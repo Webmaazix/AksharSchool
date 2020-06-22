@@ -1,0 +1,34 @@
+// Android configuration
+ext.config = [
+        compile   : 29,
+        min       : 21,
+        target    : 29,
+        buildTools: "29.0.3"
+]
+
+// Version of libraries and tools provided by Android framework
+ext.versionsAndroid = [
+        support      : "27.1.1",
+        kotlin       : "1.3.72",
+        gradleVersion: "3.6.3",
+]
+
+ext.versionsAndroidX = [
+        support      : "1.1.0",
+        ktx          : "1.2.0",
+        constraint   : "1.1.3",
+        lifecycle    : "2.2.0",
+        arch_version : "2.1.0",
+        card_view    : "1.0.0",
+        room_version : "2.2.5"
+]
+
+// Version of third-party libraries.
+ext.versionsExternal = [
+        junitVersion       : "4.12",
+        sdp                : "1.0.6",
+        retrofit           : "2.9.0",
+        gson               : "2.8.6",
+        logging_interceptor: "4.7.2",
+        coroutines         : "1.3.7"
+]

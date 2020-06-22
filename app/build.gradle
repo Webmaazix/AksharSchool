@@ -1,0 +1,76 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion config.compile
+    buildToolsVersion config.buildTools
+    def appVersionCode = System.getenv("VERSION_CODE") as Integer ?: 1
+
+    defaultConfig {
+        applicationId "com.akshar.one"
+        minSdkVersion config.min
+        targetSdkVersion config.target
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${versionsAndroid.kotlin}"
+    implementation "androidx.appcompat:appcompat:${versionsAndroidX.support}"
+    implementation "androidx.core:core-ktx:${versionsAndroidX.ktx}"
+    implementation "androidx.constraintlayout:constraintlayout:${versionsAndroidX.constraint}"
+    implementation "androidx.cardview:cardview:${versionsAndroidX.card_view}"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation "com.google.android.material:material:1.1.0"
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    //scalable dp & sp to handle multiple screen size
+    implementation "com.intuit.sdp:sdp-android:${versionsExternal.sdp}"
+    implementation "com.intuit.ssp:ssp-android:${versionsExternal.sdp}"
+
+    // ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${versionsAndroidX.lifecycle}"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:${versionsAndroidX.lifecycle}"
+    implementation "androidx.lifecycle:lifecycle-common-java8:${versionsAndroidX.arch_version}"
+
+    /**
+     *  Room Database
+     **/
+    implementation "androidx.room:room-runtime:${versionsAndroidX.room_version}"
+    kapt "androidx.room:room-compiler:${versionsAndroidX.room_version}"
+    implementation "androidx.room:room-ktx:${versionsAndroidX.room_version}"
+
+    // Retrofit
+    implementation "com.google.code.gson:gson:${versionsExternal.gson}"
+    implementation "com.squareup.retrofit2:retrofit:${versionsExternal.retrofit}"
+    implementation "com.squareup.retrofit2:converter-gson:${versionsExternal.retrofit}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${versionsExternal.logging_interceptor}"
+
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versionsExternal.coroutines}"
+
+}

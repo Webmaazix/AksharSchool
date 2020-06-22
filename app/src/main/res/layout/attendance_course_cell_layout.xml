@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="position"
+            type="java.lang.Integer" />
+
+        <variable
+            name="attendanceCourseViewModel"
+            type="com.akshar.one.viewmodels.attendance.AttendanceCourseViewModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:background="@color/white"
+        app:cardCornerRadius="@dimen/_4sdp"
+        app:cardPreventCornerOverlap="true"
+        android:onClick="@{() -> attendanceCourseViewModel.onCourseItemClick(position)}">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/common_margin">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lines="1"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp"
+                android:text="@{attendanceCourseViewModel.getCourseAt(position).courseName}"
+                tools:text="Nursery" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
+

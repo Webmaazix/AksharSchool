@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">AksharSchool</string>
+
+    <string name="no_internet_available">No internet available. Please try later!</string>
+
+    <!-- Welcome Screen -->
+    <string name="login_with_email">Login with Email</string>
+    <string name="login_with_phone">Login with Phone</string>
+    <string name="welcome_to">Welcome To</string>
+    <string name="akshar_school_solutions">Akshar School Solutions</string>
+    <string name="a_complete_digital_solution_for_school">A complete digital solution for school</string>
+    <string name="username">Username</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="enter_your_username_and_password_to_login">Enter your username and password to login</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="login">Login</string>
+    <string name="i_want_to_login_with_phone_number">I want to login with Phone Number</string>
+    <string name="error_please_enter_username">Please enter username</string>
+    <string name="error_please_enter_password">Please enter password</string>
+    <string name="phoneNumber">Phone Number</string>
+    <string name="enter_your_mobile_number_we_will_send_you_the">Enter your Mobile number, we will send you the</string>
+    <string name="error_please_enter_phone_number">Please enter phone number</string>
+    <string name="otp_for_verification_code">OTP for verification code</string>
+    <string name="i_want_to_login_with_user_name">I want to login with Username</string>
+    <string name="str_continue">Continue</string>
+    <string name="error_please_enter_valid_phone_number">Please enter valid phone number</string>
+    <string name="str_ok">Ok</string>
+    <string name="we_have_sent_you_sms_on">We have sent you an SMS on +91 %s</string>
+    <string name="with_6_digit_verification_code">with 6 digit verification code.</string>
+    <string name="do_not_receive_the_code">Do not receive the code?</string>
+    <string name="resend_otp">Resend OTP</string>
+    <string name="submit">Submit</string>
+    <string name="go_back">Go Back</string>
+    <string name="error_please_enter_otp">Please enter otp</string>
+    <string name="by_signing_up_you_agree_with_our">By signing up, you agree with our</string>
+    <string name="term_and_condition">&#160;term and condition</string>
+    <string name="title_terms_and_condition">Terms &amp; Condition</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="select_class_selection">Select Class / Selection</string>
+    <string name="attendance">Attendance</string>
+</resources>

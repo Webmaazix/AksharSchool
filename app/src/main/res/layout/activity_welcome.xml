@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.welcome.WelcomeActivity"
+    android:background="@color/white">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/ic_logo"
+        android:layout_marginTop="@dimen/_42sdp" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imgLogo"
+        android:src="@drawable/ic_welcome"
+        android:layout_marginTop="@dimen/_20sdp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtWelcomeTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:text="@string/welcome_to"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img1" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtAksharSchool"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_6sdp"
+        android:text="@string/akshar_school_solutions"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16ssp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtWelcomeTo" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_6sdp"
+        android:text="@string/a_complete_digital_solution_for_school"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_10ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtAksharSchool" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtDesc"
+        android:layout_marginTop="@dimen/_24sdp"
+        android:paddingStart="@dimen/_24sdp"
+        android:paddingEnd="@dimen/_24sdp"
+        android:background="@color/light_yellow"
+        android:gravity="center_vertical">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnLoginWithEmail"
+            style="@style/blueButton"
+            android:text="@string/login_with_email" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnLoginWithPhone"
+            style="@style/whiteButton"
+            android:text="@string/login_with_phone"
+            android:layout_below="@id/btnLoginWithEmail"
+            android:layout_marginTop="@dimen/_12sdp"/>
+
+    </RelativeLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
