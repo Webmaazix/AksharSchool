@@ -13,8 +13,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingStart="@dimen/common_margin"
-        android:paddingEnd="@dimen/common_margin"
+        android:paddingStart="@dimen/_14sdp"
+        android:paddingEnd="@dimen/_14sdp"
         android:background="@color/background">
 
         <androidx.appcompat.widget.AppCompatTextView

@@ -16,7 +16,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="n">
-        <activity android:name=".view.browser.InAppBrowserActivity"></activity>
+        <activity android:name=".view.studentprofile.EditStudentProfile"></activity>
+        <activity android:name=".view.studentprofile.ViewStudentProfile" />
+        <activity android:name=".view.studentprofile.StudentList" />
+        <activity android:name=".view.notification.NotificationActivity" />
+        <activity android:name=".view.browser.InAppBrowserActivity" />
         <activity
             android:name=".view.welcome.WelcomeActivity"
             android:screenOrientation="portrait">

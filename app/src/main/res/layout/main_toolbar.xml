@@ -20,6 +20,24 @@
             android:layout_height="match_parent"
             android:visibility="visible">
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgMenu"
+                android:layout_width="@dimen/_24sdp"
+                android:src="@drawable/menu"
+                android:visibility="visible"
+                android:layout_height="@dimen/_24sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgBack"
+                android:layout_width="@dimen/_24sdp"
+                android:src="@drawable/ic_baseline_arrow_back_24"
+                android:layout_height="@dimen/_24sdp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtToolbarTitle"
                 android:layout_width="0dp"
