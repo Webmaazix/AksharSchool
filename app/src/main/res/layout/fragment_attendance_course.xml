@@ -45,13 +45,16 @@
 
         <LinearLayout
             android:id="@+id/linProgressIndicator"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginBottom="194dp"
-            android:background="@color/progress_bar_bg"
+            android:background="@android:color/transparent"
             android:clickable="true"
             android:gravity="center"
-            android:visibility="gone">
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ProgressBar
                 android:id="@+id/progressCircular"

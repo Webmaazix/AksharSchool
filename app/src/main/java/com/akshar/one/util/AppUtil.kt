@@ -4,8 +4,15 @@ import com.akshar.one.api.response.ErrorResponse
 import com.google.gson.Gson
 import org.json.JSONObject
 import java.lang.reflect.Type
+import java.text.SimpleDateFormat
+import java.util.*
 
 object AppUtil {
+
+    const val CALENDAR_DAY_FORMAT = "EEE"
+    const val CALENDAR_DATE_FORMAT = "dd"
+
+    const val SERVER_DATE_FORMAT = "yyyy-MM-dd"
 
     fun fromJson(jsonString: String?, type: Type): Any? {
         return Gson().fromJson(jsonString, type)
@@ -22,5 +29,7 @@ object AppUtil {
         }
         return JSONObject(Gson().toJson(model))
     }
+
+    fun getServerDateFormat(date:Date): String = SimpleDateFormat(SERVER_DATE_FORMAT).format(date)
 
 }

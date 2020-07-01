@@ -73,4 +73,7 @@ dependencies {
     // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versionsExternal.coroutines}"
 
+    //Horizontal CalendarView
+    implementation "devs.mulham.horizontalcalendar:horizontalcalendar:${versionsExternal.horizontal_calendar}"
+
 }

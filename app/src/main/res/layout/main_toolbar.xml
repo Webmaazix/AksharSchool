@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:background="@drawable/light_yellow_rounded_bg">
+    android:background="@color/light_yellow">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

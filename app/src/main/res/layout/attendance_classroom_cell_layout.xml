@@ -14,6 +14,7 @@
     </data>
 
     <RelativeLayout
+        android:id="@+id/relRow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -24,12 +25,22 @@
             android:id="@+id/txtTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:ellipsize="end"
             android:lines="1"
             android:text="@{attendanceClassRoomViewModel.getClassRoomAt(position).classroomName}"
             android:textColor="@color/black"
             android:textSize="@dimen/_12ssp"
             tools:text="Section A" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_toEndOf="@id/txtTitle"
+            android:visibility="gone" />
     </RelativeLayout>
 </layout>
 

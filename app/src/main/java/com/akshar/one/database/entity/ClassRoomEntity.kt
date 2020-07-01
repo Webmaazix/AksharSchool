@@ -3,6 +3,7 @@ package com.akshar.one.database.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity(
     tableName = ClassRoomEntity.TABLE_NAME
@@ -14,8 +15,8 @@ data class ClassRoomEntity(
     @ColumnInfo(name = CLASSROOM_NAME) var classroomName: String?,
     @ColumnInfo(name = COURSE_ID) var courseId: Int? = 0,
     @ColumnInfo(name = SCHOOL_CD) var schoolCode: String?,
-    @ColumnInfo(name = DISPLAY_ORDER) var displayOrder: Int? = 0
-) {
+    @ColumnInfo(name = DISPLAY_ORDER) var displayOrder: Int?
+) : Serializable {
 
     companion object {
         const val TABLE_NAME = "classroom"

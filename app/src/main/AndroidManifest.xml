@@ -15,7 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:targetApi="n">
+        tools:targetApi="n"
+        tools:replace="android:allowBackup">
+
         <activity android:name=".view.browser.InAppBrowserActivity"></activity>
         <activity
             android:name=".view.welcome.WelcomeActivity"

@@ -41,4 +41,16 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="select_class_selection">Select Class / Selection</string>
     <string name="attendance">Attendance</string>
+    <string name="r_no">R.No.</string>
+    <string name="student_name">Student Name</string>
+    <string name="absent">Absent</string>
+    <string name="late">Late</string>
+    <string name="leave">Leave</string>
+    <string name="on_leave">On leave</string>
+    <string name="save">Save</string>
+    <string name="mark_all_as">Mark all as</string>
+    <string name="present">Present</string>
+    <string name="holiday">Holiday</string>
+    <string name="week_off">Week - Off</string>
+    <string name="select_your_class_amp_section"><![CDATA[Select your class & section]]></string>
 </resources>

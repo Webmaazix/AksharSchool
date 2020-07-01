@@ -14,4 +14,13 @@
     <color name="grey">#D5D5D5</color>
     <color name="progress_bar_bg">#A0ffffff</color>
     <color name="background">#E5E5E5</color>
+    <color name="blue">#2C98F0</color>
+    <color name="switch_bg">#2196F3</color>
+    <color name="light_red">#F24E4E</color>
+    <color name="orange">#FF8855</color>
+    <color name="btn_blue">#22215B</color>
+    <color name="transparent">#00000000</color>
+    <color name="light_grey">#FAFAFA</color>
+    <color name="light_purple">#5C93FA</color>
+    <color name="light_sky_blue">#EAF5FD</color>
 </resources>
