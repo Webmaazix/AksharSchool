@@ -1,44 +1,47 @@
 package com.akshar.one.view.attendance.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.akshar.one.R
 import com.akshar.one.database.entity.AttendanceCategoryEntity
+import com.akshar.one.databinding.AttendanceCourseCellLayoutBinding
+import com.akshar.one.view.attendance.AttendanceCategoryListener
 import com.akshar.one.viewmodels.attendance.AttendanceClassRoomViewModel
+import com.akshar.one.viewmodels.attendance.AttendanceCourseViewModel
 import kotlinx.android.synthetic.main.attendance_category_drop_down_cell.view.*
+import kotlinx.android.synthetic.main.select_section_cell.view.*
 
-class AttendanceCategoryAdapter() : BaseAdapter() {
+class AttendanceCategoryAdapter(private val context:Context, private val attendanceCategoryEntityList: List<AttendanceCategoryEntity>?, private val attendanceCategoryListener: AttendanceCategoryListener?) : RecyclerView.Adapter<AttendanceCategoryAdapter.Holder>()  {
 
-    private lateinit var layoutInflater: LayoutInflater
-
-    constructor(attendanceClassRoomViewModel: AttendanceClassRoomViewModel) : this() {
-        layoutInflater = LayoutInflater.from(attendanceClassRoomViewModel.getApplication())
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
+        val view = LayoutInflater.from(context).inflate(R.layout.select_section_cell,parent,false)
+        return Holder(view, attendanceCategoryListener)
     }
 
-    private var attendanceCategoryEntityList: MutableList<AttendanceCategoryEntity>? = ArrayList()
+    override fun getItemCount(): Int = attendanceCategoryEntityList?.size ?: 0
 
-    fun setAttendanceCategoryEntityList(attendanceCategoryEntityList: List<AttendanceCategoryEntity>?) {
-        this.attendanceCategoryEntityList?.clear()
-        attendanceCategoryEntityList?.let {
-            this.attendanceCategoryEntityList?.addAll(it)
+    override fun onBindViewHolder(holder: Holder, position: Int) {
+        holder.bind(attendanceCategoryEntityList?.get(position))
+    }
+
+    class Holder(itemView:View, private val attendanceCategoryListener: AttendanceCategoryListener?) : RecyclerView.ViewHolder(itemView) {
+
+        fun bind(attendanceCategoryEntity: AttendanceCategoryEntity?) {
+            itemView.txtSection.text = attendanceCategoryEntity?.category
+            itemView.txtSection.setOnClickListener {
+                attendanceCategoryEntity?.let { categoryEntity ->
+                    attendanceCategoryListener?.onAttendanceCategorySelected(
+                        categoryEntity
+                    )
+                }
+            }
         }
-        notifyDataSetChanged()
+
     }
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val view =
-            layoutInflater.inflate(R.layout.attendance_category_drop_down_cell, parent, false)
-        view?.txtAttendanceCategory?.text = getItem(position)?.category
-        return view
-    }
 
-    override fun getItem(position: Int): AttendanceCategoryEntity? =
-        attendanceCategoryEntityList?.get(position)
-
-    override fun getItemId(position: Int): Long =
-        attendanceCategoryEntityList?.get(position)?.id ?: 0
-
-    override fun getCount(): Int = attendanceCategoryEntityList?.size ?: 0
 }

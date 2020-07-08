@@ -81,8 +81,8 @@ class ClassRoomAdapter(
             position: Int,
             attendanceClassRoomViewModel: AttendanceClassRoomViewModel
         ) {
-            attendanceCategoryAdapter = AttendanceCategoryAdapter(attendanceClassRoomViewModel)
-            attendanceClassroomCellLayoutBinding.spinner.adapter = attendanceCategoryAdapter
+//            attendanceCategoryAdapter = AttendanceCategoryAdapter(attendanceClassRoomViewModel)
+//            attendanceClassroomCellLayoutBinding.spinner.adapter = attendanceCategoryAdapter
             attendanceClassroomCellLayoutBinding.spinner.onItemSelectedListener = this
             attendanceClassRoomViewModel.getAttendanceCategoriesFromDB(position, this)
         }
@@ -90,8 +90,12 @@ class ClassRoomAdapter(
         override fun updateAttendanceCategory(attendanceCategoryEntityList: List<AttendanceCategoryEntity>?) {
             attendanceCategoryEntityList?.takeIf { !it.isNullOrEmpty() }?.apply {
                 attendanceClassroomCellLayoutBinding.spinner.visibility = View.VISIBLE
-                attendanceCategoryAdapter?.setAttendanceCategoryEntityList(this)
+//                attendanceCategoryAdapter?.setAttendanceCategoryEntityList(this)
             }
+        }
+
+        override fun onAttendanceCategorySelected(attendanceCategoryEntity: AttendanceCategoryEntity) {
+            TODO("Not yet implemented")
         }
 
         override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -103,8 +107,8 @@ class ClassRoomAdapter(
                 return
             }
 
-            val attendanceCategory = attendanceCategoryAdapter?.getItem(position)
-            attendanceBottomSheetDialogListener.onAttendanceCategorySelectedAction(classRoomEntity,attendanceCategory)
+//            val attendanceCategory = attendanceCategoryAdapter?.getItem(position)
+//            attendanceBottomSheetDialogListener.onAttendanceCategorySelectedAction(classRoomEntity,attendanceCategory)
         }
 
     }

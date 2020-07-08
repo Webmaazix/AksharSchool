@@ -2,6 +2,7 @@ package com.akshar.one.util
 
 import com.akshar.one.api.response.ErrorResponse
 import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
 import org.json.JSONObject
 import java.lang.reflect.Type
 import java.text.SimpleDateFormat
@@ -16,6 +17,14 @@ object AppUtil {
 
     fun fromJson(jsonString: String?, type: Type): Any? {
         return Gson().fromJson(jsonString, type)
+    }
+
+    fun fromJsonToList(jsonString: String?, type: Type): ArrayList<Any>? {
+        return try {
+            Gson().fromJson(jsonString, type)
+        } catch (e: JsonSyntaxException) {
+            null
+        }
     }
 
     fun getErrorResponse(jsonString: String?): ErrorResponse? {

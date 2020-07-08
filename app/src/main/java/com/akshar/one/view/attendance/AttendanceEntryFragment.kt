@@ -5,7 +5,6 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +18,9 @@ import androidx.lifecycle.ViewModelStore
 import com.akshar.one.R
 import com.akshar.one.database.entity.AttendanceCategoryEntity
 import com.akshar.one.database.entity.ClassRoomEntity
+import com.akshar.one.database.entity.CourseEntity
 import com.akshar.one.databinding.FragmentAttendanceEntryBinding
+import com.akshar.one.extension.isInForeground
 import com.akshar.one.util.AndroidUtil
 import com.akshar.one.util.AppUtil
 import com.akshar.one.view.activity.MainActivity
@@ -31,7 +32,8 @@ import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener
 import kotlinx.android.synthetic.main.fragment_attendance_entry.*
 import java.util.*
 
-class AttendanceEntryFragment : BaseFragment(), View.OnClickListener {
+class AttendanceEntryFragment : BaseFragment(), View.OnClickListener, OnClassRoomSelectedListener,
+    AttendanceCategoryListener {
 
     private var classRoomEntity: ClassRoomEntity? = null
     private var attendanceCategoryEntity: AttendanceCategoryEntity? = null
@@ -74,18 +76,9 @@ class AttendanceEntryFragment : BaseFragment(), View.OnClickListener {
         }
         fragmentAttendanceEntryBinding?.attendanceEntryViewModel = attendanceEntryViewModel
 
-        classRoomEntity = arguments?.getSerializable(CLASSROOM_ENTITY) as ClassRoomEntity
-        attendanceCategoryEntity =
-            arguments?.getSerializable(ATTENDANCE_CATEGORY_ENTITY) as AttendanceCategoryEntity
-
-        Log.d(
-            "AksharOne",
-            "ClassRoom : " + classRoomEntity?.classroomId + " , attendanceCategory : " + attendanceCategoryEntity?.category
-        )
+        mainActivity?.setToolbarTitle("Attendance")
 
         observers()
-
-        fetchAttendanceStudents()
     }
 
     private fun fetchAttendanceStudents() {
@@ -106,7 +99,6 @@ class AttendanceEntryFragment : BaseFragment(), View.OnClickListener {
                 Toast.LENGTH_LONG
             ).show()
         }
-
     }
 
     private fun observers() {
@@ -128,6 +120,8 @@ class AttendanceEntryFragment : BaseFragment(), View.OnClickListener {
         initHorizontalCalendar()
         fragmentAttendanceEntryBinding?.btnSave?.setOnClickListener(this)
         fragmentAttendanceEntryBinding?.rlMarkAll?.setOnClickListener(this)
+        fragmentAttendanceEntryBinding?.rLClassAndSection?.setOnClickListener(this)
+        fragmentAttendanceEntryBinding?.rLCategory?.setOnClickListener(this)
 
     }
 
@@ -169,21 +163,9 @@ class AttendanceEntryFragment : BaseFragment(), View.OnClickListener {
     }
 
     companion object {
-        private const val CLASSROOM_ENTITY = "classroomEntity"
-        private const val ATTENDANCE_CATEGORY_ENTITY = "attendanceCategoryEntity"
-
         @JvmStatic
         fun newInstance(
-            classRoomEntity: ClassRoomEntity?,
-            attendanceCategoryEntity: AttendanceCategoryEntity?
-        ): AttendanceEntryFragment {
-            val attendanceEntryFragment = AttendanceEntryFragment()
-            val bundle = Bundle()
-            bundle.putSerializable(CLASSROOM_ENTITY, classRoomEntity)
-            bundle.putSerializable(ATTENDANCE_CATEGORY_ENTITY, attendanceCategoryEntity)
-            attendanceEntryFragment.arguments = bundle
-            return attendanceEntryFragment
-        }
+        ): AttendanceEntryFragment = AttendanceEntryFragment()
     }
 
     override fun onClick(v: View?) {
@@ -206,14 +188,69 @@ class AttendanceEntryFragment : BaseFragment(), View.OnClickListener {
             R.id.rlMarkAll -> {
                 showMarkAllDialog()
             }
+            R.id.rLClassAndSection -> {
+                mainActivity?.let { activity ->
+                    if (activity.isInForeground() && !activity.isFinishing && !activity.isDestroyed) {
+                        val classAndSectionDialog =
+                            ClassAndSectionDialog.newInstance(onClassRoomSelectedListener = this)
+                        classAndSectionDialog.show(
+                            activity.supportFragmentManager,
+                            ClassAndSectionDialog::class.java.simpleName
+                        )
+                    }
+                }
+
+            }
+            R.id.rLCategory -> {
+
+                if (classRoomEntity == null) {
+                    Toast.makeText(context, "Please select Class and Section", Toast.LENGTH_LONG)
+                        .show()
+                } else {
+                    attendanceEntryViewModel?.getAttendanceCategories(classRoomEntity, this)
+                }
+            }
         }
+    }
+
+    override fun onClassRoomSelectedListener(
+        courseEntity: CourseEntity,
+        classroomEntity: ClassRoomEntity
+    ) {
+        this.classRoomEntity = classroomEntity
+        this.attendanceCategoryEntity = null
+        fragmentAttendanceEntryBinding?.txtPeriod?.text = context?.getString(R.string.select_period)
+        attendanceEntryViewModel?.setStudentAttendanceListInAdapter(null)
+        fragmentAttendanceEntryBinding?.txtClassAndSection?.text =
+            "${courseEntity.courseName} - ${classroomEntity.classroomName}"
+    }
+
+    override fun updateAttendanceCategory(attendanceCategoryEntityList: List<AttendanceCategoryEntity>?) {
+        attendanceCategoryEntityList?.let {
+            mainActivity?.let { activity ->
+                if (activity.isInForeground() && !activity.isFinishing && !activity.isDestroyed) {
+                    val categorySectionDialog =
+                        CategorySectionDialog.newInstance(attendanceCategoryEntityList, this)
+                    categorySectionDialog.show(
+                        activity.supportFragmentManager,
+                        CategorySectionDialog::class.java.simpleName
+                    )
+                }
+            }
+        }
+    }
+
+    override fun onAttendanceCategorySelected(attendanceCategoryEntity: AttendanceCategoryEntity) {
+        this.attendanceCategoryEntity = attendanceCategoryEntity
+        fragmentAttendanceEntryBinding?.txtPeriod?.text = attendanceCategoryEntity.category
+        fetchAttendanceStudents()
     }
 
     private fun showMarkAllDialog() {
         val markAllDialog = context?.let { Dialog(it) }
         markAllDialog?.setContentView(R.layout.attendance_mark_all_dialog)
         markAllDialog?.setCanceledOnTouchOutside(true)
-        markAllDialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+        markAllDialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         markAllDialog?.show()
         markAllDialog?.findViewById<AppCompatTextView>(R.id.txtPresent)?.setOnClickListener {
             markAllDialog.dismiss()
@@ -235,4 +272,5 @@ class AttendanceEntryFragment : BaseFragment(), View.OnClickListener {
             markAllDialog.dismiss()
         }
     }
+
 }

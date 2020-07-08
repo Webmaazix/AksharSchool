@@ -12,18 +12,18 @@ import com.akshar.one.databinding.AttendanceEntryCellLayoutBinding
 import com.akshar.one.extension.gone
 import com.akshar.one.extension.visible
 import com.akshar.one.model.StudentAttendanceModel
-import com.akshar.one.util.AndroidUtil
 import com.akshar.one.viewmodels.attendance.AttendanceEntryViewModel
 
 class StudentAttendanceAdapter(private val attendanceEntryViewModel: AttendanceEntryViewModel): RecyclerView.Adapter<StudentAttendanceAdapter.Holder>() {
 
-    private var studentAttendanceList: List<StudentAttendanceModel>? = null
+    private var studentAttendanceList: MutableList<StudentAttendanceModel>? = null
 
     fun setStudentAttendanceList(studentAttendanceList: List<StudentAttendanceModel>?){
+        this.studentAttendanceList?.clear()
         studentAttendanceList?.let {
-            this.studentAttendanceList = it
-            notifyDataSetChanged()
+            this.studentAttendanceList = it as MutableList
         }
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
@@ -56,8 +56,13 @@ class StudentAttendanceAdapter(private val attendanceEntryViewModel: AttendanceE
         }
 
         private fun updateUI() {
-            val student = attendanceEntryViewModel.getStudentAt(pos)
-            attendanceEntryCellLayoutBinding.txtAttendanceSwitch.isChecked = student?.attendanceInd?.equals(AttendanceEntryViewModel.PRESENT) ?: false
+            val isChecked = attendanceEntryViewModel.getStudentAt(pos)?.attendanceInd?.equals(AttendanceEntryViewModel.PRESENT,true) == true
+            attendanceEntryCellLayoutBinding.txtAttendanceSwitch.isChecked = isChecked
+            if(isChecked){
+                attendanceEntryCellLayoutBinding.llAttendance.gone()
+            }else{
+                attendanceEntryCellLayoutBinding.llAttendance.visible()
+            }
         }
 
         override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {

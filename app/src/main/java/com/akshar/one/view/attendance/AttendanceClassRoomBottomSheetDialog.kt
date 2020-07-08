@@ -99,7 +99,7 @@ class AttendanceClassRoomBottomSheetDialog() : BottomSheetDialogFragment(), Atte
         classRoomEntity: ClassRoomEntity?,
         attendanceCategoryEntity: AttendanceCategoryEntity?
     ) {
-        val attendanceEntryFragment = AttendanceEntryFragment.newInstance(classRoomEntity,attendanceCategoryEntity)
+        val attendanceEntryFragment = AttendanceEntryFragment.newInstance()
         mainActivity?.replaceFragment(attendanceEntryFragment, AttendanceEntryFragment::class.java.simpleName, true)
         dismiss()
     }

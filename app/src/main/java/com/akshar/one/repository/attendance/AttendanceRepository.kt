@@ -4,12 +4,9 @@ import android.app.Application
 import com.akshar.one.api.service.AksharSchoolService
 import com.akshar.one.api.service.AttendanceApi
 import com.akshar.one.database.AksharSchoolDataBase
-import com.akshar.one.database.dao.AttendanceCategoryDao
-import com.akshar.one.database.dao.ClassroomDao
-import com.akshar.one.database.dao.CourseDao
-import com.akshar.one.database.entity.AttendanceCategoryEntity
-import com.akshar.one.database.entity.ClassRoomEntity
-import com.akshar.one.database.entity.CourseEntity
+import com.akshar.one.database.dao.*
+import com.akshar.one.database.entity.*
+import com.akshar.one.model.CourseWithClassRoomModel
 import com.akshar.one.model.StudentAttendanceModel
 import com.akshar.one.repository.base.BaseRepository
 
@@ -20,6 +17,8 @@ class AttendanceRepository(application: Application) : BaseRepository() {
     private var courseDao: CourseDao? = null
     private var classroomDao: ClassroomDao? = null
     private var attendanceCategoryDao: AttendanceCategoryDao? = null
+    private var degreeDao: DegreeDao? = null
+    private var departmentDao: DepartmentDao? = null
 
     init {
         attendanceApi = service.createService(AttendanceApi::class.java)
@@ -27,6 +26,8 @@ class AttendanceRepository(application: Application) : BaseRepository() {
         courseDao = aksharSchoolDataBase.courseDao()
         classroomDao = aksharSchoolDataBase.classroomDao()
         attendanceCategoryDao = aksharSchoolDataBase.attendanceCategory()
+        degreeDao = aksharSchoolDataBase.degreeDao()
+        departmentDao = aksharSchoolDataBase.departmentDao()
     }
 
     suspend fun getCourses() = attendanceApi?.getCourses(service.headers())
@@ -71,4 +72,19 @@ class AttendanceRepository(application: Application) : BaseRepository() {
             classroomId = classRoomId,
             studentList = studentList
         )
+
+    suspend fun getClassRoomsDropdown() =
+        attendanceApi?.getClassRoomsDropDown(service.headers())
+
+    suspend fun getClassRoomsDropdownFromDB(schoolCode: String): List<CourseWithClassRoomModel>? =
+        courseDao?.getCoursesWithClassRoom(schoolCode)
+
+    suspend fun getDegreeFromDB(schoolCode: String) = degreeDao?.getDegree(schoolCode)
+
+    suspend fun getDegreeClassRoomsDropdown() =
+        attendanceApi?.getDegreeClassRoomsDropDown(service.headers())
+
+    suspend fun insertDegree(degreeEntity: DegreeEntity) = degreeDao?.insert(degreeEntity)
+
+    suspend fun insertDepartment(departmentEntity: DepartmentEntity) = departmentDao?.insert(departmentEntity)
 }

@@ -1,10 +1,8 @@
 package com.akshar.one.database.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.akshar.one.database.entity.CourseEntity
+import com.akshar.one.model.CourseWithClassRoomModel
 
 @Dao
 interface CourseDao {
@@ -17,4 +15,8 @@ interface CourseDao {
 
     @Query("SELECT * FROM course WHERE school_cd = :schoolCode ORDER BY display_order ASC")
     suspend fun getCourses(schoolCode: String): List<CourseEntity>?
+
+    @Transaction
+    @Query("SELECT * FROM course WHERE school_cd = :schoolCode ORDER BY display_order ASC")
+    suspend fun getCoursesWithClassRoom(schoolCode: String): List<CourseWithClassRoomModel>?
 }

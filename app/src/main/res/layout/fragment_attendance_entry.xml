@@ -81,6 +81,7 @@
             android:weightSum="100">
 
             <RelativeLayout
+                android:id="@+id/rLCategory"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="50">
@@ -97,7 +98,7 @@
                     android:lines="1"
                     android:textColor="@color/dark_blue"
                     android:textSize="@dimen/_12ssp"
-                    android:text="Select Period"/>
+                    android:text="@string/select_period"/>
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/imgDropDownPeriod"

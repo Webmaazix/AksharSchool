@@ -2,6 +2,7 @@ package com.akshar.one.api.service
 
 import com.akshar.one.model.ClassRoomModel
 import com.akshar.one.model.CourseModel
+import com.akshar.one.model.DegreeModel
 import com.akshar.one.model.StudentAttendanceModel
 import retrofit2.http.*
 
@@ -39,4 +40,10 @@ interface AttendanceApi {
         @Path("classroomId") classroomId: Int,
         @Body  studentList : List<StudentAttendanceModel>
     )
+
+    @GET("AksharOne/classrooms/dropdown")
+    suspend fun getClassRoomsDropDown(@HeaderMap headers: Map<String, String>): List<CourseModel>?
+
+    @GET("AksharOne/classrooms/dropdown")
+    suspend fun getDegreeClassRoomsDropDown(@HeaderMap headers: Map<String, String>): List<DegreeModel>?
 }

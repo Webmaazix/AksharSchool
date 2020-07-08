@@ -1,18 +1,67 @@
 package com.akshar.one.view.activity
 
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStore
 import com.akshar.one.R
+import com.akshar.one.util.AndroidUtil
 import com.akshar.one.view.attendance.AttendanceCourseFragment
+import com.akshar.one.view.attendance.AttendanceEntryFragment
+import com.akshar.one.viewmodels.ViewModelFactory
+import com.akshar.one.viewmodels.main.MainViewModel
+import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.main_toolbar.*
 
 class MainActivity : BaseActivity() {
+
+    private var mainViewModel: MainViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        replaceFragment(AttendanceCourseFragment.newInstance(), AttendanceCourseFragment::javaClass.name, true)
+        mainViewModel = ViewModelProvider(
+            ViewModelStore(),
+            ViewModelFactory(application)
+        ).get(MainViewModel::class.java)
+
+        observers()
+        fetchCourses()
+    }
+
+    private fun fetchCourses() {
+        mainViewModel?.getClassRoomDropdownService()
+    }
+
+    private fun observers() {
+        mainViewModel?.getIsLoading()?.observe(this, Observer {
+            showProgressIndicator(it)
+        })
+
+        mainViewModel?.getErrorMutableLiveData()?.observe(this, Observer {
+            it?.let {
+                AndroidUtil.showMessageDialog(this, it.message)
+            }
+        })
+
+        mainViewModel?.getCourseListMutableLiveData()?.observe(this, Observer {
+            replaceFragment(
+                AttendanceEntryFragment.newInstance(),
+                AttendanceCourseFragment::javaClass.name,
+                true
+            )
+        })
+
+//        mainViewModel?.getDegreeListMutableLiveData()?.observe(this, Observer {
+//            replaceFragment(
+//                AttendanceEntryFragment.newInstance(),
+//                AttendanceCourseFragment::javaClass.name,
+//                true
+//            )
+//        })
     }
 
     fun isLastAddedFragment(fragmentName: String?): Boolean {
@@ -68,5 +117,9 @@ class MainActivity : BaseActivity() {
 
     fun setToolbarTitle(title: String) {
         txtToolbarTitle.text = title
+    }
+
+    private fun showProgressIndicator(isLoading: Boolean?) {
+        linProgressIndicator.visibility = if (isLoading == true) View.VISIBLE else View.GONE
     }
 }

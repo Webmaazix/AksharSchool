@@ -53,4 +53,6 @@
     <string name="holiday">Holiday</string>
     <string name="week_off">Week - Off</string>
     <string name="select_your_class_amp_section"><![CDATA[Select your class & section]]></string>
+    <string name="select_category">Select Category</string>
+    <string name="select_period">Select Period</string>
 </resources>
