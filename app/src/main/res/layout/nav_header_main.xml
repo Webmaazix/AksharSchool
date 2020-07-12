@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_120sdp"
+    android:background="@color/light_yellow"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+
+
+    <com.akshar.one.circlularimageview.CircularImageView
+        android:id="@+id/imgUserProfile"
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="@dimen/_70sdp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/_7sdp"
+        android:src="@drawable/circle_default_pic"
+        app:civ_border_width="@dimen/_1sdp"
+        app:civ_border_color="@color/ultra_light_grey"
+        app:civ_circle_color="@color/lightishgray"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="@dimen/_18sdp"
+        android:src="@drawable/camera_circle"
+        android:layout_gravity="center_vertical|center"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_height="@dimen/_18sdp"/>
+
+
+    <TextView
+        android:id="@+id/tvUserName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="User Name"
+        android:layout_gravity="bottom"
+        android:textAlignment="center"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:fontFamily="@font/opensans_bold"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_12sp"
+        android:textStyle="bold" />
+
+
+
+</FrameLayout>

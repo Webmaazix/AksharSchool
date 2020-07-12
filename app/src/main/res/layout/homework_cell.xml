@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="position"
+            type="java.lang.Integer" />
+
+        <variable
+            name="dashboardViewModel"
+            type="com.akshar.one.viewmodels.dashboard.DashboardViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/rlMain"
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/_5sdp"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/cvMain"
+            android:layout_width="match_parent"
+            android:background="@drawable/undefinedx"
+            android:layout_height="@dimen/_140sdp"
+            app:cardCornerRadius="@dimen/_10sp"
+            app:cardElevation="@dimen/_5sdp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTimeLine"
+                android:layout_width="match_parent"
+                android:padding="@dimen/_7sdp"
+                android:text="db"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_11sp"
+                android:layout_marginTop="@dimen/_10sp"
+                android:layout_marginStart="@dimen/_10sp"
+                android:fontFamily="@font/opensans_bold"
+                android:layout_height="wrap_content"/>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvSubjectName"
+                android:layout_below="@+id/tvTimeLine"
+                android:layout_width="match_parent"
+                android:paddingStart="@dimen/_7sdp"
+                android:paddingEnd="@dimen/_7sdp"
+                android:text="nbndbshd"
+                android:paddingBottom="@dimen/_2sdp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_13sp"
+                android:layout_marginTop="@dimen/_10sp"
+                android:layout_marginStart="@dimen/_10sp"
+                android:fontFamily="@font/opensans_bold"
+                android:layout_height="wrap_content"/>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTime"
+                android:layout_below="@+id/tvSubjectName"
+                android:layout_width="match_parent"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sp"
+                android:paddingStart="@dimen/_7sdp"
+                android:paddingEnd="@dimen/_7sdp"
+                android:paddingBottom="@dimen/_5sdp"
+                android:text="bdhd"
+                android:layout_marginStart="@dimen/_10sp"
+                android:fontFamily="@font/opensans_regular"
+                android:layout_height="wrap_content"/>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvHomeWork"
+                android:layout_below="@+id/tvTime"
+                android:layout_width="wrap_content"
+                android:text="@string/homework"
+                android:textColor="@color/light_blue"
+                android:background="@drawable/white_nopadding_shape"
+                android:textSize="@dimen/_10sp"
+                android:layout_marginBottom="@dimen/_10sp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_centerVertical="true"
+                android:textAlignment="center"
+                android:paddingStart="@dimen/_10sp"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingEnd="@dimen/_10sp"
+                android:paddingBottom="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_10sp"
+                android:fontFamily="@font/opensans_regular"
+                android:layout_height="wrap_content"/>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvAttendance"
+                android:layout_toEndOf="@+id/tvHomeWork"
+                android:layout_below="@+id/tvTime"
+                android:layout_width="wrap_content"
+                android:text="@string/attendance"
+                android:textColor="@color/white"
+                android:background="@drawable/white_stroke_shape"
+                android:textSize="@dimen/_10sp"
+                android:layout_marginBottom="@dimen/_10sp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_centerVertical="true"
+                android:textAlignment="center"
+                android:paddingStart="@dimen/_10sp"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingEnd="@dimen/_10sp"
+                android:paddingBottom="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_10sp"
+                android:fontFamily="@font/opensans_regular"
+                android:layout_height="wrap_content"/>
+
+
+
+            </RelativeLayout>
+
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</layout>

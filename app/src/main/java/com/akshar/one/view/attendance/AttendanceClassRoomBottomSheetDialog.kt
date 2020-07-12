@@ -1,5 +1,6 @@
 package com.akshar.one.view.attendance
 
+import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -22,6 +23,7 @@ class AttendanceClassRoomBottomSheetDialog() : BottomSheetDialogFragment() {
     private var classroomBottomSheetDialogFragmentBinding : ClassroomBottomSheetDialogFragmentBinding? = null
     private var attendanceClassRoomViewModel: AttendanceClassRoomViewModel? = null
     private var classRoomEntityList: List<ClassRoomEntity>? = null
+    private lateinit var currActivity : Activity
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,6 +32,7 @@ class AttendanceClassRoomBottomSheetDialog() : BottomSheetDialogFragment() {
     ): View? {
         classroomBottomSheetDialogFragmentBinding = DataBindingUtil.inflate(inflater,
             R.layout.classroom_bottom_sheet_dialog_fragment, container, false)
+        currActivity = activity!!
         return classroomBottomSheetDialogFragmentBinding?.root
     }
 
@@ -61,7 +64,7 @@ class AttendanceClassRoomBottomSheetDialog() : BottomSheetDialogFragment() {
 
         attendanceClassRoomViewModel?.getClassRoomListMutableLiveData()?.observe(this, Observer {
             it?.let {
-                attendanceClassRoomViewModel?.setClassRoomInAdapter(it)
+                attendanceClassRoomViewModel?.setClassRoomInAdapter(it,currActivity)
             }
         })
     }

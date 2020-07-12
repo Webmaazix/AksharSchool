@@ -75,4 +75,14 @@ dependencies {
     // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versionsExternal.coroutines}"
 
+    //images
+    implementation 'com.github.bumptech.glide:glide:4.10.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.7.0'
+    implementation 'pub.devrel:easypermissions:0.3.0'
+    implementation 'com.bm.photoview:library:1.4.1'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+
+
 }

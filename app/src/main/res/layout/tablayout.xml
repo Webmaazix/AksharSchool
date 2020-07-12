@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:text="My TimeTable"
+        android:textSize="@dimen/_11sp"
+        android:fontFamily="@font/opensans_bold"
+        android:padding="@dimen/_7sdp"
+        android:layout_height="wrap_content"/>
+
+<!--    <androidx.appcompat.widget.AppCompatImageView-->
+<!--        android:id="@+id/imgLine"-->
+<!--        android:layout_below="@+id/title"-->
+<!--        android:layout_width="@dimen/_50sdp"-->
+<!--        android:src="@drawable/blue_line"-->
+<!--        android:paddingStart="@dimen/_7sdp"-->
+<!--        android:layout_height="@dimen/_7sdp"/>-->
+
+</RelativeLayout>

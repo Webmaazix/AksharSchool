@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="position"
+            type="java.lang.Integer" />
+
+        <variable
+            name="attendanceClassRoomViewModel"
+            type="com.akshar.one.viewmodels.attendance.AttendanceClassRoomViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+        <RelativeLayout
+            android:id="@+id/rlToolbar"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:layout_height="wrap_content">
+
+
+<!--            <include-->
+<!--                android:id="@+id/toolbar"-->
+<!--                layout="@layout/main_toolbar"/>-->
+
+            <RelativeLayout
+                android:id="@+id/rlClassSection"
+                android:layout_width="match_parent"
+                android:layout_margin="@dimen/_10sdp"
+                android:background="@drawable/grey_round_shape"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvClassSectionName"
+                    android:layout_width="match_parent"
+                    android:text="@string/select_class_section"
+                    android:padding="@dimen/_7sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11sp"
+                    android:fontFamily="@font/opensans_bold"
+                    android:layout_height="wrap_content"/>
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/_24sdp"
+                    android:layout_height="@dimen/_24sdp"
+                    android:src="@drawable/dropdown"
+                    android:layout_centerInParent="true"
+                    android:layout_alignParentEnd="true"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:layout_below="@+id/rlToolbar"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvSerialNumber"
+                android:layout_width="wrap_content"
+                android:textSize="@dimen/_12sp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:text="@string/r_no"
+                android:fontFamily="@font/opensans_bold"
+                android:visibility="invisible"
+                android:padding="@dimen/_7sdp"
+                android:textColor="@color/dark_blue"
+                android:layout_height="wrap_content"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvStudentName"
+                android:layout_width="wrap_content"
+                android:textSize="@dimen/_12sp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:text="@string/student_name"
+                android:padding="@dimen/_7sdp"
+                android:visibility="invisible"
+                android:fontFamily="@font/opensans_bold"
+
+                android:layout_toEndOf="@+id/tvSerialNumber"
+                android:textColor="@color/dark_blue"
+                android:layout_height="wrap_content"/>
+
+            <RelativeLayout
+                android:id="@+id/rlNoDataFound"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgEmpty"
+                    android:layout_width="@dimen/_100sdp"
+                    android:src="@drawable/emptynotice"
+                    android:layout_centerInParent="true"
+                    android:layout_centerVertical="true"
+                    android:layout_height="@dimen/_100sdp"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvEmptyText"
+                    android:layout_below="@+id/imgEmpty"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/opensans_regular"
+                    android:text="@string/no_students_found"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/_12sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvStudents"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/tvSerialNumber"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgCreateStudent"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:visibility="gone"
+            android:backgroundTint="@color/dark_blue"
+            android:background="@drawable/circle_white_solid_background"
+            android:src="@drawable/add"
+            android:tint="@color/white"
+            android:padding="@dimen/_13sdp"
+            android:layout_margin="@dimen/_10sdp"
+            android:layout_height="@dimen/_40sdp"/>
+
+        <LinearLayout
+            android:id="@+id/linProgressIndicator"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/progress_bar_bg"
+            android:gravity="center"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:id="@+id/progressCircular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+
+</layout>

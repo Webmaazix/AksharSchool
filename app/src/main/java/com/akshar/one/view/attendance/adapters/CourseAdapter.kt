@@ -20,7 +20,8 @@ class CourseAdapter(private val attendanceCourseViewModel: AttendanceCourseViewM
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val attendanceCourseCellLayoutBinding = DataBindingUtil.inflate<AttendanceCourseCellLayoutBinding>(LayoutInflater.from(parent.context), R.layout.attendance_course_cell_layout, parent,  false)
+        val attendanceCourseCellLayoutBinding =
+            DataBindingUtil.inflate<AttendanceCourseCellLayoutBinding>(LayoutInflater.from(parent.context), R.layout.attendance_course_cell_layout, parent,  false)
         return Holder(attendanceCourseCellLayoutBinding)
     }
 

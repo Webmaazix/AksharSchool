@@ -14,11 +14,12 @@
     </data>
 
     <RelativeLayout
+        android:id="@+id/rlMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:paddingTop="@dimen/_12sdp"
-        android:paddingBottom="@dimen/_12sdp">
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtTitle"
@@ -26,10 +27,11 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:lines="1"
-            android:text="@{attendanceClassRoomViewModel.getClassRoomAt(position).classroomName}"
             android:textColor="@color/black"
-            android:textSize="@dimen/_12ssp"
+            android:textSize="@dimen/_12sp"
+            android:fontFamily="@font/opensans_regular"
             tools:text="Section A" />
+
     </RelativeLayout>
 </layout>
 

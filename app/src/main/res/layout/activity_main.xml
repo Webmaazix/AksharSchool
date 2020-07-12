@@ -18,7 +18,7 @@
             android:id="@+id/app_toolbar"
             layout="@layout/main_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_45sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -40,11 +40,13 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="false"
-        android:theme="@style/NavigationView"
         android:visibility="visible"
-        app:itemHorizontalPadding="@dimen/_24sdp"
-        app:itemIconTint="@drawable/drawer_item"
-        app:itemTextColor="@color/black">
+        android:background="@color/dark_blue"
+        app:itemTextColor="@color/drawer_itemmm"
+        app:itemBackground="@drawable/drawer_selected_item"
+        app:itemTextAppearance="@style/NavDrawerTextStyle"
+        app:headerLayout="@layout/nav_header_main"
+        app:menu="@menu/activity_main_drawer" >
 
     </com.google.android.material.navigation.NavigationView>
 

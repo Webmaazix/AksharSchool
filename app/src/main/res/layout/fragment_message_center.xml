@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="position"
+            type="java.lang.Integer" />
+
+        <variable
+            name="dashboardViewModel"
+            type="com.akshar.one.viewmodels.dashboard.DashboardViewModel" />
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/white_nopadding_shape"
+            android:layout_margin="@dimen/_15sdp"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:id="@+id/llRow1"
+                android:layout_width="match_parent"
+                android:weightSum="2"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="@dimen/_15sdp"
+                    android:background="@drawable/blue_nopadding_shape"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:id="@+id/rlAbsentImage"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/dark_blue_nopadding_shape"
+                        android:layout_marginStart="@dimen/_30sdp"
+                        android:layout_marginEnd="@dimen/_30sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:padding="@dimen/_3sdp"
+                        android:layout_marginBottom="@dimen/_15sdp"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="match_parent"
+                            android:src="@drawable/message_desk"
+                            android:layout_centerInParent="true"
+                            android:layout_height="wrap_content"/>
+
+                    </RelativeLayout>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:textSize="@dimen/_12sp"
+                        android:text="@string/absent_report"
+                        android:textColor="@color/black"
+                        android:layout_centerInParent="true"
+                        android:textAlignment="center"
+                        android:fontFamily="@font/opensans_regular"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:layout_below="@+id/rlAbsentImage"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="@dimen/_15sdp"
+                    android:background="@drawable/pink_nopadding_shape"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:id="@+id/rlMarksImage"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/darkpink_nopadding_shape"
+                        android:layout_marginStart="@dimen/_30sdp"
+                        android:layout_marginEnd="@dimen/_30sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:padding="@dimen/_3sdp"
+                        android:layout_marginBottom="@dimen/_15sdp"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="match_parent"
+                            android:src="@drawable/marks"
+                            android:layout_centerInParent="true"
+                            android:layout_height="wrap_content"/>
+
+                    </RelativeLayout>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:textSize="@dimen/_12sp"
+                        android:text="@string/marks_report"
+                        android:textColor="@color/black"
+                        android:layout_centerInParent="true"
+                        android:textAlignment="center"
+                        android:fontFamily="@font/opensans_regular"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:layout_below="@+id/rlMarksImage"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/llRow2"
+                android:layout_below="@+id/llRow1"
+                android:layout_width="match_parent"
+                android:weightSum="2"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="@dimen/_15sdp"
+                    android:background="@drawable/yellow_nopadding_shape"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:id="@+id/rlHomeWorkImage"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/darkyellow_nopadding_shape"
+                        android:layout_marginStart="@dimen/_30sdp"
+                        android:layout_marginEnd="@dimen/_30sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:padding="@dimen/_3sdp"
+                        android:layout_marginBottom="@dimen/_15sdp"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="match_parent"
+                            android:src="@drawable/homework"
+                            android:layout_centerInParent="true"
+                            android:layout_height="wrap_content"/>
+
+                    </RelativeLayout>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:textSize="@dimen/_12sp"
+                        android:text="@string/homework"
+                        android:textColor="@color/black"
+                        android:layout_centerInParent="true"
+                        android:textAlignment="center"
+                        android:fontFamily="@font/opensans_regular"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:layout_below="@+id/rlHomeWorkImage"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:background="@drawable/seagreen_nopadding_shape"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:id="@+id/rlFeeDueImage"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/dark_seagreen_nopadding_shape"
+                        android:layout_marginStart="@dimen/_30sdp"
+                        android:layout_marginEnd="@dimen/_30sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:padding="@dimen/_3sdp"
+                        android:layout_marginBottom="@dimen/_15sdp"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="match_parent"
+                            android:src="@drawable/feedue"
+                            android:layout_centerInParent="true"
+                            android:layout_height="wrap_content"/>
+
+                    </RelativeLayout>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:textSize="@dimen/_12sp"
+                        android:text="Fee Reminder"
+                        android:textColor="@color/black"
+                        android:layout_centerInParent="true"
+                        android:textAlignment="center"
+                        android:fontFamily="@font/opensans_regular"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:layout_below="@+id/rlFeeDueImage"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/llRow3"
+                android:layout_below="@+id/llRow2"
+                android:layout_width="match_parent"
+                android:weightSum="2"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="@dimen/_15sdp"
+                    android:background="@drawable/green_nopadding_shape"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:id="@+id/rlNotificationImage"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/darkgreen_nopadding_shape"
+                        android:layout_marginStart="@dimen/_30sdp"
+                        android:layout_marginEnd="@dimen/_30sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:padding="@dimen/_3sdp"
+                        android:layout_marginBottom="@dimen/_15sdp"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="match_parent"
+                            android:src="@drawable/green_notification"
+                            android:layout_centerInParent="true"
+                            android:layout_height="wrap_content"/>
+
+                    </RelativeLayout>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:textSize="@dimen/_11sp"
+                        android:text="@string/general_n_notification"
+                        android:textColor="@color/black"
+                        android:layout_centerInParent="true"
+                        android:textAlignment="center"
+                        android:fontFamily="@font/opensans_regular"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:layout_below="@+id/rlNotificationImage"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="@dimen/_12sdp"
+                    android:background="@drawable/light_blue_nopadding_shape"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:id="@+id/rlEmployeeImage"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/darkblue_nopadding_shape"
+                        android:layout_marginStart="@dimen/_30sdp"
+                        android:layout_marginEnd="@dimen/_30sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:padding="@dimen/_1sdp"
+                        android:layout_marginBottom="@dimen/_15sdp"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="match_parent"
+                            android:src="@drawable/blueemployee"
+                            android:layout_centerInParent="true"
+                            android:layout_height="wrap_content"/>
+
+                    </RelativeLayout>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:textSize="@dimen/_11sp"
+                        android:text="@string/employee_notification"
+                        android:textColor="@color/black"
+                        android:layout_centerInParent="true"
+                        android:textAlignment="center"
+                        android:fontFamily="@font/opensans_regular"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:layout_below="@+id/rlEmployeeImage"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/llRow4"
+                android:layout_below="@+id/llRow3"
+                android:layout_width="match_parent"
+                android:weightSum="2"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="@dimen/_15sdp"
+                    android:background="@drawable/primarygreen_nopadding_shape"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:id="@+id/rlLateEntryImage"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/primarydarkgreen_nopadding_shape"
+                        android:layout_marginStart="@dimen/_30sdp"
+                        android:layout_marginEnd="@dimen/_30sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:padding="@dimen/_3sdp"
+                        android:layout_marginBottom="@dimen/_15sdp"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="@dimen/_55sdp"
+                            android:src="@drawable/time"
+                            android:layout_centerInParent="true"
+                            android:layout_height="@dimen/_55sdp"/>
+
+                    </RelativeLayout>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:textSize="@dimen/_12sp"
+                        android:text="@string/late_entry"
+                        android:textColor="@color/black"
+                        android:layout_centerInParent="true"
+                        android:textAlignment="center"
+                        android:fontFamily="@font/opensans_regular"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:layout_below="@+id/rlLateEntryImage"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    android:layout_margin="@dimen/_15sdp"
+                    android:background="@drawable/pink_nopadding_shape"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:id="@+id/xx"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/darkpink_nopadding_shape"
+                        android:layout_marginStart="@dimen/_30sdp"
+                        android:layout_marginEnd="@dimen/_30sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:padding="@dimen/_3sdp"
+                        android:layout_marginBottom="@dimen/_15sdp"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="match_parent"
+                            android:src="@drawable/marks"
+                            android:layout_centerInParent="true"
+                            android:layout_height="wrap_content"/>
+
+                    </RelativeLayout>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:textSize="@dimen/_12sp"
+                        android:text="@string/marks_report"
+                        android:textColor="@color/black"
+                        android:layout_centerInParent="true"
+                        android:textAlignment="center"
+                        android:fontFamily="@font/opensans_regular"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:layout_below="@+id/xx"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+
+        </RelativeLayout>
+
+        </ScrollView>
+    </RelativeLayout>
+
+</layout>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/white_nopadding_square_shape"
+            android:layout_marginStart="@dimen/_50sdp"
+            android:layout_marginEnd="@dimen/_50sdp"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/rlFeeHead"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvFeaHead"
+                    android:layout_width="wrap_content"
+                    android:text="@string/by_feahead"
+                    android:padding="@dimen/_7sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/opensans_regular"
+                    android:layout_height="wrap_content"/>
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgFeeHead"
+                    android:layout_width="@dimen/_15sdp"
+                    android:src="@drawable/done"
+                    android:visibility="gone"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="@dimen/_17sdp"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+
+
+
+            <View
+                android:id="@+id/vv1"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/rlFeeHead"
+                android:background="@color/lightishgray"
+                android:layout_height="@dimen/_1sdp"/>
+
+            <RelativeLayout
+                android:id="@+id/rlPaymentMethod"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/rlFeeHead"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvPaymentMethod"
+
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:layout_width="match_parent"
+                    android:text="@string/by_payment_method"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:padding="@dimen/_7sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sp"
+                    android:fontFamily="@font/opensans_regular"
+                    android:layout_height="wrap_content"/>
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgPaymentMethod"
+                    android:layout_width="@dimen/_15sdp"
+                    android:src="@drawable/done"
+                    android:visibility="gone"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+
+
+            <View
+                android:id="@+id/vv2"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/rlPaymentMethod"
+                android:background="@color/lightishgray"
+                android:visibility="gone"
+                android:layout_height="@dimen/_1sdp"/>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvNext7days"
+                android:layout_below="@+id/rlPaymentMethod"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:text="@string/next_7_days"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:padding="@dimen/_7sdp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sp"
+                android:fontFamily="@font/opensans_regular"
+                android:layout_height="wrap_content"/>
+
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</layout>

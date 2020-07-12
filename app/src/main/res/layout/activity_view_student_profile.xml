@@ -1,9 +1,675 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.studentprofile.ViewStudentProfile">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+
+        <variable
+            name="position"
+            type="java.lang.Integer" />
+
+        <variable
+            name="attendanceClassRoomViewModel"
+            type="com.akshar.one.viewmodels.attendance.AttendanceClassRoomViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_type_square"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_below="@+id/toolbar"
+            android:layout_height="@dimen/_150sdp"
+            android:background="@drawable/yellow_topsquare_with_nopadding">
+
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_below="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_height="wrap_content">
+
+                <com.akshar.one.circlularimageview.CircularImageView
+                    android:layout_width="@dimen/_80sdp"
+                    android:src="@drawable/circle_default_pic"
+                    android:elevation="@dimen/_1sdp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_height="@dimen/_80sdp"/>
+
+                <RelativeLayout
+                    android:id="@+id/rlStudentInfo"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_35sdp"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/white_square_shape"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:id="@+id/rlEditProfile"
+                        android:layout_width="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/dark_grey_box"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/imgEdit"
+                            android:layout_width="@dimen/_20sdp"
+                            android:src="@drawable/edit"
+                            android:padding="@dimen/_5sdp"
+                            android:layout_height="@dimen/_20sdp"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvEdit"
+                            android:layout_width="wrap_content"
+                            android:textSize="@dimen/_11sp"
+                            android:text="@string/edit"
+                            android:textColor="@color/black"
+                            android:layout_toEndOf="@+id/imgEdit"
+                            android:layout_centerInParent="true"
+                            android:fontFamily="@font/opensans_regular"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:layout_height="wrap_content"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rlEmptyView"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_below="@+id/rlEditProfile"/>
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvStudentName"
+                        android:layout_width="match_parent"
+                        android:textColor="@color/dark_black"
+                        android:text="Student Name"
+                        android:fontFamily="@font/opensans_bold"
+                        android:textSize="@dimen/_12sp"
+                        android:layout_below="@+id/rlEmptyView"
+                        android:textAlignment="center"
+                        android:layout_height="wrap_content"/>
+
+
+                    <RelativeLayout
+                        android:layout_below="@+id/tvStudentName"
+                        android:id="@+id/rlGender"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_20sdp">
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvGenderLable"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/dark_black"
+                            android:text="@string/gender"
+                            android:fontFamily="@font/opensans_regular"
+                            android:textSize="@dimen/_12sp"
+                            android:textAlignment="center"
+                            android:layout_height="wrap_content"/>
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvGender"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/dark_black"
+                            android:text=" Male"
+                            android:layout_toEndOf="@+id/tvGenderLable"
+                            android:fontFamily="@font/opensans_bold"
+                            android:textSize="@dimen/_12sp"
+                            android:textAlignment="center"
+                            android:layout_height="wrap_content"/>
+
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_below="@+id/rlGender"
+                        android:id="@+id/rlBloodGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_7sdp">
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvBloodGroupLable"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/dark_black"
+                            android:text="@string/blood_group"
+                            android:fontFamily="@font/opensans_regular"
+                            android:textSize="@dimen/_12sp"
+                            android:textAlignment="center"
+                            android:layout_height="wrap_content"/>
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvBloodGroup"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/dark_black"
+                            android:text=" B+"
+                            android:layout_toEndOf="@+id/tvBloodGroupLable"
+                            android:fontFamily="@font/opensans_bold"
+                            android:textSize="@dimen/_12sp"
+                            android:textAlignment="center"
+                            android:layout_height="wrap_content"/>
+
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_below="@+id/rlBloodGroup"
+                        android:id="@+id/rlAdmissionNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_7sdp">
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvAdmissionNumberLable"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/dark_black"
+                            android:text="@string/admission_number"
+                            android:fontFamily="@font/opensans_regular"
+                            android:textSize="@dimen/_12sp"
+                            android:textAlignment="center"
+                            android:layout_height="wrap_content"/>
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvAdmissionNumber"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/dark_black"
+                            android:text=" (603) 555-01456"
+                            android:layout_toEndOf="@+id/tvAdmissionNumberLable"
+                            android:fontFamily="@font/opensans_bold"
+                            android:textSize="@dimen/_12sp"
+                            android:textAlignment="center"
+                            android:layout_height="wrap_content"/>
+
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_below="@+id/rlAdmissionNumber"
+                        android:id="@+id/rlTransport"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_7sdp">
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvTransportLable"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/dark_black"
+                            android:text="@string/opted_for_transport"
+                            android:fontFamily="@font/opensans_regular"
+                            android:textSize="@dimen/_12sp"
+                            android:textAlignment="center"
+                            android:layout_height="wrap_content"/>
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvTransport"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/dark_black"
+                            android:text=" yes"
+                            android:layout_toEndOf="@+id/tvTransportLable"
+                            android:fontFamily="@font/opensans_bold"
+                            android:textSize="@dimen/_12sp"
+                            android:textAlignment="center"
+                            android:layout_height="wrap_content"/>
+
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlParentDetails"
+                    android:layout_below="@+id/rlStudentInfo"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/white_square_shape"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvParentDetails"
+                        android:layout_width="match_parent"
+                        android:textColor="@color/dark_black"
+                        android:text="@string/parent_details"
+                        android:fontFamily="@font/opensans_bold"
+                        android:textSize="@dimen/_12sp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:textAlignment="viewStart"
+                        android:layout_height="wrap_content"/>
+
+
+
+                    <RelativeLayout
+                        android:layout_below="@+id/tvParentDetails"
+                        android:id="@+id/rlParentName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_7sdp">
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvParentNameLabel"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/dark_black"
+                            android:text="@string/name"
+                            android:fontFamily="@font/opensans_regular"
+                            android:textSize="@dimen/_12sp"
+                            android:textAlignment="center"
+                            android:layout_height="wrap_content"/>
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvParentName"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/dark_black"
+                            android:text=" yes"
+                            android:layout_toEndOf="@+id/tvParentNameLabel"
+                            android:fontFamily="@font/opensans_bold"
+                            android:textSize="@dimen/_12sp"
+                            android:textAlignment="center"
+                            android:layout_height="wrap_content"/>
+
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_below="@+id/rlParentName"
+                        android:id="@+id/rlRelationShip"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_7sdp">
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvRelationShipLabel"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/dark_black"
+                            android:text="@string/relation_ship"
+                            android:fontFamily="@font/opensans_regular"
+                            android:textSize="@dimen/_12sp"
+                            android:textAlignment="center"
+                            android:layout_height="wrap_content"/>
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvRelationShip"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/dark_black"
+                            android:text=" Father"
+                            android:layout_toEndOf="@+id/tvRelationShipLabel"
+                            android:fontFamily="@font/opensans_bold"
+                            android:textSize="@dimen/_12sp"
+                            android:textAlignment="center"
+                            android:layout_height="wrap_content"/>
+
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_below="@+id/rlRelationShip"
+                        android:id="@+id/rlMobileNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_7sdp">
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvMobileNumberLabel"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/dark_black"
+                            android:text="@string/mobile_no"
+                            android:fontFamily="@font/opensans_regular"
+                            android:textSize="@dimen/_12sp"
+                            android:textAlignment="center"
+                            android:layout_height="wrap_content"/>
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvMobile"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/dark_black"
+                            android:text=" (603) 91784563"
+                            android:layout_toEndOf="@+id/tvMobileNumberLabel"
+                            android:fontFamily="@font/opensans_bold"
+                            android:textSize="@dimen/_12sp"
+                            android:textAlignment="center"
+                            android:layout_height="wrap_content"/>
+
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/rlAddress"
+                    android:layout_below="@+id/rlParentDetails"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_60sdp"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/white_square_shape"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvAddressLabel"
+                        android:layout_width="match_parent"
+                        android:textColor="@color/dark_black"
+                        android:text="@string/address"
+                        android:fontFamily="@font/opensans_bold"
+                        android:textSize="@dimen/_12sp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:textAlignment="viewStart"
+                        android:layout_height="wrap_content"/>
+
+                    <RelativeLayout
+                        android:layout_below="@+id/tvAddressLabel"
+                        android:id="@+id/rlHouse"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_7sdp">
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvHouseLabel"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/dark_black"
+                            android:text="@string/house_number"
+                            android:fontFamily="@font/opensans_regular"
+                            android:textSize="@dimen/_12sp"
+                            android:textAlignment="center"
+                            android:layout_height="wrap_content"/>
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvHouseNumber"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/dark_black"
+                            android:text=" D.No. 5-51-554"
+                            android:layout_toEndOf="@+id/tvHouseLabel"
+                            android:fontFamily="@font/opensans_bold"
+                            android:textSize="@dimen/_12sp"
+                            android:textAlignment="center"
+                            android:layout_height="wrap_content"/>
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_below="@+id/rlHouse"
+                        android:id="@+id/rlStreet"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_7sdp">
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvStreetLabel"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/dark_black"
+                            android:text="@string/street"
+                            android:fontFamily="@font/opensans_regular"
+                            android:textSize="@dimen/_12sp"
+                            android:textAlignment="center"
+                            android:layout_height="wrap_content"/>
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvStreet"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/dark_black"
+                            android:text=" 554,Allwayn colony"
+                            android:layout_toEndOf="@+id/tvStreetLabel"
+                            android:fontFamily="@font/opensans_bold"
+                            android:textSize="@dimen/_12sp"
+                            android:textAlignment="center"
+                            android:layout_height="wrap_content"/>
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_below="@+id/rlStreet"
+                        android:id="@+id/rlCity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_7sdp">
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvCityLabel"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/dark_black"
+                            android:text="@string/city"
+                            android:fontFamily="@font/opensans_regular"
+                            android:textSize="@dimen/_12sp"
+                            android:textAlignment="center"
+                            android:layout_height="wrap_content"/>
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvCity"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/dark_black"
+                            android:text=" Noida"
+                            android:layout_toEndOf="@+id/tvCityLabel"
+                            android:fontFamily="@font/opensans_bold"
+                            android:textSize="@dimen/_12sp"
+                            android:textAlignment="center"
+                            android:layout_height="wrap_content"/>
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_below="@+id/rlCity"
+                        android:id="@+id/rlDistrict"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_7sdp">
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvDistrictLabel"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/dark_black"
+                            android:text="@string/district"
+                            android:fontFamily="@font/opensans_regular"
+                            android:textSize="@dimen/_12sp"
+                            android:textAlignment="center"
+                            android:layout_height="wrap_content"/>
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvDistrict"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/dark_black"
+                            android:text=" Haryana"
+                            android:layout_toEndOf="@+id/tvDistrictLabel"
+                            android:fontFamily="@font/opensans_bold"
+                            android:textSize="@dimen/_12sp"
+                            android:textAlignment="center"
+                            android:layout_height="wrap_content"/>
+
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_below="@+id/rlDistrict"
+                        android:id="@+id/rlState"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_7sdp">
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvStateLabel"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/dark_black"
+                            android:text="@string/state"
+                            android:fontFamily="@font/opensans_regular"
+                            android:textSize="@dimen/_12sp"
+                            android:textAlignment="center"
+                            android:layout_height="wrap_content"/>
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvState"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/dark_black"
+                            android:text=" Andhra Pradesh"
+                            android:layout_toEndOf="@+id/tvStateLabel"
+                            android:fontFamily="@font/opensans_bold"
+                            android:textSize="@dimen/_12sp"
+                            android:textAlignment="center"
+                            android:layout_height="wrap_content"/>
+
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_below="@+id/rlState"
+                        android:id="@+id/rlPostalCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_7sdp">
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvPostalLabel"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/dark_black"
+                            android:text="@string/postal_code"
+                            android:fontFamily="@font/opensans_regular"
+                            android:textSize="@dimen/_12sp"
+                            android:textAlignment="center"
+                            android:layout_height="wrap_content"/>
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvPostal"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/dark_black"
+                            android:text=" 500601"
+                            android:layout_toEndOf="@+id/tvPostalLabel"
+                            android:fontFamily="@font/opensans_bold"
+                            android:textSize="@dimen/_12sp"
+                            android:textAlignment="center"
+                            android:layout_height="wrap_content"/>
+
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </ScrollView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:weightSum="2"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/rlPrevious"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="@color/dark_blue"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgBack1"
+                        android:layout_toStartOf="@+id/tvPrevious"
+                        android:layout_width="@dimen/_20sdp"
+                        android:src="@drawable/ic_baseline_arrow_back_24"
+                        android:tint="@color/white"
+                        android:layout_centerVertical="true"
+                        android:layout_height="@dimen/_20sdp"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvPrevious"
+                        android:layout_width="wrap_content"
+                        android:text="@string/previous"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_11sp"
+                        android:textAlignment="center"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_height="wrap_content"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlNext"
+                    android:layout_width="0dp"
+                    android:background="@color/dark_blue"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvNext"
+                        android:layout_width="wrap_content"
+                        android:text="@string/next"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_11sp"
+                        android:textAlignment="center"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_height="wrap_content"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgBack2"
+                        android:layout_toEndOf="@+id/tvNext"
+                        android:layout_width="@dimen/_20sdp"
+                        android:src="@drawable/arrow_forward"
+                        android:tint="@color/white"
+                        android:layout_centerVertical="true"
+                        android:layout_height="@dimen/_20sdp"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</layout>

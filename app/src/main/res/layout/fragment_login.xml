@@ -48,20 +48,42 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txtWelcomeBack" />
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/edtUserName"
+            <RelativeLayout
+                android:id="@+id/rlUserName"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_24sdp"
-                android:background="@drawable/white_rounded_radius_4_bg"
-                android:hint="@string/username"
-                android:inputType="text"
-                android:textSize="@dimen/_14ssp"
-                android:lines="1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="@dimen/_24sdp"
+                android:background="@drawable/white_rounded_radius_4_bg"
                 app:layout_constraintTop_toBottomOf="@id/txtDesc"
-                android:text="pratikkukadia@gmail.com"/>
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edtUserName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/username"
+                    android:inputType="text"
+                    android:background="@null"
+                    android:layout_toStartOf="@+id/imgCheck"
+                    android:textSize="@dimen/_14ssp"
+                    android:lines="1"
+                   />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgCheck"
+                    android:visibility="gone"
+                    android:layout_width="@dimen/_20sdp"
+                    android:src="@drawable/circle_check_mark"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_height="@dimen/_20sdp"/>
+
+
+
+            </RelativeLayout>
+
+
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtErrorUsername"
@@ -72,7 +94,7 @@
                 android:textColor="@color/red"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/edtUserName"
+                app:layout_constraintTop_toBottomOf="@id/rlUserName"
                 android:visibility="gone"/>
 
             <androidx.appcompat.widget.AppCompatEditText
@@ -88,8 +110,7 @@
                 android:lines="1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txtErrorUsername"
-                android:text="pratik1234"/>
+                app:layout_constraintTop_toBottomOf="@id/txtErrorUsername" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtErrorPwd"

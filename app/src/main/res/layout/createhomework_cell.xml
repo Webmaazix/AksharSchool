@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/_10sp"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/rlTop"
+            android:layout_width="match_parent"
+            android:padding="@dimen/_10sp"
+            android:background="@drawable/white_nopadding_bottomsquare"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgNotes"
+                android:layout_width="@dimen/_40sdp"
+                android:src="@drawable/notes"
+                android:background="@drawable/lightbluecircle"
+                android:padding="@dimen/_7sdp"
+                android:layout_height="@dimen/_40sdp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTopicName"
+                android:layout_toEndOf="@+id/imgNotes"
+                android:layout_marginStart="@dimen/_20sp"
+                android:text="@string/title"
+                android:textColor="@color/black"
+                android:fontFamily="@font/opensans_bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <RelativeLayout
+                android:id="@+id/rlImage"
+                android:layout_width="match_parent"
+                android:paddingStart="@dimen/_10sp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:layout_toEndOf="@+id/imgNotes"
+                android:layout_below="@+id/tvTopicName"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgAttachment"
+                    android:layout_width="@dimen/_18sdp"
+                    android:src="@drawable/attachment"
+                    android:padding="@dimen/_4sdp"
+                    android:layout_height="@dimen/_18sdp"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvImages"
+                    android:layout_toEndOf="@+id/imgAttachment"
+                    android:text="@string/images"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/opensans_regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlBottom"
+            android:layout_below="@+id/rlTop"
+            android:layout_width="match_parent"
+            android:background="@drawable/blue_nopadding_topsquare"
+            android:layout_height="wrap_content">
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvDate"
+                android:layout_marginStart="@dimen/_20sp"
+                android:text="2 september 2020 at 1:00 Pm"
+                android:textColor="@color/white"
+                android:padding="@dimen/_10sdp"
+                android:fontFamily="@font/opensans_regular"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</layout>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/_10sp"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/rlTop"
+            android:layout_width="match_parent"
+            android:padding="@dimen/_10sp"
+            android:background="@drawable/white_nopadding_shape"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTopicName"
+                android:layout_marginStart="@dimen/_20sp"
+                android:text="@string/title"
+                android:textColor="@color/black"
+                android:fontFamily="@font/opensans_bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvDesc"
+                android:text="@string/images"
+                android:layout_below="@+id/tvTopicName"
+                android:textColor="@color/black"
+                android:layout_marginStart="@dimen/_20sp"
+                android:fontFamily="@font/opensans_regular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <View
+                android:id="@+id/vv"
+                android:layout_width="match_parent"
+                android:background="@color/ultra_light_grey"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_below="@+id/tvDesc"
+                android:layout_height="@dimen/_1sdp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvDate"
+                android:layout_below="@+id/vv"
+                android:layout_marginStart="@dimen/_10sp"
+                android:text="2 september 2020 at 1:00 Pm"
+                android:textColor="@color/black"
+                android:padding="@dimen/_7sdp"
+                android:fontFamily="@font/opensans_regular"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvExpired"
+                android:layout_below="@+id/vv"
+                android:layout_marginStart="@dimen/_10sp"
+                android:text=". Expired"
+                android:textColor="@color/red"
+                android:padding="@dimen/_7sdp"
+                android:fontFamily="@font/opensans_regular"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_height="wrap_content"/>
+
+
+
+        </RelativeLayout>
+
+
+
+
+    </RelativeLayout>
+
+</layout>

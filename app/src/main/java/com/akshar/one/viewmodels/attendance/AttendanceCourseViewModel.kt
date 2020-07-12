@@ -22,9 +22,7 @@ import retrofit2.HttpException
 class AttendanceCourseViewModel(application: Application) : BaseViewModel(application) {
 
     private var attendanceRepository: AttendanceRepository? = null
-
     private var courseAdapter: CourseAdapter? = null
-
     private var courseListMutableLiveData = MutableLiveData<List<CourseEntity>>()
     private var classRoomListMutableLiveData = MutableLiveData<List<ClassRoomEntity>>()
     private val isLoading = MutableLiveData<Boolean>()
@@ -98,6 +96,43 @@ class AttendanceCourseViewModel(application: Application) : BaseViewModel(applic
                 )
             }
             courseEntity?.let { attendanceRepository?.insertCourse(it) }
+        }
+    }
+
+    fun getClassSection(courceEntity: CourseEntity){
+        isLoading.value = true
+       // val courseEntity = courseListMutableLiveData.value?.get(position)
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                try {
+                    isLoading.postValue(true)
+                    courceEntity.let { course ->
+                        var classRoomEntityList = attendanceRepository?.getClassRoomsByCourseId(
+                            course.courseId,
+                            course.schoolCode
+                        )
+                        if (classRoomEntityList.isNullOrEmpty()) {
+                            val classRoomList = attendanceRepository?.getClassRooms(course.courseId)
+                            classRoomList?.let { list ->
+                                insertClassRoomInDB(list, course)
+                                classRoomEntityList = attendanceRepository?.getClassRoomsByCourseId(course.courseId,course.schoolCode)
+                            }
+                        }
+                        classRoomListMutableLiveData.postValue(classRoomEntityList)
+
+                    }
+                    isLoading.postValue(false)
+
+                } catch (httpException: HttpException) {
+                    isLoading.postValue(false)
+                    val errorResponse =
+                        AppUtil.getErrorResponse(httpException.response()?.errorBody()?.string())
+                    errorResponse?.let { getErrorMutableLiveData().postValue(it) }
+                } catch (e: Exception) {
+                    isLoading.postValue(false)
+                    Log.d(AppConstant.TAG, "Courses Exception : $e")
+                }
+            }
         }
     }
 

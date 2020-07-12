@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="position"
+            type="java.lang.Integer" />
+
+        <variable
+            name="attendanceClassRoomViewModel"
+            type="com.akshar.one.viewmodels.attendance.AttendanceClassRoomViewModel" />
+    </data>
+
 
     <RelativeLayout
+        android:id="@+id/rlMain"
         android:layout_width="match_parent"
         android:padding="@dimen/_5sdp"
         android:layout_height="wrap_content">
@@ -24,6 +35,7 @@
             android:textColor="@color/black"
             android:text="Sanjay Singh"
             android:textSize="@dimen/_11sp"
+            android:layout_marginStart="@dimen/_20sdp"
             android:layout_toEndOf="@+id/tvSerialNumber"
             android:padding="@dimen/_7sdp"
             android:layout_toStartOf="@+id/imgRight"
@@ -45,4 +57,4 @@
             android:background="@color/grey"/>
     </RelativeLayout>
 
-</RelativeLayout>
+</layout>

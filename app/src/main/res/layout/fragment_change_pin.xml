@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="position"
+            type="java.lang.Integer" />
+
+        <variable
+            name="attendanceClassRoomViewModel"
+            type="com.akshar.one.viewmodels.attendance.AttendanceClassRoomViewModel" />
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/main_toolbar"/>
+
+        <RelativeLayout
+            android:id="@+id/rlMain"
+            android:layout_below="@+id/toolbar"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_40sdp"
+            android:layout_width="match_parent"
+            android:background="@drawable/white_nopadding_shape"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/rlEmptyView"
+                android:layout_width="match_parent"
+                android:background="@color/light_blue"
+                android:layout_height="@dimen/_10sdp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_below="@+id/rlEmptyView"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginBottom="@dimen/_30sdp"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etCurrentPin"
+                    android:hint="@string/current_pin"
+                    android:textSize="@dimen/_12sp"
+                    android:padding="@dimen/_7sdp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/opensans_regular"
+                    android:background="@drawable/grey_outline_shape"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etNewPin"
+                    android:hint="@string/new_pin"
+                    android:layout_below="@+id/etCurrentPin"
+                    android:textSize="@dimen/_12sp"
+                    android:padding="@dimen/_7sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/opensans_regular"
+                    android:background="@drawable/grey_outline_shape"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etConfirmPin"
+                    android:hint="@string/confirm_pin"
+                    android:textSize="@dimen/_12sp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_below="@+id/etNewPin"
+                    android:padding="@dimen/_7sdp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/opensans_regular"
+                    android:background="@drawable/grey_outline_shape"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvChangePin"
+            android:layout_alignParentBottom="true"
+            android:background="@color/dark_blue"
+            android:padding="@dimen/_10sdp"
+            android:text="@string/change_pin"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:fontFamily="@font/opensans_bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+    </RelativeLayout>
+
+
+
+
+</layout>

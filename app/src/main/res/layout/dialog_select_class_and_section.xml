@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="position"
+            type="java.lang.Integer" />
+
+        <variable
+            name="attendanceClassRoomViewModel"
+            type="com.akshar.one.viewmodels.attendance.AttendanceClassRoomViewModel" />
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/rlBlue"
+                android:layout_width="match_parent"
+                android:background="@drawable/blue_nopadding_bottomsquare"
+                android:layout_height="@dimen/_40sdp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:text="@string/choose_class_and_section"
+                    android:textSize="@dimen/_12sp"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/white"
+                    android:padding="@dimen/_7sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgCancel"
+                    android:layout_width="@dimen/_24sdp"
+                    android:src="@drawable/ic_baseline_close_24"
+                    android:layout_alignParentEnd="true"
+                    android:tint="@color/white"
+                    android:padding="@dimen/_3sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_centerVertical="true"
+                    android:layout_height="@dimen/_24sdp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_below="@+id/rlBlue"
+                android:background="@drawable/white_nopadding_topsquare"
+                android:layout_height="wrap_content">
+
+             <androidx.recyclerview.widget.RecyclerView
+                 android:id="@+id/rlClassesDropdown"
+                 android:layout_width="match_parent"
+                 android:layout_margin="@dimen/_7sdp"
+                 android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</layout>

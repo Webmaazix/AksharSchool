@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="position"
+            type="java.lang.Integer" />
+
+        <variable
+            name="attendanceClassRoomViewModel"
+            type="com.akshar.one.viewmodels.attendance.AttendanceClassRoomViewModel" />
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSerialNumber"
+            android:layout_width="wrap_content"
+            android:textColor="@color/black"
+            android:text="01."
+            android:textSize="@dimen/_11sp"
+            android:padding="@dimen/_7sdp"
+            android:layout_height="wrap_content"/>
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvStudentName"
+            android:layout_width="match_parent"
+            android:textColor="@color/black"
+            android:text="Sanjay Singh"
+            android:textSize="@dimen/_11sp"
+            android:layout_toEndOf="@+id/tvSerialNumber"
+            android:padding="@dimen/_7sdp"
+            android:layout_toStartOf="@+id/imgRight"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/imgRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/right_arrow"/>
+
+
+        <View
+            android:id="@+id/vv"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_below="@+id/imgRight"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@color/grey"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_below="@+id/vv"
+
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:weightSum="3"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="#F24E4E"
+                    android:padding="@dimen/_5sdp"
+                    android:text="@string/absent"
+                    android:textColor="@color/white"
+                    android:textAlignment="center"
+                    android:fontFamily="@font/opensans_regular"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_11sp"
+                    android:layout_height="wrap_content"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="#FF8855"
+                    android:padding="@dimen/_5sdp"
+                    android:text="@string/late"
+                    android:textColor="@color/white"
+                    android:textAlignment="center"
+                    android:fontFamily="@font/opensans_regular"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_11sp"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="#2C98F0"
+                    android:padding="@dimen/_5sdp"
+                    android:text="@string/on_leave"
+                    android:textColor="@color/white"
+                    android:textAlignment="center"
+                    android:fontFamily="@font/opensans_regular"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_11sp"
+                    android:layout_height="wrap_content"/>
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</layout>

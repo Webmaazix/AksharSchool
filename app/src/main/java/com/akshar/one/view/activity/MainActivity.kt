@@ -1,18 +1,104 @@
 package com.akshar.one.view.activity
 
+import android.app.Activity
+import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.provider.MediaStore
+import android.view.Gravity
+import android.view.MenuItem
+import android.view.View
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.akshar.one.R
-import com.akshar.one.view.attendance.AttendanceCourseFragment
+import com.akshar.one.assignhomework.AssignHomeworkFragment
+import com.akshar.one.attendance.AttendanceFragment
+import com.akshar.one.feeandpayments.StudentListForFeesFragment
+import com.akshar.one.manager.SessionManager
+import com.akshar.one.timetable.TimeTableActivity
+import com.akshar.one.util.CheckPermission
+import com.akshar.one.view.home.DashboardActivity
+import com.akshar.one.studentprofile.StudentListFragment
+import com.google.android.material.navigation.NavigationView
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.main_toolbar.*
+import kotlinx.android.synthetic.main.nav_header_main.view.*
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity(),  NavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
+
+
+    var drawerLayout: DrawerLayout? = null
+    var mSlideState = false
+    private var currActivity : Activity = this
+
+
+    companion object {
+        fun open(currActivity: Activity) {
+            val intent = Intent(currActivity, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+            currActivity.startActivity(intent)
+            currActivity.overridePendingTransition(R.anim.slide_in, R.anim.slide_out)
+            currActivity.finish()
+
+        }
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        nav_view.setNavigationItemSelectedListener(this)
+        drawerLayout = findViewById(R.id.drawer_layout)
+        val toggle = object : ActionBarDrawerToggle(
+            this,
+            drawerLayout,
 
-        replaceFragment(AttendanceCourseFragment.newInstance(), AttendanceCourseFragment::javaClass.name, true)
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
+        ) {
+
+            override fun onDrawerOpened(drawerView: View) {
+                super.onDrawerOpened(drawerView)
+                if(SessionManager.getLoginModel()!= null){
+                    val loginModel = SessionManager.getLoginModel()
+                    if(loginModel!!.appsList!= null){
+                        if(loginModel.appsList!![0].username!= null){
+                            nav_view.getHeaderView(0).tvUserName.text = loginModel.appsList!![0].username
+                        }
+                    }
+                }
+                nav_view.getHeaderView(0).imgUserProfile.setOnClickListener{
+                    if (CheckPermission.checkCameraPermission(currActivity))
+                        openCameraDialog()
+                    else
+                        CheckPermission.requestCameraPermission(
+                            currActivity,
+                            CheckPermission.REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS
+                        )
+                }
+            }
+
+            override fun onDrawerClosed(drawerView: View) {
+                super.onDrawerClosed(drawerView)
+
+            }
+        }
+
+
+        drawerLayout?.setDrawerListener(toggle)
+        nav_view.itemIconTintList = null;
+        setListner()
+        toolbar.background = currActivity.resources.getDrawable(R.drawable.white_square_nopadding_shape)
+        getWindow().statusBarColor = Color.WHITE;
+        txtToolbarTitle.text = currActivity.resources.getString(R.string.home)
+        replaceFragment(DashboardActivity.newInstance(), DashboardActivity::javaClass.name, false)
+    }
+
+    private fun setListner() {
+        imgMenu.setOnClickListener(this)
     }
 
     fun isLastAddedFragment(fragmentName: String?): Boolean {
@@ -68,5 +154,110 @@ class MainActivity : BaseActivity() {
 
     fun setToolbarTitle(title: String) {
         txtToolbarTitle.text = title
+    }
+
+    private fun openCamera(){
+
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.nav_logout -> {
+            }
+            R.id.nav_dashboard -> {
+                txtToolbarTitle.text = currActivity.resources.getString(R.string.home)
+                toolbar.background = currActivity.resources.getDrawable(R.drawable.white_square_nopadding_shape)
+                replaceFragment(DashboardActivity.newInstance(), DashboardActivity::javaClass.name, false)
+            }
+            R.id.nav_time_table -> {
+                TimeTableActivity.open(currActivity)
+             //   replaceFragment(DashboardActivity.newInstance(), DashboardActivity::javaClass.name, true)
+
+            }
+            R.id.nav_student_profile -> {
+                toolbar.background = currActivity.resources.getDrawable(R.drawable.yellow_top_square)
+
+                replaceFragment(StudentListFragment.newInstance(), StudentListFragment::javaClass.name, false)
+
+            }
+
+            R.id.nav_attandance_entry -> {
+                toolbar.background = currActivity.resources.getDrawable(R.drawable.yellow_top_square)
+
+                replaceFragment(AttendanceFragment.newInstance(), AttendanceFragment::javaClass.name, false)
+
+
+            }
+            R.id.nav_settings -> {
+            }
+            R.id.nav_assign_homework -> {
+                toolbar.background = currActivity.resources.getDrawable(R.drawable.yellow_top_square)
+
+                replaceFragment(AssignHomeworkFragment.newInstance(), AssignHomeworkFragment::javaClass.name, false)
+
+
+
+            }
+            R.id.nav_notice_board -> {
+
+            }
+
+            R.id.nav_marks_entry -> {
+            }
+            R.id.nav_exam_schedule -> {
+            }
+            R.id.nav_fees_payment -> {
+                toolbar.background = currActivity.resources.getDrawable(R.drawable.yellow_top_square)
+
+                replaceFragment(StudentListForFeesFragment.newInstance(), StudentListForFeesFragment::javaClass.name, false)
+
+            }
+            R.id.nav_message_center -> {
+            }
+
+        }
+        drawerLayout!!.closeDrawer(GravityCompat.START);
+        return true
+
+    }
+
+    fun openCameraDialog() {
+        val options = arrayOf<CharSequence>("Take Photo", "Choose from Gallery")
+        val builder = AlertDialog.Builder(currActivity)
+        builder.setTitle("Add Profile Pic!")
+        builder.setItems(options) { dialogInterface, i ->
+            if (options[i].toString().equals("Take Photo", ignoreCase = true)) {
+                val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                if (takePictureIntent.resolveActivity(packageManager) != null) {
+                    startActivityForResult(takePictureIntent, 101)
+                }
+            } else if (options[i].toString().equals("Choose from Gallery", ignoreCase = true)) {
+                val intent = Intent(Intent.ACTION_PICK)
+                // Sets the type as image/*. This ensures only components of type image are selected
+                intent.type = "image/*"
+                //We pass an extra array with the accepted mime types. This will ensure only components with these MIME types as targeted.
+                val mimeTypes = arrayOf("image/jpeg", "image/png")
+                intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+                // Launching the Intent
+                startActivityForResult(intent, 102)
+            } else if (options[i] == "Cancel") {
+                dialogInterface.dismiss()
+            }
+        }
+        builder.show()
+    }
+
+    override fun onClick(p0: View?) {
+
+        when (p0!!.id) {
+
+            R.id.imgMenu -> {
+                if (!mSlideState) {
+                    drawerLayout?.openDrawer(Gravity.LEFT);
+                } else {
+                    drawerLayout?.closeDrawer(Gravity.LEFT);
+                }
+            }
+        }
     }
 }

@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/white_nopadding_square_shape"
+            android:layout_marginStart="@dimen/_40sdp"
+            android:layout_marginEnd="@dimen/_40sdp"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/rlToday"
+                android:layout_width="match_parent"
+                android:padding="@dimen/_7sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvToday"
+                    android:layout_width="wrap_content"
+                    android:text="Today"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:fontFamily="@font/opensans_regular"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgToday"
+                    android:layout_width="@dimen/_15sdp"
+                    android:src="@drawable/done"
+                    android:visibility="gone"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_height="wrap_content"/>
+
+
+            </RelativeLayout>
+
+
+            <View
+                android:id="@+id/vv1"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/rlToday"
+                android:background="@color/lightishgray"
+                android:layout_height="@dimen/_1sdp"/>
+
+            <RelativeLayout
+                android:id="@+id/rlYesterday"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/rlToday"
+                android:padding="@dimen/_7sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvYesterDay"
+                    android:layout_width="match_parent"
+                    android:text="Yesterday"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sp"
+                    android:fontFamily="@font/opensans_regular"
+                    android:layout_height="wrap_content"/>
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgYesterDay"
+                    android:layout_width="@dimen/_15sdp"
+                    android:src="@drawable/done"
+                    android:visibility="gone"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+
+
+            <View
+                android:id="@+id/vv2"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/rlYesterday"
+                android:background="@color/lightishgray"
+                android:layout_height="@dimen/_1sdp"/>
+
+            <RelativeLayout
+                android:id="@+id/rlWeek"
+                android:layout_below="@+id/rlYesterday"
+                android:padding="@dimen/_7sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvWeek"
+
+                    android:layout_width="match_parent"
+                    android:text="This Week"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:textSize="@dimen/_12sp"
+                    android:fontFamily="@font/opensans_regular"
+                    android:layout_height="wrap_content"/>
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgWeek"
+                    android:layout_width="@dimen/_15sdp"
+                    android:src="@drawable/done"
+                    android:visibility="gone"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+
+            <View
+                android:id="@+id/vv3"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/rlWeek"
+                android:background="@color/lightishgray"
+                android:layout_height="@dimen/_1sdp"/>
+
+            <RelativeLayout
+                android:id="@+id/rlMonth"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/rlWeek"
+                android:padding="@dimen/_7sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_height="wrap_content">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvMonth"
+                    android:layout_width="wrap_content"
+                    android:text="This Month"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:fontFamily="@font/opensans_regular"
+                    android:layout_height="wrap_content"/>
+
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgMonth"
+                    android:layout_width="@dimen/_15sdp"
+                    android:src="@drawable/done"
+                    android:visibility="gone"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+
+            <View
+                android:id="@+id/vv4"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/rlMonth"
+                android:background="@color/lightishgray"
+                android:layout_height="@dimen/_1sdp"/>
+
+            <RelativeLayout
+                android:id="@+id/rlYear"
+                android:layout_below="@+id/rlMonth"
+                android:padding="@dimen/_7sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvYear"
+                    android:layout_width="match_parent"
+                    android:text="This Year"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sp"
+                    android:fontFamily="@font/opensans_regular"
+                    android:layout_height="wrap_content"/>
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgYear"
+                    android:layout_width="@dimen/_15sdp"
+                    android:src="@drawable/done"
+                    android:visibility="gone"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_height="wrap_content"/>
+
+
+
+            </RelativeLayout>
+
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</layout>

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="position"
+            type="java.lang.Integer" />
+
+        <variable
+            name="attendanceClassRoomViewModel"
+            type="com.akshar.one.viewmodels.attendance.AttendanceClassRoomViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/main_toolbar"/>
+
+        <RelativeLayout
+            android:id="@+id/rlMain"
+            android:layout_below="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/rlClassName"
+                android:layout_width="wrap_content"
+                android:background="@drawable/white_nopadding_shape"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/etClassName"
+                    android:layout_width="wrap_content"
+                    android:padding="@dimen/_5sdp"
+                    android:hint="Semester Examination"
+                    android:background="@null"
+                    android:paddingStart="@dimen/_10sp"
+                    android:paddingEnd="@dimen/_10sp"
+                    android:textSize="@dimen/_10sp"
+                    android:fontFamily="@font/opensans_bold"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/_18sdp"
+                    android:src="@drawable/dropdown"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_toEndOf="@+id/etClassName"
+                    android:layout_height="@dimen/_18sdp"/>
+
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rlStudents"
+                android:layout_toEndOf="@+id/rlClassName"
+                android:layout_width="wrap_content"
+                android:background="@drawable/white_nopadding_shape"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvAllStudents"
+                    android:layout_width="wrap_content"
+                    android:padding="@dimen/_5sdp"
+                    android:hint="English"
+                    android:background="@null"
+                    android:paddingStart="@dimen/_10sp"
+                    android:paddingEnd="@dimen/_10sp"
+                    android:textSize="@dimen/_10sp"
+                    android:fontFamily="@font/opensans_bold"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/_18sdp"
+                    android:src="@drawable/dropdown"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_toEndOf="@+id/tvAllStudents"
+                    android:layout_height="@dimen/_18sdp"/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlEmptyView"
+                android:layout_below="@+id/rlStudents"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@color/lightishgray"
+                android:layout_height="@dimen/_10sdp"/>
+
+            <RelativeLayout
+                android:id="@+id/rlMaximumMarks"
+                android:layout_below="@+id/rlEmptyView"
+                android:background="@color/light_blue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:text="@string/maximum_marks"
+                    android:textSize="@dimen/_11sp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/opensans_bold"
+                    android:padding="@dimen/_5sdp"
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content"/>
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:text="100"
+                    android:textSize="@dimen/_11sp"
+                    android:paddingStart="@dimen/_20sdp"
+                    android:paddingEnd="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:background="@drawable/transparent_white_stroke"
+                    android:layout_alignParentEnd="true"
+                    android:textColor="@color/white"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:fontFamily="@font/opensans_bold"
+                    android:padding="@dimen/_5sdp"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlStudentRow"
+                android:layout_below="@+id/rlMaximumMarks"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvSerialNumber"
+                    android:layout_width="wrap_content"
+                    android:textSize="@dimen/_11sp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:text="@string/r_no"
+                    android:fontFamily="@font/opensans_bold"
+                    android:padding="@dimen/_7sdp"
+                    android:textColor="@color/dark_blue"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvStudentName"
+                    android:layout_width="wrap_content"
+                    android:textSize="@dimen/_11sp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:text="@string/student_name"
+                    android:padding="@dimen/_7sdp"
+                    android:fontFamily="@font/opensans_bold"
+
+                    android:layout_toEndOf="@+id/tvSerialNumber"
+                    android:textColor="@color/dark_blue"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvObtainedMarks"
+                    android:layout_width="wrap_content"
+                    android:textSize="@dimen/_11sp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:text="@string/obtained_marks"
+                    android:layout_alignParentEnd="true"
+                    android:padding="@dimen/_7sdp"
+                    android:fontFamily="@font/opensans_bold"
+                    android:textColor="@color/dark_blue"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_below="@+id/tvSerialNumber"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:layout_height="wrap_content"/>
+
+
+
+            </RelativeLayout>
+
+
+
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+</layout>

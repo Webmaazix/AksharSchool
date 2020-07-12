@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="position"
+            type="java.lang.Integer" />
+
+        <variable
+            name="attendanceClassRoomViewModel"
+            type="com.akshar.one.viewmodels.attendance.AttendanceClassRoomViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/main_toolbar"/>
+
+        <RelativeLayout
+                android:id="@+id/rlMain"
+                android:layout_below="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/rlClassName"
+                    android:layout_width="wrap_content"
+                    android:background="@drawable/white_nopadding_shape"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/etClassName"
+                        android:layout_width="wrap_content"
+                        android:padding="@dimen/_5sdp"
+                        android:hint="Class Xth B"
+                        android:background="@null"
+                        android:paddingStart="@dimen/_10sp"
+                        android:paddingEnd="@dimen/_10sp"
+                        android:textSize="@dimen/_10sp"
+                        android:fontFamily="@font/opensans_bold"
+                        android:layout_height="wrap_content"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/_18sdp"
+                        android:src="@drawable/dropdown"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_toEndOf="@+id/etClassName"
+                        android:layout_height="@dimen/_18sdp"/>
+
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/rlStudents"
+                    android:layout_toEndOf="@+id/rlClassName"
+                    android:layout_width="wrap_content"
+                    android:background="@drawable/white_nopadding_shape"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvAllStudents"
+                        android:layout_width="wrap_content"
+                        android:padding="@dimen/_5sdp"
+                        android:hint="Sanjay Singh"
+                        android:background="@null"
+                        android:paddingStart="@dimen/_10sp"
+                        android:paddingEnd="@dimen/_10sp"
+                        android:textSize="@dimen/_10sp"
+                        android:fontFamily="@font/opensans_bold"
+                        android:layout_height="wrap_content"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/_18sdp"
+                        android:src="@drawable/dropdown"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_toEndOf="@+id/tvAllStudents"
+                        android:layout_height="@dimen/_18sdp"/>
+
+
+                </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rlFragments"
+                android:layout_below="@+id/rlStudents"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@color/dim_white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tbLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/vpPager"
+                    android:layout_below="@+id/tbLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+
+            </RelativeLayout>
+
+
+
+
+            </RelativeLayout>
+
+    </RelativeLayout>
+
+</layout>

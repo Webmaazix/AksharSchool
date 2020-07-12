@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.fragment_login.*
 
 class AttendanceCourseFragment : BaseFragment() {
 
-    private var fragmentAttendanceCourseBinding: FragmentAttendanceCourseBinding? = null
+   private var fragmentAttendanceCourseBinding: FragmentAttendanceCourseBinding? = null
     private var attendanceCourseViewModel : AttendanceCourseViewModel? = null
     private var mainActivity: MainActivity? = null
 
@@ -56,7 +56,7 @@ class AttendanceCourseFragment : BaseFragment() {
                 ViewModelFactory(it)
             ).get(AttendanceCourseViewModel::class.java)
         }
-        fragmentAttendanceCourseBinding?.attendanceCourseViewModel = attendanceCourseViewModel
+       fragmentAttendanceCourseBinding?.attendanceCourseViewModel = attendanceCourseViewModel
         observers()
         fetchCourses()
     }
@@ -86,8 +86,10 @@ class AttendanceCourseFragment : BaseFragment() {
 
     private fun openBottomSheetSelectionDialog(classRoomEntityList: List<ClassRoomEntity>) {
 
-        val attendanceClassRoomBottomSheetDialog = AttendanceClassRoomBottomSheetDialog.newInstance(classRoomEntityList)
-        mainActivity?.supportFragmentManager?.let { attendanceClassRoomBottomSheetDialog.show(it, AttendanceClassRoomBottomSheetDialog::class.java.name) }
+        val attendanceClassRoomBottomSheetDialog = AttendanceClassRoomBottomSheetDialog.newInstance(
+            classRoomEntityList)
+        mainActivity?.supportFragmentManager?.let {
+            attendanceClassRoomBottomSheetDialog.show(it, AttendanceClassRoomBottomSheetDialog::class.java.name) }
     }
 
     private fun showProgressIndicator(isLoading: Boolean?) {

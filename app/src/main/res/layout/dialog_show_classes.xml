@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="position"
+            type="java.lang.Integer" />
+
+        <variable
+            name="attendanceClassRoomViewModel"
+            type="com.akshar.one.viewmodels.attendance.AttendanceClassRoomViewModel" />
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/rlBlue"
+                android:layout_width="match_parent"
+                android:background="@drawable/blue_nopadding_bottomsquare"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:text="@string/mark_all_as"
+                    android:textSize="@dimen/_12sp"
+                    android:textColor="@color/white"
+                    android:padding="@dimen/_7sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/_24sdp"
+                    android:src="@drawable/ic_baseline_close_24"
+                    android:layout_alignParentEnd="true"
+                    android:tint="@color/white"
+                    android:padding="@dimen/_3sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_centerVertical="true"
+                    android:layout_height="@dimen/_24sdp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_below="@+id/rlBlue"
+                android:background="@drawable/white_nopadding_topsquare"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvPresent"
+                    android:layout_width="match_parent"
+                    android:text="@string/mark_all_as"
+                    android:textSize="@dimen/_12sp"
+                    android:textColor="@color/black"
+                    android:padding="@dimen/_7sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_height="wrap_content"/>
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvOnLeave"
+                    android:layout_below="@+id/tvPresent"
+                    android:layout_width="match_parent"
+                    android:text="@string/on_leave"
+                    android:textSize="@dimen/_12sp"
+                    android:textColor="@color/black"
+                    android:padding="@dimen/_7sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvAbsent"
+                    android:layout_below="@+id/tvOnLeave"
+                    android:layout_width="match_parent"
+                    android:text="@string/absent"
+                    android:textSize="@dimen/_12sp"
+                    android:textColor="@color/black"
+                    android:padding="@dimen/_7sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_height="wrap_content"/>
+
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</layout>

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="position"
+            type="java.lang.Integer" />
+
+        <variable
+            name="attendanceClassRoomViewModel"
+            type="com.akshar.one.viewmodels.attendance.AttendanceClassRoomViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/main_toolbar"/>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/white_nopadding_shape"
+            android:layout_below="@+id/toolbar"
+            android:layout_margin="@dimen/_20sdp"
+            android:layout_height="wrap_content">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:background="@color/light_blue"
+                android:layout_height="@dimen/_10sdp"/>
+
+
+            <RelativeLayout
+                android:id="@+id/rlClassSelection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/llClassSelection"
+                    android:layout_width="match_parent"
+                    android:weightSum="2"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:text="@string/c_lass"
+                        android:padding="@dimen/_7sdp"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/_12sp"
+                        android:fontFamily="@font/opensans_bold"
+                        android:layout_height="wrap_content"/>
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:text="@string/section"
+                        android:padding="@dimen/_7sdp"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/_12sp"
+                        android:fontFamily="@font/opensans_bold"
+                        android:layout_height="wrap_content"/>
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/llClassSelectionDropDown"
+                    android:layout_below="@+id/llClassSelection"
+                    android:layout_width="match_parent"
+                    android:weightSum="2"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:text="@string/select_class"
+                        android:background="@drawable/grey_outline_shape"
+                        android:drawableEnd="@drawable/dropdown"
+                        android:padding="@dimen/_7sdp"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/_12sp"
+                        android:fontFamily="@font/opensans_bold"
+                        android:layout_height="wrap_content"/>
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:text="@string/select_section"
+                        android:padding="@dimen/_7sdp"
+                        android:background="@drawable/grey_outline_shape"
+                        android:drawableEnd="@drawable/dropdown"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/_12sp"
+                        android:fontFamily="@font/opensans_bold"
+                        android:layout_height="wrap_content"/>
+
+
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlSubject"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/rlClassSelection"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_height="wrap_content">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvSubjectLabel"
+                    android:layout_width="match_parent"
+                    android:text="@string/subject"
+                    android:paddingTop="@dimen/_7sdp"
+                    android:paddingBottom="@dimen/_7sdp"
+                    android:textSize="@dimen/_12sp"
+                    android:fontFamily="@font/opensans_bold"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvSubject"
+                    android:layout_width="match_parent"
+                    android:textSize="@dimen/_12sp"
+                    android:textColor="@color/black"
+                    android:background="@drawable/grey_outline_shape"
+                    android:drawableEnd="@drawable/dropdown"
+                    android:padding="@dimen/_5sdp"
+                    android:fontFamily="@font/opensans_regular"
+                    android:layout_below="@+id/tvSubjectLabel"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rlExamName"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/rlSubject"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_height="wrap_content">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvExamNameLabel"
+                    android:layout_width="match_parent"
+                    android:text="@string/exam_name"
+                    android:paddingTop="@dimen/_7sdp"
+                    android:paddingBottom="@dimen/_7sdp"
+                    android:textSize="@dimen/_12sp"
+                    android:fontFamily="@font/opensans_bold"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvExamName"
+                    android:layout_width="match_parent"
+                    android:textSize="@dimen/_12sp"
+                    android:textColor="@color/black"
+                    android:background="@drawable/grey_outline_shape"
+                    android:drawableEnd="@drawable/dropdown"
+                    android:padding="@dimen/_5sdp"
+                    android:fontFamily="@font/opensans_regular"
+                    android:layout_below="@+id/tvExamNameLabel"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rltestName"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/rlExamName"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_height="wrap_content">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvTestNameLabel"
+                    android:layout_width="match_parent"
+                    android:text="@string/date"
+                    android:paddingTop="@dimen/_7sdp"
+                    android:paddingBottom="@dimen/_7sdp"
+                    android:textSize="@dimen/_12sp"
+                    android:fontFamily="@font/opensans_bold"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvTestName"
+                    android:layout_width="match_parent"
+                    android:textSize="@dimen/_12sp"
+                    android:textColor="@color/black"
+                    android:background="@drawable/grey_outline_shape"
+                    android:drawableEnd="@drawable/ic_calendar"
+                    android:padding="@dimen/_5sdp"
+                    android:fontFamily="@font/opensans_regular"
+                    android:layout_below="@+id/tvTestNameLabel"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:background="@color/dark_blue"
+            android:layout_alignParentBottom="true"
+            android:text="@string/c_ontinue"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:padding="@dimen/_10sdp"
+            android:textSize="@dimen/_12sp"
+            android:fontFamily="@font/opensans_regular"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+</layout>

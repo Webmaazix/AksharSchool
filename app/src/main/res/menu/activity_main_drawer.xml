@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_dashboard"
+            android:icon="@drawable/menudashboardd"
+            android:title="@string/dashboard" />
+        <item
+            android:id="@+id/nav_time_table"
+            android:icon="@drawable/timetable"
+            android:title="@string/timetable" />
+        <item
+            android:id="@+id/nav_student_profile"
+            android:icon="@drawable/book"
+            android:title="@string/student_profile" />
+        <item
+            android:id="@+id/nav_attandance_entry"
+            android:icon="@drawable/attendanceentry"
+            android:title="@string/attendance_entry" />
+
+        <item
+            android:id="@+id/nav_assign_homework"
+            android:icon="@drawable/assign_homework"
+            android:title="@string/assign_homework" />
+
+        <item
+            android:id="@+id/nav_notice_board"
+            android:icon="@drawable/noticeboard"
+            android:title="@string/notice_board" />
+
+        <item
+            android:id="@+id/nav_marks_entry"
+            android:icon="@drawable/marks_entry"
+            android:title="@string/marks_entry" />
+
+        <item
+            android:id="@+id/nav_exam_schedule"
+            android:icon="@drawable/exam_schedule"
+            android:title="@string/exam_schedule" />
+
+
+        <item
+            android:id="@+id/nav_fees_payment"
+            android:icon="@drawable/rupee"
+            android:title="@string/fee_amp_payment" />
+
+        <item
+            android:id="@+id/nav_message_center"
+            android:icon="@drawable/message_center"
+            android:title="@string/message_center" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/settings"
+            android:title="@string/settings" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/logout"
+            android:title="@string/logout" />
+    </group>
+
+<!--    <item android:title="Communicate">-->
+<!--        <menu>-->
+<!--            <item-->
+<!--                android:id="@+id/nav_share"-->
+<!--                android:icon="@drawable/ic_menu_share"-->
+<!--                android:title="@string/feedback_rate_us" />-->
+<!--            <item-->
+<!--                android:id="@+id/nav_send"-->
+<!--                android:icon="@drawable/ic_menu_send"-->
+<!--                android:title="@string/settings" />-->
+
+
+<!--            <item-->
+<!--                android:id="@+id/nav_Terms_Condition"-->
+<!--                android:icon="@drawable/ic_menu_send"-->
+<!--                android:title="@string/settings" />-->
+
+<!--            <item-->
+<!--                android:id="@+id/nav_logout"-->
+<!--                android:icon="@drawable/logout"-->
+<!--                android:title="@string/logout" />-->
+<!--        </menu>-->
+<!--    </item>-->
+
+</menu>

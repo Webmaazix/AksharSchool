@@ -1,0 +1,582 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="position"
+            type="java.lang.Integer" />
+
+        <variable
+            name="attendanceClassRoomViewModel"
+            type="com.akshar.one.viewmodels.attendance.AttendanceClassRoomViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/main_toolbar"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_below="@+id/toolbar"
+            android:layout_height="match_parent">
+
+
+        <RelativeLayout
+            android:id="@+id/rlMain"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/rlClassName"
+                android:layout_width="wrap_content"
+                android:background="@drawable/white_nopadding_shape"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/etClassName"
+                    android:layout_width="wrap_content"
+                    android:padding="@dimen/_5sdp"
+                    android:hint="Class Xth B"
+                    android:background="@null"
+                    android:paddingStart="@dimen/_10sp"
+                    android:paddingEnd="@dimen/_10sp"
+                    android:textSize="@dimen/_10sp"
+                    android:fontFamily="@font/opensans_bold"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/_18sdp"
+                    android:src="@drawable/dropdown"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_toEndOf="@+id/etClassName"
+                    android:layout_height="@dimen/_18sdp"/>
+
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rlStudents"
+                android:layout_toEndOf="@+id/rlClassName"
+                android:layout_width="wrap_content"
+                android:background="@drawable/white_nopadding_shape"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvAllStudents"
+                    android:layout_width="wrap_content"
+                    android:padding="@dimen/_5sdp"
+                    android:hint="Sanjay Singh"
+                    android:background="@null"
+                    android:paddingStart="@dimen/_10sp"
+                    android:paddingEnd="@dimen/_10sp"
+                    android:textSize="@dimen/_10sp"
+                    android:fontFamily="@font/opensans_bold"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/_18sdp"
+                    android:src="@drawable/dropdown"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_toEndOf="@+id/tvAllStudents"
+                    android:layout_height="@dimen/_18sdp"/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlfeeDetails"
+                android:layout_below="@+id/rlStudents"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@color/dim_white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:background="@drawable/white_nopadding_shape"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:padding="@dimen/_5sdp"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:id="@+id/rlFeeHead"
+                        android:layout_width="match_parent"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:paddingTop="@dimen/_7sdp"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvFeeHeadLabel"
+                            android:text="@string/fee_head"
+                            android:textSize="@dimen/_11sp"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/opensans_regular"
+                            android:layout_height="wrap_content"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvFeeHead"
+                            android:layout_alignParentEnd="true"
+                            android:text="Tution"
+                            android:textSize="@dimen/_11sp"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/opensans_bold"
+                            android:layout_height="wrap_content"/>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/rlDueDate"
+                        android:layout_below="@+id/rlFeeHead"
+                        android:layout_width="match_parent"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:paddingTop="@dimen/_7sdp"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvDueDateLabel"
+                            android:text="@string/due_date"
+                            android:textSize="@dimen/_11sp"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/opensans_regular"
+                            android:layout_height="wrap_content"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvDueDate"
+                            android:layout_alignParentEnd="true"
+                            android:text="05-10-2020"
+                            android:textSize="@dimen/_11sp"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/opensans_bold"
+                            android:layout_height="wrap_content"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rlTerm"
+                        android:layout_below="@+id/rlDueDate"
+                        android:layout_width="match_parent"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:paddingTop="@dimen/_7sdp"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvTermLabel"
+                            android:text="@string/term"
+                            android:textSize="@dimen/_11sp"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/opensans_regular"
+                            android:layout_height="wrap_content"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvTerm"
+                            android:layout_alignParentEnd="true"
+                            android:text="Term4"
+                            android:textSize="@dimen/_11sp"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/opensans_bold"
+                            android:layout_height="wrap_content"/>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/rlAmount"
+                        android:layout_below="@+id/rlTerm"
+                        android:layout_width="match_parent"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:paddingTop="@dimen/_7sdp"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvAmountLabel"
+                            android:text="@string/amount"
+                            android:textSize="@dimen/_11sp"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/opensans_regular"
+                            android:layout_height="wrap_content"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvAmount"
+                            android:layout_alignParentEnd="true"
+                            android:text="Rs. 1000"
+                            android:textSize="@dimen/_11sp"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/opensans_bold"
+                            android:layout_height="wrap_content"/>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/rlConcession"
+                        android:layout_below="@+id/rlAmount"
+                        android:layout_width="match_parent"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:paddingTop="@dimen/_7sdp"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvConcessionLabel"
+                            android:text="@string/concession"
+                            android:textSize="@dimen/_11sp"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/opensans_regular"
+                            android:layout_height="wrap_content"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvConcession"
+                            android:layout_alignParentEnd="true"
+                            android:text="Rs. 0"
+                            android:textSize="@dimen/_11sp"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/opensans_bold"
+                            android:layout_height="wrap_content"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rlFinalAmount"
+                        android:layout_below="@+id/rlConcession"
+                        android:layout_width="match_parent"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:paddingTop="@dimen/_7sdp"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvFinalAmountLabel"
+                            android:text="@string/final_amount"
+                            android:textSize="@dimen/_11sp"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/opensans_regular"
+                            android:layout_height="wrap_content"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvFinalAmount"
+                            android:layout_alignParentEnd="true"
+                            android:text="Rs. 1000"
+                            android:textSize="@dimen/_11sp"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/opensans_bold"
+                            android:layout_height="wrap_content"/>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/rlDueAmount"
+                        android:layout_below="@+id/rlFinalAmount"
+                        android:layout_width="match_parent"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:paddingTop="@dimen/_7sdp"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvDueAmountLabel"
+                            android:text="@string/due_amount"
+                            android:textSize="@dimen/_11sp"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/opensans_regular"
+                            android:layout_height="wrap_content"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvDueAmount"
+                            android:layout_alignParentEnd="true"
+                            android:text="Rs. 1000"
+                            android:textSize="@dimen/_11sp"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/opensans_bold"
+                            android:layout_height="wrap_content"/>
+
+                    </RelativeLayout>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:text="@string/pay"
+                        android:layout_below="@+id/rlDueAmount"
+                        android:background="@drawable/darkblue_buttonshape_nopadding"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:textColor="@color/white"
+                        android:textAlignment="center"
+                        android:padding="@dimen/_7sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:layout_height="wrap_content"/>
+
+
+
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rlSchoolFeeDetail"
+                android:layout_below="@+id/rlfeeDetails"
+                android:background="@color/dim_white"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="@dimen/_55sdp"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:background="@drawable/white_nopadding_shape"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:padding="@dimen/_5sdp"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:id="@+id/rlSFeeHead"
+                        android:layout_width="match_parent"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:paddingTop="@dimen/_7sdp"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvSFeeHeadLabel"
+                            android:text="@string/fee_head"
+                            android:textSize="@dimen/_11sp"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/opensans_regular"
+                            android:layout_height="wrap_content"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvSFeeHead"
+                            android:layout_alignParentEnd="true"
+                            android:text="Tution"
+                            android:textSize="@dimen/_11sp"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/opensans_bold"
+                            android:layout_height="wrap_content"/>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/rlSDueDate"
+                        android:layout_below="@+id/rlSFeeHead"
+                        android:layout_width="match_parent"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:paddingTop="@dimen/_7sdp"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvSDueDateLabel"
+                            android:text="@string/due_date"
+                            android:textSize="@dimen/_11sp"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/opensans_regular"
+                            android:layout_height="wrap_content"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvSDueDate"
+                            android:layout_alignParentEnd="true"
+                            android:text="05-10-2020"
+                            android:textSize="@dimen/_11sp"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/opensans_bold"
+                            android:layout_height="wrap_content"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rlSTerm"
+                        android:layout_below="@+id/rlSDueDate"
+                        android:layout_width="match_parent"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:paddingTop="@dimen/_7sdp"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvSTermLabel"
+                            android:text="@string/term"
+                            android:textSize="@dimen/_11sp"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/opensans_regular"
+                            android:layout_height="wrap_content"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvSTerm"
+                            android:layout_alignParentEnd="true"
+                            android:text="Term4"
+                            android:textSize="@dimen/_11sp"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/opensans_bold"
+                            android:layout_height="wrap_content"/>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/rlSAmount"
+                        android:layout_below="@+id/rlSTerm"
+                        android:layout_width="match_parent"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:paddingTop="@dimen/_7sdp"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvSAmountLabel"
+                            android:text="@string/amount"
+                            android:textSize="@dimen/_11sp"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/opensans_regular"
+                            android:layout_height="wrap_content"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvSAmount"
+                            android:layout_alignParentEnd="true"
+                            android:text="Rs. 1000"
+                            android:textSize="@dimen/_11sp"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/opensans_bold"
+                            android:layout_height="wrap_content"/>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/rlSConcession"
+                        android:layout_below="@+id/rlSAmount"
+                        android:layout_width="match_parent"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:paddingTop="@dimen/_7sdp"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvSConcessionLabel"
+                            android:text="@string/concession"
+                            android:textSize="@dimen/_11sp"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/opensans_regular"
+                            android:layout_height="wrap_content"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvSConcession"
+                            android:layout_alignParentEnd="true"
+                            android:text="Rs. 0"
+                            android:textSize="@dimen/_11sp"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/opensans_bold"
+                            android:layout_height="wrap_content"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rlSFinalAmount"
+                        android:layout_below="@+id/rlSConcession"
+                        android:layout_width="match_parent"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:paddingTop="@dimen/_7sdp"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvSFinalAmountLabel"
+                            android:text="@string/final_amount"
+                            android:textSize="@dimen/_11sp"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/opensans_regular"
+                            android:layout_height="wrap_content"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvSFinalAmount"
+                            android:layout_alignParentEnd="true"
+                            android:text="Rs. 1000"
+                            android:textSize="@dimen/_11sp"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/opensans_bold"
+                            android:layout_height="wrap_content"/>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/rlSDueAmount"
+                        android:layout_below="@+id/rlSFinalAmount"
+                        android:layout_width="match_parent"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:paddingTop="@dimen/_7sdp"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvSDueAmountLabel"
+                            android:text="@string/due_amount"
+                            android:textSize="@dimen/_11sp"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/opensans_regular"
+                            android:layout_height="wrap_content"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvSDueAmount"
+                            android:layout_alignParentEnd="true"
+                            android:text="Rs. 1000"
+                            android:textSize="@dimen/_11sp"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/opensans_bold"
+                            android:layout_height="wrap_content"/>
+
+                    </RelativeLayout>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:text="@string/pay"
+                        android:layout_below="@+id/rlSDueAmount"
+                        android:background="@drawable/darkblue_buttonshape_nopadding"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:textColor="@color/white"
+                        android:textAlignment="center"
+                        android:padding="@dimen/_7sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:layout_height="wrap_content"/>
+
+
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        </ScrollView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:text="@string/pay_all"
+            android:textSize="@dimen/_11sp"
+            android:textColor="@color/white"
+            android:background="@color/dark_blue"
+            android:padding="@dimen/_7sdp"
+            android:textAlignment="center"
+            android:fontFamily="@font/opensans_bold"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+</layout>

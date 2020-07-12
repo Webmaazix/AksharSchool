@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
 import com.akshar.one.R
 import com.akshar.one.util.AndroidUtil
+import com.akshar.one.util.AppUtil
 import com.akshar.one.view.fragment.BaseFragment
 import com.akshar.one.viewmodels.ViewModelFactory
 import com.akshar.one.viewmodels.login.LoginViewModel
@@ -68,6 +69,7 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
             R.id.btnLogin -> {
                 AndroidUtil.hideKeyboard(context, btnLogin)
                 if (validate()) {
+                    imgCheck.visibility = View.VISIBLE
                     loginViewModel?.let {
                         if (context?.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true) {
                             it.loginServiceWithUsername(edtUserName?.text.toString(), edtPwd?.text.toString())
@@ -160,6 +162,9 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
     private fun validate(): Boolean {
 
         if (edtUserName.text.isNullOrEmpty()) {
+            txtErrorUsername.visibility = View.VISIBLE
+            return false
+        } else if(!AppUtil.isValidEmail(edtUserName.text.toString())){
             txtErrorUsername.visibility = View.VISIBLE
             return false
         } else if (edtPwd.text.isNullOrEmpty()) {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@color/white</color>
-    <color name="colorPrimaryDark">@color/white</color>
+    <color name="colorPrimary">#CFA21C</color>
+    <color name="colorPrimaryDark">#CFA21C</color>
     <color name="colorAccent">@color/dark_yellow</color>
 
     <color name="white">#FFFFFF</color>
@@ -11,11 +11,42 @@
     <color name="light_yellow">#FBD460</color>
     <color name="dark_yellow">#CFA21C</color>
     <color name="light_blue">#3395E5</color>
+    <color name="bluee">#6291FA</color>
     <color name="black">#333333</color>
     <color name="red">#ff0000</color>
+    <color name="maroon">#F55757</color>
+    <color name="orange">#F87D0B</color>
     <color name="grey">#D5D5D5</color>
     <color name="progress_bar_bg">#A0ffffff</color>
+    <color name="green_normal">#63C95A</color>
     <color name="background">#E5E5E5</color>
     <color name="light_grey">#E2E1E1</color>
     <color name="dim_white">#FBFAFA</color>
+    <color name="ultra_light_grey">#efc1c2c7</color>
+    <color name="lightishgray">#f0f0f0</color>
+    <color name="dark_dim_white">#8BFFFFFF</color>
+    <color name="light_green">#B2E8B9</color>
+    <color name="ultra_light_green">#DCF3DF</color>
+    <color name="light_white">#4DFFFFFF</color>
+
+    //subject colors
+
+    <color name="telugu_blue">#72D5C7</color>
+    <color name="hindi_orange">#F59C73</color>
+    <color name="english_pink">#F69372</color>
+    <color name="math_purple">#AA3C6D</color>
+    <color name="science_blue">#72D5C7</color>
+    <color name="environment_green">#089E9E</color>
+    <color name="bio_purple">#AA3C6D</color>
+    <color name="physics_pink">#F69372</color>
+    <color name="socialstudy_purple">#BC8DBB</color>
+    <color name="civics_green">#089E9E</color>
+    <color name="commerce_peach">#F59C73</color>
+    <color name="economics_purple">#BC8DBB</color>
+    <color name="chemistry_blue">#2887BF</color>
+    <color name="undefined_black">#928DAB</color>
+    <color name="undefined_green">#93F9B9</color>
+    <color name="lightish_grey">#F0F0F0</color>
+
+
 </resources>
