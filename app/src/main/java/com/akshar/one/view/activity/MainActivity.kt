@@ -4,16 +4,25 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import android.provider.MediaStore
 import android.view.Gravity
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStore
 import com.akshar.one.R
+import com.akshar.one.util.AndroidUtil
+import com.akshar.one.view.attendance.AttendanceCourseFragment
+import com.akshar.one.view.attendance.AttendanceEntryFragment
+import com.akshar.one.viewmodels.ViewModelFactory
+import com.akshar.one.viewmodels.main.MainViewModel
+import kotlinx.android.synthetic.main.fragment_login.*
 import com.akshar.one.assignhomework.AssignHomeworkFragment
 import com.akshar.one.attendance.AttendanceFragment
 import com.akshar.one.feeandpayments.StudentListForFeesFragment
@@ -33,7 +42,7 @@ class MainActivity : BaseActivity(),  NavigationView.OnNavigationItemSelectedLis
     var drawerLayout: DrawerLayout? = null
     var mSlideState = false
     private var currActivity : Activity = this
-
+    private var mainViewModel: MainViewModel? = null
 
     companion object {
         fun open(currActivity: Activity) {
@@ -87,8 +96,47 @@ class MainActivity : BaseActivity(),  NavigationView.OnNavigationItemSelectedLis
             }
         }
 
+        mainViewModel = ViewModelProvider(
+            ViewModelStore(),
+            ViewModelFactory(application)
+        ).get(MainViewModel::class.java)
 
-        drawerLayout?.setDrawerListener(toggle)
+        observers()
+        fetchCourses()
+    }
+
+    private fun fetchCourses() {
+        mainViewModel?.getClassRoomDropdownService()
+    }
+
+    private fun observers() {
+        mainViewModel?.getIsLoading()?.observe(this, Observer {
+            showProgressIndicator(it)
+        })
+
+        mainViewModel?.getErrorMutableLiveData()?.observe(this, Observer {
+            it?.let {
+                AndroidUtil.showMessageDialog(this, it.message)
+            }
+        })
+
+        mainViewModel?.getCourseListMutableLiveData()?.observe(this, Observer {
+//            replaceFragment(
+//                AttendanceEntryFragment.newInstance(),
+//                AttendanceCourseFragment::javaClass.name,
+//                true
+//            )
+        })
+
+//        mainViewModel?.getDegreeListMutableLiveData()?.observe(this, Observer {
+//            replaceFragment(
+//                AttendanceEntryFragment.newInstance(),
+//                AttendanceCourseFragment::javaClass.name,
+//                true
+//            )
+//        })
+
+//        drawerLayout?.setDrawerListener(toggle)
         nav_view.itemIconTintList = null;
         setListner()
         toolbar.background = currActivity.resources.getDrawable(R.drawable.white_square_nopadding_shape)
@@ -156,6 +204,10 @@ class MainActivity : BaseActivity(),  NavigationView.OnNavigationItemSelectedLis
         txtToolbarTitle.text = title
     }
 
+    private fun showProgressIndicator(isLoading: Boolean?) {
+//        linProgressIndicator.visibility = if (isLoading == true) View.VISIBLE else View.GONE
+    }
+
     private fun openCamera(){
 
     }
@@ -184,8 +236,7 @@ class MainActivity : BaseActivity(),  NavigationView.OnNavigationItemSelectedLis
             R.id.nav_attandance_entry -> {
                 toolbar.background = currActivity.resources.getDrawable(R.drawable.yellow_top_square)
 
-                replaceFragment(AttendanceFragment.newInstance(), AttendanceFragment::javaClass.name, false)
-
+                replaceFragment(AttendanceEntryFragment.newInstance(), AttendanceCourseFragment::javaClass.name, true)
 
             }
             R.id.nav_settings -> {
@@ -194,8 +245,6 @@ class MainActivity : BaseActivity(),  NavigationView.OnNavigationItemSelectedLis
                 toolbar.background = currActivity.resources.getDrawable(R.drawable.yellow_top_square)
 
                 replaceFragment(AssignHomeworkFragment.newInstance(), AssignHomeworkFragment::javaClass.name, false)
-
-
 
             }
             R.id.nav_notice_board -> {

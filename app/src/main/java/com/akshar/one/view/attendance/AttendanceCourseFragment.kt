@@ -17,13 +17,14 @@ import com.akshar.one.view.activity.MainActivity
 import com.akshar.one.view.fragment.BaseFragment
 import com.akshar.one.viewmodels.ViewModelFactory
 import com.akshar.one.viewmodels.attendance.AttendanceCourseViewModel
-import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.android.synthetic.main.fragment_attendance_course.*
 
 class AttendanceCourseFragment : BaseFragment() {
 
-   private var fragmentAttendanceCourseBinding: FragmentAttendanceCourseBinding? = null
+    private var fragmentAttendanceCourseBinding: FragmentAttendanceCourseBinding? = null
     private var attendanceCourseViewModel : AttendanceCourseViewModel? = null
     private var mainActivity: MainActivity? = null
+    private var attendanceClassRoomBottomSheetDialog: AttendanceClassRoomBottomSheetDialog? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -44,10 +45,6 @@ class AttendanceCourseFragment : BaseFragment() {
         initViews()
     }
 
-    private fun initViews() {
-        mainActivity?.setToolbarTitle(getString(R.string.attendance))
-    }
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         activity?.application?.let {
@@ -56,9 +53,18 @@ class AttendanceCourseFragment : BaseFragment() {
                 ViewModelFactory(it)
             ).get(AttendanceCourseViewModel::class.java)
         }
-       fragmentAttendanceCourseBinding?.attendanceCourseViewModel = attendanceCourseViewModel
+        fragmentAttendanceCourseBinding?.attendanceCourseViewModel = attendanceCourseViewModel
         observers()
         fetchCourses()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        attendanceClassRoomBottomSheetDialog?.dismiss()
+    }
+
+    private fun initViews() {
+        mainActivity?.setToolbarTitle(getString(R.string.attendance))
     }
 
     private fun observers() {
@@ -86,10 +92,8 @@ class AttendanceCourseFragment : BaseFragment() {
 
     private fun openBottomSheetSelectionDialog(classRoomEntityList: List<ClassRoomEntity>) {
 
-        val attendanceClassRoomBottomSheetDialog = AttendanceClassRoomBottomSheetDialog.newInstance(
-            classRoomEntityList)
-        mainActivity?.supportFragmentManager?.let {
-            attendanceClassRoomBottomSheetDialog.show(it, AttendanceClassRoomBottomSheetDialog::class.java.name) }
+        attendanceClassRoomBottomSheetDialog = AttendanceClassRoomBottomSheetDialog.newInstance(classRoomEntityList)
+        mainActivity?.supportFragmentManager?.let { attendanceClassRoomBottomSheetDialog?.show(it, AttendanceClassRoomBottomSheetDialog::class.java.name) }
     }
 
     private fun showProgressIndicator(isLoading: Boolean?) {

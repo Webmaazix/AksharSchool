@@ -14,9 +14,8 @@
         android:id="@+id/linBottomSheet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
         android:orientation="vertical"
-        android:padding="@dimen/_10sdp"
+        android:padding="@dimen/common_margin"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -43,10 +42,14 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/common_margin"
+            android:overScrollMode="never"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtSelectClassRoom" />
+            app:layout_constraintTop_toBottomOf="@+id/txtSelectClassRoom"
+            tools:itemCount="5"
+            tools:listitem="@layout/attendance_classroom_cell_layout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
