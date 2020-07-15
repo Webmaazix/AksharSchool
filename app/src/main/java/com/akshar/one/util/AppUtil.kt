@@ -1,16 +1,14 @@
 package com.akshar.one.util
 
 import com.akshar.one.api.response.ErrorResponse
+import com.akshar.one.calender.data.Day
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
 import org.json.JSONObject
 import java.lang.reflect.Type
 import java.text.SimpleDateFormat
-import android.util.Log
-import java.text.ParseException
 import java.util.*
 import java.util.regex.Pattern
-import kotlin.collections.ArrayList
 
 
 object AppUtil {
@@ -112,4 +110,7 @@ object AppUtil {
 
     fun getServerDateFormat(date:Date): String = SimpleDateFormat(SERVER_DATE_FORMAT).format(date)
 
+    fun getServerDateFormat(day: Day): String{
+        return day.year.toString()+"-"+day.month.toString()+"-"+day.day
+    }
 }

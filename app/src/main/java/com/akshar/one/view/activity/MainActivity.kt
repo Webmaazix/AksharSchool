@@ -200,10 +200,13 @@ class MainActivity : BaseActivity(),  NavigationView.OnNavigationItemSelectedLis
         return lastFragment
     }
 
-    fun setToolbarTitle(title: String) {
+    fun setToolbarTitle(title: String?) {
         txtToolbarTitle.text = title
     }
 
+    fun setToolbarBackground(boolean: Boolean){
+        toolbar.background = if(boolean) resources.getDrawable(R.drawable.yellow_top_square,null) else resources.getDrawable(R.color.light_yellow,null)
+    }
     private fun showProgressIndicator(isLoading: Boolean?) {
 //        linProgressIndicator.visibility = if (isLoading == true) View.VISIBLE else View.GONE
     }

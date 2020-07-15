@@ -14,17 +14,40 @@
         android:layout_height="match_parent"
         android:background="@color/background">
 
-<!--        <devs.mulham.horizontalcalendar.HorizontalCalendarView-->
-<!--            android:id="@+id/calendarView"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:background="@drawable/light_yellow_rounded_bg"-->
-<!--            app:sizeTopText="@dimen/_12ssp"-->
-<!--            app:sizeMiddleText="@dimen/_10ssp"-->
-<!--            app:selectorColor="@color/white"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
+        <RelativeLayout
+            android:id="@+id/rlCalenderView"
+            android:layout_width="match_parent"
+            android:background="@drawable/yellow_topsquare_with_nopadding"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.akshar.one.calender.widget.CollapsibleCalendar
+                android:id="@+id/collapsibleCalendarView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:primaryColor="@color/light_yellow"
+                app:texttColor="@android:color/black"
+                android:visibility="visible"
+                app:selectedItem_textColor="@color/black"
+                app:todayItem_textColor="@android:color/black"
+                app:todayItem_background="@drawable/circle_white_stroke_background"
+                app:selectedItem_background="@drawable/circle_white_solid_background"
+                app:buttonLeft_drawableTintColor="@android:color/black"
+                app:buttonRight_drawableTintColor="@android:color/black"
+                app:expandIconColor="@android:color/black"
+                app:eventColor="@android:color/black" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgExpand"
+                android:layout_width="@dimen/_18sdp"
+                android:src="@drawable/arrow_up"
+                android:layout_below="@+id/collapsibleCalendarView"
+                android:layout_centerInParent="true"
+                android:layout_height="@dimen/_18sdp"/>
+
+        </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/rLClassAndSection"
@@ -38,7 +61,7 @@
             android:paddingEnd="@dimen/_10sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/rlCalenderView">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtClassAndSection"

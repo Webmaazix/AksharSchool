@@ -16,6 +16,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
 import com.akshar.one.R
+import com.akshar.one.calender.widget.CollapsibleCalendar
 import com.akshar.one.database.entity.AttendanceCategoryEntity
 import com.akshar.one.database.entity.ClassRoomEntity
 import com.akshar.one.database.entity.CourseEntity
@@ -28,10 +29,9 @@ import com.akshar.one.view.fragment.BaseFragment
 import com.akshar.one.viewmodels.ViewModelFactory
 import com.akshar.one.viewmodels.attendance.AttendanceEntryViewModel
 import kotlinx.android.synthetic.main.fragment_attendance_entry.*
-import java.util.*
 
 class AttendanceEntryFragment : BaseFragment(), View.OnClickListener, OnClassRoomSelectedListener,
-    AttendanceCategoryListener {
+    AttendanceCategoryListener, CollapsibleCalendar.CalendarListener {
 
     private var classRoomEntity: ClassRoomEntity? = null
     private var attendanceCategoryEntity: AttendanceCategoryEntity? = null
@@ -39,6 +39,8 @@ class AttendanceEntryFragment : BaseFragment(), View.OnClickListener, OnClassRoo
     private var fragmentAttendanceEntryBinding: FragmentAttendanceEntryBinding? = null
     private var attendanceEntryViewModel: AttendanceEntryViewModel? = null
     private var mainActivity: MainActivity? = null
+
+    private var currentDate: String? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -74,7 +76,8 @@ class AttendanceEntryFragment : BaseFragment(), View.OnClickListener, OnClassRoo
         }
         fragmentAttendanceEntryBinding?.attendanceEntryViewModel = attendanceEntryViewModel
 
-        mainActivity?.setToolbarTitle("Attendance")
+        mainActivity?.setToolbarBackground(false)
+        mainActivity?.setToolbarTitle(context?.getString(R.string.attendance))
 
         observers()
     }
@@ -83,11 +86,13 @@ class AttendanceEntryFragment : BaseFragment(), View.OnClickListener, OnClassRoo
         if (context?.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true) {
             classRoomEntity?.classroomId?.let { classroomId ->
                 attendanceCategoryEntity?.category?.let { category ->
-                    attendanceEntryViewModel?.getStudentAttendanceByClassRoomId(
-                        classroomId,
-                        category,
-                        AppUtil.getServerDateFormat(Calendar.getInstance().time)
-                    )
+                    currentDate?.let { date ->
+                        attendanceEntryViewModel?.getStudentAttendanceByClassRoomId(
+                            classroomId,
+                            category,
+                            date
+                        )
+                    }
                 }
             }
         } else {
@@ -115,46 +120,16 @@ class AttendanceEntryFragment : BaseFragment(), View.OnClickListener, OnClassRoo
 
     private fun initViews() {
 
-//        initHorizontalCalendar()
+        currentDate = fragmentAttendanceEntryBinding?.collapsibleCalendarView?.selectedDay?.let {
+            AppUtil.getServerDateFormat(it)
+        }
         fragmentAttendanceEntryBinding?.btnSave?.setOnClickListener(this)
         fragmentAttendanceEntryBinding?.rlMarkAll?.setOnClickListener(this)
         fragmentAttendanceEntryBinding?.rLClassAndSection?.setOnClickListener(this)
         fragmentAttendanceEntryBinding?.rLCategory?.setOnClickListener(this)
-
+        fragmentAttendanceEntryBinding?.collapsibleCalendarView?.setCalendarListener(this)
+        fragmentAttendanceEntryBinding?.imgExpand?.setOnClickListener(this)
     }
-
-//    private fun initHorizontalCalendar() {
-//        /* starts before 1 month from now */
-//        val startDate: Calendar = Calendar.getInstance()
-//        startDate.add(Calendar.MONTH, -1)
-//
-//        /* ends after 1 month from now */
-//        val endDate: Calendar = Calendar.getInstance()
-//        endDate.add(Calendar.MONTH, 1)
-//
-//        val horizontalCalendar: HorizontalCalendar =
-//            HorizontalCalendar.Builder(fragmentAttendanceEntryBinding?.root, R.id.calendarView)
-//                .range(startDate, endDate)
-//                .datesNumberOnScreen(7)   // Number of Dates cells shown on screen (default to 5).
-//                .configure()    // starts configuration.
-//                .formatTopText(AppUtil.CALENDAR_DAY_FORMAT)
-//                .formatMiddleText(AppUtil.CALENDAR_DATE_FORMAT)
-//                .showTopText(true)              // show or hide TopText (default to true).
-//                .showBottomText(false)           // show or hide BottomText (default to true).
-//                .textColor(
-//                    R.color.black,
-//                    R.color.black
-//                )    // default to (Color.LTGRAY, Color.WHITE).
-//                // set selected date cell background.
-//                .end()          // ends configuration.
-//                .build()
-//
-//        horizontalCalendar.calendarListener = object : HorizontalCalendarListener() {
-//            override fun onDateSelected(date: Calendar?, position: Int) {
-//
-//            }
-//        }
-//    }
 
     private fun showProgressIndicator(isLoading: Boolean?) {
         linProgressIndicator.visibility = if (isLoading == true) View.VISIBLE else View.GONE
@@ -197,16 +172,22 @@ class AttendanceEntryFragment : BaseFragment(), View.OnClickListener, OnClassRoo
                         )
                     }
                 }
-
             }
             R.id.rLCategory -> {
 
                 if (classRoomEntity == null) {
-                    Toast.makeText(context, "Please select Class and Section", Toast.LENGTH_LONG)
+                    Toast.makeText(
+                        context,
+                        getString(R.string.please_select_class_and_section),
+                        Toast.LENGTH_LONG
+                    )
                         .show()
                 } else {
                     attendanceEntryViewModel?.getAttendanceCategories(classRoomEntity, this)
                 }
+            }
+            R.id.imgExpand -> {
+                onClickListener()
             }
         }
     }
@@ -269,6 +250,38 @@ class AttendanceEntryFragment : BaseFragment(), View.OnClickListener, OnClassRoo
         markAllDialog?.findViewById<AppCompatImageView>(R.id.imgClose)?.setOnClickListener {
             markAllDialog.dismiss()
         }
+    }
+
+    override fun onDaySelect() {
+        currentDate = fragmentAttendanceEntryBinding?.collapsibleCalendarView?.selectedDay?.let {
+            AppUtil.getServerDateFormat(it)
+        }
+        fetchAttendanceStudents()
+    }
+
+    override fun onItemClick(v: View) {
+    }
+
+    override fun onDataUpdate() {
+    }
+
+    override fun onMonthChange() {
+    }
+
+    override fun onWeekChange(position: Int) {
+    }
+
+    override fun onClickListener() {
+        if(fragmentAttendanceEntryBinding?.collapsibleCalendarView?.expanded == true){
+            fragmentAttendanceEntryBinding?.imgExpand?.setImageResource(R.drawable.arrow_up)
+            fragmentAttendanceEntryBinding?.collapsibleCalendarView?.collapse(400)
+        } else{
+            fragmentAttendanceEntryBinding?.imgExpand?.setImageResource(R.drawable.down_arrow_icon)
+            fragmentAttendanceEntryBinding?.collapsibleCalendarView?.expand(400)
+        }
+    }
+
+    override fun onDayChanged() {
     }
 
 }

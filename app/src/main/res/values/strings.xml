@@ -211,4 +211,5 @@
     <string name="turnOnInternet">Turn on internet</string>
     <string name="mobileData">Mobile data</string>
     <string name="Wifi">Wifi</string>
+    <string name="please_select_class_and_section">Please select Class and Section</string>
 </resources>
