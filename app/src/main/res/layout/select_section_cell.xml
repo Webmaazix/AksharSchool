@@ -7,7 +7,7 @@
 
         <variable
             name="classAndSectionViewModel"
-            type="com.akshar.one.viewmodels.attendance.ClassAndSectionViewModel" />
+            type="com.akshar.one.viewmodels.common.ClassAndSectionViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

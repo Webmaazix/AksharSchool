@@ -1,4 +1,4 @@
-package com.akshar.one.viewmodels.attendance
+package com.akshar.one.viewmodels.common
 
 import android.app.Application
 import android.util.Log
@@ -13,7 +13,7 @@ import com.akshar.one.model.DegreeModel
 import com.akshar.one.model.DegreeWithDeptModel
 import com.akshar.one.repository.attendance.AttendanceRepository
 import com.akshar.one.util.AppConstant
-import com.akshar.one.view.attendance.adapters.ClassAndSectionAdapter
+import com.akshar.one.view.common.adapters.ClassAndSectionAdapter
 import com.akshar.one.viewmodels.base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -33,7 +33,8 @@ class ClassAndSectionViewModel(application: Application) : BaseViewModel(applica
 
     init {
         attendanceRepository = AttendanceRepository(application)
-        classAndSectionAdapter = ClassAndSectionAdapter(this)
+        classAndSectionAdapter =
+            ClassAndSectionAdapter(this)
     }
 
     fun getDegreeListMutableLiveData(): MutableLiveData<List<DegreeWithDeptModel>> =

@@ -1,4 +1,4 @@
-package com.akshar.one.view.attendance.adapters
+package com.akshar.one.view.common.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,9 +6,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.akshar.one.R
 import com.akshar.one.databinding.SelectSectionCellBinding
-import com.akshar.one.model.CourseModel
 import com.akshar.one.model.CourseWithClassRoomModel
-import com.akshar.one.viewmodels.attendance.ClassAndSectionViewModel
+import com.akshar.one.viewmodels.common.ClassAndSectionViewModel
 
 class ClassRoomDialogAdapter(
     private val classAndSectionViewModel: ClassAndSectionViewModel,
@@ -23,7 +22,11 @@ class ClassRoomDialogAdapter(
             parent,
             false
         )
-        return Holder(selectSectionCellBinding, classAndSectionViewModel, courseModel)
+        return Holder(
+            selectSectionCellBinding,
+            classAndSectionViewModel,
+            courseModel
+        )
     }
 
     override fun getItemCount(): Int {

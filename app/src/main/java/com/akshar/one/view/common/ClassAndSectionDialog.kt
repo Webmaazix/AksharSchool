@@ -1,4 +1,4 @@
-package com.akshar.one.view.attendance
+package com.akshar.one.view.common
 
 import android.content.Context
 import android.graphics.Color
@@ -14,10 +14,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
 import com.akshar.one.R
 import com.akshar.one.databinding.SelectClassAndSectionDialogBinding
-import com.akshar.one.model.DegreeModel
 import com.akshar.one.view.activity.MainActivity
 import com.akshar.one.viewmodels.ViewModelFactory
-import com.akshar.one.viewmodels.attendance.ClassAndSectionViewModel
+import com.akshar.one.viewmodels.common.ClassAndSectionViewModel
 
 class ClassAndSectionDialog : DialogFragment() {
 
@@ -108,7 +107,8 @@ class ClassAndSectionDialog : DialogFragment() {
         fun newInstance(
             onClassRoomSelectedListener: OnClassRoomSelectedListener?
         ): ClassAndSectionDialog {
-            val classAndSectionDialog = ClassAndSectionDialog()
+            val classAndSectionDialog =
+                ClassAndSectionDialog()
             classAndSectionDialog.onClassRoomSelectedListener = onClassRoomSelectedListener
             return classAndSectionDialog
         }
