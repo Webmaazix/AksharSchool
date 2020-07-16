@@ -25,12 +25,15 @@ import com.akshar.one.extension.isInForeground
 import com.akshar.one.util.AndroidUtil
 import com.akshar.one.util.AppUtil
 import com.akshar.one.view.activity.MainActivity
+import com.akshar.one.view.common.ClassAndSectionDialog
+import com.akshar.one.view.common.OnClassRoomSelectedListener
 import com.akshar.one.view.fragment.BaseFragment
 import com.akshar.one.viewmodels.ViewModelFactory
 import com.akshar.one.viewmodels.attendance.AttendanceEntryViewModel
 import kotlinx.android.synthetic.main.fragment_attendance_entry.*
 
-class AttendanceEntryFragment : BaseFragment(), View.OnClickListener, OnClassRoomSelectedListener,
+class AttendanceEntryFragment : BaseFragment(), View.OnClickListener,
+    OnClassRoomSelectedListener,
     AttendanceCategoryListener, CollapsibleCalendar.CalendarListener {
 
     private var classRoomEntity: ClassRoomEntity? = null
@@ -172,6 +175,7 @@ class AttendanceEntryFragment : BaseFragment(), View.OnClickListener, OnClassRoo
                         )
                     }
                 }
+
             }
             R.id.rLCategory -> {
 

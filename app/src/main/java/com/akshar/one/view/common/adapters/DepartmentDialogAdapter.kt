@@ -1,4 +1,4 @@
-package com.akshar.one.view.attendance.adapters
+package com.akshar.one.view.common.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,9 +6,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.akshar.one.R
 import com.akshar.one.databinding.SelectDepartmentCellBinding
-import com.akshar.one.model.DepartmentModel
 import com.akshar.one.model.DeptWithCourseModel
-import com.akshar.one.viewmodels.attendance.ClassAndSectionViewModel
+import com.akshar.one.viewmodels.common.ClassAndSectionViewModel
 
 class DepartmentDialogAdapter(
     private val classAndSectionViewModel: ClassAndSectionViewModel,
@@ -23,7 +22,10 @@ class DepartmentDialogAdapter(
             parent,
             false
         )
-        return Holder(selectDepartmentCellBinding, classAndSectionViewModel)
+        return Holder(
+            selectDepartmentCellBinding,
+            classAndSectionViewModel
+        )
     }
 
     override fun getItemCount(): Int {
@@ -46,10 +48,11 @@ class DepartmentDialogAdapter(
 
         private fun updateUI(position: Int, departmentModel: DeptWithCourseModel?) {
             selectDepartmentCellBinding.txtTitle.text = departmentModel?.departmentEntity?.departmentName
-            selectDepartmentCellBinding.rvClassDegree.adapter = DepartmentCourseDialogAdapter(
-                classAndSectionViewModel,
-                departmentModel?.courseList
-            )
+            selectDepartmentCellBinding.rvClassDegree.adapter =
+                DepartmentCourseDialogAdapter(
+                    classAndSectionViewModel,
+                    departmentModel?.courseList
+                )
         }
 
     }

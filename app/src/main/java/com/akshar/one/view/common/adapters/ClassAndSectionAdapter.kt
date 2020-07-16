@@ -1,4 +1,4 @@
-package com.akshar.one.view.attendance.adapters
+package com.akshar.one.view.common.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,9 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.akshar.one.R
 import com.akshar.one.databinding.SelectClassOrDegreeCellBinding
 import com.akshar.one.model.CourseWithClassRoomModel
-import com.akshar.one.model.DegreeModel
 import com.akshar.one.model.DegreeWithDeptModel
-import com.akshar.one.viewmodels.attendance.ClassAndSectionViewModel
+import com.akshar.one.viewmodels.common.ClassAndSectionViewModel
 
 class ClassAndSectionAdapter(private val classAndSectionViewModel: ClassAndSectionViewModel) :
     RecyclerView.Adapter<ClassAndSectionAdapter.Holder>() {
@@ -47,7 +46,11 @@ class ClassAndSectionAdapter(private val classAndSectionViewModel: ClassAndSecti
                 parent,
                 false
             )
-        return Holder(selectClassOrDegreeCellBinding, classAndSectionViewModel, isCollege)
+        return Holder(
+            selectClassOrDegreeCellBinding,
+            classAndSectionViewModel,
+            isCollege
+        )
     }
 
     override fun getItemCount(): Int {
@@ -88,12 +91,18 @@ class ClassAndSectionAdapter(private val classAndSectionViewModel: ClassAndSecti
                 val degreeModel = classAndSectionViewModel.getDegreeWithDeptModel(position)
                 selectClassOrDegreeCellBinding.txtTitle.text = degreeModel?.degreeEntity?.degreeName
                 selectClassOrDegreeCellBinding.rvClassDegree.adapter =
-                    DepartmentDialogAdapter(classAndSectionViewModel, degreeModel?.deptList)
+                    DepartmentDialogAdapter(
+                        classAndSectionViewModel,
+                        degreeModel?.deptList
+                    )
             } else {
                 val courseModel = classAndSectionViewModel.getCourseWithClassRoomModel(position)
                 selectClassOrDegreeCellBinding.txtTitle.text = courseModel?.courseEntity?.courseName
                 selectClassOrDegreeCellBinding.rvClassDegree.adapter =
-                    ClassRoomDialogAdapter(classAndSectionViewModel, courseModel)
+                    ClassRoomDialogAdapter(
+                        classAndSectionViewModel,
+                        courseModel
+                    )
             }
         }
 

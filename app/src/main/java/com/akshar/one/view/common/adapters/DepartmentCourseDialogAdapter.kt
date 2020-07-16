@@ -1,4 +1,4 @@
-package com.akshar.one.view.attendance.adapters
+package com.akshar.one.view.common.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,9 +6,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.akshar.one.R
 import com.akshar.one.databinding.SelectCollegeYearCellBinding
-import com.akshar.one.model.CourseModel
 import com.akshar.one.model.CourseWithClassRoomModel
-import com.akshar.one.viewmodels.attendance.ClassAndSectionViewModel
+import com.akshar.one.viewmodels.common.ClassAndSectionViewModel
 
 class DepartmentCourseDialogAdapter(
     private val classAndSectionViewModel: ClassAndSectionViewModel,
@@ -23,7 +22,10 @@ class DepartmentCourseDialogAdapter(
             parent,
             false
         )
-        return Holder(selectCollegeYearCellBinding, classAndSectionViewModel)
+        return Holder(
+            selectCollegeYearCellBinding,
+            classAndSectionViewModel
+        )
     }
 
     override fun getItemCount(): Int {
@@ -47,7 +49,10 @@ class DepartmentCourseDialogAdapter(
         private fun updateUI(position: Int, courseModel: CourseWithClassRoomModel?) {
             selectCollegeYearCellBinding.txtClgYear.text = courseModel?.courseEntity?.courseName
             selectCollegeYearCellBinding.rvSection.adapter =
-                ClassRoomDialogAdapter(classAndSectionViewModel, courseModel)
+                ClassRoomDialogAdapter(
+                    classAndSectionViewModel,
+                    courseModel
+                )
 
         }
 
