@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
 import com.akshar.one.R
+import com.akshar.one.extension.gone
+import com.akshar.one.extension.visible
 import com.akshar.one.util.AndroidUtil
+import com.akshar.one.util.AppConstant
 import com.akshar.one.util.AppUtil
 import com.akshar.one.view.fragment.BaseFragment
 import com.akshar.one.viewmodels.ViewModelFactory
@@ -25,11 +29,17 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
     private var containerView: View? = null
     private var loginViewModel: LoginViewModel? = null
     private lateinit var loginActivity: LoginActivity
+    private var showUserScreen = true
 
     companion object {
 
         @JvmStatic
-        fun newInstance() = LoginFragment()
+        fun newInstance(showUserScreen: Boolean): LoginFragment {
+            val loginFragment = LoginFragment()
+            loginFragment.showUserScreen = showUserScreen
+            return loginFragment
+        }
+
     }
 
     override fun onAttach(context: Context) {
@@ -69,10 +79,19 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
             R.id.btnLogin -> {
                 AndroidUtil.hideKeyboard(context, btnLogin)
                 if (validate()) {
-                    imgCheck.visibility = View.VISIBLE
-                    loginViewModel?.let {
+                    loginViewModel?.let { viewModel ->
                         if (context?.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true) {
-                            it.loginServiceWithUsername(edtUserName?.text.toString(), edtPwd?.text.toString())
+                            if (showUserScreen) {
+                                imgCheck.visibility = View.VISIBLE
+                                viewModel.loginServiceWithUsername(
+                                    edtUserName?.text.toString(),
+                                    edtPwd?.text.toString()
+                                )
+                            } else {
+                                edtPhoneNumber?.text?.toString()
+                                    ?.let { phoneNumber -> viewModel.loginServiceGetOTP(phoneNumber) }
+                            }
+
                         } else
                             Toast.makeText(
                                 context,
@@ -84,7 +103,8 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
             }
 
             R.id.txtPhone -> {
-                loginActivity.goToLoginWithPhoneScreen()
+                showUserScreen = !showUserScreen
+                initView()
             }
 
             R.id.txtTermAndCondition -> {
@@ -103,9 +123,15 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
             loginActivity.goToMainActivity()
         })
 
+        loginViewModel?.getMutableLiveDataOTPResponse()?.observe(this, Observer {
+            Log.d(AppConstant.TAG, "OTP status : " + it.status)
+            loginActivity.goToOTPScreen(edtPhoneNumber?.text.toString())
+        })
+
+
         loginViewModel?.getErrorMutableLiveData()?.observe(this, Observer {
             it?.let {
-                AndroidUtil.showMessageDialog(context,it.message)
+                AndroidUtil.showMessageDialog(context, it.message)
             }
         })
     }
@@ -115,6 +141,19 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
     }
 
     private fun initView() {
+
+        if (showUserScreen) {
+            clUserName?.visible()
+            clPhone?.gone()
+            txtPhone?.text = context?.getString(R.string.i_want_to_login_with_phone_number)
+            btnLogin?.text = context?.getString(R.string.login)
+
+        } else {
+            clUserName?.gone()
+            clPhone?.visible()
+            txtPhone?.text = context?.getString(R.string.i_want_to_login_with_user_name)
+            btnLogin?.text = context?.getString(R.string.str_continue)
+        }
 
         edtUserName.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
@@ -161,19 +200,31 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
 
     private fun validate(): Boolean {
 
-        if (edtUserName.text.isNullOrEmpty()) {
-            txtErrorUsername.visibility = View.VISIBLE
-            return false
-        } else if(!AppUtil.isValidEmail(edtUserName.text.toString())){
-            txtErrorUsername.visibility = View.VISIBLE
-            return false
-        } else if (edtPwd.text.isNullOrEmpty()) {
-            txtErrorPwd.visibility = View.VISIBLE
-            return false
+        if (showUserScreen) {
+            if (edtUserName.text.isNullOrEmpty()) {
+                txtErrorUsername.visibility = View.VISIBLE
+                return false
+            } else if (!AppUtil.isValidEmail(edtUserName.text.toString())) {
+                txtErrorUsername.visibility = View.VISIBLE
+                return false
+            } else if (edtPwd.text.isNullOrEmpty()) {
+                txtErrorPwd.visibility = View.VISIBLE
+                return false
+            }
+        } else {
+            if (edtPhoneNumber?.text.isNullOrEmpty()) {
+                txtErrorPhoneNumber.text = getString(R.string.error_please_enter_phone_number)
+                txtErrorPhoneNumber.visibility = View.VISIBLE
+                return false
+            } else if (edtPhoneNumber?.text?.isNotEmpty() == true && edtPhoneNumber?.text?.toString()
+                    ?.trim()?.length?.let { it < 10 } == true
+            ) {
+                txtErrorPhoneNumber.visibility = View.VISIBLE
+                txtErrorPhoneNumber.text = getString(R.string.error_please_enter_valid_phone_number)
+                return false
+            }
         }
         return true
     }
-
-
 
 }
