@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="common_margin">@dimen/_16sdp</dimen>
+
     <dimen name="_1sdp">1.00dp</dimen>
     <dimen name="_2sdp">2.00dp</dimen>
     <dimen name="_3sdp">3.00dp</dimen>

@@ -30,7 +30,7 @@ class ClassSectionAdapter(private val mContext: Context, private val classRoomLi
         val classRoomList = classRoomList?.get(position)
         holder.binding.txtTitle.text = classRoomList!!.classroomName
 
-        holder.binding.rlMain.setOnClickListener {
+        holder.binding.relRow.setOnClickListener {
             AttandanceEntryActivity.open(mContext as Activity)
         }
 

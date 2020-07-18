@@ -2,20 +2,35 @@ package com.akshar.one.util
 
 import com.akshar.one.api.response.ErrorResponse
 import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
 import org.json.JSONObject
 import java.lang.reflect.Type
 import java.text.SimpleDateFormat
-import java.util.*
 import android.util.Log
 import java.text.DateFormat
 import java.text.ParseException
+import java.util.*
 import java.util.regex.Pattern
+import kotlin.collections.ArrayList
 
 
 object AppUtil {
 
+    const val CALENDAR_DAY_FORMAT = "EEE"
+    const val CALENDAR_DATE_FORMAT = "dd"
+
+    const val SERVER_DATE_FORMAT = "yyyy-MM-dd"
+
     fun fromJson(jsonString: String?, type: Type): Any? {
         return Gson().fromJson(jsonString, type)
+    }
+
+    fun fromJsonToList(jsonString: String?, type: Type): ArrayList<Any>? {
+        return try {
+            Gson().fromJson(jsonString, type)
+        } catch (e: JsonSyntaxException) {
+            null
+        }
     }
 
     fun getErrorResponse(jsonString: String?): ErrorResponse? {
@@ -102,5 +117,7 @@ object AppUtil {
         return Pattern.matches(regex, email)
     }
 
+
+    fun getServerDateFormat(date:Date): String = SimpleDateFormat(SERVER_DATE_FORMAT).format(date)
 
 }
