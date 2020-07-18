@@ -23,5 +23,20 @@ object DummyContent {
 
         return timeTableList
     }
+    fun noticeBoard(): ArrayList<TabsModel> {
+        val noticeBoardList = ArrayList<TabsModel>()
+
+        val noticeBoardOne = TabsModel()
+        noticeBoardOne.name = "Active Notice"
+
+        val noticeBoardTwo = TabsModel()
+        noticeBoardTwo.name = "Expired Notice"
+
+
+        noticeBoardList.add(noticeBoardOne)
+        noticeBoardList.add(noticeBoardTwo)
+
+        return noticeBoardList
+    }
 }
 

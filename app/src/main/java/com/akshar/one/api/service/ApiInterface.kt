@@ -1,9 +1,7 @@
 package com.akshar.one.api.service
 
 import com.akshar.one.model.*
-import com.akshar.one.studentprofile.CreateStudentProfile
 import retrofit2.http.*
-import com.google.gson.JsonObject
 import retrofit2.http.POST
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -92,17 +90,35 @@ interface ApiInterface {
         @HeaderMap headers: Map<String, String>
     ) : List<ClassDropDownModel>?
 
+    @GET("AksharOne/academics/exams")
+    suspend fun getExaminationDropDown(
+        @HeaderMap headers: Map<String, String>,
+        @Query("classroomId") classroomId: Int
+    ) : List<ExaminationDropDownModel>?
+
+    @GET("AksharOne/academics/exams/schedule")
+    suspend fun getExaminations(
+        @HeaderMap headers: Map<String, String>,
+        @Query("examId") examId: Int
+    ) : ExaminationScheduleList?
+
+    @GET("AksharOne/academics/exams/schedule")
+    suspend fun getExaminationsTest(
+        @HeaderMap headers: Map<String, String>,
+        @Query("testId") testId: Int
+    ) : ExaminationScheduleList?
+
     @GET("AksharOne/students")
     suspend fun getStudentListByClassId(
         @HeaderMap headers: Map<String, String>,
         @Query("classroomId") classroomId: Int
     ) : StudentList?
 
-    @GET("AksharOne/noticeboard/getAll")
+    @GET("AksharOne/noticeboard/")
     suspend fun getNotices(
         @HeaderMap headers: Map<String, String>,
         @Query("showExpired") showExpired: Boolean
-    ) : List<NoticeBoardModel>?
+    ) : NoticeModel?
 
     @PUT("AksharOne/students/{studentProfileId}")
     suspend fun UpdateStudentProfile(
@@ -115,10 +131,24 @@ interface ApiInterface {
         @HeaderMap headers: Map<String, String>,
         @Path("studentProfileId") studentProfileId : Int
     ) : ImageModel?
+
+    @PUT("AksharOne/academics/exams/schedule/{scheduleId}")
+    suspend fun updateExamSchedule(
+        @HeaderMap headers: Map<String, String>,
+        @Path("scheduleId") scheduleId  : Int,
+        @Body jsonObject : ExamPostModel
+
+    ) : ImageModel?
+
     @POST("AksharOne/students")
     suspend fun CreateStudentProfile(
         @HeaderMap headers: Map<String, String>,
         @Body jsonObject : StudentListModel
+    )
+    @POST("AksharOne/academics/exams/schedule")
+    suspend fun createExamSchedule(
+        @HeaderMap headers: Map<String, String>,
+        @Body jsonObject : ExamPostModel
     )
 
     @Headers("Content-Type: image/jpg")
@@ -127,4 +157,21 @@ interface ApiInterface {
         @Url path: String,
         @Body image: RequestBody
     ): Call<Void>
+
+    @DELETE("AksharOne/noticeboard/{id}")
+    suspend fun deleteNotice(@HeaderMap headers: Map<String, String>,
+                             @Path("id") id : Int) : Boolean
+
+    @DELETE("AksharOne/academics/exams/schedule/{scheduleId}")
+    suspend fun deleteExamSchedule(@HeaderMap headers: Map<String, String>,
+                             @Path("scheduleId") scheduleId  : Int)
+
+    @POST("AksharOne/noticeboard")
+    suspend fun createNotice(@HeaderMap headers: Map<String, String>,
+                             @Body jsonObject: NoticeBoardModel)
+
+    @PUT("AksharOne/noticeboard/{id}")
+    suspend fun updateNotice(@HeaderMap headers: Map<String, String>,
+                             @Path("scheduleId") scheduleId  : Int,
+                             @Body jsonObject: NoticeBoardModel)
 }

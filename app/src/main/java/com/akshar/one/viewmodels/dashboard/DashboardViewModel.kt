@@ -4,13 +4,11 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.akshar.one.adapter.TimeTableAdapter
-import com.akshar.one.database.entity.CourseEntity
+import com.akshar.one.view.home.adapter.TimeTableAdapter
 import com.akshar.one.model.*
 import com.akshar.one.repository.dashboard.DashboardRepository
 import com.akshar.one.util.AppConstant
 import com.akshar.one.util.AppUtil
-import com.akshar.one.view.attendance.adapters.CourseAdapter
 import com.akshar.one.viewmodels.base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

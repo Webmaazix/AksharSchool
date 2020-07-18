@@ -14,14 +14,16 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.akshar.one.R
-import com.akshar.one.assignhomework.AssignHomeworkFragment
-import com.akshar.one.attendance.AttendanceFragment
-import com.akshar.one.feeandpayments.StudentListForFeesFragment
+import com.akshar.one.view.assignhomework.AssignHomeworkFragment
+import com.akshar.one.view.attendance.AttendanceFragment
+import com.akshar.one.view.examschedule.ScheduledExamList
+import com.akshar.one.view.feeandpayments.StudentListForFeesFragment
 import com.akshar.one.manager.SessionManager
-import com.akshar.one.timetable.TimeTableActivity
+import com.akshar.one.view.noticeboard.NoticeboardActivity
+import com.akshar.one.view.timetable.TimeTableActivity
 import com.akshar.one.util.CheckPermission
 import com.akshar.one.view.home.DashboardActivity
-import com.akshar.one.studentprofile.StudentListFragment
+import com.akshar.one.view.studentprofile.StudentListFragment
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.main_toolbar.*
@@ -194,23 +196,18 @@ class MainActivity : BaseActivity(),  NavigationView.OnNavigationItemSelectedLis
                 toolbar.background = currActivity.resources.getDrawable(R.drawable.yellow_top_square)
 
                 replaceFragment(AssignHomeworkFragment.newInstance(), AssignHomeworkFragment::javaClass.name, false)
-
-
-
             }
             R.id.nav_notice_board -> {
-
+                NoticeboardActivity.open(currActivity)
             }
-
             R.id.nav_marks_entry -> {
             }
             R.id.nav_exam_schedule -> {
+                ScheduledExamList.open(currActivity)
             }
             R.id.nav_fees_payment -> {
                 toolbar.background = currActivity.resources.getDrawable(R.drawable.yellow_top_square)
-
                 replaceFragment(StudentListForFeesFragment.newInstance(), StudentListForFeesFragment::javaClass.name, false)
-
             }
             R.id.nav_message_center -> {
             }

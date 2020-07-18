@@ -7,6 +7,7 @@ import java.lang.reflect.Type
 import java.text.SimpleDateFormat
 import java.util.*
 import android.util.Log
+import java.text.DateFormat
 import java.text.ParseException
 import java.util.regex.Pattern
 
@@ -40,6 +41,13 @@ object AppUtil {
        return Calendar.getInstance().get(Calendar.YEAR);
     }
 
+//    fun getBirthdayDate(str_date : String) : String?{
+//        val formatter: DateFormat
+//        var date: Date? = null
+//        formatter = SimpleDateFormat("dd-MMMM-yyyy")
+//        date = formatter.parse(str_date)
+//        return date.toString()
+//    }
     fun getSevenDaysBack(): String? {
         val cal = GregorianCalendar.getInstance();
         cal.setTime(Date());

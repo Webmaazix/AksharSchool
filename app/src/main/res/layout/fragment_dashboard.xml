@@ -46,22 +46,51 @@
                 android:fontFamily="@font/opensans_bold"
                 android:layout_height="wrap_content"/>
 
-<!--            <androidx.recyclerview.widget.RecyclerView-->
-<!--                android:id="@+id/rvClassRooms"-->
-<!--                android:layout_below="@+id/tvTimeLine"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"/>-->
+            <RelativeLayout
+                android:id="@+id/rlTimeTable"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/tvTimeLine"
+                android:layout_height="wrap_content">
+
+
+
+            <RelativeLayout
+                android:id="@+id/rlTimeTableNotFound"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgTimeTableNotFound"
+                    android:layout_width="@dimen/_100sdp"
+                    android:src="@drawable/timetableempty"
+                    android:layout_centerHorizontal="true"
+                    android:layout_height="@dimen/_100sdp"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_below="@+id/imgTimeTableNotFound"
+                    android:layout_centerHorizontal="true"
+                    android:textAlignment="center"
+                    android:fontFamily="@font/opensans_regular"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11sp"
+                    android:text="@string/time_table_not_found"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvClassRooms"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:layout_below="@+id/tvTimeLine" />
+                android:layout_marginTop="@dimen/_5sdp" />
+
+            </RelativeLayout>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvBirthDay"
-                android:layout_below="@+id/rvClassRooms"
+                android:layout_below="@+id/rlTimeTable"
                 android:layout_marginTop="@dimen/_10sp"
                 android:layout_width="match_parent"
                 android:text="@string/birthday"

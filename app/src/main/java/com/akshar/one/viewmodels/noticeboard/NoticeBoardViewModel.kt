@@ -34,7 +34,6 @@ class NoticeBoardViewModel(application: Application) : BaseViewModel(application
 
     fun getImageLiveData() : MutableLiveData<ImageModel> = mutableLiveDataImage
 
-
     fun getAllNotices(showExpired : Boolean){
         viewModelScope.launch {
             withContext(Dispatchers.IO){
@@ -42,7 +41,7 @@ class NoticeBoardViewModel(application: Application) : BaseViewModel(application
                     isLoading.postValue(false)
                     val noticeList = studentRepository?.getAllNotices(showExpired)
                     noticeList.let {
-                        mutuableLiveDataNoticeList.postValue(noticeList)
+                        mutuableLiveDataNoticeList.postValue(it?.list)
                     }
 
                 }catch (httpException : HttpException){
@@ -52,6 +51,61 @@ class NoticeBoardViewModel(application: Application) : BaseViewModel(application
 
                 }catch (e : Exception){
                     isLoading.postValue(false)
+                    e.printStackTrace()
+                }
+            }
+        }
+    }
+
+    fun deleteNotice(id : Int){
+        isLoading.postValue(true)
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                try {
+                    isLoading.postValue(false)
+                    val noticeModel = studentRepository?.deleteNotice(id)
+                    isSuccess.postValue(noticeModel!!)
+                }catch (httpException : HttpException){
+                    val errorResponse = AppUtil.getErrorResponse(httpException.response()?.errorBody()?.string())
+                    errorResponse.let { getErrorMutableLiveData().postValue(it) }
+                }catch (e : Exception){
+                    e.printStackTrace()
+                }
+            }
+        }
+    }
+
+    fun createNotice(noticeBoardModel: NoticeBoardModel){
+        isSuccess.postValue(false)
+        isLoading.postValue(true)
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                try {
+                    isLoading.postValue(false)
+                    studentRepository?.createNotice(noticeBoardModel)
+                    isSuccess.postValue(true)
+                }catch (httpException : HttpException){
+                    val errorResponse = AppUtil.getErrorResponse(httpException.response()?.errorBody()?.string())
+                    errorResponse.let { getErrorMutableLiveData().postValue(it) }
+                }catch (e : Exception){
+                    e.printStackTrace()
+                }
+            }
+        }
+    }
+    fun updateNotice(id : Int,noticeBoardModel: NoticeBoardModel){
+        isSuccess.postValue(false)
+        isLoading.postValue(true)
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                try {
+                    isLoading.postValue(false)
+                    studentRepository?.updateNotice(id,noticeBoardModel)
+                    isSuccess.postValue(true)
+                }catch (httpException : HttpException){
+                    val errorResponse = AppUtil.getErrorResponse(httpException.response()?.errorBody()?.string())
+                    errorResponse.let { getErrorMutableLiveData().postValue(it) }
+                }catch (e : Exception){
                     e.printStackTrace()
                 }
             }

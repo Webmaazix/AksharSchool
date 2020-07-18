@@ -3,7 +3,6 @@ package com.akshar.one.viewmodels.attendance
 import android.app.Activity
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import com.akshar.one.attandance.AttandanceEntryActivity
 import com.akshar.one.database.entity.ClassRoomEntity
 import com.akshar.one.repository.attendance.AttendanceRepository
 import com.akshar.one.view.attendance.adapters.ClassRoomAdapter

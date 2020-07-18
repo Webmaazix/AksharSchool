@@ -14,6 +14,7 @@
             type="com.akshar.one.viewmodels.attendance.AttendanceClassRoomViewModel" />
     </data>
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:background="@color/light_yellow"
@@ -23,10 +24,10 @@
             android:id="@+id/toolbar"
             layout="@layout/main_toolbar"/>
 
+
         <RelativeLayout
             android:id="@+id/rlMain"
             android:layout_below="@+id/toolbar"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -79,11 +80,12 @@
                     android:id="@+id/vpPager"
                     android:layout_below="@+id/tbLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="wrap_content"/>
 
             </RelativeLayout>
 
         </RelativeLayout>
+
 
     </RelativeLayout>
 

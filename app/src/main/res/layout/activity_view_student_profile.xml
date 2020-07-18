@@ -40,9 +40,10 @@
                 android:layout_height="wrap_content">
 
                 <com.akshar.one.circlularimageview.CircularImageView
+                    android:id="@+id/imgUserImage"
                     android:layout_width="@dimen/_80sdp"
                     android:src="@drawable/circle_default_pic"
-                    android:elevation="@dimen/_1sdp"
+                    android:elevation="@dimen/_2sdp"
                     android:layout_centerHorizontal="true"
                     android:layout_height="@dimen/_80sdp"/>
 
@@ -53,6 +54,7 @@
                     android:layout_marginBottom="@dimen/_15sdp"
                     android:layout_marginTop="@dimen/_35sdp"
                     android:layout_width="match_parent"
+                    android:elevation="@dimen/_1sdp"
                     android:background="@drawable/white_square_shape"
                     android:layout_height="wrap_content">
 
@@ -246,7 +248,9 @@
                     android:layout_below="@+id/rlStudentInfo"
                     android:layout_marginStart="@dimen/_15sdp"
                     android:layout_marginEnd="@dimen/_15sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
                     android:layout_width="match_parent"
+                    android:elevation="@dimen/_1sdp"
                     android:background="@drawable/white_square_shape"
                     android:layout_height="wrap_content">
 
@@ -374,6 +378,7 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginBottom="@dimen/_60sdp"
                     android:layout_width="match_parent"
+                    android:elevation="@dimen/_1sdp"
                     android:background="@drawable/white_square_shape"
                     android:layout_height="wrap_content">
 

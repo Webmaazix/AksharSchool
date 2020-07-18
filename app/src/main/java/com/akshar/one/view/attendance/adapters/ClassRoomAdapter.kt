@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.akshar.one.R
-import com.akshar.one.attandance.AttandanceEntryActivity
 import com.akshar.one.database.entity.ClassRoomEntity
 import com.akshar.one.databinding.AttendanceClassroomCellLayoutBinding
 import com.akshar.one.viewmodels.attendance.AttendanceClassRoomViewModel

@@ -55,6 +55,20 @@
 
         </RelativeLayout>
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgCreateNotice"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:visibility="visible"
+            android:backgroundTint="@color/dark_blue"
+            android:background="@drawable/circle_white_solid_background"
+            android:src="@drawable/add"
+            android:padding="@dimen/_13sdp"
+            android:layout_margin="@dimen/_10sdp"
+            android:layout_height="@dimen/_40sdp"/>
+
+
     </RelativeLayout>
 
 </layout>
