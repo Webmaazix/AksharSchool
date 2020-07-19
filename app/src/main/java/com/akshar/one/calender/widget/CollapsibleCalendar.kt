@@ -604,7 +604,7 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
     }
 
     fun select(day: Day) {
-        selectedItem = Day(day.year, day.month, day.day)
+        selectedItem = Day(day.year, day.month, day.day) //i changed this
 
         redraw()
 

@@ -68,7 +68,7 @@ class AttendanceClassRoomBottomSheetDialog() : BottomSheetDialogFragment(), Atte
         classroomBottomSheetDialogFragmentBinding?.attendanceClassRoomViewModel =
             attendanceClassRoomViewModel
 
-        courseAdapter = attendanceClassRoomViewModel?.let { ClassRoomAdapter(it, this) }
+        courseAdapter = attendanceClassRoomViewModel?.let { ClassRoomAdapter(it) }
         classroomBottomSheetDialogFragmentBinding?.recyclerView?.adapter = courseAdapter
 
         observers()
@@ -79,7 +79,7 @@ class AttendanceClassRoomBottomSheetDialog() : BottomSheetDialogFragment(), Atte
 
         attendanceClassRoomViewModel?.getClassRoomListMutableLiveData()?.observe(this, Observer {
             it?.let {
-                courseAdapter?.setClassRoomList(it)
+                courseAdapter?.setClassRoomList(it,mainActivity as Activity)
             }
         })
     }

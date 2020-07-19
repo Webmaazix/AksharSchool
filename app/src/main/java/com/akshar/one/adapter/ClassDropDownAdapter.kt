@@ -18,20 +18,15 @@ import java.util.ArrayList
 
 
 
-class ClassDropDownAdapter(private val mContext: Activity, private val list: ArrayList<ClassDropDownModel>?,private var fragment : Fragment
+class ClassDropDownAdapter(private val mContext: Activity, private val list: ArrayList<ClassDropDownModel>?,private var fragment : Fragment?
                            ,private var callback : SectionSelection) :
     RecyclerView.Adapter<ClassDropDownAdapter.ViewHolder>() {
-//    lateinit var adapter : SectionAdapter
 
     companion object{
         var selectedChild = -1
         var clickParent=-1;
     }
 
-//    init {
-//         selectedChild = -1
-//         clickParent=-1
-//    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -55,35 +50,35 @@ class ClassDropDownAdapter(private val mContext: Activity, private val list: Arr
             -1
         }
         holder.binding.rlSections.layoutManager = LinearLayoutManager(mContext,LinearLayoutManager.VERTICAL,false)
-        val adapter = SectionAdapter(mContext,position,value,classModel.classroomsList as ArrayList<SectionList>,fragment,classModel,object :SectionSelection{
-            override fun selectionCallback(parent: Int, child: Int) {
-                selectedChild=child;
-                clickParent=parent;
-                callback.selectionCallback(parent,child)
-            }
-        })
-        holder.binding.rlSections.adapter = adapter
+        if(fragment!= null){
+            val adapter = SectionAdapter(mContext,position,value,classModel.classroomsList as ArrayList<SectionList>,fragment,classModel,object :SectionSelection{
+                override fun selectionCallback(parent: Int, child: Int) {
+                    selectedChild=child;
+                    clickParent=parent;
+                    callback.selectionCallback(parent,child)
+                }
+            })
 
-//        holder.binding.rlSections.addOnItemTouchListener(
-//            RecyclerItemClickListener(
-//                mContext,
-//                holder.binding.rlSections,
-//                object : RecyclerItemClickListener.OnItemClickListener {
-//                    override fun onLongItemClick(view: View?, position: Int) {
-//
-//                    }
-//
-//                    override fun onItemClick(view: View, position: Int) {
-//                        selected = position
-//                        if(fragment is ClassTimeTableFragment){
-//                            (fragment as ClassTimeTableFragment).sectionClicked(classModel ,classModel.classroomsList[position])
-//                        }else if(fragment is StudentListFragment){
-//                            (fragment as StudentListFragment).sectionClicked(classModel ,classModel.classroomsList[position])
-//                        }
-//                        adapter.notifyDataSetChanged();
-//                    }
-//                })
-//        )
+            holder.binding.rlSections.adapter = adapter
+        }else{
+            val adapter = SectionAdapter(mContext,position,value,classModel.classroomsList as ArrayList<SectionList>,null,classModel,object :SectionSelection{
+                override fun selectionCallback(parent: Int, child: Int) {
+                    selectedChild=child;
+                    clickParent=parent;
+                    callback.selectionCallback(parent,child)
+                }
+            })
+            holder.binding.rlSections.adapter = adapter
+
+        }
+
+        holder.binding.rlSections.measure(View.MeasureSpec.makeMeasureSpec(holder.binding.rlSections.width, View.MeasureSpec.EXACTLY), View.MeasureSpec.UNSPECIFIED)
+        val height = holder.binding.rlSections.measuredHeight
+
+        holder.binding.imgLine.layoutParams.height = height
+        holder.binding.imgLine.requestLayout()
+
+
 
     }
 

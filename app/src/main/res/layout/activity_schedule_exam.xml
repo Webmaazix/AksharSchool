@@ -28,122 +28,107 @@
             android:background="@drawable/white_nopadding_shape"
             android:layout_below="@+id/toolbar"
             android:layout_margin="@dimen/_20sdp"
+            android:elevation="@dimen/_2sdp"
             android:layout_height="wrap_content">
 
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:background="@color/light_blue"
+                android:background="@drawable/blue_nopadding_bottomsquare"
                 android:layout_height="@dimen/_10sdp"/>
 
 
             <RelativeLayout
-                android:id="@+id/rlClassSelection"
+                android:id="@+id/rlClassSection"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <LinearLayout
-                    android:id="@+id/llClassSelection"
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvClassSectionLabel"
+                    android:layout_width="wrap_content"
+                    android:text="@string/select_class_section"
+                    android:fontFamily="@font/opensans_bold"
+                    android:textSize="@dimen/_11sp"
+                    android:textAlignment="center"
+                    android:layout_height="wrap_content"/>
+
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:weightSum="2"
+                    android:layout_below="@+id/tvClassSectionLabel"
+                    android:background="@drawable/grey_outline_shape"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_height="wrap_content">
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="0dp"
-                        android:text="@string/c_lass"
+                        android:id="@+id/tvSelectClassSection"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/select_class_section"
+                        android:textSize="@dimen/_11sp"
+                        android:fontFamily="@font/opensans_regular"
                         android:padding="@dimen/_7sdp"
-                        android:layout_weight="1"
-                        android:textSize="@dimen/_12sp"
-                        android:fontFamily="@font/opensans_bold"
-                        android:layout_height="wrap_content"/>
+                        android:inputType="textEmailAddress"
+                        />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:src="@drawable/dropdown"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_height="@dimen/_20sdp"/>
 
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="0dp"
-                        android:text="@string/section"
-                        android:padding="@dimen/_7sdp"
-                        android:layout_weight="1"
-                        android:textSize="@dimen/_12sp"
-                        android:fontFamily="@font/opensans_bold"
-                        android:layout_height="wrap_content"/>
+                </RelativeLayout>
 
 
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/llClassSelectionDropDown"
-                    android:layout_below="@+id/llClassSelection"
-                    android:layout_width="match_parent"
-                    android:weightSum="2"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:layout_height="wrap_content">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="0dp"
-                        android:text="@string/select_class"
-                        android:background="@drawable/grey_outline_shape"
-                        android:drawableEnd="@drawable/dropdown"
-                        android:padding="@dimen/_7sdp"
-                        android:layout_weight="1"
-                        android:textSize="@dimen/_12sp"
-                        android:fontFamily="@font/opensans_bold"
-                        android:layout_height="wrap_content"/>
-
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="0dp"
-                        android:text="@string/select_section"
-                        android:padding="@dimen/_7sdp"
-                        android:background="@drawable/grey_outline_shape"
-                        android:drawableEnd="@drawable/dropdown"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_weight="1"
-                        android:textSize="@dimen/_12sp"
-                        android:fontFamily="@font/opensans_bold"
-                        android:layout_height="wrap_content"/>
-
-
-                </LinearLayout>
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/rlSubject"
+                android:id="@+id/rlExamRdioButton"
                 android:layout_width="match_parent"
-                android:layout_below="@+id/rlClassSelection"
+                android:layout_below="@+id/rlClassSection"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_height="wrap_content">
 
+                    <RadioGroup
+                        android:id="@+id/rgLevel"
+                        android:layout_width="match_parent"
+                        android:weightSum="2"
+                        android:orientation="horizontal"
+                        android:layout_height="wrap_content">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvSubjectLabel"
-                    android:layout_width="match_parent"
-                    android:text="@string/subject"
-                    android:paddingTop="@dimen/_7sdp"
-                    android:paddingBottom="@dimen/_7sdp"
-                    android:textSize="@dimen/_12sp"
-                    android:fontFamily="@font/opensans_bold"
-                    android:layout_height="wrap_content"/>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvSubject"
-                    android:layout_width="match_parent"
-                    android:textSize="@dimen/_12sp"
-                    android:textColor="@color/black"
-                    android:background="@drawable/grey_outline_shape"
-                    android:drawableEnd="@drawable/dropdown"
-                    android:padding="@dimen/_5sdp"
-                    android:fontFamily="@font/opensans_regular"
-                    android:layout_below="@+id/tvSubjectLabel"
-                    android:layout_height="wrap_content"/>
+                        <RadioButton
+                            android:id="@+id/rbExamLevel"
+                            android:layout_width="match_parent"
+                            android:text="@string/exam_level"
+                            android:textSize="@dimen/_10sp"
+                            android:textColor="@color/black"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/opensans_bold"
+                            android:layout_height="wrap_content"/>
+                        <RadioButton
+                            android:id="@+id/rbTestLevel"
+                            android:layout_width="match_parent"
+                            android:text="@string/test_level"
+                            android:textSize="@dimen/_10sp"
+                            android:textColor="@color/black"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/opensans_bold"
+                            android:layout_height="wrap_content"/>
+                    </RadioGroup>
 
             </RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/rlExamName"
                 android:layout_width="match_parent"
-                android:layout_below="@+id/rlSubject"
+                android:layout_below="@+id/rlExamRdioButton"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
@@ -156,21 +141,36 @@
                     android:text="@string/exam_name"
                     android:paddingTop="@dimen/_7sdp"
                     android:paddingBottom="@dimen/_7sdp"
-                    android:textSize="@dimen/_12sp"
+                    android:textSize="@dimen/_11sp"
                     android:fontFamily="@font/opensans_bold"
                     android:layout_height="wrap_content"/>
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvExamName"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:textSize="@dimen/_12sp"
-                    android:textColor="@color/black"
                     android:background="@drawable/grey_outline_shape"
-                    android:drawableEnd="@drawable/dropdown"
-                    android:padding="@dimen/_5sdp"
-                    android:fontFamily="@font/opensans_regular"
                     android:layout_below="@+id/tvExamNameLabel"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvExamName"
+                        android:layout_width="match_parent"
+                        android:textSize="@dimen/_12sp"
+                        android:textColor="@color/black"
+                        android:padding="@dimen/_5sdp"
+                        android:fontFamily="@font/opensans_regular"
+                        android:layout_height="wrap_content"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:src="@drawable/dropdown"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_height="@dimen/_20sdp"/>
+
+
+                </RelativeLayout>
+
 
             </RelativeLayout>
 
@@ -180,7 +180,6 @@
                 android:layout_below="@+id/rlExamName"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_15sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_height="wrap_content">
 
@@ -188,35 +187,137 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvTestNameLabel"
                     android:layout_width="match_parent"
-                    android:text="@string/date"
+                    android:text="@string/start_date"
                     android:paddingTop="@dimen/_7sdp"
                     android:paddingBottom="@dimen/_7sdp"
-                    android:textSize="@dimen/_12sp"
+                    android:textSize="@dimen/_11sp"
                     android:fontFamily="@font/opensans_bold"
                     android:layout_height="wrap_content"/>
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvTestName"
+                <RelativeLayout
+                    android:id="@+id/rlStartDate"
                     android:layout_width="match_parent"
-                    android:textSize="@dimen/_12sp"
-                    android:textColor="@color/black"
                     android:background="@drawable/grey_outline_shape"
-                    android:drawableEnd="@drawable/ic_calendar"
-                    android:padding="@dimen/_5sdp"
-                    android:fontFamily="@font/opensans_regular"
                     android:layout_below="@+id/tvTestNameLabel"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvStartDate"
+                        android:layout_width="match_parent"
+                        android:textSize="@dimen/_12sp"
+                        android:textColor="@color/black"
+                        android:padding="@dimen/_5sdp"
+                        android:layout_toStartOf="@+id/imgCalender"
+                        android:fontFamily="@font/opensans_regular"
+                        android:layout_height="wrap_content"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgCalender"
+                        android:layout_width="@dimen/_20sdp"
+                        android:src="@drawable/calender"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_height="@dimen/_20sdp"/>
+
+                </RelativeLayout>
+
 
             </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlDateTime"
+                android:layout_below="@+id/rltestName"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/llDateTime"
+                    android:layout_width="match_parent"
+                    android:weightSum="2"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:text="@string/start_time"
+                        android:padding="@dimen/_7sdp"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/_11sp"
+                        android:fontFamily="@font/opensans_bold"
+                        android:layout_height="wrap_content"/>
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:text="@string/duration"
+                        android:padding="@dimen/_7sdp"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/_11sp"
+                        android:fontFamily="@font/opensans_bold"
+                        android:layout_height="wrap_content"/>
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/llDateTimeDropDown"
+                    android:layout_below="@+id/llDateTime"
+                    android:layout_width="match_parent"
+                    android:weightSum="2"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:background="@drawable/grey_outline_shape"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatSpinner
+                            android:id="@+id/sbStartTime"
+                            android:layout_width="match_parent"
+                            android:text="@string/start_time"
+                            android:textSize="@dimen/_11sp"
+                            android:padding="@dimen/_4sdp"
+                            android:fontFamily="@font/opensans_regular"
+                            android:layout_height="wrap_content"/>
+
+                    </RelativeLayout>
+
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/etDuration"
+                        android:layout_width="match_parent"
+                        android:hint="@string/duration"
+                        android:background="@drawable/grey_outline_shape"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_weight="1"
+                        android:padding="@dimen/_8sdp"
+                        android:textSize="@dimen/_11sp"
+                        android:inputType="phone"
+                        android:fontFamily="@font/opensans_regular"
+                        android:layout_height="wrap_content"/>
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
 
         </RelativeLayout>
 
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvScheduleExam"
             android:layout_width="match_parent"
             android:background="@color/dark_blue"
             android:layout_alignParentBottom="true"
-            android:text="@string/c_ontinue"
+            android:text="@string/schedule_exam"
             android:textColor="@color/white"
             android:textAlignment="center"
             android:padding="@dimen/_10sdp"

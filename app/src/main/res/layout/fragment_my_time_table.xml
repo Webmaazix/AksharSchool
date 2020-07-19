@@ -14,40 +14,19 @@
     </data>
 
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-            <RelativeLayout
-                android:id="@+id/rlNoDataFound"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/imgEmpty"
-                    android:layout_width="@dimen/_100sdp"
-                    android:src="@drawable/emptynotice"
-                    android:layout_centerInParent="true"
-                    android:layout_centerVertical="true"
-                    android:layout_height="@dimen/_100sdp"/>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvEmptyText"
-                    android:layout_below="@+id/imgEmpty"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/opensans_regular"
-                    android:text="@string/no_timetable_found"
-                    android:textAlignment="center"
-                    android:textSize="@dimen/_12sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-            </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rlActiveNotice"
@@ -58,6 +37,36 @@
                 android:layout_height="wrap_content"/>
 
         </RelativeLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <RelativeLayout
+            android:id="@+id/rlNoDataFound"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgEmpty"
+                android:layout_width="@dimen/_100sdp"
+                android:src="@drawable/emptynotice"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:layout_height="@dimen/_100sdp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvEmptyText"
+                android:layout_below="@+id/imgEmpty"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/opensans_regular"
+                android:text="@string/no_timetable_found"
+                android:textAlignment="center"
+                android:textSize="@dimen/_12sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
     </RelativeLayout>
 
 </layout>

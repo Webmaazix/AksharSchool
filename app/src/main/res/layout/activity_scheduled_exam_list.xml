@@ -22,10 +22,83 @@
             layout="@layout/main_toolbar"/>
 
         <RelativeLayout
-            android:layout_width="match_parent"
+            android:id="@+id/rlSelection"
             android:layout_below="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:background="@color/white"
             android:layout_height="wrap_content">
 
+            <RelativeLayout
+                android:id="@+id/rlClassSection"
+                android:layout_width="match_parent"
+                android:background="@drawable/grey_round_shape"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvClassSectionName"
+                    android:layout_width="match_parent"
+                    android:text="@string/select_class_section"
+                    android:padding="@dimen/_7sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11sp"
+                    android:fontFamily="@font/opensans_bold"
+                    android:layout_height="wrap_content"/>
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/_24sdp"
+                    android:layout_height="@dimen/_24sdp"
+                    android:src="@drawable/dropdown"
+                    android:layout_centerInParent="true"
+                    android:layout_alignParentEnd="true"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rlExaminationSelection"
+                android:layout_below="@+id/rlClassSection"
+                android:layout_width="match_parent"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:background="@drawable/grey_round_shape"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvExamName"
+                    android:layout_width="match_parent"
+                    android:text="@string/select_exam_amp_test_name"
+                    android:padding="@dimen/_7sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11sp"
+                    android:fontFamily="@font/opensans_bold"
+                    android:layout_height="wrap_content"/>
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/_24sdp"
+                    android:layout_height="@dimen/_24sdp"
+                    android:src="@drawable/dropdown"
+                    android:layout_centerInParent="true"
+                    android:layout_alignParentEnd="true"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_below="@+id/rlSelection"
+            android:layout_height="wrap_content">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -33,6 +106,7 @@
 
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvExams"
                     android:layout_width="match_parent"
                     android:layout_marginTop="@dimen/_7sdp"
                     android:layout_height="wrap_content"/>
@@ -42,6 +116,18 @@
         </RelativeLayout>
 
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgScheduleExam"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:visibility="visible"
+            android:backgroundTint="@color/dark_blue"
+            android:background="@drawable/circle_white_solid_background"
+            android:src="@drawable/add"
+            android:padding="@dimen/_13sdp"
+            android:layout_margin="@dimen/_10sdp"
+            android:layout_height="@dimen/_40sdp"/>
 
 
 

@@ -21,20 +21,30 @@
         tools:targetApi="n"
         tools:replace="android:allowBackup">
 
-        <activity android:name=".studentprofile.CreateStudentProfile"
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <activity android:name="com.akshar.one.view.studentprofile.CreateStudentProfile"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan"></activity>
-        <activity android:name=".timetable.TimeTableActivity" />
-        <activity android:name=".noticeboard.CreateNoticeActivity" />
-        <activity android:name=".noticeboard.NoticeboardActivity" />
-        <activity android:name=".examschedule.ScheduledExamList" />
-        <activity android:name=".examschedule.ScheduleExamActivity" />
-        <activity android:name=".messagecenter.ReportActivity" />
-        <activity android:name=".studentprofile.ViewStudentProfileActivity"
+        <activity android:name="com.akshar.one.view.timetable.TimeTableActivity" />
+        <activity android:name="com.akshar.one.view.noticeboard.CreateNoticeActivity" />
+        <activity android:name="com.akshar.one.view.noticeboard.NoticeboardActivity" />
+        <activity android:name="com.akshar.one.view.examschedule.ScheduledExamList" />
+        <activity android:name="com.akshar.one.view.examschedule.ScheduleExamActivity" />
+        <activity android:name="com.akshar.one.view.messagecenter.ReportActivity" />
+        <activity android:name="com.akshar.one.view.studentprofile.ViewStudentProfileActivity"
             android:theme="@style/AppTheme">
 
         </activity>
-        <activity android:name=".studentprofile.EditStudentProfileActivity"
+        <activity android:name="com.akshar.one.view.studentprofile.EditStudentProfileActivity"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan">
 
@@ -50,16 +60,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".attandance.AttandanceEntryActivity"
+            android:name="com.akshar.one.view.attandance.AttandanceEntryActivity"
             android:theme="@style/AppTheme"></activity>
-        <activity android:name=".birthday.BirthdayActivity"></activity>
-        <activity android:name=".feeandpayments.MakePaymentActivity" />
-        <activity android:name=".feeandpayments.PayFeeActivity" />
-        <activity android:name=".feeandpayments.StudentFeesDetails" />
-        <activity android:name=".marksentry.StudentMarksEntry" />
-        <activity android:name=".marksentry.MarksEntrySelectionActivity" />
-        <activity android:name=".assignhomework.CreateHomeworkActivity" />
-        <activity android:name=".assignhomework.AssignHomeworkActivity" />
+        <activity android:name="com.akshar.one.view.birthday.BirthdayActivity"></activity>
+        <activity android:name="com.akshar.one.view.feeandpayments.MakePaymentActivity" />
+        <activity android:name="com.akshar.one.view.feeandpayments.PayFeeActivity" />
+        <activity android:name="com.akshar.one.view.feeandpayments.StudentFeesDetails" />
+        <activity android:name="com.akshar.one.view.marksentry.StudentMarksEntry" />
+        <activity android:name="com.akshar.one.view.marksentry.MarksEntrySelectionActivity" />
+        <activity android:name="com.akshar.one.view.assignhomework.CreateHomeworkActivity" />
+        <activity android:name="com.akshar.one.view.assignhomework.AssignHomeworkActivity" />
         <activity android:name=".view.notification.NotificationActivity" />
         <activity android:name=".view.browser.InAppBrowserActivity" />
         <activity
