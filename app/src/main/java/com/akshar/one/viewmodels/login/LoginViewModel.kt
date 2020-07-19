@@ -87,9 +87,12 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 try {
+                    isLoading.postValue(true)
                     loginRepository?.changePassword(username, password)
+                    isLoading.postValue(false)
                     mutableLiveDataChangePasswordResponse?.postValue(true)
                 } catch (httpException: HttpException) {
+                    isLoading.postValue(false)
                     val errorResponse =
                         AppUtil.getErrorResponse(httpException.response()?.errorBody()?.string())
                     Log.d(
@@ -97,6 +100,7 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
                         "Change Password : Status  ${errorResponse?.status}, Message ${errorResponse?.message}"
                     )
                 } catch (e: Exception) {
+                    isLoading.postValue(false)
                     Log.d(AppConstant.TAG, "Change Password : $e")
                 }
             }

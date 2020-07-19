@@ -128,11 +128,11 @@
                     app:layout_constraintTop_toBottomOf="@id/edtPwd" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txtForgotPassword"
+                    android:id="@+id/txtTroubleLogin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_6sdp"
-                    android:text="@string/forgot_password"
+                    android:text="@string/trouble_in_login_question_mark"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"

@@ -22,7 +22,6 @@ class OTPViewModel(application: Application) : BaseViewModel(application) {
     private var loginRepository: LoginRepository? = null
     private var mutableLiveDataLoginModel: MutableLiveData<LoginModel>? = MutableLiveData()
     private var mutableLiveDataOTPModel: MutableLiveData<OTPModel> = MutableLiveData()
-    private var mutableLiveDataChangePasswordResponse: MutableLiveData<Boolean>? = null
     private val isLoading = MutableLiveData<Boolean>()
 
     init {
@@ -36,14 +35,12 @@ class OTPViewModel(application: Application) : BaseViewModel(application) {
 
     fun getMutableLiveDataOTPResponse(): MutableLiveData<OTPModel>? = mutableLiveDataOTPModel
 
-    fun getMutableLiveDataChangePassword(): MutableLiveData<Boolean>? =
-        mutableLiveDataChangePasswordResponse
-
     fun loginServiceGetOTP(mobileNumber: String) {
         isLoading.value = true
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 try {
+                    isLoading.postValue(true)
                     val otpResponse = loginRepository?.getOTP(mobileNumber)
                     isLoading.postValue(false)
                     mutableLiveDataOTPModel.postValue(otpResponse)
@@ -64,13 +61,16 @@ class OTPViewModel(application: Application) : BaseViewModel(application) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 try {
+                    isLoading.postValue(true)
                     val loginModel = loginRepository?.loginWithOTP(mobileNumber, otp)
+                    isLoading.postValue(false)
                     loginModel?.let {
                         mutableLiveDataLoginModel?.postValue(it)
                         SharedPreferenceFactory.getSharedPreferenceManager()
                             .putObject(SharedPreferenceManager.LOGIN_MODEL, it)
                     }
                 } catch (httpException: HttpException) {
+                    isLoading.postValue(false)
                     val errorResponse =
                         AppUtil.getErrorResponse(httpException.response()?.errorBody()?.string())
                     Log.d(
@@ -78,28 +78,8 @@ class OTPViewModel(application: Application) : BaseViewModel(application) {
                         "Login Error : Status  ${errorResponse?.status}, Message ${errorResponse?.message}"
                     )
                 } catch (e: Exception) {
+                    isLoading.postValue(false)
                     Log.d(AppConstant.TAG, "Login Exception : $e")
-                }
-            }
-        }
-    }
-
-    fun changePasswordService(username: String, password: String) {
-        mutableLiveDataChangePasswordResponse = MutableLiveData()
-        viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                try {
-                    loginRepository?.changePassword(username, password)
-                    mutableLiveDataChangePasswordResponse?.postValue(true)
-                } catch (httpException: HttpException) {
-                    val errorResponse =
-                        AppUtil.getErrorResponse(httpException.response()?.errorBody()?.string())
-                    Log.d(
-                        AppConstant.TAG,
-                        "Change Password : Status  ${errorResponse?.status}, Message ${errorResponse?.message}"
-                    )
-                } catch (e: Exception) {
-                    Log.d(AppConstant.TAG, "Change Password : $e")
                 }
             }
         }

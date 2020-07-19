@@ -53,8 +53,6 @@
             android:name=".attandance.AttandanceEntryActivity"
             android:theme="@style/AppTheme"></activity>
         <activity android:name=".birthday.BirthdayActivity"></activity>
-        <activity android:name=".forgetpassword.ChangePasswordActivity" />
-        <activity android:name=".forgetpassword.ForgetPasswordActivity" />
         <activity android:name=".feeandpayments.MakePaymentActivity" />
         <activity android:name=".feeandpayments.PayFeeActivity" />
         <activity android:name=".feeandpayments.StudentFeesDetails" />

@@ -28,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_48sdp"
-                android:text="@string/welcome_back"
+                android:text="@string/trouble_in_login"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_16ssp"
                 android:textStyle="bold"
@@ -37,53 +37,95 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/txtDesc"
+                android:id="@+id/txtDesc1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_4sdp"
-                android:text="@string/enter_your_email_to_change_password"
+                android:text="@string/enter_your_mobile_number_we_will_send_you_the"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txtWelcomeBack" />
+                app:layout_constraintTop_toBottomOf="@id/txtWelcomeBack"/>
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/edtUserName"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtDesc2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:text="@string/otp_for_verification_code"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtDesc1" />
+
+            <RelativeLayout
+                android:id="@+id/relPhoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_24sdp"
                 android:background="@drawable/white_rounded_radius_4_bg"
-                android:hint="Email"
-                android:drawableStart="@drawable/defaultprofile"
-                android:drawablePadding="@dimen/_7sdp"
-                android:inputType="text"
-                android:textSize="@dimen/_14ssp"
-                android:lines="1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txtDesc" />
+                app:layout_constraintTop_toBottomOf="@id/txtDesc2">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txtCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:text="+91"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14ssp" />
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="@dimen/_1sdp"
+                    android:layout_height="@dimen/_24sdp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:layout_toEndOf="@id/txtCode"
+                    android:background="@color/grey" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edtPhoneNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/divider"
+                    android:background="@null"
+                    android:hint="@string/phoneNumber"
+                    android:imeOptions="actionDone"
+                    android:inputType="number"
+                    android:lines="1"
+                    android:maxLength="10"
+                    android:text="9714761636"
+                    android:textSize="@dimen/_14ssp" />
+
+            </RelativeLayout>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/txtErrorUsername"
+                android:id="@+id/txtErrorPhoneNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:layout_marginTop="@dimen/_4sdp"
-                android:text="@string/error_please_enter_username"
+                android:text="@string/error_please_enter_phone_number"
                 android:textColor="@color/red"
                 android:textSize="@dimen/_12ssp"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/edtUserName"
-                android:visibility="gone"/>
-
+                app:layout_constraintTop_toBottomOf="@id/relPhoneNumber" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnLogin"
+            android:id="@+id/btnContinue"
             style="@style/blueButton"
-            android:text="@string/login"
+            android:text="@string/str_continue"
             android:textAllCaps="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -103,7 +145,7 @@
         app:layout_constraintTop_toBottomOf="@+id/frLogin">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txtPhone"
+            android:id="@+id/txtGoBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_14sdp"
@@ -120,7 +162,7 @@
             android:src="@drawable/ic_login_img"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtPhone"
+            app:layout_constraintTop_toBottomOf="@+id/txtGoBack"
             android:layout_marginTop="@dimen/_24sdp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

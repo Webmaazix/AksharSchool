@@ -23,6 +23,11 @@ import com.akshar.one.view.fragment.BaseFragment
 import com.akshar.one.viewmodels.ViewModelFactory
 import com.akshar.one.viewmodels.login.LoginViewModel
 import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.android.synthetic.main.fragment_login.edtPhoneNumber
+import kotlinx.android.synthetic.main.fragment_login.linProgressIndicator
+import kotlinx.android.synthetic.main.fragment_login.txtErrorPhoneNumber
+import kotlinx.android.synthetic.main.fragment_login.txtTermAndCondition
+import kotlinx.android.synthetic.main.fragment_login_with_phone.*
 
 class LoginFragment : BaseFragment(), View.OnClickListener {
 
@@ -110,6 +115,10 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
             R.id.txtTermAndCondition -> {
                 loginActivity.goToTermsAndConditionScreen()
             }
+
+            R.id.txtTroubleLogin -> {
+                loginActivity.goToForgotPasswordScreen()
+            }
         }
     }
 
@@ -189,6 +198,27 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
             false
         }
 
+        edtPhoneNumber.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                txtErrorPhoneNumber.visibility = View.GONE
+            }
+
+        })
+
+        edtPhoneNumber.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                AndroidUtil.hideKeyboard(context, edtPhoneNumber)
+                btnContinue.performClick()
+            }
+            false
+        }
+
         setClickListeners()
     }
 
@@ -196,6 +226,7 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
         btnLogin.setOnClickListener(this)
         txtPhone.setOnClickListener(this)
         txtTermAndCondition.setOnClickListener(this)
+        txtTroubleLogin.setOnClickListener(this)
     }
 
     private fun validate(): Boolean {

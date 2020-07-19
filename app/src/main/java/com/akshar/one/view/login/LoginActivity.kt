@@ -106,9 +106,10 @@ class LoginActivity : BaseActivity() {
         finish()
     }
 
-    fun goToOTPScreen(mobileNumber: String) {
+    fun goToOTPScreen(mobileNumber: String, isTroubleLogin: Boolean = false) {
         val bundle = Bundle()
         bundle.putString(OTPFragment.MOBILE_NUMBER, mobileNumber)
+        bundle.putBoolean(OTPFragment.IS_TROUBLE_LOGIN, isTroubleLogin)
         val fragment = OTPFragment.newInstance()
         fragment.arguments = bundle
         addFragment(fragment, LoginFragment::class.java.name, true)
@@ -119,5 +120,17 @@ class LoginActivity : BaseActivity() {
         bundle.putString(InAppBrowserActivity.TITLE, getString(R.string.title_terms_and_condition))
         bundle.putString(InAppBrowserActivity.URL, getString(R.string.TERMS_AND_CONDITION_URL))
         AndroidUtil.startActivity(this, InAppBrowserActivity::class.java, bundle)
+    }
+
+    fun goToForgotPasswordScreen() {
+        addFragment(TroubleLoginFragment.newInstance(), TroubleLoginFragment::class.java.name, true)
+    }
+
+    fun goToChangePasswordScreen() {
+        replaceFragment(
+            ChangePasswordFragment.newInstance(),
+            ChangePasswordFragment::class.java.name,
+            true
+        )
     }
 }
