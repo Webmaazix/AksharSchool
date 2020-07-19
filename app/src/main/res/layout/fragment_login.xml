@@ -217,7 +217,6 @@
                         android:inputType="number"
                         android:lines="1"
                         android:maxLength="10"
-                        android:text="9714761636"
                         android:textSize="@dimen/_14ssp" />
 
                 </RelativeLayout>
