@@ -8,15 +8,18 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.akshar.one.R
 import com.akshar.one.databinding.SectionRowBinding
+import com.akshar.one.view.examschedule.ScheduleExamActivity
+import com.akshar.one.view.examschedule.ScheduledExamList
 import com.akshar.one.model.ClassDropDownModel
 import com.akshar.one.model.SectionList
-import com.akshar.one.studentprofile.StudentListFragment
-import com.akshar.one.timetable.ClassTimeTableFragment
+import com.akshar.one.view.studentprofile.EditStudentProfileActivity
+import com.akshar.one.view.studentprofile.StudentListFragment
+import com.akshar.one.view.timetable.ClassTimeTableFragment
 
 import java.util.ArrayList
 
 class SectionAdapter(private val mContext: Activity, var parent: Int,
-                     var child:Int, private val list: ArrayList<SectionList>?, private var fragment: Fragment,
+                     var child:Int, private val list: ArrayList<SectionList>?, private var fragment: Fragment?,
                      private var model: ClassDropDownModel, val callback: ClassDropDownAdapter.SectionSelection
 ) :
     RecyclerView.Adapter<SectionAdapter.ViewHolder>() {
@@ -60,11 +63,22 @@ class SectionAdapter(private val mContext: Activity, var parent: Int,
         init {
             itemView.setOnClickListener {
                 callback.selectionCallback(parent,adapterPosition)
-                if(fragment is ClassTimeTableFragment){
-                    (fragment as ClassTimeTableFragment).sectionClicked(model , model.classroomsList!!.get(adapterPosition))
-                }else if(fragment is StudentListFragment){
-                    (fragment as StudentListFragment).sectionClicked(model ,model.classroomsList!![adapterPosition])
+                if(fragment!= null){
+                    if(fragment is ClassTimeTableFragment){
+                        (fragment as ClassTimeTableFragment).sectionClicked(model , model.classroomsList.get(adapterPosition))
+                    }else if(fragment is StudentListFragment){
+                        (fragment as StudentListFragment).sectionClicked(model ,model.classroomsList[adapterPosition])
+                    }
+                }else{
+                    if(mContext is EditStudentProfileActivity){
+                        (mContext).sectionClicked(model,model.classroomsList[adapterPosition])
+                    }else if(mContext is ScheduleExamActivity){
+                        (mContext).sectionClicked(model,model.classroomsList[adapterPosition])
+                    }else if(mContext is ScheduledExamList){
+                        (mContext).sectionClicked(model,model.classroomsList[adapterPosition])
+                    }
                 }
+
             }
 
         }

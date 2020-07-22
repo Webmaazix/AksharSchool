@@ -103,8 +103,7 @@
                     android:maxLength="10"
                     android:textSize="@dimen/_14ssp"
                     android:layout_toEndOf="@id/divider"
-                    android:layout_centerVertical="true"
-                    android:text="9714761636"/>
+                    android:layout_centerVertical="true"/>
 
             </RelativeLayout>
 

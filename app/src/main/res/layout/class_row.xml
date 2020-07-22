@@ -31,14 +31,16 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imgLine"
             android:layout_below="@+id/tvClassName"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/_10sdp"
             android:src="@drawable/linepng"
             android:layout_marginStart="@dimen/_15sdp"
-            android:layout_height="@dimen/_80sdp"/>
+            android:layout_height="wrap_content"/>
 
         <RelativeLayout
+            android:id="@+id/rlImageView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/imgLine"
             android:layout_below="@+id/tvClassName">
 
@@ -51,10 +53,37 @@
 <!--                app:cardBackgroundColor="@color/grey"-->
 <!--                />-->
 
+
+            <RelativeLayout
+                android:id="@+id/rlEmptyView"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_marginStart="@dimen/_7sdp"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgEmpty"
+                    android:layout_width="@dimen/_50sdp"
+                    android:src="@drawable/emptynotice"
+                    android:layout_height="@dimen/_50sdp"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_toEndOf="@+id/imgEmpty"
+                    android:layout_marginStart="@dimen/_7sdp"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/opensans_regular"
+                    android:textSize="@dimen/_10sp"
+                    android:textColor="@color/black"
+                    android:text="@string/kindly_switch_to_test_level_to_view_tests"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rlSections"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_5sdp"
+                android:visibility="visible"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 

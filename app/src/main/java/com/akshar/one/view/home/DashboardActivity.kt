@@ -6,14 +6,13 @@ import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.akshar.one.R
-import com.akshar.one.adapter.BirthDayAdapter
-import com.akshar.one.adapter.TimeTableAdapter
+import com.akshar.one.view.home.adapter.BirthDayAdapter
+import com.akshar.one.view.home.adapter.TimeTableAdapter
 import com.akshar.one.databinding.BirthdayPopupBinding
 import com.akshar.one.databinding.DialogChooseFeaheadBinding
 import com.akshar.one.databinding.DialogCommonOptionsBinding
@@ -25,14 +24,10 @@ import com.akshar.one.util.AppUtil
 import com.akshar.one.view.fragment.BaseFragment
 import com.akshar.one.viewmodels.ViewModelFactory
 import com.akshar.one.viewmodels.dashboard.DashboardViewModel
-import java.util.*
 import kotlin.collections.ArrayList
-import android.widget.Toast
-import android.R.attr.button
 import android.view.*
 import androidx.appcompat.widget.PopupMenu
-import androidx.lifecycle.LifecycleOwner
-import com.akshar.one.birthday.BirthdayActivity
+import com.akshar.one.view.birthday.BirthdayActivity
 import com.akshar.one.view.activity.MainActivity
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import java.text.DecimalFormat
@@ -99,13 +94,14 @@ class DashboardActivity : BaseFragment(),View.OnClickListener {
     private fun setAdapter(){
         binding!!.rvClassRooms.setHasFixedSize(true)
         binding!!.rvClassRooms.layoutManager = LinearLayoutManager(currActivity,LinearLayoutManager.HORIZONTAL,false)
-        adapter = TimeTableAdapter(currActivity,timeTableList)
+        adapter = TimeTableAdapter(currActivity, timeTableList)
         binding!!.rvClassRooms.adapter = adapter
 
 
         binding!!.rvBirthdays.setHasFixedSize(true)
         binding!!.rvBirthdays.layoutManager = LinearLayoutManager(currActivity,LinearLayoutManager.VERTICAL,false)
-        birthDayadapter = BirthDayAdapter(currActivity,birthDayList)
+        birthDayadapter =
+            BirthDayAdapter(currActivity, birthDayList)
         binding!!.rvBirthdays.adapter = birthDayadapter
     }
 
@@ -150,6 +146,13 @@ class DashboardActivity : BaseFragment(),View.OnClickListener {
         dashboardViewModel?.getTimeTableLiveData()?.observe(this, Observer {
             timeTableList.clear()
             timeTableList.addAll(it)
+            if(timeTableList.size > 0){
+                binding!!.rlTimeTableNotFound.visibility = View.GONE
+                binding!!.rvClassRooms.visibility = View.VISIBLE
+            }else{
+                binding!!.rlTimeTableNotFound.visibility = View.VISIBLE
+                binding!!.rvClassRooms.visibility = View.GONE
+            }
             adapter.notifyDataSetChanged()
            // dashboardViewModel?.setTimeTableAdapter(it)
         })

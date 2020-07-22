@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="BASE_URL">http://test.aksharschoolsolutions.com:8080/</string>
+    <string name="BASE_URL">http://test.schooladminportal.com/</string>
     <string name="TERMS_AND_CONDITION_URL">https://aksharschoolsolutions.com/termsandconditions</string>
 </resources>

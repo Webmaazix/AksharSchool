@@ -2,17 +2,17 @@ package com.akshar.one.view.login
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.akshar.one.view.activity.MainActivity
 import com.akshar.one.R
 import com.akshar.one.util.AndroidUtil
 import com.akshar.one.view.activity.BaseActivity
+import com.akshar.one.view.activity.MainActivity
 import com.akshar.one.view.browser.InAppBrowserActivity
 
 class LoginActivity : BaseActivity() {
 
     private var SHOW_USERNAME_SCREEN = true
 
-    companion object{
+    companion object {
         val SHOW_LOGIN_WITH_USERNAME_SCREEN = "showLoginWithUsernameScreen"
     }
 
@@ -20,14 +20,11 @@ class LoginActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        intent.extras?.let { bundle ->  SHOW_USERNAME_SCREEN = bundle.getBoolean(SHOW_LOGIN_WITH_USERNAME_SCREEN,true) }
-
-        if(SHOW_USERNAME_SCREEN) {
-            goToLoginScreen()
-        }else{
-            goToLoginWithPhoneScreen()
+        intent.extras?.let { bundle ->
+            SHOW_USERNAME_SCREEN = bundle.getBoolean(SHOW_LOGIN_WITH_USERNAME_SCREEN, true)
         }
 
+        goToLoginScreen()
     }
 
     override fun onBackPressed() {
@@ -35,7 +32,7 @@ class LoginActivity : BaseActivity() {
         if (lastFragmentFromBackStack != null) {
             if (lastFragmentFromBackStack is LoginFragment || lastFragmentFromBackStack is LoginWithPhoneFragment) {
                 finish()
-            }else {
+            } else {
                 supportFragmentManager.popBackStack()
             }
         } else {
@@ -96,8 +93,12 @@ class LoginActivity : BaseActivity() {
         replaceFragment(LoginWithPhoneFragment(), LoginFragment::class.java.name, true)
     }
 
-    fun goToLoginScreen(){
-        replaceFragment(LoginFragment.newInstance(), LoginFragment::class.java.name, true)
+    fun goToLoginScreen() {
+        replaceFragment(
+            LoginFragment.newInstance(SHOW_USERNAME_SCREEN),
+            LoginFragment::class.java.name,
+            true
+        )
     }
 
     fun goToMainActivity() {
@@ -105,9 +106,10 @@ class LoginActivity : BaseActivity() {
         finish()
     }
 
-    fun goToOTPScreen(mobileNumber: String){
+    fun goToOTPScreen(mobileNumber: String, isTroubleLogin: Boolean = false) {
         val bundle = Bundle()
         bundle.putString(OTPFragment.MOBILE_NUMBER, mobileNumber)
+        bundle.putBoolean(OTPFragment.IS_TROUBLE_LOGIN, isTroubleLogin)
         val fragment = OTPFragment.newInstance()
         fragment.arguments = bundle
         addFragment(fragment, LoginFragment::class.java.name, true)
@@ -118,5 +120,17 @@ class LoginActivity : BaseActivity() {
         bundle.putString(InAppBrowserActivity.TITLE, getString(R.string.title_terms_and_condition))
         bundle.putString(InAppBrowserActivity.URL, getString(R.string.TERMS_AND_CONDITION_URL))
         AndroidUtil.startActivity(this, InAppBrowserActivity::class.java, bundle)
+    }
+
+    fun goToForgotPasswordScreen() {
+        addFragment(TroubleLoginFragment.newInstance(), TroubleLoginFragment::class.java.name, true)
+    }
+
+    fun goToChangePasswordScreen() {
+        replaceFragment(
+            ChangePasswordFragment.newInstance(),
+            ChangePasswordFragment::class.java.name,
+            true
+        )
     }
 }

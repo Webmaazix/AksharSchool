@@ -16,7 +16,7 @@
     <string name="welcome_back">Welcome Back!</string>
     <string name="enter_your_username_and_password_to_login">Enter your username and password to login</string>
     <string name="password">Password</string>
-    <string name="forgot_password">Forgot Password?</string>
+    <string name="forgot_password_question_mark">Forgot Password?</string>
     <string name="login">Login</string>
     <string name="i_want_to_login_with_phone_number">I want to login with Phone Number</string>
     <string name="error_please_enter_username">Please enter username</string>
@@ -133,7 +133,7 @@
     <string name="new_password">New Password</string>
     <string name="confirm_password">Confirm password</string>
     <string name="change">Change</string>
-    <string name="enter_your_email_to_change_password">Enter your email to change password</string>
+    <string name="enter_your_email_to_change_password">Enter your email to change the password</string>
     <string name="dashboard">Dashboard</string>
     <string name="timetable">Timetable</string>
     <string name="student_profile">Student Profile</string>
@@ -211,5 +211,41 @@
     <string name="turnOnInternet">Turn on internet</string>
     <string name="mobileData">Mobile data</string>
     <string name="Wifi">Wifi</string>
+    <string name="delete">Delete</string>
+    <string name="target_audience">Target Audience</string>
+    <string name="parents">Parents</string>
+    <string name="employees">Employees</string>
+    <string name="create_notice">Create Notice</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
+    <string name="select_exam_amp_test_name"><![CDATA[Select Exam & Test Name]]></string>
+    <string name="start_time">Start Time</string>
+    <string name="duration">Duration</string>
+    <string name="schedule_exam">Schedule Exam</string>
+    <string name="create_exam_schedule">Create Exam Schedule</string>
+    <string name="exam_level">Exam Level</string>
+    <string name="test_level">Test Level</string>
+    <string name="kindly_switch_to_test_level_to_view_tests">kindly switch to test level to view tests</string>
+    <string name="update_schedule">Update Schedule</string>
+    <string name="time_table_not_found">Time table not found</string>
+
+    //image crop string
+
+    <string name="ucrop_label_original">Original</string>
+    <string name="ucrop_label_edit_photo">Edit Photo</string>
+
+    <string name="ucrop_menu_crop">Crop</string>
+
+    <string name="ucrop_error_input_data_is_absent" translatable="false">Both input and output Uri must be specified</string>
+    <string name="ucrop_mutate_exception_hint" translatable="false">Therefore, override color resource (ucrop_color_toolbar_widget) in your app to make it work on pre-L devices</string>
+    <string name="ucrop_rotate">Rotate</string>
+    <string name="ucrop_scale">Scale</string>
+    <string name="ucrop_crop">Crop</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="trouble_in_login">Trouble In Login</string>
+    <string name="trouble_in_login_question_mark">Trouble In Login?</string>
+    <string name="error_please_enter_new_password">Please enter new password</string>
+    <string name="error_please_enter_confirm_password">Pleae enter confirm password</string>
+    <string name="error_new_password_and_confirm_password_not_match">New password and confirm password does not match</string>
     <string name="please_select_class_and_section">Please select Class and Section</string>
 </resources>
