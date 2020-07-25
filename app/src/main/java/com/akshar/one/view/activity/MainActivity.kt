@@ -17,18 +17,18 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
 import com.akshar.one.R
-import com.akshar.one.view.assignhomework.AssignHomeworkFragment
-import com.akshar.one.view.attendance.AttendanceFragment
-import com.akshar.one.view.examschedule.ScheduledExamList
-import com.akshar.one.view.feeandpayments.StudentListForFeesFragment
 import com.akshar.one.manager.SessionManager
 import com.akshar.one.util.AndroidUtil
-import com.akshar.one.view.noticeboard.NoticeboardActivity
-import com.akshar.one.view.timetable.TimeTableActivity
 import com.akshar.one.util.CheckPermission
-import com.akshar.one.view.attendance.AttendanceEntryFragment
+import com.akshar.one.view.assignhomework.AssignHomeworkFragment
+import com.akshar.one.view.attendance.student.AttendanceEntryFragment
+import com.akshar.one.view.attendance.employee.EmployeeAttendanceEntryFragment
+import com.akshar.one.view.examschedule.ScheduledExamList
+import com.akshar.one.view.feeandpayments.StudentListForFeesFragment
 import com.akshar.one.view.home.DashboardActivity
+import com.akshar.one.view.noticeboard.NoticeboardActivity
 import com.akshar.one.view.studentprofile.StudentListFragment
+import com.akshar.one.view.timetable.TimeTableActivity
 import com.akshar.one.viewmodels.ViewModelFactory
 import com.akshar.one.viewmodels.main.MainViewModel
 import com.google.android.material.navigation.NavigationView
@@ -36,12 +36,13 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.main_toolbar.*
 import kotlinx.android.synthetic.main.nav_header_main.view.*
 
-class MainActivity : BaseActivity(),  NavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
+class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener,
+    View.OnClickListener {
 
 
     var drawerLayout: DrawerLayout? = null
     var mSlideState = false
-    private var currActivity : Activity = this
+    private var currActivity: Activity = this
     private var mainViewModel: MainViewModel? = null
 
     companion object {
@@ -71,15 +72,16 @@ class MainActivity : BaseActivity(),  NavigationView.OnNavigationItemSelectedLis
 
             override fun onDrawerOpened(drawerView: View) {
                 super.onDrawerOpened(drawerView)
-                if(SessionManager.getLoginModel()!= null){
+                if (SessionManager.getLoginModel() != null) {
                     val loginModel = SessionManager.getLoginModel()
-                    if(loginModel!!.appsList!= null){
-                        if(loginModel.appsList!![0].username!= null){
-                            nav_view.getHeaderView(0).tvUserName.text = loginModel.appsList!![0].username
+                    if (loginModel!!.appsList != null) {
+                        if (loginModel.appsList!![0].username != null) {
+                            nav_view.getHeaderView(0).tvUserName.text =
+                                loginModel.appsList!![0].username
                         }
                     }
                 }
-                nav_view.getHeaderView(0).imgUserProfile.setOnClickListener{
+                nav_view.getHeaderView(0).imgUserProfile.setOnClickListener {
                     if (CheckPermission.checkCameraPermission(currActivity))
                         openCameraDialog()
                     else
@@ -101,6 +103,15 @@ class MainActivity : BaseActivity(),  NavigationView.OnNavigationItemSelectedLis
             ViewModelFactory(application)
         ).get(MainViewModel::class.java)
 
+        drawerLayout?.setDrawerListener(toggle)
+        nav_view.itemIconTintList = null;
+        setListner()
+        toolbar.background =
+            currActivity.resources.getDrawable(R.drawable.white_square_nopadding_shape)
+        getWindow().statusBarColor = Color.WHITE;
+        txtToolbarTitle.text = currActivity.resources.getString(R.string.home)
+        replaceFragment(DashboardActivity.newInstance(), DashboardActivity::class.java.name, false)
+
         observers()
         fetchCourses()
     }
@@ -119,14 +130,6 @@ class MainActivity : BaseActivity(),  NavigationView.OnNavigationItemSelectedLis
                 AndroidUtil.showMessageDialog(this, it.message)
             }
         })
-
-//        drawerLayout?.setDrawerListener(toggle)
-        nav_view.itemIconTintList = null;
-        setListner()
-        toolbar.background = currActivity.resources.getDrawable(R.drawable.white_square_nopadding_shape)
-        getWindow().statusBarColor = Color.WHITE;
-        txtToolbarTitle.text = currActivity.resources.getString(R.string.home)
-        replaceFragment(DashboardActivity.newInstance(), DashboardActivity::javaClass.name, false)
     }
 
     private fun setListner() {
@@ -188,15 +191,18 @@ class MainActivity : BaseActivity(),  NavigationView.OnNavigationItemSelectedLis
         txtToolbarTitle.text = title
     }
 
-    fun setToolbarBackground(boolean: Boolean){
-        toolbar.background = if(boolean) resources.getDrawable(R.drawable.yellow_top_square,null) else resources.getDrawable(R.color.light_yellow,null)
+    fun setToolbarBackground(boolean: Boolean) {
+        toolbar.background = if (boolean) resources.getDrawable(
+            R.drawable.yellow_top_square,
+            null
+        ) else resources.getDrawable(R.color.light_yellow, null)
     }
 
     private fun showProgressIndicator(isLoading: Boolean?) {
 //        linProgressIndicator.visibility = if (isLoading == true) View.VISIBLE else View.GONE
     }
 
-    private fun openCamera(){
+    private fun openCamera() {
 
     }
 
@@ -206,47 +212,90 @@ class MainActivity : BaseActivity(),  NavigationView.OnNavigationItemSelectedLis
             }
             R.id.nav_dashboard -> {
                 txtToolbarTitle.text = currActivity.resources.getString(R.string.home)
-                toolbar.background = currActivity.resources.getDrawable(R.drawable.white_square_nopadding_shape)
-                replaceFragment(DashboardActivity.newInstance(), DashboardActivity::javaClass.name, false)
+                toolbar.background =
+                    currActivity.resources.getDrawable(R.drawable.white_square_nopadding_shape)
+                replaceFragment(
+                    DashboardActivity.newInstance(),
+                    DashboardActivity::javaClass.name,
+                    false
+                )
             }
             R.id.nav_time_table -> {
                 TimeTableActivity.open(currActivity)
-             //   replaceFragment(DashboardActivity.newInstance(), DashboardActivity::javaClass.name, true)
+                //   replaceFragment(DashboardActivity.newInstance(), DashboardActivity::javaClass.name, true)
 
             }
             R.id.nav_student_profile -> {
-                toolbar.background = currActivity.resources.getDrawable(R.drawable.yellow_top_square)
+                toolbar.background =
+                    currActivity.resources.getDrawable(R.drawable.yellow_top_square)
 
-                replaceFragment(StudentListFragment.newInstance(), StudentListFragment::javaClass.name, false)
+                replaceFragment(
+                    StudentListFragment.newInstance(),
+                    StudentListFragment::javaClass.name,
+                    false
+                )
+
+            }
+
+            R.id.nav_student_attendance_entry -> {
+                toolbar.background =
+                    currActivity.resources.getDrawable(R.drawable.yellow_top_square,null)
+
+                replaceFragment(
+                    AttendanceEntryFragment.newInstance(),
+                    AttendanceEntryFragment::class.java.name,
+                    true
+                )
+
+            }
+            R.id.nav_employee_attendance_entry -> {
+                toolbar.background =
+                    currActivity.resources.getDrawable(R.drawable.yellow_top_square, null)
+
+                replaceFragment(
+                    EmployeeAttendanceEntryFragment.newInstance(),
+                    EmployeeAttendanceEntryFragment::class.java.name,
+                    true
+                )
 
             }
 
-            R.id.nav_attandance_entry -> {
-                toolbar.background = currActivity.resources.getDrawable(R.drawable.yellow_top_square)
-
-                replaceFragment(AttendanceEntryFragment.newInstance(), AttendanceEntryFragment::javaClass.name, true)
-
-            }
             R.id.nav_settings -> {
             }
-            R.id.nav_assign_homework -> {
-                toolbar.background = currActivity.resources.getDrawable(R.drawable.yellow_top_square)
 
-                replaceFragment(AssignHomeworkFragment.newInstance(), AssignHomeworkFragment::javaClass.name, false)
+            R.id.nav_assign_homework -> {
+                toolbar.background =
+                    currActivity.resources.getDrawable(R.drawable.yellow_top_square)
+
+                replaceFragment(
+                    AssignHomeworkFragment.newInstance(),
+                    AssignHomeworkFragment::javaClass.name,
+                    false
+                )
 
             }
+
             R.id.nav_notice_board -> {
                 NoticeboardActivity.open(currActivity)
             }
+
             R.id.nav_marks_entry -> {
             }
+
             R.id.nav_exam_schedule -> {
                 ScheduledExamList.open(currActivity)
             }
+
             R.id.nav_fees_payment -> {
-                toolbar.background = currActivity.resources.getDrawable(R.drawable.yellow_top_square)
-                replaceFragment(StudentListForFeesFragment.newInstance(), StudentListForFeesFragment::javaClass.name, false)
+                toolbar.background =
+                    currActivity.resources.getDrawable(R.drawable.yellow_top_square)
+                replaceFragment(
+                    StudentListForFeesFragment.newInstance(),
+                    StudentListForFeesFragment::javaClass.name,
+                    false
+                )
             }
+
             R.id.nav_message_center -> {
             }
 

@@ -248,4 +248,9 @@
     <string name="error_please_enter_confirm_password">Pleae enter confirm password</string>
     <string name="error_new_password_and_confirm_password_not_match">New password and confirm password does not match</string>
     <string name="please_select_class_and_section">Please select Class and Section</string>
+
+    <string name="student_attendance_entry">Student Attendance</string>
+    <string name="employee_attendance_entry">Employee Attendance</string>
+    <string name="employee_name">Employee Name</string>
+    <string name="s_no">S. No</string>
 </resources>

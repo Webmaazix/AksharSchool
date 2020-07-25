@@ -9,15 +9,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.akshar.one.R
-import com.akshar.one.database.entity.AttendanceCategoryEntity
+import com.akshar.one.database.entity.ShiftEntity
 import com.akshar.one.view.activity.MainActivity
-import com.akshar.one.view.attendance.adapters.AttendanceCategoryAdapter
+import com.akshar.one.view.attendance.student.adapter.AttendanceCategoryAdapter
 import kotlinx.android.synthetic.main.select_category_dialog.view.*
 
-class CategorySectionDialog : DialogFragment(), AttendanceCategoryListener {
+class CategorySectionDialog : DialogFragment(),
+    AttendanceCategoryListener {
 
     private var mainActivity: MainActivity? = null
-    private var attendanceCategoryList: List<AttendanceCategoryEntity>? = null
+    private var attendanceCategoryList: List<ShiftEntity>? = null
     private var attendanceCategoryListener: AttendanceCategoryListener? = null
     private var baseView: View? = null
     private var attendanceCategoryAdapter: AttendanceCategoryAdapter? = null
@@ -47,7 +48,13 @@ class CategorySectionDialog : DialogFragment(), AttendanceCategoryListener {
 
     private fun initView() {
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        attendanceCategoryAdapter = mainActivity?.let { AttendanceCategoryAdapter(it,attendanceCategoryList,this)}
+        attendanceCategoryAdapter = mainActivity?.let {
+            AttendanceCategoryAdapter(
+                it,
+                attendanceCategoryList,
+                this
+            )
+        }
         baseView?.recyclerView?.adapter = attendanceCategoryAdapter
 
         baseView?.imgClose?.setOnClickListener { dismiss() }
@@ -55,7 +62,7 @@ class CategorySectionDialog : DialogFragment(), AttendanceCategoryListener {
 
     companion object {
         fun newInstance(
-            attendanceCategoryList: List<AttendanceCategoryEntity>?,
+            attendanceCategoryList: List<ShiftEntity>?,
             attendanceCategoryListener: AttendanceCategoryListener?
         ): CategorySectionDialog {
             val categorySectionDialog = CategorySectionDialog()
@@ -65,11 +72,11 @@ class CategorySectionDialog : DialogFragment(), AttendanceCategoryListener {
         }
     }
 
-    override fun updateAttendanceCategory(attendanceCategoryEntityList: List<AttendanceCategoryEntity>?) {
+    override fun updateAttendanceCategory(shiftEntityList: List<ShiftEntity>?) {
     }
 
-    override fun onAttendanceCategorySelected(attendanceCategoryEntity: AttendanceCategoryEntity) {
+    override fun onAttendanceCategorySelected(shiftEntity: ShiftEntity) {
         dismiss()
-        attendanceCategoryListener?.onAttendanceCategorySelected(attendanceCategoryEntity)
+        attendanceCategoryListener?.onAttendanceCategorySelected(shiftEntity)
     }
 }

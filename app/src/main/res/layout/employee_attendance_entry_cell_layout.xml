@@ -10,8 +10,8 @@
             type="java.lang.Integer" />
 
         <variable
-            name="attendanceEntryViewModel"
-            type="com.akshar.one.viewmodels.attendance.AttendanceEntryViewModel" />
+            name="employeeAttendanceEntryViewModel"
+            type="com.akshar.one.viewmodels.attendance.EmployeeAttendanceEntryViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,7 +36,7 @@
                 android:id="@+id/txtRollNo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{attendanceEntryViewModel.getStudentAt(position).rollNbr}"
+                android:text="@{employeeAttendanceEntryViewModel.getEmployeeAt(position).rollNbr}"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_11ssp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -52,7 +52,7 @@
                 android:layout_marginEnd="@dimen/_4sdp"
                 android:ellipsize="end"
                 android:lines="1"
-                android:text="@{attendanceEntryViewModel.getStudentAt(position).fullName}"
+                android:text="@{employeeAttendanceEntryViewModel.getEmployeeAt(position).fullName}"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_11ssp"
                 app:layout_constraintBottom_toBottomOf="parent"

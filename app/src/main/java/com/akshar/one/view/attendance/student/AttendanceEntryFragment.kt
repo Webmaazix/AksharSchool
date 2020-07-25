@@ -1,4 +1,4 @@
-package com.akshar.one.view.attendance
+package com.akshar.one.view.attendance.student
 
 import android.app.Dialog
 import android.content.Context
@@ -17,14 +17,16 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
 import com.akshar.one.R
 import com.akshar.one.calender.widget.CollapsibleCalendar
-import com.akshar.one.database.entity.AttendanceCategoryEntity
 import com.akshar.one.database.entity.ClassRoomEntity
 import com.akshar.one.database.entity.CourseEntity
+import com.akshar.one.database.entity.ShiftEntity
 import com.akshar.one.databinding.FragmentAttendanceEntryBinding
 import com.akshar.one.extension.isInForeground
 import com.akshar.one.util.AndroidUtil
 import com.akshar.one.util.AppUtil
 import com.akshar.one.view.activity.MainActivity
+import com.akshar.one.view.attendance.AttendanceCategoryListener
+import com.akshar.one.view.attendance.CategorySectionDialog
 import com.akshar.one.view.common.ClassAndSectionDialog
 import com.akshar.one.view.common.OnClassRoomSelectedListener
 import com.akshar.one.view.fragment.BaseFragment
@@ -37,7 +39,7 @@ class AttendanceEntryFragment : BaseFragment(), View.OnClickListener,
     AttendanceCategoryListener, CollapsibleCalendar.CalendarListener {
 
     private var classRoomEntity: ClassRoomEntity? = null
-    private var attendanceCategoryEntity: AttendanceCategoryEntity? = null
+    private var shiftEntity: ShiftEntity? = null
 
     private var fragmentAttendanceEntryBinding: FragmentAttendanceEntryBinding? = null
     private var attendanceEntryViewModel: AttendanceEntryViewModel? = null
@@ -80,7 +82,7 @@ class AttendanceEntryFragment : BaseFragment(), View.OnClickListener,
         fragmentAttendanceEntryBinding?.attendanceEntryViewModel = attendanceEntryViewModel
 
         mainActivity?.setToolbarBackground(false)
-        mainActivity?.setToolbarTitle(context?.getString(R.string.attendance))
+        mainActivity?.setToolbarTitle(context?.getString(R.string.student_attendance_entry))
 
         observers()
     }
@@ -88,11 +90,11 @@ class AttendanceEntryFragment : BaseFragment(), View.OnClickListener,
     private fun fetchAttendanceStudents() {
         if (context?.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true) {
             classRoomEntity?.classroomId?.let { classroomId ->
-                attendanceCategoryEntity?.category?.let { category ->
+                shiftEntity?.shiftId?.let { shiftId ->
                     currentDate?.let { date ->
                         attendanceEntryViewModel?.getStudentAttendanceByClassRoomId(
                             classroomId,
-                            category,
+                            shiftId,
                             date
                         )
                     }
@@ -141,18 +143,15 @@ class AttendanceEntryFragment : BaseFragment(), View.OnClickListener,
     companion object {
         @JvmStatic
         fun newInstance(
-        ): AttendanceEntryFragment = AttendanceEntryFragment()
+        ): AttendanceEntryFragment =
+            AttendanceEntryFragment()
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btnSave -> {
                 if (context?.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true) {
-                    classRoomEntity?.classroomId?.let {
-                        attendanceEntryViewModel?.saveStudentAttendance(
-                            it
-                        )
-                    }
+                    attendanceEntryViewModel?.saveStudentAttendance()
                 } else {
                     Toast.makeText(
                         context,
@@ -201,19 +200,22 @@ class AttendanceEntryFragment : BaseFragment(), View.OnClickListener,
         classroomEntity: ClassRoomEntity
     ) {
         this.classRoomEntity = classroomEntity
-        this.attendanceCategoryEntity = null
+        this.shiftEntity = null
         fragmentAttendanceEntryBinding?.txtPeriod?.text = context?.getString(R.string.select_period)
         attendanceEntryViewModel?.setStudentAttendanceListInAdapter(null)
         fragmentAttendanceEntryBinding?.txtClassAndSection?.text =
             "${courseEntity.courseName} - ${classroomEntity.classroomName}"
     }
 
-    override fun updateAttendanceCategory(attendanceCategoryEntityList: List<AttendanceCategoryEntity>?) {
-        attendanceCategoryEntityList?.let {
+    override fun updateAttendanceCategory(shiftEntityList: List<ShiftEntity>?) {
+        shiftEntityList?.let {
             mainActivity?.let { activity ->
                 if (activity.isInForeground() && !activity.isFinishing && !activity.isDestroyed) {
                     val categorySectionDialog =
-                        CategorySectionDialog.newInstance(attendanceCategoryEntityList, this)
+                        CategorySectionDialog.newInstance(
+                            shiftEntityList,
+                            this
+                        )
                     categorySectionDialog.show(
                         activity.supportFragmentManager,
                         CategorySectionDialog::class.java.simpleName
@@ -223,9 +225,9 @@ class AttendanceEntryFragment : BaseFragment(), View.OnClickListener,
         }
     }
 
-    override fun onAttendanceCategorySelected(attendanceCategoryEntity: AttendanceCategoryEntity) {
-        this.attendanceCategoryEntity = attendanceCategoryEntity
-        fragmentAttendanceEntryBinding?.txtPeriod?.text = attendanceCategoryEntity.category
+    override fun onAttendanceCategorySelected(shiftEntity: ShiftEntity) {
+        this.shiftEntity = shiftEntity
+        fragmentAttendanceEntryBinding?.txtPeriod?.text = shiftEntity.name
         fetchAttendanceStudents()
     }
 
@@ -276,10 +278,10 @@ class AttendanceEntryFragment : BaseFragment(), View.OnClickListener,
     }
 
     override fun onClickListener() {
-        if(fragmentAttendanceEntryBinding?.collapsibleCalendarView?.expanded == true){
+        if (fragmentAttendanceEntryBinding?.collapsibleCalendarView?.expanded == true) {
             fragmentAttendanceEntryBinding?.imgExpand?.setImageResource(R.drawable.arrow_up)
             fragmentAttendanceEntryBinding?.collapsibleCalendarView?.collapse(400)
-        } else{
+        } else {
             fragmentAttendanceEntryBinding?.imgExpand?.setImageResource(R.drawable.down_arrow_icon)
             fragmentAttendanceEntryBinding?.collapsibleCalendarView?.expand(400)
         }
