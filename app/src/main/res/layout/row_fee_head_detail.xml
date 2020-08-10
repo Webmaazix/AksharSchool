@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="position"
+            type="java.lang.Integer" />
+
+        <variable
+            name="attendanceClassRoomViewModel"
+            type="com.akshar.one.viewmodels.attendance.AttendanceClassRoomViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/rlMain"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:elevation="@dimen/_2sdp"
+        android:background="@drawable/white_nopadding_shape"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvFeeHeadName"
+            android:layout_width="match_parent"
+            android:text="Tution Fee"
+            android:textStyle="bold"
+            android:padding="@dimen/_7sdp"
+            android:fontFamily="@font/opensans_regular"
+            android:textSize="@dimen/_11sp"
+            android:textColor="@color/black"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_height="wrap_content"/>
+
+        <View
+            android:id="@+id/vv1"
+            android:layout_width="match_parent"
+            android:background="@color/ultra_light_grey"
+            android:layout_below="@+id/tvFeeHeadName"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:layout_height="@dimen/_1sdp"/>
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvTermsList"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/vv1"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_height="wrap_content"/>
+
+
+    </RelativeLayout>
+
+
+</layout>

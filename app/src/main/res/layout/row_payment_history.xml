@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="position"
+            type="java.lang.Integer" />
+
+        <variable
+            name="attendanceClassRoomViewModel"
+            type="com.akshar.one.viewmodels.attendance.AttendanceClassRoomViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/rlMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:elevation="@dimen/_5sdp"
+            android:background="@drawable/white_square_shape"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvInvoiceLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/invoice"
+                android:textSize="@dimen/_11sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/opensans_regular" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvInvoiceNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" 843458457"
+                android:layout_toEndOf="@+id/tvInvoiceLabel"
+                android:textSize="@dimen/_11sp"
+                android:fontFamily="@font/opensans_regular" />
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/tvDownloadInvoice"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:src="@drawable/right_arrow"
+                android:tint="@color/black"
+                android:layout_alignParentEnd="true" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvStudentName"
+                android:text="Student Name"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11sp"
+                android:fontFamily="@font/opensans_regular"
+                android:layout_below="@+id/tvDownloadInvoice"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_height="wrap_content"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvDate"
+                android:text="05-06-2020"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11sp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/opensans_regular"
+                android:layout_below="@+id/tvStudentName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvPaymentMethodLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/payment_method"
+                android:textSize="@dimen/_11sp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_below="@+id/tvDate"
+                android:textColor="@color/black"
+                android:fontFamily="@font/opensans_regular" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvPaymentMethod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Net Banking"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_below="@+id/tvDate"
+                android:layout_toEndOf="@+id/tvPaymentMethodLabel"
+                android:textSize="@dimen/_11sp"
+                android:fontFamily="@font/opensans_regular" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvRefrenceNumberLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Refrence number : "
+                android:textSize="@dimen/_11sp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_below="@+id/tvPaymentMethod"
+                android:textColor="@color/black"
+                android:fontFamily="@font/opensans_regular" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvRefrenceNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Net Banking"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_below="@+id/tvPaymentMethod"
+                android:layout_toEndOf="@+id/tvRefrenceNumberLabel"
+                android:textSize="@dimen/_11sp"
+                android:fontFamily="@font/opensans_regular" />
+
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+</layout>

@@ -43,7 +43,7 @@ class StudentViewModel(application: Application) : BaseViewModel(application){
                     isLoading.postValue(false)
                     val studentList = studentRepository?.getStudentListByClassId(classRoomId)
                     studentList.let {
-                        mutuableLiveDataStudentList.postValue(studentList?.list)
+                        mutuableLiveDataStudentList.postValue(studentList)
                     }
 
                 }catch (httpException : HttpException){

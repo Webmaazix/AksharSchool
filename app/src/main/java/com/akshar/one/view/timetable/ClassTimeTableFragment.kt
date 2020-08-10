@@ -41,7 +41,7 @@ class ClassTimeTableFragment : Fragment() ,View.OnClickListener{
 
     private var currActivity : Activity? = null
     private var binding : FragmentClassTimeTableBinding? = null
-    private var timeTableList = ArrayList<TimeTableModel>()
+    private var timeTableList = ArrayList<PeriodTimeTable>()
     private var dashboardViewModel: DashboardViewModel? = null
     private var timeTableViewModel : TimeTableViewModel? = null
     private var classRoomId : Int = 0;
@@ -127,15 +127,23 @@ class ClassTimeTableFragment : Fragment() ,View.OnClickListener{
         dashboardViewModel?.getErrorMutableLiveData()?.observe(this, Observer {
             it?.let {
                 if(it.message.equals("Either classroomId or employeeProfileId must be passed as request parameter.",true)){
-
+                   // (currActivity as TimeTableActivity).hideProgressBar()
+                    timeTableList.clear()
+                    adapter.notifyDataSetChanged()
                 }else{
-                    AndroidUtil.showToast(context!!, it.message,true)
+                    //(currActivity as TimeTableActivity).hideProgressBar()
+                    binding!!.rlNoDataFound.visibility = View.VISIBLE
+                    binding!!.rlClassTimeTable.visibility = View.GONE
+                    timeTableList.clear()
+                    adapter.notifyDataSetChanged()
+                   // AndroidUtil.showToast(context!!, it.message,true)
                 }
 
             }
         })
 
         dashboardViewModel?.getClassTimeTableLiveData()?.observe(this, Observer {
+            (currActivity as TimeTableActivity).hideProgressBar()
             timeTableList.clear()
             timeTableList.addAll(it)
             if(timeTableList.size> 0){
@@ -163,6 +171,7 @@ class ClassTimeTableFragment : Fragment() ,View.OnClickListener{
         date = data.year.toString()+"-"+month.toString()+"-"+data.day
         dashboardViewModel?.let {
             if (context?.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true) {
+                //(currActivity as TimeTableActivity).showProgressBar()
                 it.getTimeTableOfClass(classRoomId,date!!) }
         }
 
@@ -206,7 +215,6 @@ class ClassTimeTableFragment : Fragment() ,View.OnClickListener{
         dialog!!.setCancelable(true)
         dialog!!.show()
     }
-
     fun sectionClicked(data : ClassDropDownModel,model : SectionList){
         classRoomId = model.classroomId
         val className = data.courseName+" "+model.classroomName

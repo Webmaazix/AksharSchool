@@ -12,6 +12,11 @@ import com.akshar.one.view.examschedule.ScheduleExamActivity
 import com.akshar.one.view.examschedule.ScheduledExamList
 import com.akshar.one.model.ClassDropDownModel
 import com.akshar.one.model.SectionList
+import com.akshar.one.view.feeandpayments.StudentListForFeesFragment
+import com.akshar.one.view.marksentry.inputselection.ClassSectionSelectActivity
+import com.akshar.one.view.marksentry.inputselection.SelectOtherInputsActivity
+import com.akshar.one.view.messagecenter.ReportActivity
+import com.akshar.one.view.messagecenter.SendMarksAndFeeReport
 import com.akshar.one.view.studentprofile.EditStudentProfileActivity
 import com.akshar.one.view.studentprofile.StudentListFragment
 import com.akshar.one.view.timetable.ClassTimeTableFragment
@@ -68,6 +73,8 @@ class SectionAdapter(private val mContext: Activity, var parent: Int,
                         (fragment as ClassTimeTableFragment).sectionClicked(model , model.classroomsList.get(adapterPosition))
                     }else if(fragment is StudentListFragment){
                         (fragment as StudentListFragment).sectionClicked(model ,model.classroomsList[adapterPosition])
+                    }else if(fragment is StudentListForFeesFragment){
+                        (fragment as StudentListForFeesFragment).sectionClicked(model ,model.classroomsList[adapterPosition])
                     }
                 }else{
                     if(mContext is EditStudentProfileActivity){
@@ -75,6 +82,14 @@ class SectionAdapter(private val mContext: Activity, var parent: Int,
                     }else if(mContext is ScheduleExamActivity){
                         (mContext).sectionClicked(model,model.classroomsList[adapterPosition])
                     }else if(mContext is ScheduledExamList){
+                        (mContext).sectionClicked(model,model.classroomsList[adapterPosition])
+                    }else if(mContext is ReportActivity){
+//                        (mContext).sectionClicked(model,model.classroomsList[adapterPosition])
+                    }else if(mContext is SelectOtherInputsActivity){
+                        (mContext).sectionClicked(model,model.classroomsList[adapterPosition])
+                    }else if(mContext is ClassSectionSelectActivity){
+                        (mContext).sectionClicked(model,model.classroomsList[adapterPosition])
+                    }else if(mContext is SendMarksAndFeeReport){
                         (mContext).sectionClicked(model,model.classroomsList[adapterPosition])
                     }
                 }

@@ -6,9 +6,6 @@ import com.google.gson.JsonSyntaxException
 import org.json.JSONObject
 import java.lang.reflect.Type
 import java.text.SimpleDateFormat
-import android.util.Log
-import java.text.DateFormat
-import java.text.ParseException
 import java.util.*
 import java.util.regex.Pattern
 import kotlin.collections.ArrayList
@@ -117,6 +114,15 @@ object AppUtil {
         return Pattern.matches(regex, email)
     }
 
+
+    fun formatDate(date : String) : String{
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd")
+        val outputFormat = SimpleDateFormat("dd MMM yyyy")
+        val inputDateStr = date
+        val date = inputFormat.parse(inputDateStr)
+        val outputDateStr = outputFormat.format(date)
+        return outputDateStr
+    }
 
     fun getServerDateFormat(date:Date): String = SimpleDateFormat(SERVER_DATE_FORMAT).format(date)
 

@@ -28,4 +28,8 @@ import java.io.Serializable
     @SerializedName("displayOrder")
     @Expose
     var displayOrder = 0
+
+    @SerializedName("isSelected")
+    @Expose
+    var isSelected = false
 }

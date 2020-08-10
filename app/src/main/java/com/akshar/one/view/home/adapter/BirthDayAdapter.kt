@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.akshar.one.R
 import com.akshar.one.databinding.BirthdayCellBinding
 import com.akshar.one.model.BirthDayModel
+import com.akshar.one.util.AppUtil
+import com.akshar.one.util.AppUtils
 import com.akshar.one.view.activity.MainActivity
 
 import java.util.ArrayList
@@ -34,9 +36,20 @@ class BirthDayAdapter(private val mContext: Context, private val birthDayModel: 
             name = birthDayModel?.firstName!!
         }
         holder.binding.tvClassName.text = "N/A"
-        holder.binding.tvDate.text = birthDayModel.birthday
+        val bdyDate = AppUtil.formatDate(birthDayModel.birthday!!)
+        holder.binding.tvDate.text = bdyDate
 
         holder.binding.tvUserName.text  = name
+
+        if(birthDayModel.imageUrl!= null || birthDayModel.imageUrl!=""){
+            AppUtils.loadImageCrop(
+                birthDayModel.imageUrl,
+                holder.binding.imgUserProfile,
+                R.drawable.circle_default_pic,
+                80,
+                80
+            )
+        }
     }
 
     override fun getItemCount(): Int {

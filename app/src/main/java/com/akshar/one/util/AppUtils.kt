@@ -22,8 +22,10 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.fragment.app.Fragment
 import com.akshar.one.R
+import com.bumptech.glide.Glide
 
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.dialog_progress.*
 import java.io.File
 
 
@@ -72,6 +74,19 @@ object AppUtils {
         newsDayTimeFormat.timeZone = TimeZone.getDefault()
         groupDateFormat.timeZone = TimeZone.getDefault()
         postDateTimeFormat.timeZone = TimeZone.getDefault()
+    }
+
+
+
+    fun showProgress(activity: Activity): Dialog {
+        val overlayDialog = Dialog(activity, android.R.style.Theme_Panel)
+        overlayDialog.setContentView(R.layout.dialog_progress)
+        overlayDialog.setCanceledOnTouchOutside(false)
+        Glide.with(activity).load(R.drawable.loader).into(overlayDialog.imgLoader);
+        if (!activity.isFinishing) {
+            overlayDialog.show()
+        }
+        return overlayDialog
     }
 
 
@@ -253,7 +268,7 @@ object AppUtils {
             if (isError)
                 textView.setBackgroundColor(activity.resources.getColor(R.color.red))
             else
-                textView.setBackgroundColor(activity.resources.getColor(R.color.colorAccent))
+                textView.setBackgroundColor(activity.resources.getColor(R.color.green_normal))
             textView.layoutParams = params
 
             toast.view = textView

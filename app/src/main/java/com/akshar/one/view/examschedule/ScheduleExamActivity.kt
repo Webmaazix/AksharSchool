@@ -32,6 +32,9 @@ import java.text.SimpleDateFormat
 import java.util.*
 import com.akshar.one.adapter.MySpinnerAdapter
 import com.akshar.one.model.*
+import com.akshar.one.util.AppUtils
+import kotlinx.android.synthetic.main.activity_create_notice.tvStartDate
+import kotlinx.android.synthetic.main.activity_schedule_exam.*
 
 
 class ScheduleExamActivity : AppCompatActivity(),View.OnClickListener {
@@ -65,9 +68,9 @@ class ScheduleExamActivity : AppCompatActivity(),View.OnClickListener {
     var testModelUpdate : TestListModel? =null
     var examDropDownModelUpdate : ExaminationDropDownModel? = null
     private var scheduledModel : ScheduleList? = null
-    var examTimeList = arrayOf("07:00", "07:30", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30",
-        "11:00","11:30","12:00","12:30","01:00","01:30","02:00","02:30","03:00","03:30","04:00","04:30",
-        "05:00","05:30","06:00","06:30","07:00")
+    var examTimeList = arrayOf("07:00 AM", "07:30 AM", "08:00 AM", "08:30 AM", "09:00 AM", "09:30 AM", "10:00 AM", "10:30 AM",
+        "11:00 AM","11:30 AM","12:00 PM","12:30 PM","01:00 PM","01:30 PM","02:00 PM","02:30 PM","03:00 PM","03:30 PM","04:00 PM","04:30 PM",
+        "05:00 PM","05:30 PM","06:00PM","06:30PM","07:00PM")
 
     companion object{
         fun open(currActivity : Activity, model : ScheduleList?, classDropDown : ClassDropDownModel?,
@@ -87,11 +90,11 @@ class ScheduleExamActivity : AppCompatActivity(),View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(currActivity,R.layout.activity_schedule_exam)
-        scheduledModel = intent.getSerializableExtra("model") as ScheduleList
-        classDropDownModelUpdate = intent.getSerializableExtra("classDropDown") as ClassDropDownModel
-        sectionModelUpdate = intent.getSerializableExtra("section") as SectionList
-        examDropDownModelUpdate = intent.getSerializableExtra("examDropDown") as ExaminationDropDownModel
-        testModelUpdate = intent.getSerializableExtra("test") as TestListModel
+        scheduledModel = intent.getSerializableExtra("model") as ScheduleList?
+        classDropDownModelUpdate = intent.getSerializableExtra("classDropDown") as ClassDropDownModel?
+        sectionModelUpdate = intent.getSerializableExtra("section") as SectionList?
+        examDropDownModelUpdate = intent.getSerializableExtra("examDropDown") as ExaminationDropDownModel?
+        testModelUpdate = intent.getSerializableExtra("test") as TestListModel?
 
         if(scheduledModel != null){
             setData()
@@ -101,8 +104,14 @@ class ScheduleExamActivity : AppCompatActivity(),View.OnClickListener {
     }
 
     private fun setData(){
-        binding!!.tvStartDate.text = scheduledModel?.date
-        binding!!.etDuration.setText(scheduledModel?.duration!!)
+        if(scheduledModel?.date != null){
+            binding!!.tvStartDate.text = scheduledModel?.date
+        }
+
+        if(scheduledModel?.duration != null){
+            binding!!.etDuration.setText(scheduledModel?.duration.toString())
+        }
+
         if(classDropDownModelUpdate!= null){
             val className = classDropDownModelUpdate?.courseName + " " + sectionModelUpdate?.classroomName
             binding!!.tvSelectClassSection.text = className
@@ -352,21 +361,43 @@ class ScheduleExamActivity : AppCompatActivity(),View.OnClickListener {
 
     private fun validation() : Boolean{
         var isValid = true
-        if(classRoomId == 0){
-            isValid = false
-            AndroidUtil.showToast(currActivity,"Select Class & Section",true)
-        }else if(examId == 0){
-            isValid = false
-            AndroidUtil.showToast(currActivity,"Please select exam name",true)
-        }else if(tvStartDate.text.toString().isEmpty() || tvStartDate.text.equals(currActivity.getString(R.string.start_date))){
-            isValid = false
-            AndroidUtil.showToast(currActivity,"Start date is required",true)
-        }else if(examTime.isEmpty()){
-            isValid = false
-            AndroidUtil.showToast(currActivity,"Exam start time is required",true)
-        }else if(duration == 0){
-            isValid = false
-            AndroidUtil.showToast(currActivity,"Exam duration is required",true)
+
+        if(binding!!.tvScheduleExam.text.toString().equals(currActivity.resources.getString(R.string.update_schedule))){
+            if(classRoomId == 0 && sectionModelUpdate!!.classroomId == 0){
+                isValid = false
+                AndroidUtil.showToast(currActivity,"Select Class & Section",true)
+            }else if(examId == 0 && sectionModelUpdate!!.classroomId == 0){
+                isValid = false
+                AndroidUtil.showToast(currActivity,"Please select exam name",true)
+            }else if(tvStartDate.text.toString().isEmpty() || tvStartDate.text.equals(currActivity.getString(R.string.start_date))){
+                isValid = false
+                AndroidUtil.showToast(currActivity,"Start date is required",true)
+            }else if(examTime.isEmpty()){
+                isValid = false
+                AndroidUtil.showToast(currActivity,"Exam start time is required",true)
+            }else if(duration == 0 && etDuration.text.toString().isNullOrEmpty()){
+                isValid = false
+                AndroidUtil.showToast(currActivity,"Exam duration is required",true)
+            }
+
+        }else{
+            if(classRoomId == 0){
+                isValid = false
+                AndroidUtil.showToast(currActivity,"Select Class & Section",true)
+            }else if(examId == 0){
+                isValid = false
+                AndroidUtil.showToast(currActivity,"Please select exam name",true)
+            }else if(tvStartDate.text.toString().isEmpty() || tvStartDate.text.equals(currActivity.getString(R.string.start_date))){
+                isValid = false
+                AndroidUtil.showToast(currActivity,"Start date is required",true)
+            }else if(examTime.isEmpty()){
+                isValid = false
+                AndroidUtil.showToast(currActivity,"Exam start time is required",true)
+            }else if(duration == 0){
+                isValid = false
+                AndroidUtil.showToast(currActivity,"Exam duration is required",true)
+            }
+
         }
         return  isValid
     }
@@ -383,6 +414,7 @@ class ScheduleExamActivity : AppCompatActivity(),View.OnClickListener {
 
         examViewModel?.let {
             if (currActivity.let { ctx -> AndroidUtil.isInternetAvailable(ctx) }) {
+                dialog =   AppUtils.showProgress(currActivity)
                 it.createExamSchedule(examPostModel) }
         }
         observers()
@@ -411,6 +443,7 @@ class ScheduleExamActivity : AppCompatActivity(),View.OnClickListener {
 
         examViewModel?.let {
             if (currActivity.let { ctx -> AndroidUtil.isInternetAvailable(ctx) }) {
+                dialog = AppUtils.showProgress(currActivity)
                 it.updateExamSchedule(scheduledModel!!.id,examPostModel) }
         }
         observers()
@@ -419,11 +452,13 @@ class ScheduleExamActivity : AppCompatActivity(),View.OnClickListener {
     private fun observers(){
         examViewModel?.getErrorMutableLiveData()?.observe(this,androidx.lifecycle.Observer {
             it?.let {
+                AppUtils.hideProgress(dialog!!)
                 AndroidUtil.showToast(currActivity, it.message,true)
             }
         })
 
         examViewModel?.getSuccessLiveData()?.observe(this,androidx.lifecycle.Observer {
+            AppUtils.hideProgress(dialog!!)
             AndroidUtil.showToast(currActivity,"Examination Schedule created successfully",false)
             onBackPressed()
         })

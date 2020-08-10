@@ -2,6 +2,7 @@ package com.akshar.one.view.noticeboard
 
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -21,6 +22,7 @@ import com.akshar.one.util.AndroidUtil
 import com.akshar.one.viewmodels.ViewModelFactory
 import com.akshar.one.viewmodels.noticeboard.NoticeBoardViewModel
 import com.akshar.one.swipelayout.util.Attributes
+import com.akshar.one.util.AppUtils
 
 /**
  * A simple [Fragment] subclass.
@@ -33,6 +35,8 @@ class ActiveNoticeFragment : Fragment() ,View.OnClickListener {
     private var noticeBoardList = ArrayList<NoticeBoardModel>()
     private var noticeBoardViewModel: NoticeBoardViewModel? = null
     lateinit var adapter : MyNoticeBoardAdapter
+    private var dialog : Dialog? = null
+    private var mdialog : Dialog? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -62,6 +66,7 @@ class ActiveNoticeFragment : Fragment() ,View.OnClickListener {
 
         noticeBoardViewModel?.let {
             if (context?.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true) {
+               mdialog =  AppUtils.showProgress(currActivity!!)
                 it.getAllNotices(false) }
         }
 
@@ -80,24 +85,23 @@ class ActiveNoticeFragment : Fragment() ,View.OnClickListener {
         adapter = MyNoticeBoardAdapter(
             currActivity!!,
             noticeBoardList,
-            false
+            false,this
         )
-        (adapter).mode = Attributes.Mode.Single
+//        (adapter).mode = Attributes.Mode.Single
         binding!!.rlActiveNotice.adapter = adapter
-
-//        val itemTouchHelperCallback = RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, this)
-//        ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(binding!!.rlActiveNotice)
     }
 
     private fun observers(){
 
         noticeBoardViewModel?.getErrorMutableLiveData()?.observe(this, Observer {
             it?.let {
+                AppUtils.hideProgress(mdialog!!)
                 AndroidUtil.showToast(context!!, it.message,true)
             }
         })
 
         noticeBoardViewModel?.getNoticeListLiveData()?.observe(this, Observer {
+            AppUtils.hideProgress(mdialog!!)
             noticeBoardList.clear()
             noticeBoardList.addAll(it)
             if(noticeBoardList.size> 0){
@@ -117,6 +121,11 @@ class ActiveNoticeFragment : Fragment() ,View.OnClickListener {
 
     override fun onClick(p0: View?) {
 
+    }
+
+    fun showEmptyBox(){
+        binding!!.rlNoDataFound.visibility = View.VISIBLE
+        binding!!.rlActiveNotice.visibility = View.GONE
     }
 
 

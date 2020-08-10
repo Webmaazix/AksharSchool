@@ -22,9 +22,11 @@ import com.akshar.one.databinding.DialogSelectClassAndSectionBinding
 import com.akshar.one.model.*
 import com.akshar.one.swipelayout.util.Attributes
 import com.akshar.one.util.AndroidUtil
+import com.akshar.one.util.AppUtils
 import com.akshar.one.viewmodels.ViewModelFactory
 import com.akshar.one.viewmodels.examination.ExamViewModel
 import com.akshar.one.viewmodels.timetable.TimeTableViewModel
+import kotlinx.android.synthetic.main.main_toolbar.view.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -67,6 +69,9 @@ class ScheduledExamList : AppCompatActivity(),View.OnClickListener {
     }
 
     private fun initViews(){
+        binding!!.toolbar.imgMenu.visibility = View.GONE
+        binding!!.toolbar.imgBack.visibility = View.VISIBLE
+        binding!!.toolbar.txtToolbarTitle.text = currActivity.resources.getString(R.string.exam_schedule)
         currActivity.application?.let {
             timeTableViewModel = ViewModelProvider(
                 ViewModelStore(),
@@ -100,7 +105,7 @@ class ScheduledExamList : AppCompatActivity(),View.OnClickListener {
             currActivity,
             examinationList as ArrayList<ScheduleList>
         )
-        (examAdapter as ExaminationAdapter).mode = Attributes.Mode.Single
+//        (examAdapter as ExaminationAdapter).mode = Attributes.Mode.Single
         binding!!.rvExams.adapter = examAdapter
     }
 
@@ -108,6 +113,7 @@ class ScheduledExamList : AppCompatActivity(),View.OnClickListener {
         binding!!.rlClassSection!!.setOnClickListener(this)
         binding!!.rlExaminationSelection!!.setOnClickListener(this)
         binding!!.imgScheduleExam!!.setOnClickListener(this)
+        binding!!.toolbar.imgBack.setOnClickListener(this)
     }
 
     override fun onClick(p0: View?) {
@@ -120,6 +126,9 @@ class ScheduledExamList : AppCompatActivity(),View.OnClickListener {
             }
             R.id.imgScheduleExam ->{
                 ScheduleExamActivity.open(currActivity,null,null,null,null,null)
+            }
+            R.id.imgBack ->{
+                onBackPressed()
             }
 
         }
@@ -217,6 +226,7 @@ class ScheduledExamList : AppCompatActivity(),View.OnClickListener {
         testModel = null
         examViewModel.let {
             if (currActivity.let { ctx -> AndroidUtil.isInternetAvailable(ctx) }) {
+                dialog =  AppUtils.showProgress(currActivity)
                 it!!.getExaminations(examId,0)
             }
         }
@@ -224,30 +234,41 @@ class ScheduledExamList : AppCompatActivity(),View.OnClickListener {
 
         dialog!!.dismiss()
     }
+
     fun selectTest(model :TestListModel,data : ExaminationDropDownModel){
         examId = data.examId
         testId = model.testId
         binding!!.tvExamName.text = data.examName+" "+model.testName
         examDropDownModel  = data
         testModel = model
-
+        dialog!!.dismiss()
         examViewModel.let {
             if (currActivity.let { ctx -> AndroidUtil.isInternetAvailable(ctx) }) {
+                dialog =  AppUtils.showProgress(currActivity)
                 it!!.getExaminations(0,testId)
             }
         }
 
-        dialog!!.dismiss()
+
     }
 
 
     private fun observer() {
-        examViewModel?.getIsLoading()?.observe(this, androidx.lifecycle.Observer {
-            showProgressIndicator(it)
-        })
-
         examViewModel?.getErrorMutableLiveData()?.observe(this, androidx.lifecycle.Observer {
             it.let {
+                AppUtils.hideProgress(dialog!!)
+                examinationList.clear()
+                examAdapter.notifyDataSetChanged()
+                binding!!.rlNoDataFound.visibility = View.VISIBLE
+                binding!!.rvExams.visibility = View.GONE
+                AndroidUtil.showToast(currActivity, it.message, true)
+            }
+        })
+
+        examViewModel?.getExamDropDownErrorData()?.observe(this, androidx.lifecycle.Observer {
+            it.let {
+                AppUtils.hideProgress(dialog!!)
+                examDropDownList.clear()
                 AndroidUtil.showToast(currActivity, it.message, true)
             }
         })
@@ -267,14 +288,22 @@ class ScheduledExamList : AppCompatActivity(),View.OnClickListener {
             examDropDownList.clear()
             examDropDownList.addAll(it)
         })
+
         examViewModel?.getExamLiveData()?.observe(this, androidx.lifecycle.Observer {
+            AppUtils.hideProgress(dialog!!)
             examinationList.clear()
             examinationList.addAll(it.schedule as ArrayList<ScheduledExamList>)
             examAdapter.classDropDownModel = classDropDownModel
             examAdapter.sectionModel = sectionModel
             examAdapter.examDropDownModel = examDropDownModel
             examAdapter.testModel = testModel
-
+            if(examinationList.size> 0){
+                binding!!.rlNoDataFound.visibility = View.GONE
+                binding!!.rvExams.visibility = View.VISIBLE
+            }else{
+                binding!!.rlNoDataFound.visibility = View.VISIBLE
+                binding!!.rvExams.visibility = View.GONE
+            }
             examAdapter.notifyDataSetChanged()
         })
     }

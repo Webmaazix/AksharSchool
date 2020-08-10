@@ -36,6 +36,7 @@
                 android:layout_height="wrap_content">
 
                 <RelativeLayout
+                    android:id="@+id/rlAbsentReport"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_margin="@dimen/_15sdp"
@@ -50,31 +51,33 @@
                         android:layout_marginEnd="@dimen/_30sdp"
                         android:layout_marginTop="@dimen/_15sdp"
                         android:padding="@dimen/_3sdp"
-                        android:layout_marginBottom="@dimen/_15sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
                         android:layout_height="wrap_content">
 
                         <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="match_parent"
+                            android:layout_width="@dimen/_50sdp"
                             android:src="@drawable/message_desk"
                             android:layout_centerInParent="true"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="@dimen/_50sdp"/>
 
                     </RelativeLayout>
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="match_parent"
-                        android:textSize="@dimen/_12sp"
+                        android:textSize="@dimen/_11sp"
                         android:text="@string/absent_report"
                         android:textColor="@color/black"
                         android:layout_centerInParent="true"
                         android:textAlignment="center"
                         android:fontFamily="@font/opensans_regular"
-                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_7sdp"
                         android:layout_below="@+id/rlAbsentImage"
                         android:layout_height="wrap_content"/>
 
                 </RelativeLayout>
+
                 <RelativeLayout
+                    android:id="@+id/rlMarksReport"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_margin="@dimen/_15sdp"
@@ -89,26 +92,26 @@
                         android:layout_marginEnd="@dimen/_30sdp"
                         android:layout_marginTop="@dimen/_15sdp"
                         android:padding="@dimen/_3sdp"
-                        android:layout_marginBottom="@dimen/_15sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
                         android:layout_height="wrap_content">
 
                         <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="match_parent"
+                            android:layout_width="@dimen/_50sdp"
                             android:src="@drawable/marks"
                             android:layout_centerInParent="true"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="@dimen/_50sdp"/>
 
                     </RelativeLayout>
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="match_parent"
-                        android:textSize="@dimen/_12sp"
+                        android:textSize="@dimen/_11sp"
                         android:text="@string/marks_report"
                         android:textColor="@color/black"
                         android:layout_centerInParent="true"
                         android:textAlignment="center"
                         android:fontFamily="@font/opensans_regular"
-                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_7sdp"
                         android:layout_below="@+id/rlMarksImage"
                         android:layout_height="wrap_content"/>
 
@@ -123,180 +126,7 @@
                 android:layout_height="wrap_content">
 
                 <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_margin="@dimen/_15sdp"
-                    android:background="@drawable/yellow_nopadding_shape"
-                    android:layout_height="wrap_content">
-
-                    <RelativeLayout
-                        android:id="@+id/rlHomeWorkImage"
-                        android:layout_width="match_parent"
-                        android:background="@drawable/darkyellow_nopadding_shape"
-                        android:layout_marginStart="@dimen/_30sdp"
-                        android:layout_marginEnd="@dimen/_30sdp"
-                        android:layout_marginTop="@dimen/_15sdp"
-                        android:padding="@dimen/_3sdp"
-                        android:layout_marginBottom="@dimen/_15sdp"
-                        android:layout_height="wrap_content">
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="match_parent"
-                            android:src="@drawable/homework"
-                            android:layout_centerInParent="true"
-                            android:layout_height="wrap_content"/>
-
-                    </RelativeLayout>
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="match_parent"
-                        android:textSize="@dimen/_12sp"
-                        android:text="@string/homework"
-                        android:textColor="@color/black"
-                        android:layout_centerInParent="true"
-                        android:textAlignment="center"
-                        android:fontFamily="@font/opensans_regular"
-                        android:layout_marginBottom="@dimen/_10sdp"
-                        android:layout_below="@+id/rlHomeWorkImage"
-                        android:layout_height="wrap_content"/>
-
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_margin="@dimen/_10sdp"
-                    android:background="@drawable/seagreen_nopadding_shape"
-                    android:layout_height="wrap_content">
-
-                    <RelativeLayout
-                        android:id="@+id/rlFeeDueImage"
-                        android:layout_width="match_parent"
-                        android:background="@drawable/dark_seagreen_nopadding_shape"
-                        android:layout_marginStart="@dimen/_30sdp"
-                        android:layout_marginEnd="@dimen/_30sdp"
-                        android:layout_marginTop="@dimen/_15sdp"
-                        android:padding="@dimen/_3sdp"
-                        android:layout_marginBottom="@dimen/_15sdp"
-                        android:layout_height="wrap_content">
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="match_parent"
-                            android:src="@drawable/feedue"
-                            android:layout_centerInParent="true"
-                            android:layout_height="wrap_content"/>
-
-                    </RelativeLayout>
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="match_parent"
-                        android:textSize="@dimen/_12sp"
-                        android:text="Fee Reminder"
-                        android:textColor="@color/black"
-                        android:layout_centerInParent="true"
-                        android:textAlignment="center"
-                        android:fontFamily="@font/opensans_regular"
-                        android:layout_marginBottom="@dimen/_5sdp"
-                        android:layout_below="@+id/rlFeeDueImage"
-                        android:layout_height="wrap_content"/>
-
-                </RelativeLayout>
-
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/llRow3"
-                android:layout_below="@+id/llRow2"
-                android:layout_width="match_parent"
-                android:weightSum="2"
-                android:layout_height="wrap_content">
-
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_margin="@dimen/_15sdp"
-                    android:background="@drawable/green_nopadding_shape"
-                    android:layout_height="wrap_content">
-
-                    <RelativeLayout
-                        android:id="@+id/rlNotificationImage"
-                        android:layout_width="match_parent"
-                        android:background="@drawable/darkgreen_nopadding_shape"
-                        android:layout_marginStart="@dimen/_30sdp"
-                        android:layout_marginEnd="@dimen/_30sdp"
-                        android:layout_marginTop="@dimen/_15sdp"
-                        android:padding="@dimen/_3sdp"
-                        android:layout_marginBottom="@dimen/_15sdp"
-                        android:layout_height="wrap_content">
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="match_parent"
-                            android:src="@drawable/green_notification"
-                            android:layout_centerInParent="true"
-                            android:layout_height="wrap_content"/>
-
-                    </RelativeLayout>
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="match_parent"
-                        android:textSize="@dimen/_11sp"
-                        android:text="@string/general_n_notification"
-                        android:textColor="@color/black"
-                        android:layout_centerInParent="true"
-                        android:textAlignment="center"
-                        android:fontFamily="@font/opensans_regular"
-                        android:layout_marginBottom="@dimen/_5sdp"
-                        android:layout_below="@+id/rlNotificationImage"
-                        android:layout_height="wrap_content"/>
-
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_margin="@dimen/_12sdp"
-                    android:background="@drawable/light_blue_nopadding_shape"
-                    android:layout_height="wrap_content">
-
-                    <RelativeLayout
-                        android:id="@+id/rlEmployeeImage"
-                        android:layout_width="match_parent"
-                        android:background="@drawable/darkblue_nopadding_shape"
-                        android:layout_marginStart="@dimen/_30sdp"
-                        android:layout_marginEnd="@dimen/_30sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:padding="@dimen/_1sdp"
-                        android:layout_marginBottom="@dimen/_15sdp"
-                        android:layout_height="wrap_content">
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="match_parent"
-                            android:src="@drawable/blueemployee"
-                            android:layout_centerInParent="true"
-                            android:layout_height="wrap_content"/>
-
-                    </RelativeLayout>
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="match_parent"
-                        android:textSize="@dimen/_11sp"
-                        android:text="@string/employee_notification"
-                        android:textColor="@color/black"
-                        android:layout_centerInParent="true"
-                        android:textAlignment="center"
-                        android:fontFamily="@font/opensans_regular"
-                        android:layout_marginBottom="@dimen/_5sdp"
-                        android:layout_below="@+id/rlEmployeeImage"
-                        android:layout_height="wrap_content"/>
-
-                </RelativeLayout>
-
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/llRow4"
-                android:layout_below="@+id/llRow3"
-                android:layout_width="match_parent"
-                android:weightSum="2"
-                android:layout_height="wrap_content">
-
-                <RelativeLayout
+                    android:id="@+id/rlLateEntry"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_margin="@dimen/_15sdp"
@@ -311,27 +141,206 @@
                         android:layout_marginEnd="@dimen/_30sdp"
                         android:layout_marginTop="@dimen/_15sdp"
                         android:padding="@dimen/_3sdp"
-                        android:layout_marginBottom="@dimen/_15sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
                         android:layout_height="wrap_content">
 
                         <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="@dimen/_55sdp"
+                            android:layout_width="@dimen/_50sdp"
                             android:src="@drawable/time"
                             android:layout_centerInParent="true"
-                            android:layout_height="@dimen/_55sdp"/>
+                            android:layout_height="@dimen/_50sdp"/>
 
                     </RelativeLayout>
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="match_parent"
-                        android:textSize="@dimen/_12sp"
+                        android:textSize="@dimen/_11sp"
                         android:text="@string/late_entry"
                         android:textColor="@color/black"
                         android:layout_centerInParent="true"
                         android:textAlignment="center"
                         android:fontFamily="@font/opensans_regular"
-                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_7sdp"
                         android:layout_below="@+id/rlLateEntryImage"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/rlFeeReminder"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:background="@drawable/seagreen_nopadding_shape"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:id="@+id/rlFeeDueImage"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/dark_seagreen_nopadding_shape"
+                        android:layout_marginStart="@dimen/_30sdp"
+                        android:layout_marginEnd="@dimen/_30sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:padding="@dimen/_3sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="@dimen/_50sdp"
+                            android:src="@drawable/feedue"
+                            android:layout_centerInParent="true"
+                            android:layout_height="@dimen/_50sdp"/>
+
+                    </RelativeLayout>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:textSize="@dimen/_11sp"
+                        android:text="Fee Reminder"
+                        android:textColor="@color/black"
+                        android:layout_centerInParent="true"
+                        android:textAlignment="center"
+                        android:fontFamily="@font/opensans_regular"
+                        android:layout_marginBottom="@dimen/_7sdp"
+                        android:layout_below="@+id/rlFeeDueImage"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/llRow3"
+                android:layout_below="@+id/llRow2"
+                android:layout_width="match_parent"
+                android:weightSum="2"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/rlGeneralNotification"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="@dimen/_15sdp"
+                    android:background="@drawable/green_nopadding_shape"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:id="@+id/rlNotificationImage"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/darkgreen_nopadding_shape"
+                        android:layout_marginStart="@dimen/_30sdp"
+                        android:layout_marginEnd="@dimen/_30sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:padding="@dimen/_3sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="@dimen/_30sdp"
+                            android:src="@drawable/green_notification"
+                            android:layout_centerInParent="true"
+                            android:layout_height="@dimen/_50sdp"/>
+
+                    </RelativeLayout>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:textSize="@dimen/_10sp"
+                        android:text="@string/general_n_notification"
+                        android:textColor="@color/black"
+                        android:layout_centerInParent="true"
+                        android:textAlignment="center"
+                        android:fontFamily="@font/opensans_regular"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:layout_below="@+id/rlNotificationImage"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/rlEmployeeNotification"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="@dimen/_12sdp"
+                    android:background="@drawable/light_blue_nopadding_shape"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:id="@+id/rlEmployeeImage"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/darkblue_nopadding_shape"
+                        android:layout_marginStart="@dimen/_30sdp"
+                        android:layout_marginEnd="@dimen/_30sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:padding="@dimen/_1sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="@dimen/_50sdp"
+                            android:src="@drawable/blueemployee"
+                            android:layout_centerInParent="true"
+                            android:layout_height="@dimen/_50sdp"/>
+
+                    </RelativeLayout>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:textSize="@dimen/_10sp"
+                        android:text="@string/employee_notification"
+                        android:textColor="@color/black"
+                        android:layout_centerInParent="true"
+                        android:textAlignment="center"
+                        android:fontFamily="@font/opensans_regular"
+                        android:layout_marginBottom="@dimen/_7sdp"
+                        android:layout_below="@+id/rlEmployeeImage"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/llRow4"
+                android:layout_below="@+id/llRow3"
+                android:layout_width="match_parent"
+                android:weightSum="2"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/rlStudent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="@dimen/_15sdp"
+                    android:background="@drawable/primarygreen_nopadding_shape"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:id="@+id/rlStudentNotification"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/primarydarkgreen_nopadding_shape"
+                        android:layout_marginStart="@dimen/_30sdp"
+                        android:layout_marginEnd="@dimen/_30sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:padding="@dimen/_1sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="@dimen/_50sdp"
+                            android:tint="#0FA9B1"
+                            android:src="@drawable/blueemployee"
+                            android:layout_centerInParent="true"
+                            android:layout_height="@dimen/_50sdp"/>
+
+                    </RelativeLayout>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:textSize="@dimen/_10sp"
+                        android:text="Student \n Notification"
+                        android:textColor="@color/black"
+                        android:layout_centerInParent="true"
+                        android:textAlignment="center"
+                        android:fontFamily="@font/opensans_regular"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:layout_below="@+id/rlStudentNotification"
                         android:layout_height="wrap_content"/>
 
                 </RelativeLayout>

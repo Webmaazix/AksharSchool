@@ -10,6 +10,7 @@
         android:textSize="@dimen/_11sp"
         android:fontFamily="@font/opensans_bold"
         android:padding="@dimen/_7sdp"
+        android:textAlignment="center"
         android:layout_height="wrap_content"/>
 
 <!--    <androidx.appcompat.widget.AppCompatImageView-->

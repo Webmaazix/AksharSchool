@@ -181,7 +181,12 @@ class EditStudentProfileActivity : AppCompatActivity(), View.OnClickListener{
                     if(studentModel!!.studentContact.address.postalcode!= null){
                         binding!!.etPostal.setText(studentModel!!.studentContact.address.postalcode)
                     }
-                    state = studentModel!!.studentContact.address.state!!
+                    if(studentModel!!.studentContact.address.state!= null){
+                        state = studentModel!!.studentContact.address.state!!
+                    }else{
+                        state = ""
+                    }
+
                 }
 
             }
@@ -210,7 +215,7 @@ class EditStudentProfileActivity : AppCompatActivity(), View.OnClickListener{
             ).get(StudentViewModel::class.java)
         }
 
-        currActivity?.application?.let {
+        currActivity.application?.let {
             timeTableViewModel = ViewModelProvider(
                 ViewModelStore(),
                 ViewModelFactory(it)
@@ -466,7 +471,7 @@ class EditStudentProfileActivity : AppCompatActivity(), View.OnClickListener{
          model  = StudentListModel()
         model!!.studentProfileId = studentModel?.studentProfileId!!
         if(classRoomId == 0){
-            model!!.classroomId = studentModel?.classroomId!!
+            model!!.classroomId = studentModel?.classroomId
         }else{
             model!!.classroomId = classRoomId
         }

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="position"
+            type="java.lang.Integer" />
+
+        <variable
+            name="attendanceClassRoomViewModel"
+            type="com.akshar.one.viewmodels.attendance.AttendanceClassRoomViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/main_toolbar"/>
+
+        <RelativeLayout
+            android:id="@+id/rlSelection"
+            android:layout_below="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/rlClassSection"
+                android:layout_width="match_parent"
+                android:background="@drawable/grey_round_shape"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvClassSectionName"
+                    android:layout_width="match_parent"
+                    android:text="@string/select_class_section"
+                    android:padding="@dimen/_7sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11sp"
+                    android:fontFamily="@font/opensans_bold"
+                    android:layout_height="wrap_content"/>
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/_24sdp"
+                    android:layout_height="@dimen/_24sdp"
+                    android:src="@drawable/dropdown"
+                    android:layout_centerInParent="true"
+                    android:layout_alignParentEnd="true"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rlExaminationSelection"
+                android:layout_below="@+id/rlClassSection"
+                android:layout_width="match_parent"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:background="@drawable/grey_round_shape"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvExamName"
+                    android:layout_width="match_parent"
+                    android:text="@string/select_exam_amp_test_name"
+                    android:padding="@dimen/_7sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11sp"
+                    android:fontFamily="@font/opensans_bold"
+                    android:layout_height="wrap_content"/>
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/_24sdp"
+                    android:layout_height="@dimen/_24sdp"
+                    android:src="@drawable/dropdown"
+                    android:layout_centerInParent="true"
+                    android:layout_alignParentEnd="true"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="@color/lightish_grey"
+            android:layout_below="@+id/rlSelection"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/rlStudentList"
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:layout_below="@+id/rlDate"
+                android:layout_marginTop="@dimen/_15sdp"
+
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvSerialNumber"
+                    android:layout_width="wrap_content"
+                    android:textSize="@dimen/_11sp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:text="@string/showing_all_students"
+                    android:fontFamily="@font/opensans_bold"
+                    android:padding="@dimen/_7sdp"
+                    android:textColor="@color/dark_blue"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/cbSelectAllStudents"
+                    android:layout_width="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="@string/select_all"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/opensans_bold"
+                    android:layout_marginEnd="@dimen/_10sp"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvStudents"
+                    android:layout_width="match_parent"
+                    android:layout_below="@+id/tvSerialNumber"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:layout_height="wrap_content"/>
+
+                <RelativeLayout
+                    android:id="@+id/rlNoDataFound"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgEmpty"
+                        android:layout_width="@dimen/_100sdp"
+                        android:src="@drawable/emptynotice"
+                        android:layout_centerInParent="true"
+                        android:layout_centerVertical="true"
+                        android:layout_height="@dimen/_100sdp"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvEmptyText"
+                        android:layout_below="@+id/imgEmpty"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/opensans_regular"
+                        android:text="@string/no_students_found"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/_11sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSendReport"
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:padding="@dimen/_7sdp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:text="@string/send_marks_report"
+            android:textSize="@dimen/_11sp"
+            android:background="@color/dark_blue"
+            android:textAlignment="center"
+            android:fontFamily="@font/opensans_regular"
+            android:layout_height="wrap_content"/>
+
+
+
+    </RelativeLayout>
+
+</layout>

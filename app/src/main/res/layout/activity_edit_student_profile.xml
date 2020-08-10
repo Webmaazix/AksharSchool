@@ -16,6 +16,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:background="@color/lightish_grey"
         android:layout_height="match_parent">
 
         <include
@@ -98,7 +99,7 @@
                                 android:fontFamily="@font/opensans_regular"
                                 android:padding="@dimen/_7sdp"
                                 android:layout_below="@+id/tvFirstNameLabel"
-                                android:background="@drawable/grey_outline_shape"
+                                android:background="@drawable/grey_stroke_shape"
                                 android:layout_marginTop="@dimen/_10sdp"/>
 
                         </RelativeLayout>
@@ -129,7 +130,7 @@
                                 android:fontFamily="@font/opensans_regular"
                                 android:padding="@dimen/_7sdp"
                                 android:layout_below="@+id/tvLastNameLabel"
-                                android:background="@drawable/grey_outline_shape"
+                                android:background="@drawable/grey_stroke_shape"
                                 android:layout_marginTop="@dimen/_10sdp"/>
 
                         </RelativeLayout>
@@ -180,7 +181,8 @@
                                     android:textSize="@dimen/_10sp"
                                     android:textColor="@color/black"
                                     android:layout_weight="1"
-                                    android:fontFamily="@font/opensans_bold"
+                                    android:fontFamily="@font/opensans_regular"
+                                    android:textStyle="bold"
                                     android:layout_height="wrap_content"/>
                                 <RadioButton
                                     android:id="@+id/rbFemale"
@@ -189,7 +191,8 @@
                                     android:textSize="@dimen/_10sp"
                                     android:textColor="@color/black"
                                     android:layout_weight="1"
-                                    android:fontFamily="@font/opensans_bold"
+                                    android:fontFamily="@font/opensans_regular"
+                                    android:textStyle="bold"
                                     android:layout_height="wrap_content"/>
                             </RadioGroup>
 
@@ -216,7 +219,7 @@
                             <RelativeLayout
                                 android:id="@+id/rlBloodGroupEdit"
                                 android:layout_width="wrap_content"
-                                android:background="@drawable/grey_outline_shape"
+                                android:background="@drawable/grey_stroke_shape"
                                 android:layout_toEndOf="@+id/tvBloodGroupLable"
                                 android:layout_marginStart="@dimen/_10sdp"
                                 android:layout_height="wrap_content">
@@ -269,7 +272,7 @@
                                 android:fontFamily="@font/opensans_regular"
                                 android:padding="@dimen/_7sdp"
                                 android:layout_below="@+id/tvAdmissionNumberLabel"
-                                android:background="@drawable/grey_outline_shape"
+                                android:background="@drawable/grey_stroke_shape"
                                 android:layout_marginTop="@dimen/_10sdp"/>
 
                         </RelativeLayout>
@@ -300,7 +303,7 @@
                                 android:fontFamily="@font/opensans_regular"
                                 android:padding="@dimen/_7sdp"
                                 android:layout_below="@+id/tvRollNumberLabel"
-                                android:background="@drawable/grey_outline_shape"
+                                android:background="@drawable/grey_stroke_shape"
                                 android:layout_marginTop="@dimen/_10sdp"/>
 
                         </RelativeLayout>
@@ -325,7 +328,7 @@
                             <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_below="@+id/tvClassSectionLabel"
-                                android:background="@drawable/grey_outline_shape"
+                                android:background="@drawable/grey_stroke_shape"
                                 android:layout_marginTop="@dimen/_10sdp"
                                 android:layout_height="wrap_content">
 
@@ -374,13 +377,13 @@
                                 android:id="@+id/etEmailAddress"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="@string/email_address"
+                                android:hint="@string/email_address_"
                                 android:textSize="@dimen/_11sp"
                                 android:fontFamily="@font/opensans_regular"
                                 android:padding="@dimen/_7sdp"
                                 android:inputType="textEmailAddress"
                                 android:layout_below="@+id/tvEmailLabel"
-                                android:background="@drawable/grey_outline_shape"
+                                android:background="@drawable/grey_stroke_shape"
                                 android:layout_marginTop="@dimen/_10sdp"/>
 
                         </RelativeLayout>
@@ -456,7 +459,8 @@
                         android:layout_width="match_parent"
                         android:textColor="@color/dark_black"
                         android:text="@string/parent_details"
-                        android:fontFamily="@font/opensans_bold"
+                        android:fontFamily="@font/opensans_regular"
+                        android:textStyle="bold"
                         android:textSize="@dimen/_10sp"
                         android:textAlignment="viewStart"
                         android:layout_height="wrap_content"/>
@@ -488,7 +492,7 @@
                             android:fontFamily="@font/opensans_regular"
                             android:padding="@dimen/_7sdp"
                             android:layout_below="@+id/tvParentNameLabel"
-                            android:background="@drawable/grey_outline_shape"
+                            android:background="@drawable/grey_stroke_shape"
                             android:layout_marginTop="@dimen/_10sdp"/>
 
                     </RelativeLayout>
@@ -519,7 +523,7 @@
                             android:fontFamily="@font/opensans_regular"
                             android:padding="@dimen/_7sdp"
                             android:layout_below="@+id/tvRelationShipLabel"
-                            android:background="@drawable/grey_outline_shape"
+                            android:background="@drawable/grey_stroke_shape"
                             android:layout_marginTop="@dimen/_10sdp"/>
 
                     </RelativeLayout>
@@ -551,7 +555,7 @@
                             android:fontFamily="@font/opensans_regular"
                             android:padding="@dimen/_7sdp"
                             android:layout_below="@+id/tvMobileNumberLabel"
-                            android:background="@drawable/grey_outline_shape"
+                            android:background="@drawable/grey_stroke_shape"
                             android:layout_marginTop="@dimen/_10sdp"/>
 
                     </RelativeLayout>
@@ -574,7 +578,8 @@
                         android:layout_width="match_parent"
                         android:textColor="@color/dark_black"
                         android:text="@string/address"
-                        android:fontFamily="@font/opensans_bold"
+                        android:fontFamily="@font/opensans_regular"
+                        android:textStyle="bold"
                         android:textSize="@dimen/_10sp"
                         android:textAlignment="viewStart"
                         android:layout_height="wrap_content"/>
@@ -606,7 +611,7 @@
                             android:fontFamily="@font/opensans_regular"
                             android:padding="@dimen/_7sdp"
                             android:layout_below="@+id/tvHouseLabel"
-                            android:background="@drawable/grey_outline_shape"
+                            android:background="@drawable/grey_stroke_shape"
                             android:layout_marginTop="@dimen/_10sdp"/>
 
                     </RelativeLayout>
@@ -637,7 +642,7 @@
                             android:fontFamily="@font/opensans_regular"
                             android:padding="@dimen/_7sdp"
                             android:layout_below="@+id/tvStreetLabel"
-                            android:background="@drawable/grey_outline_shape"
+                            android:background="@drawable/grey_stroke_shape"
                             android:layout_marginTop="@dimen/_10sdp"/>
 
                     </RelativeLayout>
@@ -668,7 +673,7 @@
                             android:fontFamily="@font/opensans_regular"
                             android:padding="@dimen/_7sdp"
                             android:layout_below="@+id/tvCityLabel"
-                            android:background="@drawable/grey_outline_shape"
+                            android:background="@drawable/grey_stroke_shape"
                             android:layout_marginTop="@dimen/_10sdp"/>
 
                     </RelativeLayout>
@@ -699,7 +704,7 @@
                             android:fontFamily="@font/opensans_regular"
                             android:padding="@dimen/_7sdp"
                             android:layout_below="@+id/tvDistrictLabel"
-                            android:background="@drawable/grey_outline_shape"
+                            android:background="@drawable/grey_stroke_shape"
                             android:layout_marginTop="@dimen/_10sdp"/>
 
                     </RelativeLayout>
@@ -725,7 +730,7 @@
                             android:layout_width="match_parent"
                             android:layout_marginTop="@dimen/_10sdp"
                             android:layout_below="@+id/tvStateLabel"
-                            android:background="@drawable/grey_outline_shape"
+                            android:background="@drawable/grey_stroke_shape"
                             android:layout_height="wrap_content">
 
                             <androidx.appcompat.widget.AppCompatSpinner
@@ -768,7 +773,7 @@
                             android:fontFamily="@font/opensans_regular"
                             android:padding="@dimen/_7sdp"
                             android:layout_below="@+id/tvPostalLabel"
-                            android:background="@drawable/grey_outline_shape"
+                            android:background="@drawable/grey_stroke_shape"
                             android:layout_marginTop="@dimen/_10sdp"/>
 
                     </RelativeLayout>

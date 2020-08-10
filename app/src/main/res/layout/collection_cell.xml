@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="position"
+            type="java.lang.Integer" />
+
+        <variable
+            name="attendanceClassRoomViewModel"
+            type="com.akshar.one.viewmodels.attendance.AttendanceClassRoomViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:background="@color/white"
+        android:padding="@dimen/_5sdp"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/rlDueCollection"
+            android:layout_width="wrap_content"
+            android:visibility="visible"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/tvYellowColorCollection"
+                android:layout_width="@dimen/_15sp"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:background="@drawable/bluesquare"
+                android:layout_height="@dimen/_15sp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvDueCollection"
+                android:layout_width="wrap_content"
+                android:layout_toEndOf="@+id/tvYellowColorCollection"
+                android:textSize="@dimen/_9sp"
+                android:text="@string/tution_fee"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:textColor="@color/black"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:fontFamily="@font/opensans_regular"
+                android:layout_height="wrap_content"/>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvDueAmountCollection"
+                android:layout_width="match_parent"
+                android:layout_alignParentEnd="true"
+                android:textSize="@dimen/_9sp"
+                android:text="RS. 0"
+                android:textAlignment="viewEnd"
+                android:textColor="@color/black"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:fontFamily="@font/opensans_bold"
+                android:layout_height="wrap_content"/>
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+
+</layout>

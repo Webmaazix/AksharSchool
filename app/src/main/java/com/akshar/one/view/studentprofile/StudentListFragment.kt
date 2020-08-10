@@ -24,6 +24,7 @@ import com.akshar.one.model.ClassDropDownModel
 import com.akshar.one.model.SectionList
 import com.akshar.one.model.StudentListModel
 import com.akshar.one.util.AndroidUtil
+import com.akshar.one.util.AppUtils
 import com.akshar.one.view.activity.MainActivity
 import com.akshar.one.viewmodels.ViewModelFactory
 import com.akshar.one.viewmodels.student.StudentViewModel
@@ -101,6 +102,7 @@ class StudentListFragment : Fragment(),View.OnClickListener {
                 ViewModelFactory(it)
             ).get(StudentViewModel::class.java)
         }
+
         timeTableViewModel?.let {
             if (context?.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true) {
                 it.getClassRoomDropdown()
@@ -117,7 +119,7 @@ class StudentListFragment : Fragment(),View.OnClickListener {
         fragmentStudentListBinding!!.rvStudents.layoutManager =
             LinearLayoutManager(currActivity, LinearLayoutManager.VERTICAL, false)
         studentadapter =
-            StudentListAdapter(currActivity, studentList)
+            StudentListAdapter(currActivity, studentList,this)
         fragmentStudentListBinding!!.rvStudents.adapter = studentadapter
     }
 
@@ -176,7 +178,7 @@ class StudentListFragment : Fragment(),View.OnClickListener {
         dialog!!.show()
     }
 
-    fun sectionClicked(data: ClassDropDownModel, model: SectionList) {
+    fun sectionClicked(data : ClassDropDownModel, model : SectionList) {
         classRoomId = model.classroomId
         classDropDownModel = data
         sectionModel = model
@@ -184,14 +186,14 @@ class StudentListFragment : Fragment(),View.OnClickListener {
         val className = data.courseName + " " + model.classroomName
         fragmentStudentListBinding!!.tvClassSectionName.text = className
         fragmentStudentListBinding!!.imgCreateStudent.visibility = View.VISIBLE
+        dialog!!.dismiss()
+
         studentViewModel.let {
             if (context?.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true) {
+                showProgressBar()
                 it!!.getStudentList(classRoomId)
             }
         }
-
-
-        dialog!!.dismiss()
     }
 
     private fun observer() {
@@ -201,6 +203,7 @@ class StudentListFragment : Fragment(),View.OnClickListener {
 
         studentViewModel?.getErrorMutableLiveData()?.observe(this, Observer {
             it.let {
+                hideProgressBar()
                 AndroidUtil.showToast(currActivity, it.message, true)
             }
         })
@@ -217,6 +220,7 @@ class StudentListFragment : Fragment(),View.OnClickListener {
         })
 
         studentViewModel?.getStudentListLiveData()?.observe(this, Observer {
+            hideProgressBar()
             studentList.clear()
             studentList.addAll(it)
             if (studentList.size > 0) {
@@ -236,6 +240,14 @@ class StudentListFragment : Fragment(),View.OnClickListener {
 
     private fun showProgressIndicator(isLoading: Boolean?) {
         linProgressIndicator.visibility = if (isLoading == true) View.VISIBLE else View.GONE
+    }
+
+    fun showProgressBar(){
+        dialog =  AppUtils.showProgress(currActivity)
+    }
+
+    fun hideProgressBar(){
+        AppUtils.hideProgress(dialog!!)
     }
 
 }

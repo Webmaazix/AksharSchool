@@ -54,7 +54,7 @@
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/settings"
-            android:title="@string/settings" />
+            android:title="@string/setup_pin" />
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/logout"

@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
 
 android {
     compileSdkVersion config.compile
@@ -91,6 +93,9 @@ dependencies {
     // This dude gave a shoutout to you (daimajia) on his github page:
     implementation 'jp.wasabeef:recyclerview-animators:1.0.3@aar'
 
+    //firebase
+    implementation 'com.google.firebase:firebase-analytics:17.2.2'
+    implementation 'com.google.firebase:firebase-crashlytics:17.1.1'
 
 
 }

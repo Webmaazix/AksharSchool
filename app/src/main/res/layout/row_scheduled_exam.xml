@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:swipe="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
@@ -15,108 +15,126 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_margin="@dimen/_10sp"
+        android:layout_marginStart="@dimen/_15sdp"
         android:layout_height="wrap_content">
 
 
 
-        <com.akshar.one.swipelayout.SwipeLayout xmlns:swipe="http://schemas.android.com/apk/res-auto"
+        <com.akshar.one.view.swipeutility.SwipeRevealLayout
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/swipe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            swipe:leftEdgeSwipeOffset="0dp"
-            swipe:rightEdgeSwipeOffset="0dp">
+            android:padding="10dp"
+            app:dragEdge="right"
+            app:mode="same_level">
 
             <RelativeLayout
                 android:id="@+id/rlBackground"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:visibility="visible"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/blue_left_square_shape"
                 android:layout_height="wrap_content">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:weightSum="2"
-                    android:layout_height="wrap_content">
-
-
-                    <RelativeLayout
-                        android:id="@+id/rlEdit"
-                        android:layout_width="match_parent"
-                        android:background="@drawable/green_right_square"
-                        android:padding="@dimen/_20sdp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content">
-
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/imgEdit"
-                            android:layout_width="@dimen/_20sdp"
-                            android:src="@drawable/edit_clear"
-                            android:tint="@color/white"
-                            android:layout_toStartOf="@+id/tvEdit"
-                            android:layout_marginEnd="@dimen/_7sdp"
-                            android:layout_centerVertical="true"
-                            android:layout_height="@dimen/_20sdp"/>
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tvEdit"
-                            android:layout_width="wrap_content"
-                            android:text="@string/edit"
-                            android:textSize="@dimen/_11sp"
-                            android:layout_alignParentEnd="true"
-                            android:textColor="@color/white"
-                            android:fontFamily="@font/opensans_regular"
-                            android:textStyle="bold"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:layout_centerVertical="true"
-                            android:layout_height="wrap_content"/>
-
-                    </RelativeLayout>
-
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:background="@drawable/red_left_square"
-                        android:padding="@dimen/_20sdp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content">
-
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/imgDelete"
-                            android:layout_width="@dimen/_20sdp"
-                            android:src="@drawable/delete"
-                            android:layout_toStartOf="@+id/tvDelete"
-                            android:layout_marginEnd="@dimen/_7sdp"
-                            android:layout_centerVertical="true"
-                            android:layout_height="@dimen/_20sdp"/>
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tvDelete"
-                            android:layout_width="wrap_content"
-                            android:text="@string/delete"
-                            android:textSize="@dimen/_11sp"
-                            android:layout_alignParentEnd="true"
-                            android:textColor="@color/white"
-                            android:fontFamily="@font/opensans_regular"
-                            android:textStyle="bold"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:layout_centerVertical="true"
-                            android:layout_height="wrap_content"/>
-
-                    </RelativeLayout>
-                </LinearLayout>
-
-
-            </RelativeLayout>
+                <!--                <LinearLayout-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:weightSum="2"-->
+                <!--                    android:layout_marginTop="@dimen/_3sdp"-->
+                <!--                    android:padding="@dimen/_30sdp"-->
+                <!--                    android:background="@drawable/blue_radious_10_shape"-->
+                <!--                    android:layout_height="wrap_content">-->
 
 
                 <RelativeLayout
+                    android:id="@+id/rlEdit"
+                    android:layout_width="@dimen/_90sdp"
+                    android:visibility="visible"
+                    android:padding="@dimen/_7sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_height="match_parent">
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgEditNotice"
+                        android:layout_width="@dimen/_15sdp"
+                        android:src="@drawable/edit_clear"
+                        android:tint="@color/white"
+                        android:layout_toStartOf="@+id/tvEdit"
+                        android:layout_marginEnd="@dimen/_7sdp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:padding="@dimen/_3sdp"
+                        android:background="@drawable/white_circle"
+                        android:layout_height="@dimen/_15sdp"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvEdit"
+                        android:layout_width="wrap_content"
+                        android:text="@string/edit"
+                        android:textSize="@dimen/_10sp"
+                        android:textColor="@color/white"
+                        android:layout_centerHorizontal="true"
+                        android:fontFamily="@font/opensans_regular"
+                        android:layout_centerVertical="true"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/vvbg"
+                    android:layout_width="@dimen/_100sdp"
+                    android:background="@color/dim_white"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_below="@+id/rlEditNotice"
+                    android:layout_height="@dimen/_1sdp"/>
+
+
+                <RelativeLayout
+                    android:id="@+id/rlDelete"
+                    android:layout_width="@dimen/_90sdp"
+                    android:layout_below="@+id/vvbg"
+                    android:padding="@dimen/_7sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_3sdp"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:layout_height="match_parent">
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgDelete"
+                        android:layout_width="@dimen/_15sdp"
+                        android:src="@drawable/delete"
+                        android:layout_toStartOf="@+id/tvDelete"
+                        android:layout_marginEnd="@dimen/_7sdp"
+                        android:padding="@dimen/_3sdp"
+                        android:background="@drawable/white_circle"
+                        android:layout_height="@dimen/_15sdp"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvDelete"
+                        android:layout_width="wrap_content"
+                        android:text="@string/delete"
+                        android:textSize="@dimen/_10sp"
+                        android:layout_centerHorizontal="true"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/opensans_regular"
+                        android:layout_centerVertical="true"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+
+                <!--                </LinearLayout>-->
+
+            </RelativeLayout>
+
+                <RelativeLayout
                     android:id="@+id/rlForground"
+                    android:background="@drawable/white_square_shape"
                     android:layout_width="match_parent"
                     android:visibility="visible"
-                    android:elevation="@dimen/_2sdp"
-                    android:background="@drawable/white_square_shape"
+                    android:layout_gravity="center"
                     android:layout_height="wrap_content">
 
 
@@ -167,7 +185,7 @@
 
                 </RelativeLayout>
 
-        </com.akshar.one.swipelayout.SwipeLayout>
+        </com.akshar.one.view.swipeutility.SwipeRevealLayout>
 
     </RelativeLayout>
 

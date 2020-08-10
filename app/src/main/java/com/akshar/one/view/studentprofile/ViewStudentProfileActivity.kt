@@ -49,12 +49,12 @@ class ViewStudentProfileActivity : AppCompatActivity(), View.OnClickListener {
     private fun setData(position: Int){
 
         if(right){
-            val RightSwipe = AnimationUtils.loadAnimation(this@ViewStudentProfileActivity, R.anim.right_slide)
+            val RightSwipe = AnimationUtils.loadAnimation(this@ViewStudentProfileActivity, R.anim.left_slide)
             binding!!.rlStudentInfo.animation = RightSwipe
             binding!!.rlParentDetails.animation = RightSwipe
             binding!!.rlAddress.animation = RightSwipe
         }else if(!right){
-            val leftSwipe = AnimationUtils.loadAnimation(this@ViewStudentProfileActivity, R.anim.left_slide)
+            val leftSwipe = AnimationUtils.loadAnimation(this@ViewStudentProfileActivity, R.anim.right_slide)
             binding!!.rlStudentInfo.animation = leftSwipe
             binding!!.rlParentDetails.animation = leftSwipe
             binding!!.rlAddress.animation = leftSwipe

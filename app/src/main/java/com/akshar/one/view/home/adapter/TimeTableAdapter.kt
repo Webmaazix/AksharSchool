@@ -8,12 +8,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.akshar.one.R
 import com.akshar.one.databinding.HomeworkCellBinding
+import com.akshar.one.model.PeriodTimeTable
 import com.akshar.one.model.TimeTableModel
 import com.akshar.one.view.activity.MainActivity
 
 import java.util.ArrayList
 
-class TimeTableAdapter(private val mContext: Context, private val timeTableList: ArrayList<TimeTableModel>?) :
+class TimeTableAdapter(private val mContext: Context, private val timeTableList: ArrayList<PeriodTimeTable>?) :
     RecyclerView.Adapter<TimeTableAdapter.ViewHolder>() {
     private var screenWidth = 0
 
@@ -43,55 +44,120 @@ class TimeTableAdapter(private val mContext: Context, private val timeTableList:
         lp.width = itemWidth.toInt()
         holder.binding.rlMain.layoutParams = lp
 
-        val className = timeTableModel!!.classroom?.courseName +" "+timeTableModel.classroom?.classroomName
-        holder.binding.tvTimeLine.text = className
-        holder.binding.tvSubjectName.text = timeTableModel.subjectName
-        val time = timeTableModel.startTime +" - "+timeTableModel.endTime
+        if(timeTableModel?.timetable!= null){
+            if(timeTableModel.timetable.size == 1){
+                val model = timeTableModel.timetable.get(0)
+                val className = model.classroom.courseName +" "+model.classroom.classroomName
+                holder.binding.tvTimeLine.text = className
+                holder.binding.tvSubjectName.text = model.subjectName
+                val time = model.startTime +" - "+model.endTime
 
-        if(timeTableModel.subjectName.equals("Telugu",true)){
-            holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_telugu)
-            holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.telugu_blue))
-        }else if(timeTableModel.subjectName.equals("Hindi",true)){
-            holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_hindi)
-            holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.hindi_orange))
-        }else if(timeTableModel.subjectName.equals("English",true)){
-            holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_english)
-            holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.english_pink))
-        }else if(timeTableModel.subjectName.equals("Mathematics",true)){
-            holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_math)
-            holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.math_purple))
-        }else if(timeTableModel.subjectName.equals("Science",true)){
-            holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_science)
-            holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.science_blue))
-        }else if(timeTableModel.subjectName.equals("Environmental Science",true)){
-            holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_environmentalstudy)
-            holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.environment_green))
-        }else if(timeTableModel.subjectName.equals("Biology",true)){
-            holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_bio)
-            holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.bio_purple))
-        }else if(timeTableModel.subjectName.equals("Physics",true)){
-            holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_physics)
-            holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.physics_pink))
-        }else if(timeTableModel.subjectName.equals("Social Studies",true)){
-            holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_socialstudy)
-            holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.socialstudy_purple))
-        }else if(timeTableModel.subjectName.equals("Civics",true)){
-            holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_civics)
-            holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.civics_green))
-        }else if(timeTableModel.subjectName.equals("Commerce",true)){
-            holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_commerce)
-            holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.commerce_peach))
-        }else if(timeTableModel.subjectName.equals("Economics",true)){
-            holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_economics)
-            holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.economics_purple))
-        }else if(timeTableModel.subjectName.equals("Chemistry",true)){
-            holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_chemistry)
-            holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.chemistry_blue))
-        }else{
-            holder.binding.cvMain.setBackgroundResource(R.drawable.undefined_subject_green)
-            holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.undefined_green))
+                if(model.subjectName != null){
+                    if(model.subjectName.contains("Telugu",true)){
+                        holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_telugu)
+                        holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.telugu_blue))
+                    }else if(model.subjectName.contains("Hindi",true)){
+                        holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_hindi)
+                        holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.hindi_orange))
+                    }else if(model.subjectName.contains("English",true)){
+                        holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_english)
+                        holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.english_pink))
+                    }else if(model.subjectName.contains("Mathematics",true)){
+                        holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_math)
+                        holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.math_purple))
+                    }else if(model.subjectName.contains("Science",true)){
+                        holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_science)
+                        holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.science_blue))
+                    }else if(model.subjectName.contains("Environmental Science",true)){
+                        holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_environmentalstudy)
+                        holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.environment_green))
+                    }else if(model.subjectName.contains("Biology",true)){
+                        holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_bio)
+                        holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.bio_purple))
+                    }else if(model.subjectName.contains("Physics",true)){
+                        holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_physics)
+                        holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.physics_pink))
+                    }else if(model.subjectName.contains("Social Studies",true)){
+                        holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_socialstudy)
+                        holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.socialstudy_purple))
+                    }else if(model.subjectName.contains("Civics",true)){
+                        holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_civics)
+                        holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.civics_green))
+                    }else if(model.subjectName.contains("Commerce",true)){
+                        holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_commerce)
+                        holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.commerce_peach))
+                    }else if(model.subjectName.contains("Economics",true)){
+                        holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_economics)
+                        holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.economics_purple))
+                    }else if(model.subjectName.contains("Chemistry",true)){
+                        holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_chemistry)
+                        holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.chemistry_blue))
+                    }else{
+                        holder.binding.cvMain.setBackgroundResource(R.drawable.undefined_subject_green)
+                        holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.undefined_green))
+                    }
+
+                }
+                holder.binding.tvTime.text = time
+            }else{
+                val model = timeTableModel.timetable.get(0)
+                val className = model.classroom.courseName +" "+model.classroom.classroomName
+                holder.binding.tvTimeLine.text = className
+                holder.binding.tvSubjectName.text = model.subjectName
+                val time = model.startTime +" - "+model.endTime
+
+                if(model.subjectName != null){
+                    if(model.subjectName.contains("Telugu",true)){
+                        holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_telugu)
+                        holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.telugu_blue))
+                    }else if(model.subjectName.contains("Hindi",true)){
+                        holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_hindi)
+                        holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.hindi_orange))
+                    }else if(model.subjectName.contains("English",true)){
+                        holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_english)
+                        holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.english_pink))
+                    }else if(model.subjectName.contains("Mathematics",true)){
+                        holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_math)
+                        holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.math_purple))
+                    }else if(model.subjectName.contains("Science",true)){
+                        holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_science)
+                        holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.science_blue))
+                    }else if(model.subjectName.contains("Environmental Science",true)){
+                        holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_environmentalstudy)
+                        holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.environment_green))
+                    }else if(model.subjectName.contains("Biology",true)){
+                        holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_bio)
+                        holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.bio_purple))
+                    }else if(model.subjectName.contains("Physics",true)){
+                        holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_physics)
+                        holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.physics_pink))
+                    }else if(model.subjectName.contains("Social Studies",true)){
+                        holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_socialstudy)
+                        holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.socialstudy_purple))
+                    }else if(model.subjectName.contains("Civics",true)){
+                        holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_civics)
+                        holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.civics_green))
+                    }else if(model.subjectName.contains("Commerce",true)){
+                        holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_commerce)
+                        holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.commerce_peach))
+                    }else if(model.subjectName.contains("Economics",true)){
+                        holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_economics)
+                        holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.economics_purple))
+                    }else if(model.subjectName.contains("Chemistry",true)){
+                        holder.binding.cvMain.background = mContext.resources.getDrawable(R.drawable.subject_chemistry)
+                        holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.chemistry_blue))
+                    }else{
+                        holder.binding.cvMain.setBackgroundResource(R.drawable.undefined_subject_green)
+                        holder.binding.tvHomeWork.setTextColor(mContext.resources.getColor(R.color.undefined_green))
+                    }
+
+                }
+                holder.binding.tvTime.text = time
+            }
+
         }
-        holder.binding.tvTime.text = time
+
+
     }
 
     override fun getItemCount(): Int {

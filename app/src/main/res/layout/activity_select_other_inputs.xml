@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/main_toolbar"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_below="@+id/toolbar"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/rlClassSectionMain"
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:paddingTop="@dimen/_10sdp"
+                android:layout_height="wrap_content">
+
+
+                <RelativeLayout
+                    android:id="@+id/rlClassName"
+                    android:layout_width="wrap_content"
+                    android:background="@drawable/grey_round_shape"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:padding="@dimen/_2sdp"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/etClassName"
+                        android:layout_width="wrap_content"
+                        android:padding="@dimen/_5sdp"
+                        android:text="Class Xth B"
+                        android:background="@null"
+                        android:paddingStart="@dimen/_10sp"
+                        android:paddingEnd="@dimen/_10sp"
+                        android:textSize="@dimen/_10sp"
+                        android:fontFamily="@font/opensans_bold"
+                        android:layout_height="wrap_content"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/_18sdp"
+                        android:src="@drawable/dropdown"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_toEndOf="@+id/etClassName"
+                        android:layout_height="@dimen/_18sdp"/>
+
+
+                </RelativeLayout>
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgClassDropDown"
+                    android:layout_width="@dimen/_20sdp"
+                    android:src="@drawable/dropdwn_arrow"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_height="@dimen/_20sdp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:background="@color/grey"
+                    android:layout_below="@+id/rlClassName"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:layout_height="@dimen/_1sdp"/>
+
+            </RelativeLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvExaminationErrorMessage"
+                android:layout_width="match_parent"
+                android:text="Examinations are not configured for this \n class section"
+                android:textColor="@color/black"
+                android:fontFamily="@font/opensans_regular"
+                android:textAlignment="center"
+                android:layout_below="@+id/rlClassSectionMain"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/_11sp"
+                app:fontFamily="@font/opensans_regular"
+                android:layout_height="wrap_content"/>
+
+            <RelativeLayout
+                android:id="@+id/rlExamSelectionMain"
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:visibility="visible"
+                android:layout_below="@+id/rlClassSectionMain"
+                android:paddingTop="@dimen/_10sdp"
+                android:layout_height="wrap_content">
+
+
+                <RelativeLayout
+                    android:id="@+id/rlExamName"
+                    android:layout_width="wrap_content"
+                    android:background="@drawable/grey_round_shape"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:padding="@dimen/_2sdp"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/etExamName"
+                        android:layout_width="wrap_content"
+                        android:padding="@dimen/_5sdp"
+                        android:text="Select Exam Name"
+                        android:background="@null"
+                        android:paddingStart="@dimen/_10sp"
+                        android:paddingEnd="@dimen/_10sp"
+                        android:textSize="@dimen/_10sp"
+                        android:fontFamily="@font/opensans_bold"
+                        android:layout_height="wrap_content"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/_18sdp"
+                        android:src="@drawable/dropdown"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_toEndOf="@+id/etExamName"
+                        android:layout_height="@dimen/_18sdp"/>
+
+
+                </RelativeLayout>
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgExamDropDown"
+                    android:layout_width="@dimen/_20sdp"
+                    android:src="@drawable/dropdwn_arrow"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_height="@dimen/_20sdp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:background="@color/grey"
+                    android:layout_below="@+id/rlExamName"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:layout_height="@dimen/_1sdp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlAssessmentAreas"
+                android:layout_below="@+id/rlExamSelectionMain"
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:visibility="gone"
+                android:paddingTop="@dimen/_10sdp"
+                android:layout_height="wrap_content">
+
+
+                <RelativeLayout
+                    android:id="@+id/rlAssesment"
+                    android:layout_width="wrap_content"
+                    android:background="@drawable/grey_round_shape"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:padding="@dimen/_2sdp"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgAssessment"
+                        android:layout_width="@dimen/_20sdp"
+                        android:src="@drawable/scholastic"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_alignParentStart="true"
+                        android:layout_height="@dimen/_20sdp"/>
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvAssessmentName"
+                        android:layout_width="wrap_content"
+                        android:padding="@dimen/_5sdp"
+                        android:text="Areas"
+                        android:background="@null"
+                        android:layout_toEndOf="@+id/imgAssessment"
+                        android:paddingEnd="@dimen/_15sp"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:textSize="@dimen/_10sp"
+                        android:fontFamily="@font/opensans_bold"
+                        android:layout_height="wrap_content"/>
+
+
+
+                </RelativeLayout>
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgAssessmentDropDown"
+                    android:layout_width="@dimen/_20sdp"
+                    android:src="@drawable/dropdwn_arrow"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_height="@dimen/_20sdp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:background="@color/grey"
+                    android:layout_below="@+id/rlAssesment"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:layout_height="@dimen/_1sdp"/>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rlSelectAssessment"
+                android:layout_below="@+id/rlExamSelectionMain"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvAssessmentLabel"
+                    android:layout_width="match_parent"
+                    android:text="@string/assessment_areas"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11sp"
+                    android:fontFamily="@font/opensans_bold"
+                    android:padding="@dimen/_10sdp"
+                    android:layout_height="wrap_content"/>
+
+                <RelativeLayout
+                    android:id="@+id/rlAssesmentOptions"
+                    android:layout_below="@+id/tvAssessmentLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:weightSum="2"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            android:id="@+id/rlScholastic"
+                            android:layout_width="0dp"
+                            android:background="@drawable/white_square_shape"
+                            android:layout_weight="1"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_height="wrap_content">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/imgScholactic"
+                                android:layout_width="@dimen/_60sdp"
+                                android:layout_centerHorizontal="true"
+                                android:src="@drawable/scholastic"
+                                android:layout_height="@dimen/_60sdp"/>
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="match_parent"
+                                android:text="@string/scholastic"
+                                android:textSize="@dimen/_11sp"
+                                android:textColor="@color/black"
+                                android:textStyle="bold"
+                               android:textAlignment="center"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:fontFamily="@font/opensans_regular"
+                                android:layout_below="@+id/imgScholactic"
+                                android:layout_height="wrap_content"/>
+
+
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:id="@+id/rlCoScholastic"
+                            android:layout_width="0dp"
+                            android:background="@drawable/white_square_shape"
+                            android:layout_weight="1"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:layout_height="wrap_content">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/imgCoScholactic"
+                                android:layout_width="@dimen/_60sdp"
+                                android:layout_centerHorizontal="true"
+                                android:src="@drawable/coscholastic"
+                                android:layout_height="@dimen/_60sdp"/>
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="match_parent"
+                                android:text="@string/co_scholastic"
+                                android:textSize="@dimen/_11sp"
+                                android:textColor="@color/black"
+                                android:textStyle="bold"
+                                android:textAlignment="center"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:fontFamily="@font/opensans_regular"
+                                android:layout_below="@+id/imgCoScholactic"
+                                android:layout_height="wrap_content"/>
+
+
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlCategory"
+                android:layout_below="@+id/rlAssessmentAreas"
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:visibility="gone"
+                android:paddingTop="@dimen/_10sdp"
+                android:layout_height="wrap_content">
+
+
+                <RelativeLayout
+                    android:id="@+id/rlCategory1"
+                    android:layout_width="wrap_content"
+                    android:background="@drawable/grey_round_shape"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:padding="@dimen/_2sdp"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvCategoryName"
+                        android:layout_width="wrap_content"
+                        android:padding="@dimen/_5sdp"
+                        android:text="Select Subject"
+                        android:background="@null"
+                        android:paddingEnd="@dimen/_20sp"
+                        android:paddingStart="@dimen/_20sdp"
+                        android:textSize="@dimen/_10sp"
+                        android:fontFamily="@font/opensans_bold"
+                        android:layout_height="wrap_content"/>
+
+
+
+                </RelativeLayout>
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgCategoryDropDown"
+                    android:layout_width="@dimen/_20sdp"
+                    android:src="@drawable/dropdwn_arrow"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_height="@dimen/_20sdp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:background="@color/grey"
+                    android:layout_below="@+id/rlCategory1"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:layout_height="@dimen/_1sdp"/>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rlSelectCategory"
+                android:layout_below="@+id/rlAssessmentAreas"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvSelectCategoryLabel"
+                    android:layout_width="match_parent"
+                    android:text="@string/select_category"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11sp"
+                    android:fontFamily="@font/opensans_bold"
+                    android:padding="@dimen/_10sdp"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvCategories"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_below="@+id/tvSelectCategoryLabel"
+                    android:layout_height="wrap_content"/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlSkills"
+                android:layout_below="@+id/rlCategory"
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:visibility="gone"
+                android:paddingTop="@dimen/_10sdp"
+                android:layout_height="wrap_content">
+
+
+                <RelativeLayout
+                    android:id="@+id/rlSkills1"
+                    android:layout_width="wrap_content"
+                    android:background="@drawable/grey_round_shape"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:padding="@dimen/_2sdp"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvSkillName"
+                        android:layout_width="wrap_content"
+                        android:padding="@dimen/_5sdp"
+                        android:text="Select Skill"
+                        android:background="@null"
+                        android:paddingEnd="@dimen/_20sp"
+                        android:paddingStart="@dimen/_20sdp"
+                        android:textSize="@dimen/_10sp"
+                        android:fontFamily="@font/opensans_bold"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgSkillDropDown"
+                    android:layout_width="@dimen/_20sdp"
+                    android:src="@drawable/dropdwn_arrow"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_height="@dimen/_20sdp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:background="@color/grey"
+                    android:layout_below="@+id/rlSkills1"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:layout_height="@dimen/_1sdp"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvStartAssessment"
+            android:layout_width="match_parent"
+            android:text="@string/start_assessment"
+            android:textColor="@color/white"
+            android:background="@color/dark_blue"
+            android:layout_alignParentBottom="true"
+            android:padding="@dimen/_10sdp"
+            android:textAlignment="center"
+            android:fontFamily="@font/opensans_regular"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+</layout>

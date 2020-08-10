@@ -26,10 +26,53 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+
             <RelativeLayout
-                android:id="@+id/rlMain"
+                android:id="@+id/rlProfileType"
                 android:background="@color/white"
                 android:layout_width="match_parent"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:layout_height="wrap_content">
+
+                <RadioGroup
+                    android:id="@+id/rgProfileType"
+                    android:layout_width="match_parent"
+                    android:weightSum="2"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+
+                    <RadioButton
+                        android:id="@+id/rbStudentProfile"
+                        android:layout_width="match_parent"
+                        android:text="@string/student"
+                        android:textSize="@dimen/_11sp"
+                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/opensans_bold"
+                        android:layout_height="wrap_content"/>
+                    <RadioButton
+                        android:id="@+id/rbEmployeeProfile"
+                        android:layout_width="match_parent"
+                        android:text="@string/employees"
+                        android:textSize="@dimen/_11sp"
+                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/opensans_bold"
+                        android:layout_height="wrap_content"/>
+                </RadioGroup>
+
+            </RelativeLayout>
+
+
+
+            <RelativeLayout
+                android:id="@+id/rlClassSection"
+                android:background="@color/white"
+                android:layout_below="@+id/rlProfileType"
+                android:layout_width="match_parent"
+                android:visibility="visible"
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -38,52 +81,118 @@
                     android:background="@drawable/grey_round_shape"
                     android:layout_margin="@dimen/_10sdp"
                     android:paddingTop="@dimen/_7sdp"
-                    android:paddingBottom="@dimen/_7sdp"
+                    android:paddingBottom="@dimen/_5sdp"
                     android:paddingStart="@dimen/_15sdp"
                     android:paddingEnd="@dimen/_10sdp"
                     android:text="@string/select_class_section"
-                    android:textSize="@dimen/_12sp"
+                    android:textSize="@dimen/_11sp"
                     android:fontFamily="@font/opensans_bold"
                     android:drawableEnd="@drawable/dropdown"
                     android:layout_height="wrap_content"/>
 
             </RelativeLayout>
+
             <RelativeLayout
-                android:id="@+id/rlMain2"
-                android:layout_below="@+id/rlMain"
+                android:id="@+id/rlDate"
+                android:layout_below="@+id/rlClassSection"
                 android:background="@color/white"
                 android:layout_width="match_parent"
+                android:visibility="visible"
                 android:layout_height="wrap_content">
 
+                <LinearLayout
+                    android:id="@+id/llAbsentDateShift"
+                    android:layout_width="match_parent"
+                    android:weightSum="2"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvSelectDate"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/grey_round_shape"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:paddingTop="@dimen/_7sdp"
+                        android:paddingBottom="@dimen/_7sdp"
+                        android:paddingStart="@dimen/_15sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:text="@string/select_date"
+                        android:textSize="@dimen/_11sp"
+                        android:layout_weight="1"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:fontFamily="@font/opensans_bold"
+                        android:drawableEnd="@drawable/calender_small"
+                        android:layout_height="wrap_content"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvSelectShift"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/grey_round_shape"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:paddingTop="@dimen/_7sdp"
+                        android:paddingBottom="@dimen/_7sdp"
+                        android:paddingStart="@dimen/_15sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:layout_weight="1"
+                        android:text="@string/select_shift"
+                        android:textSize="@dimen/_11sp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:fontFamily="@font/opensans_bold"
+                        android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_24"
+                        android:layout_height="wrap_content"/>
+
+
+
+                </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etTypeMessage"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/grey_square_shape"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:paddingTop="@dimen/_7sdp"
+                    android:paddingBottom="@dimen/_60sdp"
+                    android:paddingStart="@dimen/_15sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:visibility="gone"
+                    android:hint="@string/type_your_message_here"
+                    android:textSize="@dimen/_11sp"
+                    android:fontFamily="@font/opensans_regular"
+                    android:layout_height="wrap_content"/>
+
+
+
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvSelectDate"
+                    android:id="@+id/tvSelectExaminationType"
                     android:layout_width="match_parent"
                     android:background="@drawable/grey_round_shape"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_10sdp"
                     android:paddingTop="@dimen/_7sdp"
+                    android:visibility="gone"
                     android:paddingBottom="@dimen/_7sdp"
                     android:paddingStart="@dimen/_15sdp"
                     android:paddingEnd="@dimen/_10sdp"
-                    android:text="@string/select_date"
+                    android:text="@string/select_examination_type"
                     android:textSize="@dimen/_12sp"
                     android:fontFamily="@font/opensans_bold"
-                    android:drawableEnd="@drawable/ic_calendar"
+                    android:drawableEnd="@drawable/dropdown"
                     android:layout_height="wrap_content"/>
+
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:background="@color/white"
-                android:layout_below="@+id/rlMain2"
+                android:layout_below="@+id/rlDate"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvSerialNumber"
                     android:layout_width="wrap_content"
-                    android:textSize="@dimen/_12sp"
+                    android:textSize="@dimen/_11sp"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:text="@string/showing_all_students"
                     android:fontFamily="@font/opensans_bold"
@@ -91,23 +200,40 @@
                     android:textColor="@color/dark_blue"
                     android:layout_height="wrap_content"/>
 
-                <androidx.appcompat.widget.AppCompatCheckBox
-                    android:id="@+id/tvStudentName"
-                    android:layout_width="wrap_content"
-                    android:textSize="@dimen/_12sp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:text="@string/select_all"
-                    android:padding="@dimen/_7sdp"
-                    android:fontFamily="@font/opensans_bold"
-                    android:textColor="@color/dark_blue"
-                    android:layout_height="wrap_content"/>
-
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvStudents"
                     android:layout_width="match_parent"
                     android:layout_below="@+id/tvSerialNumber"
                     android:layout_marginTop="@dimen/_7sdp"
                     android:layout_height="wrap_content"/>
+
+                <RelativeLayout
+                    android:id="@+id/rlNoDataFound"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgEmpty"
+                        android:layout_width="@dimen/_100sdp"
+                        android:src="@drawable/emptynotice"
+                        android:layout_centerInParent="true"
+                        android:layout_centerVertical="true"
+                        android:layout_height="@dimen/_100sdp"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvEmptyText"
+                        android:layout_below="@+id/imgEmpty"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/opensans_regular"
+                        android:text="@string/no_students_found"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/_11sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+
 
             </RelativeLayout>
 
@@ -116,15 +242,17 @@
 
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSend"
             android:layout_width="match_parent"
             android:layout_alignParentBottom="true"
             android:text="@string/send_absent_report"
-            android:textSize="@dimen/_12sp"
+            android:textSize="@dimen/_11sp"
             android:textColor="@color/white"
             android:background="@color/dark_blue"
-            android:padding="@dimen/_7sdp"
+            android:padding="@dimen/_10sdp"
             android:textAlignment="center"
-            android:fontFamily="@font/opensans_bold"
+            android:fontFamily="@font/opensans_regular"
+            android:textStyle="bold"
             android:layout_height="wrap_content"/>
 
 

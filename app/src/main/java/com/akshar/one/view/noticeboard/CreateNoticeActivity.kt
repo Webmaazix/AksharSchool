@@ -71,6 +71,9 @@ class CreateNoticeActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun setData(){
         if(noticeModel!= null){
+            binding!!.toolbar.txtToolbarTitle.text = getString(R.string.update_notice)
+            binding!!.toolbar.imgMenu.visibility = View.GONE
+            binding!!.toolbar.imgBack.visibility = View.VISIBLE
             binding!!.etTitle.setText(noticeModel?.title)
             binding!!.etDesc.setText(noticeModel?.description)
             binding!!.tvStartDate.text = noticeModel?.startDate
@@ -86,6 +89,10 @@ class CreateNoticeActivity : AppCompatActivity(), View.OnClickListener {
                 binding!!.cbParents.isChecked = false
                 binding!!.cbEmployees.isChecked = true
             }
+        }else{
+            binding!!.toolbar.txtToolbarTitle.text = getString(R.string.create_notice)
+            binding!!.toolbar.imgMenu.visibility = View.GONE
+            binding!!.toolbar.imgBack.visibility = View.VISIBLE
         }
     }
 
@@ -112,7 +119,7 @@ class CreateNoticeActivity : AppCompatActivity(), View.OnClickListener {
 
         observers()
         setListner()
-        binding!!.toolbar.txtToolbarTitle.text = getString(R.string.create_notice)
+
     }
 
     private fun setListner(){
@@ -206,6 +213,9 @@ class CreateNoticeActivity : AppCompatActivity(), View.OnClickListener {
         }else if(tvEndDate.text.toString().isEmpty() || tvEndDate.text.equals(currActivity.getString(R.string.end_date))){
             isValid = false
             AndroidUtil.showToast(currActivity,"End date is required",true)
+        }else if(!binding!!.cbParents.isChecked && !binding!!.cbEmployees.isChecked){
+            isValid = false
+            AndroidUtil.showToast(currActivity,"Please select at least one value from above options Parents or Employee",true)
         }
         return  isValid
     }

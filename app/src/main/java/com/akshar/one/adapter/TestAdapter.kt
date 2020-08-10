@@ -12,6 +12,8 @@ import com.akshar.one.view.examschedule.ScheduleExamActivity
 import com.akshar.one.view.examschedule.ScheduledExamList
 import com.akshar.one.model.ExaminationDropDownModel
 import com.akshar.one.model.TestListModel
+import com.akshar.one.view.marksentry.inputselection.SelectOtherInputsActivity
+import com.akshar.one.view.messagecenter.SendMarksAndFeeReport
 
 import java.util.ArrayList
 
@@ -47,8 +49,6 @@ class TestAdapter(private val mContext: Activity, var parent: Int,
             holder.binding.imgCheck.visibility = View.GONE
             holder.binding.tvClassName.setTextColor(mContext.resources.getColor(R.color.black))
         }
-
-
     }
 
     override fun getItemCount(): Int {
@@ -67,7 +67,12 @@ class TestAdapter(private val mContext: Activity, var parent: Int,
 
                     }else if(mContext is ScheduledExamList){
                         (mContext).selectTest(list?.get(adapterPosition)!!,model)
+                    } else if(mContext is SelectOtherInputsActivity){
+                        (mContext).selectTest(list?.get(adapterPosition)!!,model)
+                    }else if(mContext is SendMarksAndFeeReport){
+                        (mContext).selectTest(list?.get(adapterPosition)!!,model)
                     }
+
                 }
 
             }

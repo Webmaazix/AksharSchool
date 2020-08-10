@@ -1,4 +1,16 @@
 package com.akshar.one.model
 
-data class FeePayment(val Admission_Fee: Int?,
-                      val TUTION_FEE : Int?)
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
+import java.io.Serializable
+
+ class FeePayment : Serializable {
+
+     @SerializedName("key")
+     @Expose
+     var key = ""
+
+     @SerializedName("value")
+     @Expose
+     var value = ""
+ }

@@ -1,9 +1,16 @@
 package com.akshar.one.model
 
-data class TimeTableModel(val classroom: ClassRoom?,
-                          val weekDay: String?,
-                          val subjectName: String?,
-                          val startTime: String?,
-                          val endTime: String?,
-                          val teacherName: String?,
-                          val sessionNumber: Int)
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
+import java.io.Serializable
+
+class TimeTableModel : Serializable{
+
+    @SerializedName("weekday")
+    @Expose
+    var weekday  = ""
+
+    @SerializedName("periodwiseTimetableList")
+    @Expose
+    var periodwiseTimetableList = ArrayList<PeriodTimeTable>()
+}

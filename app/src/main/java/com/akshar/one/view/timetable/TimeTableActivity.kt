@@ -1,6 +1,7 @@
 package com.akshar.one.view.timetable
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,6 +16,7 @@ import com.akshar.one.calender.data.Day
 import com.akshar.one.calender.widget.CollapsibleCalendar
 import com.akshar.one.databinding.ActivityTimeTableBinding
 import com.akshar.one.model.TabsModel
+import com.akshar.one.util.AppUtils
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.main_toolbar.view.*
 import kotlinx.android.synthetic.main.tablayout.view.*
@@ -27,6 +29,7 @@ class TimeTableActivity : AppCompatActivity(),View.OnClickListener{
     var customTabs = ArrayList<TabsModel>()
     lateinit var myTimeTableFragment: MyTimeTableFragment
     lateinit var classTimeTableFragment: ClassTimeTableFragment
+    private var dialog: Dialog? = null
 
     companion object{
         fun open(currActivity : Activity){
@@ -101,10 +104,10 @@ class TimeTableActivity : AppCompatActivity(),View.OnClickListener{
             }
             R.id.imgExpand ->{
                 if(binding!!.collapsibleCalendarView.expanded){
-                    binding!!.imgExpand.setImageResource(R.drawable.arrow_up)
+                    binding!!.imgExpand.setImageResource(R.drawable.down_arrow_icon)
                     binding!!.collapsibleCalendarView.collapse(400)
                 } else{
-                    binding!!.imgExpand.setImageResource(R.drawable.down_arrow_icon)
+                    binding!!.imgExpand.setImageResource(R.drawable.arrow_up)
                     binding!!.collapsibleCalendarView.expand(400)
                 }
             }
@@ -171,4 +174,11 @@ class TimeTableActivity : AppCompatActivity(),View.OnClickListener{
         }
     }
 
+    fun showProgressBar(){
+      dialog =  AppUtils.showProgress(currActivity)
+    }
+
+    fun hideProgressBar(){
+        AppUtils.hideProgress(dialog!!)
+    }
 }

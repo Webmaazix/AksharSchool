@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="position"
+            type="java.lang.Integer" />
+
+        <variable
+            name="attendanceClassRoomViewModel"
+            type="com.akshar.one.viewmodels.attendance.AttendanceClassRoomViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/white_square_shape"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_height="wrap_content">
+
+        <com.akshar.one.circlularimageview.CircularImageView
+            android:id="@+id/imgUserProfile"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:src="@drawable/circle_default_pic"
+            app:civ_border_width="@dimen/_1sdp"
+            app:civ_border_color="@color/ultra_light_grey"
+            app:civ_circle_color="@color/lightish_grey"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvUserName"
+            android:layout_toEndOf="@+id/imgUserProfile"
+            android:layout_marginStart="@dimen/_10sp"
+            android:layout_width="match_parent"
+            android:text="Shubham"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_11sp"
+            android:fontFamily="@font/opensans_bold"
+            android:layout_height="wrap_content"/>
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvMobileNumber"
+            android:layout_below="@+id/tvUserName"
+            android:layout_toEndOf="@+id/imgUserProfile"
+            android:layout_marginStart="@dimen/_10sp"
+            android:layout_width="wrap_content"
+            android:text="3839734232"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_11sp"
+            android:fontFamily="@font/opensans_regular"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/tvCheckStudent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="@dimen/_10sp"
+            android:layout_width="wrap_content"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="@dimen/_11sp"
+            android:fontFamily="@font/opensans_bold"
+            android:layout_height="wrap_content"/>
+
+
+    </RelativeLayout>
+
+
+
+</layout>

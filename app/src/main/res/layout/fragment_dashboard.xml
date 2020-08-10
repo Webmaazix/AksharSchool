@@ -58,6 +58,7 @@
                 android:id="@+id/rlTimeTableNotFound"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_width="match_parent"
+                android:visibility="gone"
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -162,6 +163,7 @@
                     android:id="@+id/rlBirthdayNotFound"
                     android:layout_width="match_parent"
                     android:layout_below="@+id/rlDay"
+                    android:visibility="gone"
                     android:layout_height="wrap_content">
 
                     <androidx.appcompat.widget.AppCompatImageView
@@ -672,104 +674,158 @@
                         </RelativeLayout>
 
 
-
-                        <com.akshar.one.piechart.PieChartView
-                            android:id="@+id/pieChartCollection"
-                            android:layout_width="@dimen/_100sdp"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:layout_below="@+id/tvCollection"
-                            android:layout_marginStart="@dimen/_5sdp"
-                            android:layout_height="@dimen/_100sdp" />
-
-
                         <RelativeLayout
-                            android:id="@+id/rlPaidCollection"
+                            android:id="@+id/rlCollectionMain"
                             android:layout_width="match_parent"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:layout_toEndOf="@+id/pieChartCollection"
                             android:layout_below="@+id/tvCollection"
-                            android:layout_marginStart="@dimen/_10sp"
                             android:layout_height="wrap_content">
 
-                            <androidx.appcompat.widget.AppCompatImageView
-                                android:id="@+id/tvGreenColorCollection"
-                                android:layout_width="@dimen/_15sp"
-                                android:layout_centerVertical="true"
-                                android:layout_marginTop="@dimen/_3sdp"
-                                android:src="@drawable/green_square"
-                                android:layout_height="@dimen/_15sp"/>
+                            <com.akshar.one.piechart.PieChartView
+                                android:id="@+id/pieChartCollection"
+                                android:layout_width="@dimen/_100sdp"
+                                android:visibility="visible"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:layout_height="@dimen/_100sdp" />
 
                             <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvPaidCollection"
+                                android:id="@+id/tvSeeAllCollection"
                                 android:layout_width="wrap_content"
-                                android:layout_toEndOf="@+id/tvGreenColorCollection"
-                                android:textSize="@dimen/_9sp"
-                                android:text="@string/admission_fee"
-                                android:textColor="@color/black"
-                                android:layout_centerVertical="true"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:fontFamily="@font/opensans_regular"
+                                android:layout_alignParentBottom="true"
+                                android:textSize="@dimen/_11sp"
+                                android:text="@string/see_all"
+                                app:fontFamily="@font/opensans_regular"
+                                android:textStyle="bold"
+                                android:textAlignment="center"
+                                android:visibility="gone"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_24"
+                                android:layout_below="@+id/pieChartCollection"
                                 android:layout_height="wrap_content"/>
 
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvPaidAmountCollection"
+                            <RelativeLayout
+                                android:id="@+id/rlPaidCollection"
                                 android:layout_width="match_parent"
-                                android:layout_alignParentEnd="true"
-                                android:textSize="@dimen/_9sp"
-                                android:text="RS. 0"
-                                android:layout_marginTop="@dimen/_2sdp"
-                                android:textAlignment="viewEnd"
-                                android:textColor="@color/black"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:fontFamily="@font/opensans_bold"
-                                android:layout_height="wrap_content"/>
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:visibility="visible"
+                                android:layout_toEndOf="@+id/pieChartCollection"
+                                android:layout_marginStart="@dimen/_10sp"
+                                android:layout_height="wrap_content">
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/rvCollection"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"/>
 
 
-                        </RelativeLayout>
+<!--                                <androidx.appcompat.widget.AppCompatImageView-->
+<!--                                    android:id="@+id/tvGreenColorCollection"-->
+<!--                                    android:layout_width="@dimen/_15sp"-->
+<!--                                    android:layout_centerVertical="true"-->
+<!--                                    android:layout_marginTop="@dimen/_3sdp"-->
+<!--                                    android:src="@drawable/green_square"-->
+<!--                                    android:layout_height="@dimen/_15sp"/>-->
 
-                        <RelativeLayout
-                            android:id="@+id/rlDueCollection"
-                            android:layout_width="match_parent"
-                            android:layout_toEndOf="@+id/pieChartCollection"
-                            android:layout_below="@+id/rlPaidCollection"
-                            android:layout_marginTop="@dimen/_7sdp"
-                            android:layout_marginStart="@dimen/_10sp"
-                            android:layout_height="wrap_content">
+<!--                                <androidx.appcompat.widget.AppCompatTextView-->
+<!--                                    android:id="@+id/tvPaidCollection"-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_toEndOf="@+id/tvGreenColorCollection"-->
+<!--                                    android:textSize="@dimen/_9sp"-->
+<!--                                    android:text="@string/admission_fee"-->
+<!--                                    android:textColor="@color/black"-->
+<!--                                    android:layout_centerVertical="true"-->
+<!--                                    android:layout_marginStart="@dimen/_5sdp"-->
+<!--                                    android:fontFamily="@font/opensans_regular"-->
+<!--                                    android:layout_height="wrap_content"/>-->
+
+
+<!--                                <androidx.appcompat.widget.AppCompatTextView-->
+<!--                                    android:id="@+id/tvPaidAmountCollection"-->
+<!--                                    android:layout_width="match_parent"-->
+<!--                                    android:layout_alignParentEnd="true"-->
+<!--                                    android:textSize="@dimen/_9sp"-->
+<!--                                    android:text="RS. 0"-->
+<!--                                    android:layout_marginTop="@dimen/_2sdp"-->
+<!--                                    android:textAlignment="viewEnd"-->
+<!--                                    android:textColor="@color/black"-->
+<!--                                    android:layout_marginStart="@dimen/_5sdp"-->
+<!--                                    android:fontFamily="@font/opensans_bold"-->
+<!--                                    android:layout_height="wrap_content"/>-->
+
+
+                            </RelativeLayout>
+
+
+<!--                            <RelativeLayout-->
+<!--                                android:id="@+id/rlDueCollection"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_toEndOf="@+id/pieChartCollection"-->
+<!--                                android:layout_below="@+id/rlPaidCollection"-->
+<!--                                android:layout_marginTop="@dimen/_7sdp"-->
+<!--                                android:visibility="visible"-->
+<!--                                android:layout_marginStart="@dimen/_10sp"-->
+<!--                                android:layout_height="wrap_content">-->
+
+<!--                                <androidx.appcompat.widget.AppCompatImageView-->
+<!--                                    android:id="@+id/tvYellowColorCollection"-->
+<!--                                    android:layout_width="@dimen/_15sp"-->
+<!--                                    android:layout_centerVertical="true"-->
+<!--                                    android:layout_marginTop="@dimen/_3sdp"-->
+<!--                                    android:src="@drawable/bluesquare"-->
+<!--                                    android:layout_height="@dimen/_15sp"/>-->
+
+<!--                                <androidx.appcompat.widget.AppCompatTextView-->
+<!--                                    android:id="@+id/tvDueCollection"-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_toEndOf="@+id/tvYellowColorCollection"-->
+<!--                                    android:textSize="@dimen/_9sp"-->
+<!--                                    android:text="@string/tution_fee"-->
+<!--                                    android:layout_marginTop="@dimen/_2sdp"-->
+<!--                                    android:textColor="@color/black"-->
+<!--                                    android:layout_centerVertical="true"-->
+<!--                                    android:layout_marginStart="@dimen/_5sdp"-->
+<!--                                    android:fontFamily="@font/opensans_regular"-->
+<!--                                    android:layout_height="wrap_content"/>-->
+
+
+<!--                                <androidx.appcompat.widget.AppCompatTextView-->
+<!--                                    android:id="@+id/tvDueAmountCollection"-->
+<!--                                    android:layout_width="match_parent"-->
+<!--                                    android:layout_alignParentEnd="true"-->
+<!--                                    android:textSize="@dimen/_9sp"-->
+<!--                                    android:text="RS. 0"-->
+<!--                                    android:textAlignment="viewEnd"-->
+<!--                                    android:textColor="@color/black"-->
+<!--                                    android:layout_marginStart="@dimen/_5sdp"-->
+<!--                                    android:fontFamily="@font/opensans_bold"-->
+<!--                                    android:layout_height="wrap_content"/>-->
+
+
+<!--                            </RelativeLayout>-->
 
                             <androidx.appcompat.widget.AppCompatImageView
-                                android:id="@+id/tvYellowColorCollection"
-                                android:layout_width="@dimen/_15sp"
-                                android:layout_centerVertical="true"
-                                android:layout_marginTop="@dimen/_3sdp"
-                                android:src="@drawable/bluesquare"
-                                android:layout_height="@dimen/_15sp"/>
+                                android:id="@+id/imgEmptyCollection"
+                                android:layout_centerInParent="true"
+                                android:visibility="gone"
+                                android:src="@drawable/timetableempty"
+                                android:layout_width="@dimen/_80sdp"
+                                android:layout_height="@dimen/_80sdp"/>
 
                             <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvDueCollection"
-                                android:layout_width="wrap_content"
-                                android:layout_toEndOf="@+id/tvYellowColorCollection"
-                                android:textSize="@dimen/_9sp"
-                                android:text="@string/tution_fee"
-                                android:layout_marginTop="@dimen/_2sdp"
-                                android:textColor="@color/black"
-                                android:layout_centerVertical="true"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:fontFamily="@font/opensans_regular"
-                                android:layout_height="wrap_content"/>
-
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvDueAmountCollection"
+                                android:id="@+id/tvErrorMessage"
                                 android:layout_width="match_parent"
-                                android:layout_alignParentEnd="true"
-                                android:textSize="@dimen/_9sp"
-                                android:text="RS. 0"
-                                android:textAlignment="viewEnd"
+                                android:text=""
+                                android:textAlignment="center"
+                                android:visibility="gone"
+                                android:maxLines="2"
+                                android:layout_below="@+id/imgEmptyCollection"
+                                android:layout_marginTop="@dimen/_7sdp"
                                 android:textColor="@color/black"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:fontFamily="@font/opensans_bold"
-                                android:layout_height="wrap_content"/>
+                                android:fontFamily="@font/opensans_regular"
+                                android:textSize="@dimen/_11sp"
+                                android:layout_height="match_parent"/>
+
 
 
                         </RelativeLayout>
@@ -778,7 +834,7 @@
                             android:id="@+id/vvCollection"
                             android:layout_width="match_parent"
                             android:background="@color/ultra_light_grey"
-                            android:layout_below="@+id/pieChartCollection"
+                            android:layout_below="@+id/rlCollectionMain"
                             android:layout_marginTop="@dimen/_10sp"
                             android:layout_height="@dimen/_1sdp"/>
 
@@ -910,104 +966,74 @@
                         </RelativeLayout>
 
 
-                        <com.akshar.one.piechart.PieChartView
-                            android:id="@+id/pieChartExpence"
-                            android:layout_width="@dimen/_100sdp"
-                            android:layout_below="@+id/tvExpence"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:layout_marginStart="@dimen/_5sdp"
-                            android:layout_height="@dimen/_100sdp" />
-
-
                         <RelativeLayout
-                            android:id="@+id/rlPaidExpence"
+                            android:id="@+id/rlExpenseMain"
                             android:layout_width="match_parent"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:layout_toEndOf="@+id/pieChartExpence"
                             android:layout_below="@+id/tvExpence"
-                            android:layout_marginStart="@dimen/_10sp"
                             android:layout_height="wrap_content">
 
-                            <androidx.appcompat.widget.AppCompatImageView
-                                android:id="@+id/tvGreenColorExpence"
-                                android:layout_width="@dimen/_15sp"
-                                android:layout_centerVertical="true"
-                                android:layout_marginTop="@dimen/_3sdp"
-                                android:background="@drawable/red_square"
-                                android:layout_height="@dimen/_15sp"/>
+                            <com.akshar.one.piechart.PieChartView
+                                android:id="@+id/pieChartExpence"
+                                android:layout_width="@dimen/_100sdp"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:layout_height="@dimen/_100sdp" />
 
                             <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvPaidExpence"
+                                android:id="@+id/tvSeeAllExpence"
                                 android:layout_width="wrap_content"
-                                android:layout_toEndOf="@+id/tvGreenColorExpence"
-                                android:textSize="@dimen/_9sp"
-                                android:text="@string/maintenance"
-                                android:textColor="@color/black"
-                                android:layout_centerVertical="true"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:fontFamily="@font/opensans_regular"
+                                android:layout_alignParentBottom="true"
+                                android:textSize="@dimen/_11sp"
+                                android:text="@string/see_all"
+                                app:fontFamily="@font/opensans_regular"
+                                android:textStyle="bold"
+                                android:textAlignment="center"
+                                android:visibility="gone"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_24"
+                                android:layout_below="@+id/pieChartExpence"
                                 android:layout_height="wrap_content"/>
 
 
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvPaidAmountExpence"
+                            <RelativeLayout
+                                android:id="@+id/rlPaidExpence"
                                 android:layout_width="match_parent"
-                                android:layout_alignParentEnd="true"
-                                android:textSize="@dimen/_9sp"
-                                android:text="RS. 0"
-                                android:layout_marginTop="@dimen/_2sdp"
-                                android:textAlignment="viewEnd"
-                                android:textColor="@color/black"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:fontFamily="@font/opensans_bold"
-                                android:layout_height="wrap_content"/>
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:layout_toEndOf="@+id/pieChartExpence"
+                                android:layout_marginStart="@dimen/_10sp"
+                                android:layout_height="wrap_content">
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/rvExpence"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"/>
 
 
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:id="@+id/rlDueExpence"
-                            android:layout_width="match_parent"
-                            android:layout_toEndOf="@+id/pieChartExpence"
-                            android:layout_below="@+id/rlPaidExpence"
-                            android:layout_marginTop="@dimen/_7sdp"
-                            android:layout_marginStart="@dimen/_10sp"
-                            android:layout_height="wrap_content">
+                            </RelativeLayout>
 
                             <androidx.appcompat.widget.AppCompatImageView
-                                android:id="@+id/tvYellowColorExpence"
-                                android:layout_width="@dimen/_15sp"
-                                android:layout_centerVertical="true"
-                                android:layout_marginTop="@dimen/_3sdp"
-                                android:src="@drawable/orangesquare"
-                                android:layout_height="@dimen/_15sp"/>
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvDueExpence"
-                                android:layout_width="wrap_content"
-                                android:layout_toEndOf="@+id/tvYellowColorExpence"
-                                android:textSize="@dimen/_9sp"
-                                android:text="@string/transport"
-                                android:textColor="@color/black"
-                                android:layout_centerVertical="true"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:fontFamily="@font/opensans_regular"
-                                android:layout_height="wrap_content"/>
+                                android:id="@+id/imgEmptyExpense"
+                                android:layout_centerInParent="true"
+                                android:visibility="gone"
+                                android:src="@drawable/timetableempty"
+                                android:layout_width="@dimen/_80sdp"
+                                android:layout_height="@dimen/_80sdp"/>
 
 
                             <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvDueAmountExpence"
+                                android:id="@+id/tvErrorMessageExpence"
                                 android:layout_width="match_parent"
-                                android:layout_alignParentEnd="true"
-                                android:textSize="@dimen/_9sp"
-                                android:text="RS. 0"
-                                android:layout_marginTop="@dimen/_2sdp"
-                                android:textAlignment="viewEnd"
+                                android:text="hdhsd"
+                                android:textAlignment="center"
+                                android:visibility="gone"
+                                android:maxLines="2"
+                                android:layout_below="@+id/imgEmptyExpense"
+                                android:layout_marginTop="@dimen/_7sdp"
                                 android:textColor="@color/black"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:fontFamily="@font/opensans_bold"
-                                android:layout_height="wrap_content"/>
-
+                                android:fontFamily="@font/opensans_regular"
+                                android:textSize="@dimen/_11sp"
+                                android:layout_height="match_parent"/>
 
                         </RelativeLayout>
 
@@ -1015,7 +1041,7 @@
                             android:id="@+id/vvExpence"
                             android:layout_width="match_parent"
                             android:background="@color/ultra_light_grey"
-                            android:layout_below="@+id/pieChartExpence"
+                            android:layout_below="@+id/rlExpenseMain"
                             android:layout_marginTop="@dimen/_10sp"
                             android:layout_height="@dimen/_1sdp"/>
 

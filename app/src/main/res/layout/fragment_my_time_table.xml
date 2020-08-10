@@ -17,6 +17,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:background="@color/lightish_grey"
         android:layout_height="match_parent">
 
         <androidx.core.widget.NestedScrollView
@@ -66,6 +67,13 @@
                 android:layout_height="wrap_content"/>
 
         </RelativeLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgLoader"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"/>
 
     </RelativeLayout>
 

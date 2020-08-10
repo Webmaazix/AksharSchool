@@ -18,12 +18,12 @@ import retrofit2.HttpException
 class DashboardViewModel(application: Application) : BaseViewModel(application) {
 
     private var loginRepository: DashboardRepository? = null
-    private var mutableLiveDataTimeTableModel = MutableLiveData<List<TimeTableModel>>()
-    private var mutableLiveDataClassTimeTableModel = MutableLiveData<List<TimeTableModel>>()
+    private var mutableLiveDataTimeTableModel = MutableLiveData<List<PeriodTimeTable>>()
+    private var mutableLiveDataClassTimeTableModel = MutableLiveData<List<PeriodTimeTable>>()
     private var mutableLiveDataBirthDayModel  = MutableLiveData<List<BirthDayModel>>()
     private var mutableLiveDataAllFinanceModel  = MutableLiveData<FinanceModel>()
-    private var mutableLiveDataCollection = MutableLiveData<FeePayment>()
-    private var mutableLiveDataExpense = MutableLiveData<ExpenseSummary>()
+    private var mutableLiveDataCollection = MutableLiveData<ArrayList<FeePayment>>()
+    private var mutableLiveDataExpense = MutableLiveData<ArrayList<FeePayment>>()
     private val isLoading = MutableLiveData<Boolean>()
     private var timeTableAdapter : TimeTableAdapter? =null
 
@@ -39,22 +39,22 @@ class DashboardViewModel(application: Application) : BaseViewModel(application) 
 
     fun getIsLoading(): MutableLiveData<Boolean> = isLoading
 
-    fun getTimeTableLiveData(): MutableLiveData<List<TimeTableModel>> =
+    fun getTimeTableLiveData(): MutableLiveData<List<PeriodTimeTable>> =
         mutableLiveDataTimeTableModel
 
-    fun getClassTimeTableLiveData(): MutableLiveData<List<TimeTableModel>> =
+    fun getClassTimeTableLiveData(): MutableLiveData<List<PeriodTimeTable>> =
         mutableLiveDataClassTimeTableModel
 
     fun getTimeTableAdapter(): TimeTableAdapter? = timeTableAdapter
 
-    fun getTimeTableAt(position: Int): TimeTableModel? =
-        mutableLiveDataTimeTableModel.value?.getOrNull(position)
+//    fun getTimeTableAt(position: Int): TimeTableModel? =
+//        mutableLiveDataTimeTableModel.value?.getOrNull(position)
 
 
     fun getBirthdayLiveData(): MutableLiveData<List<BirthDayModel>> =
         mutableLiveDataBirthDayModel
 
-    fun getExpenseLiveData() : MutableLiveData<ExpenseSummary> =
+    fun getExpenseLiveData() : MutableLiveData<ArrayList<FeePayment>> =
         mutableLiveDataExpense
 
     fun getTimeTableOfEmployee(employeeId: Int, date: String) {
@@ -63,7 +63,7 @@ class DashboardViewModel(application: Application) : BaseViewModel(application) 
             withContext(Dispatchers.IO) {
                 try {
                     val loginModel = loginRepository?.getTimeTableOfEmployee(employeeId, date)
-                    mutableLiveDataTimeTableModel.postValue(loginModel!!)
+                    mutableLiveDataTimeTableModel.postValue(loginModel!!.get(0).periodwiseTimetableList)
                     isLoading.postValue(false)
                    /* loginModel?.let {
                         mutableLiveDataTimeTableModel.postValue(it)
@@ -86,7 +86,7 @@ class DashboardViewModel(application: Application) : BaseViewModel(application) 
             withContext(Dispatchers.IO) {
                 try {
                     val loginModel = loginRepository?.getTimeTableOfClass(classRoomId, date)
-                    mutableLiveDataClassTimeTableModel.postValue(loginModel!!)
+                    mutableLiveDataClassTimeTableModel.postValue(loginModel!!.get(0).periodwiseTimetableList)
                     isLoading.postValue(false)
                    /* loginModel?.let {
                         mutableLiveDataTimeTableModel.postValue(it)
@@ -130,7 +130,7 @@ class DashboardViewModel(application: Application) : BaseViewModel(application) 
         }
     }
 
-    fun getCollectionLiveData() : MutableLiveData<FeePayment> =
+    fun getCollectionLiveData() : MutableLiveData<ArrayList<FeePayment>> =
         mutableLiveDataCollection
 
 
@@ -146,7 +146,7 @@ class DashboardViewModel(application: Application) : BaseViewModel(application) 
                 }catch (httpException : HttpException){
                     isLoading.postValue(false)
                     val errorResponse = AppUtil.getErrorResponse(httpException.response()?.errorBody()?.string())
-                    errorResponse?.let { getErrorMutableLiveData().postValue(it)}
+                    errorResponse?.let { getCollectionErrorMutableLiveData().postValue(it)}
                 }catch (e: Exception){
                     isLoading.postValue(false)
                     Log.d(AppConstant.TAG, "FinanceEntity Exception :$e")
@@ -166,7 +166,7 @@ class DashboardViewModel(application: Application) : BaseViewModel(application) 
                 }catch (httException : HttpException){
                     isLoading.postValue(false)
                     val errorResponse = AppUtil.getErrorResponse(httException.response()?.errorBody()?.string())
-                    errorResponse?.let { getErrorMutableLiveData().postValue(it) }
+                    errorResponse?.let { getExpenseErrorMutableLiveData().postValue(it) }
                 }catch (e : Exception){
                     isLoading.postValue(false)
                     Log.d(AppConstant.TAG, "FinanceEntity Exception :$e")

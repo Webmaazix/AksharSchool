@@ -2,6 +2,7 @@ package com.akshar.one.view.noticeboard
 
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -20,6 +21,7 @@ import com.akshar.one.databinding.FragmentExpiredNoticeBinding
 import com.akshar.one.model.NoticeBoardModel
 import com.akshar.one.swipelayout.util.Attributes
 import com.akshar.one.util.AndroidUtil
+import com.akshar.one.util.AppUtils
 import com.akshar.one.viewmodels.ViewModelFactory
 import com.akshar.one.viewmodels.noticeboard.NoticeBoardViewModel
 
@@ -33,6 +35,8 @@ class ExpiredNotice : Fragment() ,View.OnClickListener{
     private var noticeBoardList = ArrayList<NoticeBoardModel>()
     private var noticeBoardViewModel: NoticeBoardViewModel? = null
     lateinit var adapter : MyNoticeBoardAdapter
+    private var dialog : Dialog? = null
+    private var mdialog : Dialog? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -60,6 +64,7 @@ class ExpiredNotice : Fragment() ,View.OnClickListener{
         }
         noticeBoardViewModel?.let {
             if (context?.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true) {
+                mdialog =  AppUtils.showProgress(currActivity!!)
                 it.getAllNotices(true) }
         }
 
@@ -78,9 +83,9 @@ class ExpiredNotice : Fragment() ,View.OnClickListener{
         adapter = MyNoticeBoardAdapter(
             currActivity!!,
             noticeBoardList,
-            true
+            true,this
         )
-        (adapter as MyNoticeBoardAdapter).mode = Attributes.Mode.Single
+//        (adapter as MyNoticeBoardAdapter).mode = Attributes.Mode.Single
         binding!!.rlActiveNotice.adapter = adapter
 
 //        val itemTouchHelperCallback = RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, )
@@ -91,11 +96,13 @@ class ExpiredNotice : Fragment() ,View.OnClickListener{
 
         noticeBoardViewModel?.getErrorMutableLiveData()?.observe(this, Observer {
             it?.let {
+              AppUtils.hideProgress(mdialog!!)
                 AndroidUtil.showToast(context!!, it.message,true)
             }
         })
 
         noticeBoardViewModel?.getNoticeListLiveData()?.observe(this, Observer {
+            AppUtils.hideProgress(mdialog!!)
             noticeBoardList.clear()
             noticeBoardList.addAll(it)
             if(noticeBoardList.size> 0){
@@ -107,7 +114,6 @@ class ExpiredNotice : Fragment() ,View.OnClickListener{
             }
 
             adapter.notifyDataSetChanged()
-            // dashboardViewModel?.setTimeTableAdapter(it)
         })
 
 
@@ -117,16 +123,9 @@ class ExpiredNotice : Fragment() ,View.OnClickListener{
 
     }
 
-//    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int, position: Int) {
-//        if (viewHolder is MyNoticeBoardAdapter.ViewHolder) {
-//            val deletedItem = noticeBoardList.get(viewHolder.adapterPosition)
-//            val deletedIndex = viewHolder.adapterPosition
-//
-//            // remove the item from recycler view
-//            adapter.removeItem(viewHolder.adapterPosition)
-//
-//        }
-//    }
-
+    fun showEmptyBox(){
+        binding!!.rlNoDataFound.visibility = View.VISIBLE
+        binding!!.rlActiveNotice.visibility = View.GONE
+    }
 
 }

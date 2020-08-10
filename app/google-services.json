@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "776844267147",
+    "firebase_url": "https://schoolone-5ae29.firebaseio.com",
+    "project_id": "schoolone-5ae29",
+    "storage_bucket": "schoolone-5ae29.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:776844267147:android:3d9e83772f7bc4df0bce8e",
+        "android_client_info": {
+          "package_name": "com.akshar.one"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "776844267147-1o9vhh2upjg6umrrdtue21oeaeumim61.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.akshar.one",
+            "certificate_hash": "a56f44f0f2292b32cd4b9129c761a0b27cdd9f30"
+          }
+        },
+        {
+          "client_id": "776844267147-57cr0qla7u2r026btkcpha6u78hq0k21.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCN-OUAoHzmpctlCAWDCOsOlwegWbYiG8E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "776844267147-57cr0qla7u2r026btkcpha6u78hq0k21.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,6 +1,7 @@
 package com.akshar.one.view.studentprofile
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
@@ -45,6 +46,7 @@ class CreateStudentProfile : AppCompatActivity(),View.OnClickListener{
     private val RESULT_LOAD = 423
     private val REQUEST_CAMERA = 433
     private var file: Uri? = null
+    private var dialog: Dialog? = null
     private var classDropDownModel : ClassDropDownModel = ClassDropDownModel()
     private var sectionList = SectionList()
     var bloodGroupList = arrayOf("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "Ab-")
@@ -340,6 +342,7 @@ class CreateStudentProfile : AppCompatActivity(),View.OnClickListener{
         model.studentContact.address.postalcode = etPostal.text.toString()
         studentViewModel.let {
             if(AksharSchoolApplication.context?.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true){
+                showProgressBar()
                 it!!.CreateStudentProfile(model)
             }
         }
@@ -354,12 +357,14 @@ class CreateStudentProfile : AppCompatActivity(),View.OnClickListener{
         })
 
         studentViewModel?.getErrorMutableLiveData()?.observe(this, Observer {
+            hideProgressBar()
             it.let {
                 AndroidUtil.showToast(currActivity,it.message,true)
             }
         })
 
         studentViewModel?.getSuccessLiveData()?.observe(this, Observer {
+            hideProgressBar()
             it.let {
                 AndroidUtil.showToast(currActivity,"User Created Successfully",false)
                 onBackPressed()
@@ -372,5 +377,15 @@ class CreateStudentProfile : AppCompatActivity(),View.OnClickListener{
     private fun showProgressIndicator(isLoading: Boolean?) {
         binding!!.linProgressIndicator.visibility = if (isLoading == true) View.VISIBLE else View.GONE
     }
+
+
+    fun showProgressBar(){
+        dialog =  AppUtils.showProgress(currActivity)
+    }
+
+    fun hideProgressBar(){
+        AppUtils.hideProgress(dialog!!)
+    }
+
 
 }

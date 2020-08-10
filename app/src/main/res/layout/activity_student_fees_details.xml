@@ -16,6 +16,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:background="@color/lightish_grey"
         android:layout_height="match_parent">
 
         <include
@@ -53,6 +54,7 @@
                         android:src="@drawable/dropdown"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="@dimen/_5sdp"
+                        android:visibility="gone"
                         android:layout_toEndOf="@+id/etClassName"
                         android:layout_height="@dimen/_18sdp"/>
 
@@ -83,6 +85,7 @@
                         android:src="@drawable/dropdown"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="@dimen/_5sdp"
+                        android:visibility="gone"
                         android:layout_toEndOf="@+id/tvAllStudents"
                         android:layout_height="@dimen/_18sdp"/>
 
@@ -111,9 +114,6 @@
 
 
             </RelativeLayout>
-
-
-
 
             </RelativeLayout>
 

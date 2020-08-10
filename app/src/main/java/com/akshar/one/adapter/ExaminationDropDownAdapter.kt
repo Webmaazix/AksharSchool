@@ -13,6 +13,8 @@ import com.akshar.one.databinding.ClassRowBinding
 import com.akshar.one.view.examschedule.ScheduleExamActivity
 import com.akshar.one.view.examschedule.ScheduledExamList
 import com.akshar.one.model.ExaminationDropDownModel
+import com.akshar.one.view.marksentry.inputselection.SelectOtherInputsActivity
+import com.akshar.one.view.messagecenter.SendMarksAndFeeReport
 
 import java.util.ArrayList
 
@@ -99,9 +101,13 @@ class ExaminationDropDownAdapter(private val mContext: Activity, private val lis
             if(!openTest){
                 if(mContext is ScheduleExamActivity){
                     (mContext).examSelectd(examModel)
+                }else if(mContext is SelectOtherInputsActivity){
+                    (mContext).examSelectd(examModel)
                 }
 
             }else if(mContext is ScheduledExamList){
+                (mContext).examSelectd(examModel)
+            }else if(mContext is SendMarksAndFeeReport){
                 (mContext).examSelectd(examModel)
             }
         }

@@ -123,8 +123,10 @@
                                     android:layout_width="0dp"
                                     android:text="@string/parents"
                                     android:layout_weight="1"
+                                    android:checked="true"
                                     android:textSize="@dimen/_11sp"
                                     android:textColor="@color/black"
+                                    android:buttonTint="@color/light_blue"
                                     android:fontFamily="@font/opensans_regular"
                                     android:textStyle="bold"
                                     android:layout_height="wrap_content"/>
@@ -134,6 +136,8 @@
                                     android:layout_width="0dp"
                                     android:text="@string/employees"
                                     android:layout_weight="1"
+                                    android:checked="true"
+                                    android:buttonTint="@color/light_blue"
                                     android:textSize="@dimen/_11sp"
                                     android:textColor="@color/black"
                                     android:fontFamily="@font/opensans_regular"
@@ -173,7 +177,7 @@
                                 android:fontFamily="@font/opensans_regular"
                                 android:padding="@dimen/_10sdp"
                                 android:layout_below="@+id/tvTitleLabel"
-                                android:background="@drawable/grey_outline_shape"
+                                android:background="@drawable/grey_stroke_shape"
                                 android:layout_marginTop="@dimen/_10sdp"/>
 
                         </RelativeLayout>
@@ -206,7 +210,7 @@
                                 android:paddingBottom="@dimen/_100sdp"
                                 android:textAlignment="viewStart"
                                 android:layout_below="@+id/tvDescLabel"
-                                android:background="@drawable/grey_outline_shape"
+                                android:background="@drawable/grey_stroke_shape"
                                 android:layout_marginTop="@dimen/_10sdp"/>
 
                         </RelativeLayout>
@@ -228,7 +232,7 @@
                                 <RelativeLayout
                                     android:layout_width="match_parent"
                                     android:layout_weight="1"
-                                    android:background="@drawable/grey_outline_shape"
+                                    android:background="@drawable/grey_stroke_shape"
                                     android:layout_height="wrap_content">
 
                                     <androidx.appcompat.widget.AppCompatImageView
@@ -254,7 +258,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_weight="1"
                                     android:layout_marginStart="@dimen/_7sdp"
-                                    android:background="@drawable/grey_outline_shape"
+                                    android:background="@drawable/grey_stroke_shape"
                                     android:layout_height="wrap_content">
 
                                     <androidx.appcompat.widget.AppCompatImageView

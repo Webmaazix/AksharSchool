@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="position"
+            type="java.lang.Integer" />
+
+        <variable
+            name="attendanceClassRoomViewModel"
+            type="com.akshar.one.viewmodels.attendance.AttendanceClassRoomViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/rlMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/_10sdp"
+            android:elevation="@dimen/_2sdp"
+            android:background="@drawable/white_square_shape"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Academic Year  : 2018-2019"
+                android:textSize="@dimen/_11sp"
+                android:fontFamily="@font/opensans_regular"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgForward"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:tint="@color/black"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/right_arrow"/>
+
+            <RelativeLayout
+                android:id="@+id/rlDetails"
+                android:layout_below="@+id/tvYear"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvFinalAmountLabel"
+                    android:layout_width="wrap_content"
+                    android:text="@string/final_amount"
+                    android:textSize="@dimen/_11sp"
+                    android:fontFamily="@font/opensans_light"
+                    android:layout_height="wrap_content"/>
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvFinalAmount"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:text="Rs. 3734547"
+                    android:textSize="@dimen/_11sp"
+                    android:fontFamily="@font/opensans_regular"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content"/>
+
+                <View
+                    android:id="@+id/vvFinalAmount"
+                    android:layout_width="match_parent"
+                    android:background="@color/lightishgray"
+                    android:layout_below="@+id/tvFinalAmount"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_height="@dimen/_1sdp"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvDueAmountLabel"
+                    android:layout_width="wrap_content"
+                    android:text="@string/due_amount"
+                    android:layout_below="@+id/vvFinalAmount"
+                    android:textSize="@dimen/_11sp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/opensans_light"
+                    android:layout_height="wrap_content"/>
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvDueAmount"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:text="Rs. 3734547"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_below="@+id/vvFinalAmount"
+                    android:textSize="@dimen/_11sp"
+                    android:fontFamily="@font/opensans_regular"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:layout_height="wrap_content"/>
+
+                <View
+                    android:id="@+id/vvDueAmount"
+                    android:layout_width="match_parent"
+                    android:background="@color/lightishgray"
+                    android:layout_below="@+id/tvDueAmount"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_height="@dimen/_1sdp"/>
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvOverDueAmountLabel"
+                    android:layout_width="wrap_content"
+                    android:text="@string/over_due_amount"
+                    android:textSize="@dimen/_11sp"
+                    android:layout_below="@+id/vvDueAmount"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/opensans_light"
+                    android:layout_height="wrap_content"/>
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvOverDueAmount"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:text="Rs. 3734547"
+                    android:layout_below="@+id/vvDueAmount"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textSize="@dimen/_11sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/opensans_regular"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+</layout>

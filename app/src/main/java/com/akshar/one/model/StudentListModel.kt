@@ -6,6 +6,10 @@ import java.io.Serializable
 
  class StudentListModel  : Serializable{
 
+    @SerializedName("isSelected")
+    @Expose
+    var isSelected = false
+
     @SerializedName("studentProfileId")
     @Expose
     var studentProfileId : Int? = null
@@ -46,6 +50,9 @@ import java.io.Serializable
     @Expose
     var bloodGroup : String? = null
 
+    @SerializedName("fullName")
+    @Expose
+    var fullName : String = ""
 
     @SerializedName("imageUrl")
     @Expose
@@ -54,6 +61,4 @@ import java.io.Serializable
     @SerializedName("studentContact")
     @Expose
     var studentContact : StudentContact = StudentContact()
-
-
 }

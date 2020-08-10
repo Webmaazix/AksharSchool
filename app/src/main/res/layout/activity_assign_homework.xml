@@ -14,68 +14,59 @@
             type="com.akshar.one.viewmodels.attendance.AttendanceClassRoomViewModel" />
     </data>
 
-
     <RelativeLayout
         android:layout_width="match_parent"
+        android:background="@color/white"
         android:layout_height="match_parent">
 
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/main_toolbar"/>
+
         <RelativeLayout
+            android:id="@+id/rlMain"
+            android:layout_below="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
-            <include
-                android:id="@+id/toolbar"
-                layout="@layout/main_toolbar"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvHomeworkList"
-                android:layout_below="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/_15sp"
-                android:visibility="gone"
-                android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content">
 
             <RelativeLayout
+                android:id="@+id/rlFragments"
+                android:background="@color/dim_white"
                 android:layout_width="match_parent"
-                android:layout_centerInParent="true"
                 android:layout_height="wrap_content">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/imgNodataFound"
-                    android:layout_width="@dimen/_90sdp"
-                    android:layout_centerInParent="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/nohomeworkcreated"
-                    android:background="@drawable/roundgrey"
-                    android:padding="@dimen/_7sdp"
-                    android:layout_height="@dimen/_90sdp"/>
-
-                <androidx.appcompat.widget.AppCompatTextView
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tbLayout"
                     android:layout_width="match_parent"
-                    android:textAlignment="center"
-                    android:layout_below="@+id/imgNodataFound"
-                    android:layout_marginTop="@dimen/_40sdp"
-                    android:fontFamily="@font/opensans_regular"
-                    android:text="@string/you_have_not_created_any_homework_yet_nclick_on_bottom_to_create_homework"
                     android:layout_height="wrap_content"/>
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/vpPager"
+                    android:layout_below="@+id/tbLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
 
 
             </RelativeLayout>
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgCreateHomework"
-                android:layout_width="@dimen/_40sdp"
-               android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:src="@drawable/add"
-                android:layout_margin="@dimen/_10sp"
-                android:background="@drawable/dark_blue_button_bg"
-                android:padding="@dimen/_12sdp"
-                android:layout_height="@dimen/_40sdp"/>
 
 
 
         </RelativeLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgCreateNotice"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:visibility="visible"
+            android:backgroundTint="@color/dark_blue"
+            android:background="@drawable/circle_white_solid_background"
+            android:src="@drawable/add"
+            android:padding="@dimen/_13sdp"
+            android:layout_margin="@dimen/_10sdp"
+            android:layout_height="@dimen/_40sdp"/>
 
 
     </RelativeLayout>

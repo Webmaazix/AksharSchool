@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="position"
+            type="java.lang.Integer" />
+
+        <variable
+            name="attendanceClassRoomViewModel"
+            type="com.akshar.one.viewmodels.attendance.AttendanceClassRoomViewModel" />
+    </data>
+
+
+    <RelativeLayout
+        android:id="@+id/rlMain"
+        android:layout_width="match_parent"
+        android:padding="@dimen/_5sdp"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSerialNumber"
+            android:layout_width="wrap_content"
+            android:textColor="@color/black"
+            android:text="01."
+            android:textSize="@dimen/_11sp"
+            android:fontFamily="@font/opensans_regular"
+            android:textStyle="bold"
+            android:padding="@dimen/_7sdp"
+            android:layout_height="wrap_content"/>
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvStudentName"
+            android:layout_width="match_parent"
+            android:textColor="@color/black"
+            android:text="Sanjay Singh"
+            android:textSize="@dimen/_11sp"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_toEndOf="@+id/tvSerialNumber"
+            android:padding="@dimen/_7sdp"
+            android:textStyle="bold"
+            android:fontFamily="@font/opensans_regular"
+            android:layout_toStartOf="@+id/etMarksEntry"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etMarksEntry"
+            android:layout_width="@dimen/_55sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:visibility="gone"
+            android:inputType="number"
+            android:background="@drawable/dark_grey_square_shape"
+            android:layout_alignParentEnd="true" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvMarks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:text="72"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:fontFamily="@font/opensans_regular"
+            android:layout_alignParentEnd="true" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_below="@+id/tvStudentName"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:background="@color/grey"/>
+    </RelativeLayout>
+
+</layout>

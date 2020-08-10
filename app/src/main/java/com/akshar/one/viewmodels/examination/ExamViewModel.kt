@@ -50,7 +50,7 @@ class ExamViewModel(application: Application) : BaseViewModel(application){
                 }catch (httpException : HttpException){
                     isLoading.postValue(false)
                     val errorResponse  = AppUtil.getErrorResponse(httpException.response()?.errorBody()?.string())
-                    errorResponse.let { getErrorMutableLiveData().postValue(it) }
+                    errorResponse.let { getExamDropDownErrorData().postValue(it) }
 
                 }catch (e : Exception){
                     isLoading.postValue(false)
@@ -90,8 +90,14 @@ class ExamViewModel(application: Application) : BaseViewModel(application){
             withContext(Dispatchers.IO){
                 try {
                     isLoading.postValue(false)
-                    isSuccess.postValue(true)
-                     examRepository?.updateExamSchedule(scheduleId,examModel)
+
+                    val data =  examRepository?.updateExamSchedule(scheduleId,examModel)
+                    if(data!= null){
+                        isSuccess.postValue(true)
+                    }else{
+                        isSuccess.postValue(false)
+                    }
+
 
                 }catch (httpException : HttpException){
                     isLoading.postValue(false)
@@ -139,14 +145,15 @@ class ExamViewModel(application: Application) : BaseViewModel(application){
                 try {
                     isLoading.postValue(false)
                     var  examList : ExaminationScheduleList? = null
-                    if(examId != 0){
-                        examList  = examRepository?.getExaminations(examId)
+                    if(testId != 0){
+                        examList  = examRepository?.getExaminationsTest(testId)
                         examList.let {
                             mutuableLiveDataExaminationScheduleList.postValue(examList)
                         }
 
+
                     }else{
-                        examList  = examRepository?.getExaminationsTest(testId)
+                        examList  = examRepository?.getExaminations(examId)
                         examList.let {
                             mutuableLiveDataExaminationScheduleList.postValue(examList)
                         }

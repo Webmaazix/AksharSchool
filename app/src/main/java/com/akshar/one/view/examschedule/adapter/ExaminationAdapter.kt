@@ -18,6 +18,8 @@ import com.akshar.one.swipelayout.SimpleSwipeListener
 import com.akshar.one.swipelayout.SwipeLayout
 import com.akshar.one.swipelayout.adapters.RecyclerSwipeAdapter
 import com.akshar.one.util.AndroidUtil
+import com.akshar.one.util.AppUtil
+import com.akshar.one.util.AppUtils
 import com.akshar.one.viewmodels.ViewModelFactory
 import com.akshar.one.viewmodels.examination.ExamViewModel
 import com.daimajia.androidanimations.library.Techniques
@@ -26,18 +28,13 @@ import kotlinx.android.synthetic.main.row_notice.view.*
 import kotlinx.android.synthetic.main.row_scheduled_exam.view.*
 
 class ExaminationAdapter(private val mContext: Activity, private val list: ArrayList<ScheduleList>?) :
-    RecyclerSwipeAdapter<ExaminationAdapter.ViewHolder>() {
+    RecyclerView.Adapter<ExaminationAdapter.ViewHolder>() {
 
     var classDropDownModel: ClassDropDownModel? = null
      var sectionModel: SectionList? =null
     var testModel : TestListModel? =null
     var examDropDownModel: ExaminationDropDownModel? = null
 
-
-
-    override fun getSwipeLayoutResourceId(position: Int): Int {
-        return R.id.swipe
-    }
 
     private var examViewModel : ExamViewModel? = null
 
@@ -59,18 +56,18 @@ class ExaminationAdapter(private val mContext: Activity, private val list: Array
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val model = list?.get(position)
-        viewHolder.binding.swipe.setShowMode(SwipeLayout.ShowMode.LayDown)
-        viewHolder.binding.swipe.addSwipeListener(object : SimpleSwipeListener() {
-            override fun onOpen(layout: SwipeLayout) {
-                YoYo.with(Techniques.Tada).duration(500).delay(100)
-                    .playOn(layout.findViewById(R.id.imgDelete))
-            }
-        })
+//        viewHolder.binding.swipe.setShowMode(SwipeLayout.ShowMode.LayDown)
+//        viewHolder.binding.swipe.addSwipeListener(object : SimpleSwipeListener() {
+//            override fun onOpen(layout: SwipeLayout) {
+//                YoYo.with(Techniques.Tada).duration(500).delay(100)
+//                    .playOn(layout.findViewById(R.id.imgDelete))
+//            }
+//        })
 
-        viewHolder.itemView.rlDelete.setOnClickListener{
+        viewHolder.binding.rlDelete.setOnClickListener{
             deleteItem(position)
         }
-        viewHolder.itemView.rlEdit.setOnClickListener{
+        viewHolder.binding.rlEdit.setOnClickListener{
             updateItem(model!!)
         }
         var name = ""
@@ -80,7 +77,17 @@ class ExaminationAdapter(private val mContext: Activity, private val list: Array
             name = "N/A"
         }
         viewHolder.binding.tvExamName.text = name
-        val time = model?.startTime+" - "+model?.endTime
+
+        var startDate = ""
+        var endDate = ""
+        if(model?.endTime != null){
+          startDate =   AppUtil.formatDate(model.startTime)
+        }
+        if(model?.endTime != null){
+            endDate  = AppUtil.formatDate(model.endTime)
+        }
+
+        val time = "$startDate - $endDate"
         viewHolder.binding.tvTime.text = time
         viewHolder.binding.tvDate.text = model?.date
         //  holder.binding.tvClassName.text = model.schedule.get(0).subjectName

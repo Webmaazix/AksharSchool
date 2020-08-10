@@ -16,6 +16,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:background="@color/lightish_grey"
         android:layout_height="match_parent">
 
         <RelativeLayout
@@ -26,7 +27,7 @@
                 android:id="@+id/rlClassSection"
                 android:layout_width="match_parent"
                 android:layout_margin="@dimen/_10sdp"
-                android:background="@drawable/grey_round_shape"
+                android:background="@drawable/rounded_light_grey_bg"
                 android:paddingStart="@dimen/_10sdp"
                 android:paddingEnd="@dimen/_10sdp"
                 android:layout_height="wrap_content"
@@ -91,6 +92,7 @@
                 android:layout_height="wrap_content"/>
 
         </RelativeLayout>
+
     </RelativeLayout>
 
 </layout>

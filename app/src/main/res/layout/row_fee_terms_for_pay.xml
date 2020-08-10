@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="position"
+            type="java.lang.Integer" />
+
+        <variable
+            name="attendanceClassRoomViewModel"
+            type="com.akshar.one.viewmodels.attendance.AttendanceClassRoomViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/rlMain"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/_10sdp"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/cbPay"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_centerVertical="true"
+                android:buttonTint="@color/light_blue"
+                android:layout_height="@dimen/_20sdp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTermName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Term 1"
+                android:layout_toEndOf="@+id/cbPay"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:textSize="@dimen/_10sp"
+                android:textColor="@color/black"
+                android:layout_centerVertical="true"
+                android:fontFamily="@font/opensans_regular" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etAmount"
+                android:hint="Enter amount"
+                android:textColor="@color/black"
+                android:background="@drawable/grey_stroke_shape"
+                android:layout_alignParentEnd="true"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:paddingTop="@dimen/_5sdp"
+                android:inputType="number"
+                android:paddingBottom="@dimen/_5sdp"
+                android:textSize="@dimen/_10sp"
+                android:fontFamily="@font/opensans_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</layout>

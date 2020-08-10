@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AksharSchool</string>
+    <string name="app_name">SchoolOne</string>
 
     <string name="no_internet_available">No internet available. Please try later!</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -49,13 +49,11 @@
     <string name="late">Late</string>
     <string name="leave">Leave</string>
     <string name="on_leave">On leave</string>
-    <string name="save">Save</string>
     <string name="mark_all_as">Mark all as</string>
     <string name="present">Present</string>
     <string name="holiday">Holiday</string>
     <string name="week_off">Week - Off</string>
     <string name="select_your_class_amp_section"><![CDATA[Select your class & section]]></string>
-    <string name="select_category">Select Category</string>
     <string name="select_period">Select Period</string>
     <string name="select_class_section"><![CDATA[Select Class & Section]]></string>
     <string name="edit">Edit</string>
@@ -126,7 +124,7 @@
     <string name="due_amount">Due Amount</string>
     <string name="pay_all">Pay all</string>
     <string name="payment_date">Payment Date</string>
-    <string name="recieved_by">Recieved By</string>
+    <string name="recieved_by">Received By :</string>
     <string name="remarks">Remarks</string>
     <string name="bank_account">Bank Account</string>
     <string name="enter_new_password_to_change_your_current_password">Enter New Password to change your current password</string>
@@ -154,9 +152,7 @@
     <string name="general_n_notification">General \n Notification</string>
     <string name="late_entry">Late Entry</string>
     <string name="select_date">Select Date</string>
-    <string name="showing_all_students">Showing All Students</string>
     <string name="select_all">Select All</string>
-    <string name="send_absent_report">Send Absent Report</string>
     <string name="date">Date</string>
     <string name="recent">Recent</string>
     <string name="notice_board_is_empty_please_click_on_n_bottom_to_add_one">Notice board is empty, please click + on \n  bottom to add one</string>
@@ -241,4 +237,44 @@
     <string name="ucrop_rotate">Rotate</string>
     <string name="ucrop_scale">Scale</string>
     <string name="ucrop_crop">Crop</string>
+    <string name="type_your_message_here">Type your message here</string>
+    <string name="select_examination_type">Select examination type</string>
+    <string name="send_absent_report">Send Absent Report</string>
+    <string name="send_home_work">Send Home Work</string>
+    <string name="send_fee_reminder">Send Fee Reminder</string>
+    <string name="send_employee_notification">Send Employee Notification</string>
+    <string name="send_late_entry">Send Late Entry</string>
+    <string name="send_general_notification">Send General Notification</string>
+    <string name="exam_schedule_is_not_available">Exam Schedule is not available</string>
+    <string name="assessment_areas">Assessment Areas</string>
+    <string name="scholastic">Scholastic</string>
+    <string name="co_scholastic">Co-Scholastic</string>
+    <string name="select_category">Select Category</string>
+    <string name="select_skills">Select Skills</string>
+    <string name="start_assessment">Start Assessment</string>
+    <string name="save">Save</string>
+    <string name="edit_marks">Edit Marks</string>
+    <string name="select_shift">Select Shift</string>
+    <string name="student">Student</string>
+    <string name="showing_all_students">Showing All Students</string>
+    <string name="showing_all_employees">Showing All Employees</string>
+    <string name="send_message">Send Message</string>
+    <string name="schedule_message">Schedule Message</string>
+    <string name="email_address_">Email Address</string>
+    <string name="update_notice">Update Notice</string>
+    <string name="notice_detail">Notice Detail</string>
+    <string name="select_department">Select Department</string>
+    <string name="setup_pin">Setup Pin</string>
+    <string name="general_notification">General Notification</string>
+    <string name="student_notification">Student Notiification</string>
+    <string name="send_report">Send Report</string>
+    <string name="payment_history_not_available">Payment history not available</string>
+    <string name="fees_detail_not_available">Fees detail not available</string>
+    <string name="paid_amount">Paid Amount</string>
+    <string name="academic_year">Academic Year</string>
+    <string name="make_payment">Make Payment</string>
+    <string name="send_marks_report">Send Marks Report</string>
+    <string name="check_number">Check Number</string>
+    <string name="transaction_id">Transaction Id</string>
+    <string name="transaction_status">Transaction Status</string>
 </resources>

@@ -13,8 +13,10 @@
             type="com.akshar.one.viewmodels.attendance.AttendanceClassRoomViewModel" />
     </data>
 
+
     <RelativeLayout
         android:layout_width="match_parent"
+        android:background="@color/lightish_grey"
         android:layout_height="match_parent">
 
         <include
@@ -34,7 +36,7 @@
             <RelativeLayout
                 android:id="@+id/rlFees"
                 android:layout_width="match_parent"
-                android:background="@color/white"
+                android:background="@color/light_grey_special"
                 android:layout_height="wrap_content">
 
 
@@ -45,61 +47,20 @@
                     android:layout_height="wrap_content">
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvAcademicYear"
                         android:layout_width="wrap_content"
-                        android:text="@string/tution_fee"
+                        android:text="Academic Year 2019-20"
                         android:textColor="@color/black"
                         android:padding="@dimen/_5sdp"
                         android:fontFamily="@font/opensans_regular"
-                        android:textSize="@dimen/_12sp"
-                        android:layout_height="wrap_content"/>
-
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:text="500"
-                        android:padding="@dimen/_5sdp"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:layout_alignParentEnd="true"
-                        android:textColor="@color/black"
-                        android:fontFamily="@font/opensans_bold"
-                        android:textSize="@dimen/_12sp"
-                        android:layout_height="wrap_content"/>
-
-
-                </RelativeLayout>
-                <RelativeLayout
-                    android:id="@+id/rlSchoolFee"
-                    android:layout_below="@+id/rlTutionFee"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:text="@string/school_fee"
-                        android:textColor="@color/black"
-                        android:paddingStart="@dimen/_7sdp"
-                        android:paddingEnd="@dimen/_7sdp"
-                        android:fontFamily="@font/opensans_regular"
-                        android:textSize="@dimen/_12sp"
-                        android:layout_height="wrap_content"/>
-
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:text="1500"
-                        android:paddingStart="@dimen/_7sdp"
-                        android:paddingEnd="@dimen/_7sdp"
-                        android:layout_alignParentEnd="true"
-                        android:textColor="@color/black"
-                        android:fontFamily="@font/opensans_bold"
-                        android:textSize="@dimen/_12sp"
+                        android:textSize="@dimen/_11sp"
                         android:layout_height="wrap_content"/>
 
 
                 </RelativeLayout>
                 <RelativeLayout
                     android:id="@+id/rlTotalAmount"
-                    android:layout_below="@+id/rlSchoolFee"
+                    android:layout_below="@+id/rlTutionFee"
                     android:layout_width="match_parent"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginBottom="@dimen/_10sdp"
@@ -112,11 +73,12 @@
                         android:paddingStart="@dimen/_7sdp"
                         android:paddingEnd="@dimen/_7sdp"
                         android:fontFamily="@font/opensans_regular"
-                        android:textSize="@dimen/_12sp"
+                        android:textSize="@dimen/_11sp"
                         android:layout_height="wrap_content"/>
 
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvTotalAmount"
                         android:layout_width="wrap_content"
                         android:text="1500"
                         android:paddingStart="@dimen/_7sdp"
@@ -124,7 +86,7 @@
                         android:layout_alignParentEnd="true"
                         android:textColor="@color/black"
                         android:fontFamily="@font/opensans_bold"
-                        android:textSize="@dimen/_12sp"
+                        android:textSize="@dimen/_11sp"
                         android:layout_height="wrap_content"/>
 
 
@@ -137,9 +99,11 @@
                 android:id="@+id/rlMakePayment"
                 android:layout_below="@+id/rlFees"
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/_25sdp"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:layout_marginEnd="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_7sdp"
+                android:layout_marginEnd="@dimen/_7sdp"
+                android:elevation="@dimen/_2sdp"
+                android:layout_marginBottom="@dimen/_80sdp"
                 android:background="@drawable/white_nopadding_shape"
                 android:layout_height="wrap_content">
 
@@ -150,14 +114,14 @@
                     android:layout_margin="@dimen/_10sdp"
                     android:layout_height="wrap_content">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvPaymentDateLabel"
-                        android:layout_width="match_parent"
-                        android:text="@string/payment_date"
-                        android:textSize="@dimen/_11sp"
-                        android:textColor="@color/black"
-                        android:fontFamily="@font/opensans_bold"
-                        android:layout_height="wrap_content"/>
+<!--                    <androidx.appcompat.widget.AppCompatTextView-->
+<!--                        android:id="@+id/tvPaymentDateLabel"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:text="@string/payment_date"-->
+<!--                        android:textSize="@dimen/_11sp"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:fontFamily="@font/opensans_regular"-->
+<!--                        android:layout_height="wrap_content"/>-->
 
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -166,21 +130,21 @@
                         android:text="@string/payment_date"
                         android:textSize="@dimen/_11sp"
                         android:textColor="@color/black"
-                        android:fontFamily="@font/opensans_bold"
+                        android:fontFamily="@font/opensans_regular"
                         android:layout_height="wrap_content"/>
 
                     <RelativeLayout
                         android:id="@+id/rlPaymentDate"
                         android:layout_width="match_parent"
                         android:layout_below="@+id/tvPaymentDate"
-                        android:background="@drawable/grey_outline_shape"
+                        android:background="@drawable/grey_stroke_shape"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:layout_height="wrap_content">
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/etPaymentDate"
                             android:layout_width="match_parent"
-                            android:padding="@dimen/_10sdp"
+                            android:padding="@dimen/_7sdp"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_11sp"
                             android:fontFamily="@font/opensans_regular"
@@ -216,7 +180,7 @@
                         android:text="@string/recieved_by"
                         android:textSize="@dimen/_11sp"
                         android:textColor="@color/black"
-                        android:fontFamily="@font/opensans_bold"
+                        android:fontFamily="@font/opensans_regular"
                         android:layout_height="wrap_content"/>
 
                     <androidx.appcompat.widget.AppCompatEditText
@@ -226,8 +190,8 @@
                         android:textColor="@color/black"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:layout_below="@+id/tvRecievedByLabel"
-                        android:background="@drawable/grey_outline_shape"
-                        android:padding="@dimen/_10sdp"
+                        android:background="@drawable/grey_stroke_shape"
+                        android:padding="@dimen/_8sdp"
                         android:layout_height="wrap_content"/>
 
                 </RelativeLayout>
@@ -249,25 +213,97 @@
                         android:text="@string/payment_method"
                         android:textSize="@dimen/_11sp"
                         android:textColor="@color/black"
-                        android:fontFamily="@font/opensans_bold"
+                        android:fontFamily="@font/opensans_regular"
                         android:layout_height="wrap_content"/>
 
-                    <androidx.appcompat.widget.AppCompatEditText
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/etPaymentMethod"
                         android:layout_width="match_parent"
                         android:textSize="@dimen/_11sp"
                         android:textColor="@color/black"
+                        android:layout_centerVertical="true"
                         android:drawableEnd="@drawable/dropdown"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:layout_below="@+id/tvPaymentMethodLabel"
-                        android:background="@drawable/grey_outline_shape"
+                        android:background="@drawable/grey_stroke_shape"
                         android:padding="@dimen/_5sdp"
                         android:layout_height="wrap_content"/>
 
                 </RelativeLayout>
                 <RelativeLayout
-                    android:id="@+id/rlRemarks"
+                    android:id="@+id/rlCheckNumber"
                     android:layout_below="@+id/rlPaymentMethod"
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:paddingStart="@dimen/_7sdp"
+                    android:paddingEnd="@dimen/_7sdp"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content">
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvCheckNumberLabel"
+                        android:layout_width="match_parent"
+                        android:text="@string/check_number"
+                        android:textSize="@dimen/_11sp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/opensans_regular"
+                        android:layout_height="wrap_content"/>
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/etCheckNumber"
+                        android:layout_width="match_parent"
+                        android:textSize="@dimen/_11sp"
+                        android:textColor="@color/black"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_below="@+id/tvCheckNumberLabel"
+                        android:background="@drawable/grey_stroke_shape"
+                        android:padding="@dimen/_7sdp"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/rlTransactionStatus"
+                    android:layout_below="@+id/rlCheckNumber"
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:paddingStart="@dimen/_7sdp"
+                    android:visibility="gone"
+                    android:paddingEnd="@dimen/_7sdp"
+                    android:layout_height="wrap_content">
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvTransactionStatusLabel"
+                        android:layout_width="match_parent"
+                        android:text="@string/transaction_status"
+                        android:textSize="@dimen/_11sp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/opensans_regular"
+                        android:layout_height="wrap_content"/>
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/etTransactionStatus"
+                        android:layout_width="match_parent"
+                        android:textSize="@dimen/_11sp"
+                        android:textColor="@color/black"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_below="@+id/tvTransactionStatusLabel"
+                        android:background="@drawable/grey_stroke_shape"
+                        android:padding="@dimen/_7sdp"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlRemarks"
+                    android:layout_below="@+id/rlTransactionStatus"
                     android:layout_width="match_parent"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
@@ -283,7 +319,7 @@
                         android:text="@string/remarks"
                         android:textSize="@dimen/_11sp"
                         android:textColor="@color/black"
-                        android:fontFamily="@font/opensans_bold"
+                        android:fontFamily="@font/opensans_regular"
                         android:layout_height="wrap_content"/>
 
                     <androidx.appcompat.widget.AppCompatEditText
@@ -293,8 +329,8 @@
                         android:textColor="@color/black"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:layout_below="@+id/tvRemarksLabel"
-                        android:background="@drawable/grey_outline_shape"
-                        android:padding="@dimen/_10sdp"
+                        android:background="@drawable/grey_stroke_shape"
+                        android:padding="@dimen/_8sdp"
                         android:layout_height="wrap_content"/>
 
                 </RelativeLayout>
@@ -318,7 +354,7 @@
                         android:text="@string/bank_account"
                         android:textSize="@dimen/_11sp"
                         android:textColor="@color/black"
-                        android:fontFamily="@font/opensans_bold"
+                        android:fontFamily="@font/opensans_regular"
                         android:layout_height="wrap_content"/>
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -328,17 +364,15 @@
                         android:textColor="@color/black"
                         android:drawableEnd="@drawable/dropdown"
                         android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_centerVertical="true"
                         android:layout_below="@+id/tvBankAccountLabel"
-                        android:background="@drawable/grey_outline_shape"
-                        android:padding="@dimen/_7sdp"
+                        android:background="@drawable/grey_stroke_shape"
+                        android:padding="@dimen/_5sdp"
                         android:layout_height="wrap_content"/>
 
                 </RelativeLayout>
 
-
             </RelativeLayout>
-
-
 
         </RelativeLayout>
 
@@ -346,6 +380,7 @@
 
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSave"
             android:layout_width="match_parent"
             android:background="@color/dark_blue"
             android:text="@string/save"

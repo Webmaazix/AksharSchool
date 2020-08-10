@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="position"
+            type="java.lang.Integer" />
+
+        <variable
+            name="attendanceClassRoomViewModel"
+            type="com.akshar.one.viewmodels.attendance.AttendanceClassRoomViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/rlMain"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/_10sdp"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTermName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Term 1"
+                android:textSize="@dimen/_11sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/opensans_regular" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvDueDate"
+                android:text="Due Date : 12 june 2020"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11sp"
+                android:fontFamily="@font/opensans_regular"
+                android:layout_below="@+id/tvTermName"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_height="wrap_content"/>
+
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvActualAmountLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Actual Amount "
+                android:textSize="@dimen/_11sp"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_below="@+id/tvDueDate"
+                android:textColor="@color/black"
+                android:fontFamily="@font/opensans_light" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvActuaAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rs 1500"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_below="@+id/tvDueDate"
+                android:textSize="@dimen/_11sp"
+                android:fontFamily="@font/opensans_regular" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvConcessionLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Concession"
+                android:textSize="@dimen/_11sp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_below="@+id/tvActuaAmount"
+                android:textColor="@color/black"
+                android:fontFamily="@font/opensans_light" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvConcession"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rs 1500"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_below="@+id/tvActuaAmount"
+               android:layout_alignParentEnd="true"
+                android:textSize="@dimen/_11sp"
+                android:fontFamily="@font/opensans_regular" />
+
+ <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvFinalAmountLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Final Amount"
+                android:textSize="@dimen/_11sp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_below="@+id/tvConcession"
+                android:textColor="@color/black"
+                android:fontFamily="@font/opensans_light" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvFinalAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rs 1500"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_below="@+id/tvConcession"
+               android:layout_alignParentEnd="true"
+                android:textSize="@dimen/_11sp"
+                android:fontFamily="@font/opensans_regular" />
+ <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvDueAmountLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Due Amount"
+                android:textSize="@dimen/_11sp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_below="@+id/tvFinalAmount"
+                android:textColor="@color/black"
+                android:fontFamily="@font/opensans_light" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvDueAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rs 1500"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_below="@+id/tvFinalAmount"
+               android:layout_alignParentEnd="true"
+                android:textSize="@dimen/_11sp"
+                android:fontFamily="@font/opensans_regular" />
+
+            <View
+                android:id="@+id/vv2"
+                android:layout_width="match_parent"
+                android:background="@color/ultra_light_grey"
+                android:layout_below="@+id/tvDueAmount"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_height="@dimen/_1sdp"/>
+
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+</layout>

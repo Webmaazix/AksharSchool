@@ -4,13 +4,16 @@ import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.akshar.one.R
 import com.akshar.one.databinding.StudentCellBinding
 import com.akshar.one.model.StudentListModel
+import com.akshar.one.view.feeandpayments.StudentFeesDetails
+import com.akshar.one.view.feeandpayments.StudentListForFeesFragment
 import com.akshar.one.view.studentprofile.ViewStudentProfileActivity
 
-class StudentListAdapter(private val mContext: Activity, private val studentList: ArrayList<StudentListModel>?) :
+class StudentListAdapter(private val mContext: Activity, private val studentList: ArrayList<StudentListModel>?,private var fragment : Fragment) :
     RecyclerView.Adapter<StudentListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -46,7 +49,12 @@ class StudentListAdapter(private val mContext: Activity, private val studentList
 
 
         holder.binding.rlMain.setOnClickListener {
-           ViewStudentProfileActivity.open(mContext,studentList!!,position)
+            if(fragment is StudentListForFeesFragment){
+                StudentFeesDetails.open(mContext,model!!)
+            }else{
+                ViewStudentProfileActivity.open(mContext,studentList!!,position)
+            }
+
         }
 
     }

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -27,8 +28,11 @@ import com.akshar.one.viewmodels.dashboard.DashboardViewModel
 import kotlin.collections.ArrayList
 import android.view.*
 import androidx.appcompat.widget.PopupMenu
+import com.akshar.one.util.AppUtils
 import com.akshar.one.view.birthday.BirthdayActivity
 import com.akshar.one.view.activity.MainActivity
+import com.akshar.one.view.home.adapter.CollectionAdapter
+import com.akshar.one.view.home.adapter.ExpencesAdapter
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import java.text.DecimalFormat
 
@@ -49,7 +53,7 @@ class DashboardActivity : BaseFragment(),View.OnClickListener {
     private lateinit var currActivity: Activity
     private lateinit var adapter : TimeTableAdapter
     private lateinit var birthDayadapter : BirthDayAdapter
-    private var timeTableList = ArrayList<TimeTableModel>()
+    private var timeTableList = ArrayList<PeriodTimeTable>()
     private var birthDayList = ArrayList<BirthDayModel>()
     private var currentYearJan : String? = null
     private var dialogCommonOptionsBinding: DialogCommonOptionsBinding? = null
@@ -61,6 +65,13 @@ class DashboardActivity : BaseFragment(),View.OnClickListener {
     private var expenseGroupBy = "FEE_HEAD"
     private var expenseFromDate = ""
     private var expenseToDate = ""
+    private lateinit var collectionAdapter : CollectionAdapter
+    private lateinit var expencesAdapter : ExpencesAdapter
+    private var collectionList = ArrayList<FeePayment>()
+    private var expenceList = ArrayList<FeePayment>()
+     var collectionAmountFloatArray = ArrayList<Float>()
+    var collectionColorArray = ArrayList<Int>()
+    var colorsArray = Array<Int>(12){0}
 
     companion object {
         @JvmStatic
@@ -80,6 +91,7 @@ class DashboardActivity : BaseFragment(),View.OnClickListener {
         loginModel = SessionManager.getLoginModel()
         currActivity = activity!!
         employeeId = loginModel.let {it?.appsList?.get(0)?.userUniqueId!!  }
+
         //val datee = AppUtil.getCurrentDateTime()
         date = AppUtil.getCurrentDate()
         currentYearJan = AppUtil.getCurrentYear().toString()+"-01-01"
@@ -88,6 +100,14 @@ class DashboardActivity : BaseFragment(),View.OnClickListener {
         fromDate = currentYearJan!!
         toDate = date!!
         setAdapter()
+        colorsArray = arrayOf(R.color.light_blue,R.color.green_normal,
+            R.color.light_yellow,R.color.dark_yellow,
+            R.color.orange,R.color.science_blue,R.color.maroon,
+            R.color.hindi_orange,R.color.english_pink,R.color.bio_purple,
+            R.color.physics_pink,
+            R.color.socialstudy_purple,R.color.civics_green,
+            R.color.chemistry_blue,R.color.economics_purple)
+
         return binding?.root
     }
 
@@ -122,28 +142,67 @@ class DashboardActivity : BaseFragment(),View.OnClickListener {
 
         dashboardViewModel?.let {
             if (context?.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true) {
+                showProgressBar()
                 it.getTimeTableOfEmployee(employeeId,date!!) }
         }
         dashboardViewModel?.let {
             if (context?.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true) {
+             //   showProgressBar()
                 it.getBirthdays(date!!,date!!) }
         }
         dashboardViewModel?.let {
             if (context?.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true) {
                 it.getAllFinanceSummery(currentYearJan!!,date!!) }
         }
-
+        setCollectionAdapter()
         observers()
     }
 
     private fun observers() {
+
         dashboardViewModel?.getErrorMutableLiveData()?.observe(this, Observer {
+            hideProgressBar()
             it?.let {
                 AndroidUtil.showToast(context!!, it.message,true)
             }
         })
 
+        dashboardViewModel?.getCollectionErrorMutableLiveData()?.observe(this, Observer {
+            it?.let {
+                if(it.status == 404){
+                   binding!!.pieChartCollection.visibility = View.GONE
+                   binding!!.rlPaidCollection.visibility = View.GONE
+//                   binding!!.rlDueCollection.visibility = View.GONE
+                   binding!!.imgEmptyCollection.visibility = View.VISIBLE
+                   binding!!.tvErrorMessage.visibility = View.VISIBLE
+                   binding!!.tvErrorMessage.text = it.message
+                   binding!!.tvTotalFinanceAmountCollection.text = "₹ 0"
+                }else{
+                      AndroidUtil.showToast(context!!, it.message,true)
+                }
+
+            }
+        })
+
+        dashboardViewModel?.getExpenseErrorMutableLiveData()?.observe(this, Observer {
+            it?.let {
+                if(it.status == 404){
+                    binding!!.pieChartExpence.visibility = View.GONE
+                    binding!!.rlPaidExpence.visibility = View.GONE
+//                    binding!!.rlDueExpence.visibility = View.GONE
+                    binding!!.imgEmptyExpense.visibility = View.VISIBLE
+                    binding!!.tvTotalFinanceAmountExpence.text = "₹ 0"
+                    binding!!.tvErrorMessageExpence.visibility = View.VISIBLE
+                    binding!!.tvErrorMessageExpence.text = it.message
+                }else{
+                    AndroidUtil.showToast(context!!, it.message,true)
+                }
+
+            }
+        })
+
         dashboardViewModel?.getTimeTableLiveData()?.observe(this, Observer {
+            hideProgressBar()
             timeTableList.clear()
             timeTableList.addAll(it)
             if(timeTableList.size > 0){
@@ -156,7 +215,9 @@ class DashboardActivity : BaseFragment(),View.OnClickListener {
             adapter.notifyDataSetChanged()
            // dashboardViewModel?.setTimeTableAdapter(it)
         })
+
         dashboardViewModel?.getBirthdayLiveData()?.observe(this, Observer {
+          //  hideProgressBar()
             birthDayList.clear()
             birthDayList.addAll(it)
             if(birthDayList.size > 0){
@@ -184,9 +245,9 @@ class DashboardActivity : BaseFragment(),View.OnClickListener {
             setFinanceData(it)
         })
 
-        dashboardViewModel?.getIsLoading()?.observe(this, Observer {
-            showProgressIndicator(it)
-        })
+//        dashboardViewModel?.getIsLoading()?.observe(this, Observer {
+//            showProgressIndicator(it)
+//        })
 
     }
 
@@ -202,6 +263,8 @@ class DashboardActivity : BaseFragment(),View.OnClickListener {
         binding!!.rlWeekExpence.setOnClickListener(this)
         binding!!.rlDay.setOnClickListener(this)
         binding!!.rlSeeAll.setOnClickListener(this)
+        binding!!.tvSeeAllCollection.setOnClickListener(this)
+        binding!!.tvSeeAllExpence.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -229,6 +292,13 @@ class DashboardActivity : BaseFragment(),View.OnClickListener {
             R.id.rlSeeAll ->{
                 BirthdayActivity.open(currActivity)
             }
+            R.id.tvSeeAllCollection ->{
+                ExpandCollectionAndExpenceActivity.open(currActivity,collectionList)
+            }
+            R.id.tvSeeAllExpence ->{
+                ExpandCollectionAndExpenceActivity.open(currActivity,collectionList)
+            }
+
         }
     }
 
@@ -260,180 +330,185 @@ class DashboardActivity : BaseFragment(),View.OnClickListener {
                 R.color.green_normal,
                 R.color.light_yellow))
         }
+
         if(it.expenseSummary!= null){
-            val maintainString = formatter.format(it.expenseSummary.Maintenance)
-            val maintenance = "₹ "+maintainString
-            val transportString = formatter.format(it.expenseSummary.Transport)
-            val transport = "₹ "+transportString
-            val total = it.expenseSummary.Maintenance!!+it.expenseSummary.Transport!!
-            val totalString = formatter.format(total)
-            val tottalExpence = "₹ "+totalString
-            binding?.tvPaidAmountExpence!!.text = maintenance
-            binding?.tvDueAmountExpence!!.text = transport
+            expenceList.clear()
+            collectionAmountFloatArray.clear()
+            collectionColorArray.clear()
+            expenceList.addAll(it.expenseSummary)
+            expencesAdapter.notifyDataSetChanged()
+            var totalAmount = 0.0
+
+            if(expenceList.size > 4){
+                binding!!.tvSeeAllExpence.visibility =View.VISIBLE
+            }else{
+                binding!!.tvSeeAllExpence.visibility =View.GONE
+            }
+
+            for(i in 0 until it.expenseSummary.size){
+                collectionAmountFloatArray.add(it.expenseSummary[i].value.toFloat())
+                collectionColorArray.add(colorsArray[i])
+
+                if(totalAmount == 0.0){
+                    totalAmount = it.expenseSummary[i].value.toDouble()
+                }else {
+                    totalAmount = totalAmount+it.expenseSummary[i].value.toDouble()
+                }
+            }
+
+            val totalString = formatter.format(totalAmount)
+            val tottalExpence = "₹ $totalString"
             binding?.tvTotalFinanceAmountExpence!!.text = tottalExpence
 
-            binding?.pieChartExpence!!.setDataPoints(floatArrayOf(
-                it.expenseSummary.Maintenance.toFloat(),
-                it.expenseSummary.Transport.toFloat()))
-            binding?.pieChartExpence!!.setCenterColor(R.color.white)
-            binding?.pieChartExpence!!.setSliceColor(intArrayOf(
-                R.color.maroon,
-                R.color.orange))
-
+            Handler().postDelayed({
+                binding?.pieChartExpence!!.setDataPoints(collectionAmountFloatArray.toFloatArray())
+                binding?.pieChartExpence!!.setCenterColor(R.color.white)
+                binding?.pieChartExpence!!.setSliceColor(collectionColorArray.toIntArray())
+            },3000)
         }
-        if(it.feePayment!= null){
-            val admissionString = formatter.format(it.feePayment.Admission_Fee)
-            val admissionFee = "₹ "+admissionString
-            val tutionString = formatter.format(it.feePayment.TUTION_FEE)
-            val tutionFee = "₹ "+tutionString
-            val total = it.feePayment.Admission_Fee!!+it.feePayment.TUTION_FEE!!
-            val totalString = formatter.format(total)
-            val tottalExpence = "₹ "+totalString
+        if(it.feePayment != null){
 
-            binding?.tvPaidAmountCollection!!.text = admissionFee
-            binding?.tvDueAmountCollection!!.text = tutionFee
+            collectionList.clear()
+            collectionAmountFloatArray.clear()
+            collectionColorArray.clear()
+            collectionList.addAll(it.feePayment)
+            collectionAdapter.notifyDataSetChanged()
+            var totalAmount = 0.0
+
+            if(collectionList.size > 4){
+                binding!!.tvSeeAllCollection.visibility = View.VISIBLE
+            }else{
+                binding!!.tvSeeAllCollection.visibility = View.GONE
+            }
+
+            for(i in 0 until it.feePayment.size){
+                collectionAmountFloatArray.add(it.feePayment[i].value.toFloat())
+                collectionColorArray.add(colorsArray[i])
+
+                if(totalAmount == 0.0){
+                    totalAmount = it.feePayment[i].value.toDouble()
+                }else {
+                    totalAmount = totalAmount+it.feePayment[i].value.toDouble()
+                }
+            }
+            val totalString = formatter.format(totalAmount)
+            val tottalExpence = "₹ $totalString"
             binding?.tvTotalFinanceAmountCollection!!.text = tottalExpence
 
-            binding?.pieChartCollection!!.setDataPoints(floatArrayOf(
-                it.feePayment.Admission_Fee.toFloat(),
-                it.feePayment.TUTION_FEE.toFloat()))
+
+            Handler().postDelayed({
+
+
+                   binding?.pieChartCollection!!.setDataPoints(collectionAmountFloatArray.toFloatArray())
+                    binding?.pieChartCollection!!.setCenterColor(R.color.white)
+                    binding?.pieChartCollection!!.setSliceColor(collectionColorArray.toIntArray())
+
+            },3000)
+
+        }
+
+    }
+
+    private fun setCollectionAdapter(){
+        binding!!.rvCollection.setHasFixedSize(true)
+        binding!!.rvCollection.layoutManager = LinearLayoutManager(currActivity,LinearLayoutManager.VERTICAL,false)
+        collectionAdapter = CollectionAdapter(currActivity,collectionList)
+        binding!!.rvCollection.adapter = collectionAdapter
+
+        binding!!.rvExpence.setHasFixedSize(true)
+        binding!!.rvExpence.layoutManager = LinearLayoutManager(currActivity,LinearLayoutManager.VERTICAL,false)
+        expencesAdapter = ExpencesAdapter(currActivity,expenceList)
+        binding!!.rvExpence.adapter = collectionAdapter
+    }
+
+    private fun setCollectionData(feePayment: ArrayList<FeePayment>?){
+        binding!!.pieChartCollection.visibility = View.VISIBLE
+        binding!!.rlPaidCollection.visibility = View.VISIBLE
+        binding!!.rvCollection.visibility = View.VISIBLE
+        binding!!.imgEmptyCollection.visibility = View.GONE
+        binding!!.tvErrorMessage.visibility = View.GONE
+        val formatter = DecimalFormat("#,###,###")
+        collectionList.clear()
+        collectionAmountFloatArray.clear()
+        collectionColorArray.clear()
+        collectionList.addAll(feePayment!!)
+        collectionAdapter.notifyDataSetChanged()
+        var totalAmount = 0.0
+
+        if(collectionList.size > 4){
+            binding!!.tvSeeAllCollection.visibility = View.VISIBLE
+        }else{
+            binding!!.tvSeeAllCollection.visibility = View.VISIBLE
+        }
+
+        for(i in 0 until feePayment.size){
+            collectionAmountFloatArray.add(feePayment[i].value.toFloat())
+            collectionColorArray.add(colorsArray[i])
+
+            if(totalAmount == 0.0){
+                totalAmount = feePayment[i].value.toDouble()
+            }else {
+                totalAmount = totalAmount+feePayment[i].value.toDouble()
+            }
+        }
+
+        val totalString = formatter.format(totalAmount)
+        val tottalExpence = "₹ $totalString"
+        binding?.tvTotalFinanceAmountCollection!!.text = tottalExpence
+
+        Handler().postDelayed({
+
+            binding?.pieChartCollection!!.setDataPoints(collectionAmountFloatArray.toFloatArray())
             binding?.pieChartCollection!!.setCenterColor(R.color.white)
-            binding?.pieChartCollection!!.setSliceColor(intArrayOf(
-                R.color.green_normal,
-                R.color.bluee))
-        }
+            binding?.pieChartCollection!!.setSliceColor(collectionColorArray.toIntArray())
+
+        },3000)
 
     }
 
-    private fun setCollectionData(feePayment: FeePayment){
+    private fun setExpenceData(expenseSummary: ArrayList<FeePayment>){
+        binding!!.pieChartExpence.visibility = View.VISIBLE
+        binding!!.rlPaidExpence.visibility = View.VISIBLE
+        binding!!.imgEmptyExpense.visibility = View.GONE
+        binding!!.tvErrorMessageExpence.visibility = View.GONE
         val formatter = DecimalFormat("#,###,###")
-        if(feePayment!= null){
-            var admissionFee = ""
-            var tottalExpence = ""
-            var tutionFee = ""
-            if(feePayment.Admission_Fee!= null){
-                val admissionString = formatter.format(feePayment.Admission_Fee)
-                admissionFee = "₹ "+admissionString
-                binding?.tvPaidAmountCollection!!.text = admissionFee
-            }else{
-                admissionFee = "₹ 0"
-                binding?.tvPaidAmountCollection!!.text = admissionFee
-            }
+        var totalAmount = 0.0
 
-            if(feePayment.TUTION_FEE!= null){
-                val tutionString = formatter.format(feePayment.TUTION_FEE)
-                 tutionFee = "₹ "+tutionString
-                binding?.tvDueAmountCollection!!.text = tutionFee
-            }else{
-                tutionFee = "₹ 0"
-                binding?.tvDueAmountCollection!!.text = tutionFee
-            }
-            if(feePayment.Admission_Fee!= null && feePayment.TUTION_FEE!= null){
-                val total = feePayment.Admission_Fee+feePayment.TUTION_FEE
-                val totalString = formatter.format(total)
-                 tottalExpence = "₹ $totalString"
-                binding?.tvTotalFinanceAmountCollection!!.text = tottalExpence
+        expenceList.clear()
+        collectionAmountFloatArray.clear()
+        collectionColorArray.clear()
+        expenceList.addAll(expenseSummary)
+        expencesAdapter.notifyDataSetChanged()
+        if(expenceList.size > 4){
 
-                binding?.pieChartCollection!!.setDataPoints(floatArrayOf(
-                    feePayment.Admission_Fee.toFloat(),
-                    feePayment.TUTION_FEE.toFloat()))
-                binding?.pieChartCollection!!.setCenterColor(R.color.white)
-                binding?.pieChartCollection!!.setSliceColor(intArrayOf(
-                    R.color.green_normal,
-                    R.color.bluee))
+        }
 
-            }else if(feePayment.Admission_Fee == null){
-                val tutionString = formatter.format(feePayment.TUTION_FEE)
-                val total = feePayment.TUTION_FEE
-                tottalExpence = "₹ $tutionString"
-                binding?.tvTotalFinanceAmountCollection!!.text = tottalExpence
+        for(i in 0 until expenseSummary.size){
+            collectionAmountFloatArray.add(expenseSummary[i].value.toFloat())
+            collectionColorArray.add(colorsArray[i])
 
-                binding?.pieChartCollection!!.setDataPoints(floatArrayOf(
-                    feePayment.TUTION_FEE!!.toFloat()))
-                binding?.pieChartCollection!!.setCenterColor(R.color.white)
-                binding?.pieChartCollection!!.setSliceColor(intArrayOf(
-                    R.color.bluee))
-
-            }else if(feePayment.TUTION_FEE == null){
-                val admissionString = formatter.format(feePayment.Admission_Fee)
-                val total = feePayment.Admission_Fee
-                tottalExpence = "₹ $admissionString"
-                binding?.tvTotalFinanceAmountCollection!!.text = tottalExpence
-                binding?.pieChartCollection!!.setDataPoints(floatArrayOf(
-                    feePayment.Admission_Fee.toFloat()))
-                binding?.pieChartCollection!!.setCenterColor(R.color.white)
-                binding?.pieChartCollection!!.setSliceColor(intArrayOf(
-                    R.color.green_normal))
+            if(totalAmount == 0.0){
+                totalAmount = expenseSummary[i].value.toDouble()
+            }else {
+                totalAmount = totalAmount+expenseSummary[i].value.toDouble()
             }
         }
 
+        val totalString = formatter.format(totalAmount)
+        val tottalExpence = "₹ $totalString"
+        binding?.tvTotalFinanceAmountExpence!!.text = tottalExpence
+
+        Handler().postDelayed({
+
+
+
+            binding?.pieChartExpence!!.setDataPoints(collectionAmountFloatArray.toFloatArray())
+            binding?.pieChartExpence!!.setCenterColor(R.color.white)
+            binding?.pieChartExpence!!.setSliceColor(collectionColorArray.toIntArray())
+        },3000)
     }
 
-    private fun setExpenceData(expenseSummary: ExpenseSummary){
-        val formatter = DecimalFormat("#,###,###")
-        if(expenseSummary!= null){
-            var maintenance = ""
-            var transport = ""
-            if(expenseSummary.Maintenance!= null){
-                val maintainString = formatter.format(expenseSummary.Maintenance)
-                 maintenance = "₹ "+maintainString
-                binding?.tvPaidAmountExpence!!.text = maintenance
-            }else{
-                maintenance = "₹ 0"
-                binding?.tvPaidAmountExpence!!.text = maintenance
-            }
-
-            if(expenseSummary.Transport!= null){
-                val transportString = formatter.format(expenseSummary.Transport)
-                 transport = "₹ "+transportString
-                binding?.tvDueAmountExpence!!.text = transport
-            }else{
-                transport = "₹ 0"
-                binding?.tvDueAmountExpence!!.text = transport
-            }
-
-            if(expenseSummary.Maintenance != null && expenseSummary.Transport!= null){
-                val total = expenseSummary.Maintenance+expenseSummary.Transport
-                val totalString = formatter.format(total)
-                val tottalExpence = "₹ "+totalString
-                binding?.tvTotalFinanceAmountExpence!!.text = tottalExpence
-
-                binding?.pieChartExpence!!.setDataPoints(floatArrayOf(
-                    expenseSummary.Maintenance.toFloat(),
-                    expenseSummary.Transport.toFloat()))
-                binding?.pieChartExpence!!.setCenterColor(R.color.white)
-                binding?.pieChartExpence!!.setSliceColor(intArrayOf(
-                    R.color.maroon,
-                    R.color.orange))
-
-            }else if(expenseSummary.Maintenance == null){
-                val total = expenseSummary.Transport!!
-                val totalString = formatter.format(total)
-                val tottalExpence = "₹ "+totalString
-                binding?.tvTotalFinanceAmountExpence!!.text = tottalExpence
-
-                binding?.pieChartExpence!!.setDataPoints(floatArrayOf(
-                    expenseSummary.Transport.toFloat()))
-                binding?.pieChartExpence!!.setCenterColor(R.color.white)
-                binding?.pieChartExpence!!.setSliceColor(intArrayOf(
-                    R.color.orange))
-            }else if(expenseSummary.Transport == null){
-                val total = expenseSummary.Maintenance
-                val totalString = formatter.format(total)
-                val tottalExpence = "₹ "+totalString
-                binding?.tvTotalFinanceAmountExpence!!.text = tottalExpence
-
-                binding?.pieChartExpence!!.setDataPoints(floatArrayOf(
-                    expenseSummary.Maintenance.toFloat()))
-                binding?.pieChartExpence!!.setCenterColor(R.color.white)
-                binding?.pieChartExpence!!.setSliceColor(intArrayOf(
-                    R.color.maroon))
-
-            }
-        }
-    }
-
-    private fun  openCategoryPopup(from: Int){
+    private fun  openCategoryPopup(from : Int){
         if(from == 0){
             val popup = PopupMenu(currActivity, rlCategory)
             //Inflating the Popup using xml file
@@ -511,7 +586,7 @@ class DashboardActivity : BaseFragment(),View.OnClickListener {
     private fun openMenu(){
         val popup = PopupMenu(currActivity,rlDay)
         //Inflating the Popup using xml file
-        popup.getMenuInflater().inflate(com.akshar.one.R.menu.birthday_popup, popup.getMenu())
+        popup.getMenuInflater().inflate(R.menu.birthday_popup, popup.menu)
 
         //registering popup with OnMenuItemClickListener
         popup.setOnMenuItemClickListener {
@@ -702,6 +777,7 @@ class DashboardActivity : BaseFragment(),View.OnClickListener {
                         setExpenceData(it)
                     })
                 } else if (it.title.equals(currActivity.resources.getString(R.string.yesterday))) {
+                    yesterdayDate = AppUtil.getYesterdayDateString()
                     dashboardViewModel?.let {
                         if(context?.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true){
                             binding?.tvWeekExpence!!.text = currActivity.resources.getString(R.string.yesterday)
@@ -775,5 +851,13 @@ class DashboardActivity : BaseFragment(),View.OnClickListener {
 
     private fun showProgressIndicator(isLoading: Boolean?) {
        // linProgressIndicator.visibility = if (isLoading == true) View.VISIBLE else View.GONE
+    }
+
+    fun showProgressBar(){
+        dialog =  AppUtils.showProgress(currActivity)
+    }
+
+    fun hideProgressBar(){
+        AppUtils.hideProgress(dialog)
     }
 }

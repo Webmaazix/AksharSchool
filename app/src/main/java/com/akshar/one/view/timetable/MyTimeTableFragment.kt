@@ -27,7 +27,8 @@ import com.akshar.one.viewmodels.ViewModelFactory
 import com.akshar.one.viewmodels.dashboard.DashboardViewModel
 import android.widget.Toast
 import androidx.core.widget.NestedScrollView
-
+import com.akshar.one.model.PeriodTimeTable
+import com.bumptech.glide.Glide
 
 
 /**
@@ -38,7 +39,7 @@ class MyTimeTableFragment : Fragment(),View.OnClickListener {
 
     private var currActivity : Activity? = null
     private var binding : FragmentMyTimeTableBinding? = null
-    private var timeTableList = ArrayList<TimeTableModel>()
+    private var timeTableList = ArrayList<PeriodTimeTable>()
     private var dashboardViewModel: DashboardViewModel? = null
     private var employeeId : Int = 0;
     private var loginModel : LoginModel? = null
@@ -74,6 +75,7 @@ class MyTimeTableFragment : Fragment(),View.OnClickListener {
         }
         dashboardViewModel?.let {
             if (context?.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true) {
+                (currActivity as TimeTableActivity).showProgressBar()
                 it.getTimeTableOfEmployee(employeeId,date!!) }
         }
 
@@ -92,10 +94,10 @@ class MyTimeTableFragment : Fragment(),View.OnClickListener {
 
             if (scrollY > scrollX) {
                 (currActivity as TimeTableActivity).scrollDataTop()
-                Toast.makeText(context, "Scrolling up", Toast.LENGTH_SHORT).show()
+              //  Toast.makeText(context, "Scrolling up", Toast.LENGTH_SHORT).show()
             } else {
                 (currActivity as TimeTableActivity).scrollDataBottom()
-                Toast.makeText(context, "Scrolling down", Toast.LENGTH_SHORT).show()
+               // Toast.makeText(context, "Scrolling down", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -113,11 +115,17 @@ class MyTimeTableFragment : Fragment(),View.OnClickListener {
 
             dashboardViewModel?.getErrorMutableLiveData()?.observe(this, Observer {
                 it?.let {
-                    AndroidUtil.showToast(context!!, it.message,true)
+                    (currActivity as TimeTableActivity).hideProgressBar()
+                    binding!!.rlNoDataFound.visibility = View.VISIBLE
+                    binding!!.rlActiveNotice.visibility = View.GONE
+                    timeTableList.clear()
+                    adapter.notifyDataSetChanged()
+                   // AndroidUtil.showToast(context!!, it.message,true)
                 }
             })
 
             dashboardViewModel?.getTimeTableLiveData()?.observe(this, Observer {
+                (currActivity as TimeTableActivity).hideProgressBar()
                 timeTableList.clear()
                 timeTableList.addAll(it)
                 if(timeTableList.size> 0){
@@ -140,6 +148,7 @@ class MyTimeTableFragment : Fragment(),View.OnClickListener {
        val date = data.year.toString()+"-"+month.toString()+"-"+data.day
        dashboardViewModel?.let {
            if (context?.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true) {
+               (currActivity as TimeTableActivity).showProgressBar()
                it.getTimeTableOfEmployee(employeeId,date) }
        }
 
