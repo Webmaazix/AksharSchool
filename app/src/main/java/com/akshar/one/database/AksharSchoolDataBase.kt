@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.akshar.one.database.dao.*
 import com.akshar.one.database.entity.*
 
-@Database(entities = [CourseEntity::class, ClassRoomEntity::class, AttendanceCategoryEntity::class, DegreeEntity::class, DepartmentEntity::class], exportSchema = false, version = 1)
+@Database(entities = [CourseEntity::class, ClassRoomEntity::class, ShiftEntity::class, DegreeEntity::class, DepartmentEntity::class], exportSchema = false, version = 1)
 abstract class AksharSchoolDataBase: RoomDatabase() {
 
     abstract fun courseDao(): CourseDao

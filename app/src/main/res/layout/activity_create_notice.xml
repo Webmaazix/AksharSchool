@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable
-            name="attendanceCourseViewModel"
-            type="com.akshar.one.viewmodels.attendance.AttendanceCourseViewModel" />
+
     </data>
 
     <RelativeLayout

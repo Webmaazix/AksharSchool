@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="attendanceEntryViewModel"
-            type="com.akshar.one.viewmodels.attendance.AttendanceEntryViewModel" />
+            name="employeeAttendanceEntryViewModel"
+            type="com.akshar.one.viewmodels.attendance.EmployeeAttendanceEntryViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -49,8 +49,8 @@
 
         </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/rLClassAndSection"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/llPeriodAndMarkAll"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_38sdp"
             android:background="@drawable/rounded_light_grey_bg"
@@ -61,46 +61,7 @@
             android:paddingEnd="@dimen/_10sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rlCalenderView">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/txtClassAndSection"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_toStartOf="@id/imgDropDownClass"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:ellipsize="end"
-                android:lines="1"
-                android:textColor="@color/dark_blue"
-                android:textSize="@dimen/_12ssp"
-                android:text="Select Class &amp; Section"/>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgDropDownClass"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/_8sdp"
-                android:src="@drawable/ic_baseline_arrow_drop_down_24" />
-
-        </RelativeLayout>
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/llPeriodAndMarkAll"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_38sdp"
-            android:background="@drawable/rounded_light_grey_bg"
-            android:layout_marginStart="@dimen/common_margin"
-            android:layout_marginTop="@dimen/_4sdp"
-            android:layout_marginEnd="@dimen/common_margin"
-            android:paddingStart="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_10sdp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rLClassAndSection"
+            app:layout_constraintTop_toBottomOf="@id/rlCalenderView"
             android:weightSum="100">
 
             <RelativeLayout
@@ -192,7 +153,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:text="@string/r_no"
+                android:text="@string/s_no"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_10ssp"
                 android:textStyle="bold"/>
@@ -203,7 +164,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@id/txtRollNoLabel"
-                android:text="@string/student_name"
+                android:text="@string/employee_name"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_10ssp"
                 android:textStyle="bold"
@@ -230,9 +191,9 @@
             app:layout_constraintTop_toBottomOf="@id/cLHeader"
             app:layout_constraintBottom_toTopOf="@id/btnSave"
             android:layout_marginTop="@dimen/_2sdp"
-            android:adapter="@{attendanceEntryViewModel.studentAttendanceAdapter}"
+            android:adapter="@{employeeAttendanceEntryViewModel.employeeAttendanceAdapter}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/attendance_entry_cell_layout"/>
+            tools:listitem="@layout/employee_attendance_entry_cell_layout"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnSave"

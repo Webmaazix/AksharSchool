@@ -20,6 +20,10 @@ class AttendanceRepository(application: Application) : BaseRepository() {
     private var degreeDao: DegreeDao? = null
     private var departmentDao: DepartmentDao? = null
 
+    companion object{
+        const val EMPLOYEE_PROFILE_TYPE = "Employee"
+        const val STUDENT_PROFILE_TYPE = "Student"
+    }
     init {
         attendanceApi = service.createService(AttendanceApi::class.java)
         val aksharSchoolDataBase = AksharSchoolDataBase.getDatabase(application)
@@ -45,31 +49,31 @@ class AttendanceRepository(application: Application) : BaseRepository() {
     suspend fun insertClassroom(classRoomEntity: ClassRoomEntity) =
         classroomDao?.insert(classRoomEntity)
 
-    suspend fun getAttendanceCategories(classRoomId: Int) =
-        attendanceApi?.getAttendanceCategories(service.headers(), classroomId = classRoomId)
+    suspend fun getShifts(profileType: String, classRoomId: Int = 0) =
+        attendanceApi?.getShifts(service.headers(), classroomId = classRoomId, profileType = profileType)
 
-    suspend fun getAttendanceCategoryByClassRoomIdFromDB(classRoomId: Int, schoolCode: String?) =
-        attendanceCategoryDao?.getCategories(classRoomId, schoolCode)
+    suspend fun getStudentsShiftsByClassRoomIdFromDB(classRoomId: Int, schoolCode: String?) =
+        attendanceCategoryDao?.getStudentShifts(classRoomId, schoolCode)
 
-    suspend fun insertAttendanceCategory(attendanceCategoryEntity: AttendanceCategoryEntity) =
-        attendanceCategoryDao?.insert(attendanceCategoryEntity)
+    suspend fun insertShiftEntity(shiftEntity: ShiftEntity) =
+        attendanceCategoryDao?.insert(shiftEntity)
 
     suspend fun getStudentAttendanceByClassRoomId(
         classRoomId: Int,
-        category: String,
-        date: String
+        date: String,
+        shiftId: Int = 0
     ) =
         attendanceApi?.getStudentsAttendanceByClassRoomId(
             service.headers(),
             classroomId = classRoomId,
-            category = category,
+            shiftId = shiftId,
             date = date
         )
 
-    suspend fun saveAttendanceStudent(classRoomId: Int, studentList: List<StudentAttendanceModel>) =
-        attendanceApi?.saveStudentsAttendanceByClassRoomId(
+    suspend fun saveAttendanceStudent(profileType: String, studentList: List<StudentAttendanceModel>) =
+        attendanceApi?.saveStudentsAttendance(
             service.headers(),
-            classroomId = classRoomId,
+            profileType = profileType,
             studentList = studentList
         )
 
@@ -87,4 +91,14 @@ class AttendanceRepository(application: Application) : BaseRepository() {
     suspend fun insertDegree(degreeEntity: DegreeEntity) = degreeDao?.insert(degreeEntity)
 
     suspend fun insertDepartment(departmentEntity: DepartmentEntity) = departmentDao?.insert(departmentEntity)
+
+    suspend fun getEmployeeAttendance(date: String, shiftId: Int) =
+        attendanceApi?.getEmployeeAttendance(
+            service.headers(),
+            shiftId = shiftId,
+            date = date
+        )
+
+    suspend fun getEmployeeShiftsFromDB() =
+        attendanceCategoryDao?.getEmployeeShifts(EMPLOYEE_PROFILE_TYPE)
 }

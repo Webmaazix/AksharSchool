@@ -16,10 +16,16 @@
             android:id="@+id/nav_student_profile"
             android:icon="@drawable/book"
             android:title="@string/student_profile" />
+
         <item
-            android:id="@+id/nav_attandance_entry"
+            android:id="@+id/nav_student_attendance_entry"
             android:icon="@drawable/attendanceentry"
-            android:title="@string/attendance_entry" />
+            android:title="@string/student_attendance_entry" />
+
+        <item
+            android:id="@+id/nav_employee_attendance_entry"
+            android:icon="@drawable/attendanceentry"
+            android:title="@string/employee_attendance_entry" />
 
         <item
             android:id="@+id/nav_assign_homework"
@@ -61,28 +67,28 @@
             android:title="@string/logout" />
     </group>
 
-<!--    <item android:title="Communicate">-->
-<!--        <menu>-->
-<!--            <item-->
-<!--                android:id="@+id/nav_share"-->
-<!--                android:icon="@drawable/ic_menu_share"-->
-<!--                android:title="@string/feedback_rate_us" />-->
-<!--            <item-->
-<!--                android:id="@+id/nav_send"-->
-<!--                android:icon="@drawable/ic_menu_send"-->
-<!--                android:title="@string/settings" />-->
+    <!--    <item android:title="Communicate">-->
+    <!--        <menu>-->
+    <!--            <item-->
+    <!--                android:id="@+id/nav_share"-->
+    <!--                android:icon="@drawable/ic_menu_share"-->
+    <!--                android:title="@string/feedback_rate_us" />-->
+    <!--            <item-->
+    <!--                android:id="@+id/nav_send"-->
+    <!--                android:icon="@drawable/ic_menu_send"-->
+    <!--                android:title="@string/settings" />-->
 
 
-<!--            <item-->
-<!--                android:id="@+id/nav_Terms_Condition"-->
-<!--                android:icon="@drawable/ic_menu_send"-->
-<!--                android:title="@string/settings" />-->
+    <!--            <item-->
+    <!--                android:id="@+id/nav_Terms_Condition"-->
+    <!--                android:icon="@drawable/ic_menu_send"-->
+    <!--                android:title="@string/settings" />-->
 
-<!--            <item-->
-<!--                android:id="@+id/nav_logout"-->
-<!--                android:icon="@drawable/logout"-->
-<!--                android:title="@string/logout" />-->
-<!--        </menu>-->
-<!--    </item>-->
+    <!--            <item-->
+    <!--                android:id="@+id/nav_logout"-->
+    <!--                android:icon="@drawable/logout"-->
+    <!--                android:title="@string/logout" />-->
+    <!--        </menu>-->
+    <!--    </item>-->
 
 </menu>

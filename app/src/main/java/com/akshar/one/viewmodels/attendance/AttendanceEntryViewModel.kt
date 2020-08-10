@@ -4,19 +4,16 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.akshar.one.database.entity.AttendanceCategoryEntity
 import com.akshar.one.database.entity.ClassRoomEntity
-import com.akshar.one.database.entity.CourseEntity
+import com.akshar.one.database.entity.ShiftEntity
 import com.akshar.one.manager.SessionManager
-import com.akshar.one.model.ClassRoomModel
-import com.akshar.one.model.CourseModel
+import com.akshar.one.model.ShiftModel
 import com.akshar.one.model.StudentAttendanceModel
 import com.akshar.one.repository.attendance.AttendanceRepository
 import com.akshar.one.util.AppConstant
 import com.akshar.one.util.AppUtil
 import com.akshar.one.view.attendance.AttendanceCategoryListener
-import com.akshar.one.view.attendance.adapters.CourseAdapter
-import com.akshar.one.view.attendance.adapters.StudentAttendanceAdapter
+import com.akshar.one.view.attendance.student.adapter.StudentAttendanceAdapter
 import com.akshar.one.viewmodels.base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -25,7 +22,7 @@ import retrofit2.HttpException
 
 class AttendanceEntryViewModel(application: Application) : BaseViewModel(application) {
 
-    companion object{
+    companion object {
         val PRESENT = "P"
         val ABSENT = "A"
         val WEEK_OFF = "W"
@@ -44,7 +41,10 @@ class AttendanceEntryViewModel(application: Application) : BaseViewModel(applica
 
     init {
         attendanceRepository = AttendanceRepository(application)
-        studentAttendanceAdapter = StudentAttendanceAdapter(this)
+        studentAttendanceAdapter =
+            StudentAttendanceAdapter(
+                this
+            )
     }
 
     fun getIsLoading(): MutableLiveData<Boolean> = isLoading
@@ -57,13 +57,13 @@ class AttendanceEntryViewModel(application: Application) : BaseViewModel(applica
     fun getStudentAt(position: Int): StudentAttendanceModel? =
         studentAttendanceListMutableLiveData.value?.getOrNull(position)
 
-    fun setStudentAttendanceListInAdapter(studentAttendanceList: List<StudentAttendanceModel>?){
+    fun setStudentAttendanceListInAdapter(studentAttendanceList: List<StudentAttendanceModel>?) {
         studentAttendanceAdapter?.setStudentAttendanceList(studentAttendanceList)
     }
 
     fun getStudentAttendanceByClassRoomId(
         classRoomId: Int,
-        category: String,
+        shiftId: Int,
         date: String
     ) {
         isLoading.value = true
@@ -73,13 +73,12 @@ class AttendanceEntryViewModel(application: Application) : BaseViewModel(applica
                     isLoading.postValue(true)
                     val studentAttendanceList =
                         attendanceRepository?.getStudentAttendanceByClassRoomId(
-                            classRoomId,
-                            category,
-                            date
+                            classRoomId = classRoomId,
+                            shiftId = shiftId,
+                            date = date
                         )
                     studentAttendanceList?.let {
-                        for(student in it){
-                            student.category = category
+                        for (student in it) {
                             student.date = date
                             student.attendanceInd = PRESENT
                         }
@@ -101,10 +100,10 @@ class AttendanceEntryViewModel(application: Application) : BaseViewModel(applica
         }
     }
 
-    fun updateAttendance(position: Int, status: String){
+    fun updateAttendance(position: Int, status: String) {
         val student = getStudentAt(position)
         student?.lateEntryFlag = null
-        when(status){
+        when (status) {
             PRESENT -> {
                 student?.attendanceInd = PRESENT
             }
@@ -121,19 +120,24 @@ class AttendanceEntryViewModel(application: Application) : BaseViewModel(applica
         }
     }
 
-    fun saveStudentAttendance(classRoomId: Int) {
+    fun saveStudentAttendance() {
         studentAttendanceListMutableLiveData.value?.let {
             isLoading.value = true
             viewModelScope.launch {
                 withContext(Dispatchers.IO) {
                     try {
                         isLoading.postValue(true)
-                        attendanceRepository?.saveAttendanceStudent(classRoomId,it)
+                        attendanceRepository?.saveAttendanceStudent(
+                            AttendanceRepository.STUDENT_PROFILE_TYPE,
+                            it
+                        )
                         isLoading.postValue(false)
                     } catch (httpException: HttpException) {
                         isLoading.postValue(false)
                         val errorResponse =
-                            AppUtil.getErrorResponse(httpException.response()?.errorBody()?.string())
+                            AppUtil.getErrorResponse(
+                                httpException.response()?.errorBody()?.string()
+                            )
                         errorResponse?.let { getErrorMutableLiveData().postValue(it) }
                     } catch (e: Exception) {
                         isLoading.postValue(false)
@@ -148,7 +152,7 @@ class AttendanceEntryViewModel(application: Application) : BaseViewModel(applica
 
     fun markAll(status: String) {
         studentAttendanceListMutableLiveData.value?.let {
-            for(student in it) {
+            for (student in it) {
                 student.lateEntryFlag = null
                 student.attendanceInd = status
             }
@@ -159,39 +163,36 @@ class AttendanceEntryViewModel(application: Application) : BaseViewModel(applica
     fun getAttendanceCategories(
         classRoomEntity: ClassRoomEntity?,
         attendanceCategoryListener: AttendanceCategoryListener
-    ): List<AttendanceCategoryEntity>? {
-        var attendanceCategoryEntityList: List<AttendanceCategoryEntity>? = ArrayList()
+    ): List<ShiftEntity>? {
+        var shiftEntityList: List<ShiftEntity>? = ArrayList()
         classRoomEntity?.let { classroom ->
             viewModelScope.launch {
                 withContext(Dispatchers.IO) {
                     try {
                         isLoading.postValue(true)
                         val schoolCode = SessionManager.getLoginModel()?.appsList?.get(0)?.orgCodes
-                        attendanceCategoryEntityList =
-                            attendanceRepository?.getAttendanceCategoryByClassRoomIdFromDB(
+                        shiftEntityList =
+                            attendanceRepository?.getStudentsShiftsByClassRoomIdFromDB(
                                 classroom.classroomId, classroom.schoolCode
                             )
-                        if (attendanceCategoryEntityList.isNullOrEmpty()) {
+                        if (shiftEntityList.isNullOrEmpty()) {
                             val categoryList =
-                                attendanceRepository?.getAttendanceCategories(classroom.classroomId)
-                            categoryList?.let { list ->
-                                insertAttendanceCategoryInDB(
-                                    classroom.classroomId,
-                                    classroom.schoolCode,
-                                    "STUDENT",
-                                    list
+                                attendanceRepository?.getShifts(
+                                    AttendanceRepository.STUDENT_PROFILE_TYPE,
+                                    classroom.classroomId
                                 )
-
+                            categoryList?.let { list ->
+                                insertAttendanceShiftInDB(classroom.classroomId, list)
                             }
-                            attendanceCategoryEntityList =
-                                attendanceRepository?.getAttendanceCategoryByClassRoomIdFromDB(
+                            shiftEntityList =
+                                attendanceRepository?.getStudentsShiftsByClassRoomIdFromDB(
                                     classroom.classroomId, classroom.schoolCode
                                 )
                         }
 
                         withContext(Dispatchers.Main) {
                             attendanceCategoryListener.updateAttendanceCategory(
-                                attendanceCategoryEntityList
+                                shiftEntityList
                             )
                         }
                         isLoading.postValue(false)
@@ -210,55 +211,26 @@ class AttendanceEntryViewModel(application: Application) : BaseViewModel(applica
                 }
             }
         }
-        return attendanceCategoryEntityList
+        return shiftEntityList
     }
 
-    private suspend fun insertAttendanceCategoryInDB(
+    private suspend fun insertAttendanceShiftInDB(
         classroomId: Int,
-        schoolCode: String?,
-        profileType: String,
-        attendanceCategoryList: List<String>?
+        shiftModelList: List<ShiftModel>?
     ) {
-        if (!attendanceCategoryList.isNullOrEmpty()) {
-            for (category in attendanceCategoryList) {
-                val attendanceCategoryEntity = AttendanceCategoryEntity(
+        if (!shiftModelList.isNullOrEmpty()) {
+            for (shift in shiftModelList) {
+                val shiftEntity = ShiftEntity(
+                    shiftId = shift.shiftId,
                     classroomId = classroomId,
-                    schoolCode = schoolCode,
-                    profileType = profileType,
-                    category = category
+                    schoolCode = shift.schoolCd,
+                    profileType = shift.profileType,
+                    name = shift.name,
+                    startTime = shift.startTime,
+                    endTime = shift.endTime
                 )
-                attendanceRepository?.insertAttendanceCategory(attendanceCategoryEntity)
+                attendanceRepository?.insertShiftEntity(shiftEntity)
             }
         }
-    }
-
-    fun getAttendanceCategoriesFromDB(
-        classRoomEntity: ClassRoomEntity?,
-        attendanceCategoryListener: AttendanceCategoryListener
-    ): List<AttendanceCategoryEntity>? {
-        var attendanceCategoryEntityList: List<AttendanceCategoryEntity>? = ArrayList()
-        classRoomEntity?.let { classroom ->
-            viewModelScope.launch {
-                withContext(Dispatchers.IO) {
-                    try {
-                        attendanceCategoryEntityList =
-                            attendanceRepository?.getAttendanceCategoryByClassRoomIdFromDB(
-                                classroom.classroomId,
-                                classroom.schoolCode
-                            )
-                        withContext(Dispatchers.Main) {
-                            attendanceCategoryListener.updateAttendanceCategory(
-                                attendanceCategoryEntityList
-                            )
-                        }
-
-                    } catch (e: Exception) {
-                        Log.d(AppConstant.TAG, "AttendanceCategories DB Exception : $e")
-                    }
-
-                }
-            }
-        }
-        return attendanceCategoryEntityList
     }
 }

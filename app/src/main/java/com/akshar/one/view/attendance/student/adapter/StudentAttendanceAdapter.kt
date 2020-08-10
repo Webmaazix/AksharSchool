@@ -1,4 +1,4 @@
-package com.akshar.one.view.attendance.adapters
+package com.akshar.one.view.attendance.student.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -28,7 +28,11 @@ class StudentAttendanceAdapter(private val attendanceEntryViewModel: AttendanceE
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val attendanceEntryCellLayoutBinding = DataBindingUtil.inflate<AttendanceEntryCellLayoutBinding>(LayoutInflater.from(parent.context), R.layout.attendance_entry_cell_layout, parent,  false)
-        return Holder(parent.context, attendanceEntryCellLayoutBinding, attendanceEntryViewModel)
+        return Holder(
+            parent.context,
+            attendanceEntryCellLayoutBinding,
+            attendanceEntryViewModel
+        )
     }
 
     override fun getItemCount(): Int {

@@ -10,9 +10,6 @@
             name="position"
             type="java.lang.Integer" />
 
-        <variable
-            name="attendanceCourseViewModel"
-            type="com.akshar.one.viewmodels.attendance.AttendanceCourseViewModel" />
     </data>
 
     <androidx.cardview.widget.CardView

@@ -9,7 +9,7 @@
     <RelativeLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:background="@drawable/yellow_top_square"
+        android:background="@color/light_yellow"
         android:layout_height="match_parent">
 
         <RelativeLayout

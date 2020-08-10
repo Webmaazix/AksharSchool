@@ -60,41 +60,24 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity
-            android:name=".view.studentprofile.CreateStudentProfile"
+        <activity android:name="com.akshar.one.view.studentprofile.CreateStudentProfile"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name=".view.timetable.TimeTableActivity"
+            android:windowSoftInputMode="adjustPan"></activity>
+        <activity android:name="com.akshar.one.view.timetable.TimeTableActivity" />
+        <activity android:name="com.akshar.one.view.noticeboard.CreateNoticeActivity" />
+        <activity android:name="com.akshar.one.view.noticeboard.NoticeboardActivity" />
+        <activity android:name="com.akshar.one.view.examschedule.ScheduledExamList" />
+        <activity android:name="com.akshar.one.view.examschedule.ScheduleExamActivity" />
+        <activity android:name="com.akshar.one.view.messagecenter.ReportActivity" />
+        <activity android:name="com.akshar.one.view.studentprofile.ViewStudentProfileActivity"
+            android:theme="@style/AppTheme">
+
+        </activity>
+        <activity android:name="com.akshar.one.view.studentprofile.EditStudentProfileActivity"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name=".view.noticeboard.CreateNoticeActivity"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name=".view.noticeboard.NoticeboardActivity"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name=".view.examschedule.ScheduledExamList"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name=".view.examschedule.ScheduleExamActivity"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name=".view.messagecenter.ReportActivity"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name=".view.studentprofile.ViewStudentProfileActivity"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".view.studentprofile.EditStudentProfileActivity"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan">
+
+        </activity>
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
@@ -164,10 +147,12 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".view.activity.MainActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"></activity>
+
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/myTheme" />
+
     </application>
 
 </manifest>

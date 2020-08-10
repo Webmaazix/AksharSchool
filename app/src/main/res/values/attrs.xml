@@ -173,26 +173,26 @@
     </declare-styleable>
 
     <declare-styleable name="CrystalRangeSeekbar" >
-        <attr name="corner_radius" />
-        <attr name="min_value" />
-        <attr name="max_value" />
-        <attr name="min_start_value" />
-        <attr name="max_start_value" />
-        <attr name="steps" />
-        <attr name="gap" />
-        <attr name="fix_gap" />
-        <attr name="bar_height"/>
-        <attr name="bar_color_mode" />
-        <attr name="bar_color" />
-        <attr name="bar_gradient_start" />
-        <attr name="bar_gradient_end" />
-        <attr name="bar_highlight_color_mode" />
-        <attr name="bar_highlight_color" />
-        <attr name="bar_highlight_gradient_start" />
-        <attr name="bar_highlight_gradient_end" />
-        <attr name="thumb_diameter" />
-        <attr name="position" />
-        <attr name="data_type" />
+<!--        <attr name="corner_radius" />-->
+<!--        <attr name="min_value" />-->
+<!--        <attr name="max_value" />-->
+<!--        <attr name="min_start_value" />-->
+<!--        <attr name="max_start_value" />-->
+<!--        <attr name="steps" />-->
+<!--        <attr name="gap" />-->
+<!--        <attr name="fix_gap" />-->
+<!--        <attr name="bar_height"/>-->
+<!--        <attr name="bar_color_mode" />-->
+<!--        <attr name="bar_color" />-->
+<!--        <attr name="bar_gradient_start" />-->
+<!--        <attr name="bar_gradient_end" />-->
+<!--        <attr name="bar_highlight_color_mode" />-->
+<!--        <attr name="bar_highlight_color" />-->
+<!--        <attr name="bar_highlight_gradient_start" />-->
+<!--        <attr name="bar_highlight_gradient_end" />-->
+<!--        <attr name="thumb_diameter" />-->
+<!--        <attr name="position" />-->
+<!--        <attr name="data_type" />-->
         <attr name="left_thumb_color" format="color" />
         <attr name="left_thumb_color_pressed" format="color" />
         <attr name="left_thumb_image" format="reference" />
@@ -201,35 +201,35 @@
         <attr name="right_thumb_color_pressed" format="color" />
         <attr name="right_thumb_image" format="reference" />
         <attr name="right_thumb_image_pressed" format="reference" />
-        <attr name="seek_bar_touch_enabled" />
+<!--        <attr name="seek_bar_touch_enabled" />-->
     </declare-styleable>
 
     <declare-styleable name="CrystalSeekbar" >
-        <attr name="corner_radius" />
-        <attr name="min_value" />
-        <attr name="max_value" />
-        <attr name="min_start_value" />
-        <attr name="max_start_value" />
-        <attr name="steps" />
-        <attr name="gap" />
-        <attr name="fix_gap" />
-        <attr name="bar_height" />
-        <attr name="bar_color_mode" />
-        <attr name="bar_color" />
-        <attr name="bar_gradient_start" />
-        <attr name="bar_gradient_end" />
-        <attr name="bar_highlight_color_mode" />
-        <attr name="bar_highlight_color" />
-        <attr name="bar_highlight_gradient_start" />
-        <attr name="bar_highlight_gradient_end" />
-        <attr name="thumb_diameter" />
-        <attr name="position" />
-        <attr name="data_type" />
+<!--        <attr name="corner_radius" />-->
+<!--        <attr name="min_value" />-->
+<!--        <attr name="max_value" />-->
+<!--        <attr name="min_start_value" />-->
+<!--        <attr name="max_start_value" />-->
+<!--        <attr name="steps" />-->
+<!--        <attr name="gap" />-->
+<!--        <attr name="fix_gap" />-->
+<!--        <attr name="bar_height" />-->
+<!--        <attr name="bar_color_mode" />-->
+<!--        <attr name="bar_color" />-->
+<!--        <attr name="bar_gradient_start" />-->
+<!--        <attr name="bar_gradient_end" />-->
+<!--        <attr name="bar_highlight_color_mode" />-->
+<!--        <attr name="bar_highlight_color" />-->
+<!--        <attr name="bar_highlight_gradient_start" />-->
+<!--        <attr name="bar_highlight_gradient_end" />-->
+<!--        <attr name="thumb_diameter" />-->
+<!--        <attr name="position" />-->
+<!--        <attr name="data_type" />-->
         <attr name="thumb_color" format="color" />
         <attr name="thumb_color_pressed" format="color" />
         <attr name="thumb_image" format="reference" />
         <attr name="thumb_image_pressed" format="reference" />
-        <attr name="seek_bar_touch_enabled" />
+<!--        <attr name="seek_bar_touch_enabled" />-->
     </declare-styleable>
 
     <declare-styleable name="CircularProgressIndicator">

@@ -4,14 +4,14 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.akshar.one.database.entity.AttendanceCategoryEntity
+import com.akshar.one.database.entity.ShiftEntity
 import com.akshar.one.database.entity.ClassRoomEntity
 import com.akshar.one.manager.SessionManager
+import com.akshar.one.model.ShiftModel
 import com.akshar.one.repository.attendance.AttendanceRepository
 import com.akshar.one.util.AppConstant
 import com.akshar.one.util.AppUtil
 import com.akshar.one.view.attendance.AttendanceCategoryListener
-import com.akshar.one.view.attendance.adapters.ClassRoomAdapter
 import com.akshar.one.viewmodels.base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -24,7 +24,7 @@ class AttendanceClassRoomViewModel(application: Application) : BaseViewModel(app
 
     private var classRoomListMutableLiveData = MutableLiveData<List<ClassRoomEntity>>()
     private var attendanceCategoryListMutableLiveData =
-        MutableLiveData<List<AttendanceCategoryEntity>>()
+        MutableLiveData<List<ShiftEntity>>()
 
     private val isLoading = MutableLiveData<Boolean>()
 
@@ -40,28 +40,28 @@ class AttendanceClassRoomViewModel(application: Application) : BaseViewModel(app
     fun getClassRoomListMutableLiveData(): MutableLiveData<List<ClassRoomEntity>> =
         classRoomListMutableLiveData
 
-    fun getAttendanceCategoryListMutableLiveData(): MutableLiveData<List<AttendanceCategoryEntity>> =
+    fun getAttendanceCategoryListMutableLiveData(): MutableLiveData<List<ShiftEntity>> =
         attendanceCategoryListMutableLiveData
 
     fun getAttendanceCategories(
         position: Int,
         attendanceCategoryListener: AttendanceCategoryListener
-    ): List<AttendanceCategoryEntity>? {
+    ): List<ShiftEntity>? {
         val classRoomEntity = getClassRoomAt(position)
-        var attendanceCategoryEntityList: List<AttendanceCategoryEntity>? = ArrayList()
+        var shiftEntityList: List<ShiftEntity>? = ArrayList()
         classRoomEntity?.let { classroom ->
             viewModelScope.launch {
                 withContext(Dispatchers.IO) {
                     try {
                         isLoading.postValue(true)
                         val schoolCode = SessionManager.getLoginModel()?.appsList?.get(0)?.orgCodes
-                        attendanceCategoryEntityList =
-                            attendanceRepository?.getAttendanceCategoryByClassRoomIdFromDB(
+                        shiftEntityList =
+                            attendanceRepository?.getStudentsShiftsByClassRoomIdFromDB(
                                 classroom.classroomId, classroom.schoolCode
                             )
-                        if (attendanceCategoryEntityList.isNullOrEmpty()) {
+                        if (shiftEntityList.isNullOrEmpty()) {
                             val categoryList =
-                                attendanceRepository?.getAttendanceCategories(classroom.classroomId)
+                                attendanceRepository?.getShifts(AttendanceRepository.STUDENT_PROFILE_TYPE, classroom.classroomId)
                             categoryList?.let { list ->
                                 insertAttendanceCategoryInDB(
                                     classroom.classroomId,
@@ -71,15 +71,15 @@ class AttendanceClassRoomViewModel(application: Application) : BaseViewModel(app
                                 )
 
                             }
-                            attendanceCategoryEntityList =
-                                attendanceRepository?.getAttendanceCategoryByClassRoomIdFromDB(
+                            shiftEntityList =
+                                attendanceRepository?.getStudentsShiftsByClassRoomIdFromDB(
                                     classroom.classroomId, classroom.schoolCode
                                 )
                         }
 
                         withContext(Dispatchers.Main) {
                             attendanceCategoryListener.updateAttendanceCategory(
-                                attendanceCategoryEntityList
+                                shiftEntityList
                             )
                         }
                         isLoading.postValue(false)
@@ -98,24 +98,27 @@ class AttendanceClassRoomViewModel(application: Application) : BaseViewModel(app
                 }
             }
         }
-        return attendanceCategoryEntityList
+        return shiftEntityList
     }
 
     private suspend fun insertAttendanceCategoryInDB(
         classroomId: Int,
         schoolCode: String?,
         profileType: String,
-        attendanceCategoryList: List<String>?
+        shiftModelList: List<ShiftModel>?
     ) {
-        if (!attendanceCategoryList.isNullOrEmpty()) {
-            for (category in attendanceCategoryList) {
-                val attendanceCategoryEntity = AttendanceCategoryEntity(
+        if (!shiftModelList.isNullOrEmpty()) {
+            for (shift in shiftModelList) {
+                val shiftEntity = ShiftEntity(
+                    shiftId = shift.shiftId,
                     classroomId = classroomId,
-                    schoolCode = schoolCode,
-                    profileType = profileType,
-                    category = category
+                    schoolCode = shift.schoolCd,
+                    profileType = shift.profileType,
+                    name = shift.name,
+                    startTime = shift.startTime,
+                    endTime = shift.endTime
                 )
-                attendanceRepository?.insertAttendanceCategory(attendanceCategoryEntity)
+                attendanceRepository?.insertShiftEntity(shiftEntity)
             }
         }
     }
@@ -123,21 +126,21 @@ class AttendanceClassRoomViewModel(application: Application) : BaseViewModel(app
     fun getAttendanceCategoriesFromDB(
         position: Int,
         attendanceCategoryListener: AttendanceCategoryListener
-    ): List<AttendanceCategoryEntity>? {
+    ): List<ShiftEntity>? {
         val classRoomEntity = getClassRoomAt(position)
-        var attendanceCategoryEntityList: List<AttendanceCategoryEntity>? = ArrayList()
+        var shiftEntityList: List<ShiftEntity>? = ArrayList()
         classRoomEntity?.let { classroom ->
             viewModelScope.launch {
                 withContext(Dispatchers.IO) {
                     try {
-                        attendanceCategoryEntityList =
-                            attendanceRepository?.getAttendanceCategoryByClassRoomIdFromDB(
+                        shiftEntityList =
+                            attendanceRepository?.getStudentsShiftsByClassRoomIdFromDB(
                                 classroom.classroomId,
                                 classroom.schoolCode
                             )
                         withContext(Dispatchers.Main) {
                             attendanceCategoryListener.updateAttendanceCategory(
-                                attendanceCategoryEntityList
+                                shiftEntityList
                             )
                         }
 
@@ -148,7 +151,7 @@ class AttendanceClassRoomViewModel(application: Application) : BaseViewModel(app
                 }
             }
         }
-        return attendanceCategoryEntityList
+        return shiftEntityList
     }
 
 }

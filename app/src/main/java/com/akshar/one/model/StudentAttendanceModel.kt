@@ -2,11 +2,14 @@ package com.akshar.one.model
 
 data class StudentAttendanceModel(
     val rollNbr: String?,
-    val firstName: String?,
-    val lastName: String?,
+    val employeeId: String?,
+    val fullName: String?,
     var date: String?,
-    var category: String?,
+    val shiftId: Int?,
+    val shiftName: String?,
     var attendanceInd: String?,
     var lateEntryFlag: String?,
-    val profileId: Int?
+    val profileId: Int?,
+    val inTime: String?,
+    val outTime: String?
 )

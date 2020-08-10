@@ -1,8 +1,8 @@
 package com.akshar.one.view.attendance
 
-import com.akshar.one.database.entity.AttendanceCategoryEntity
+import com.akshar.one.database.entity.ShiftEntity
 
 interface AttendanceCategoryListener {
-    fun updateAttendanceCategory(attendanceCategoryEntityList: List<AttendanceCategoryEntity>?)
-    fun onAttendanceCategorySelected(attendanceCategoryEntity: AttendanceCategoryEntity)
+    fun updateAttendanceCategory(shiftEntityList: List<ShiftEntity>?)
+    fun onAttendanceCategorySelected(shiftEntity: ShiftEntity)
 }

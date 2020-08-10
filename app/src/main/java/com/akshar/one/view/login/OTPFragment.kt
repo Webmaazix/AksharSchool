@@ -25,10 +25,12 @@ class OTPFragment : BaseFragment(), View.OnClickListener {
     private var otpViewModel: OTPViewModel? = null
     private lateinit var loginActivity: LoginActivity
     private var mobileNumber: String? = null
+    private var isTroubleLogin: Boolean? = false
 
     companion object {
 
         val MOBILE_NUMBER = "mobileNumber"
+        val IS_TROUBLE_LOGIN = "isTroubleLogin"
 
         @JvmStatic
         fun newInstance() = OTPFragment()
@@ -132,7 +134,11 @@ class OTPFragment : BaseFragment(), View.OnClickListener {
         })
 
         otpViewModel?.getMutableLiveDataLoginModel()?.observe(this, Observer {
-            loginActivity.goToMainActivity()
+            if(isTroubleLogin == true){
+                loginActivity.goToChangePasswordScreen()
+            }else {
+                loginActivity.goToMainActivity()
+            }
         })
 
     }
@@ -140,6 +146,7 @@ class OTPFragment : BaseFragment(), View.OnClickListener {
     private fun initView() {
 
         mobileNumber = arguments?.getString(MOBILE_NUMBER)
+        isTroubleLogin = arguments?.getBoolean(IS_TROUBLE_LOGIN)
 
         txtDesc?.text = String.format(getString(R.string.we_have_sent_you_sms_on),mobileNumber)
 
