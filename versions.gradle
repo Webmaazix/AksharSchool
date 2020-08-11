@@ -1,7 +1,7 @@
 // Android configuration
 ext.config = [
         compile   : 29,
-        min       : 21,
+        min       : 23,
         target    : 29,
         buildTools: "29.0.3"
 ]
@@ -10,7 +10,7 @@ ext.config = [
 ext.versionsAndroid = [
         support      : "27.1.1",
         kotlin       : "1.3.72",
-        gradleVersion: '4.0.0',
+        gradleVersion: '3.5.3',
 ]
 
 ext.versionsAndroidX = [

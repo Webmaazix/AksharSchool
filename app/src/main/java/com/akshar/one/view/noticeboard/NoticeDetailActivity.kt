@@ -18,9 +18,12 @@ import kotlinx.android.synthetic.main.activity_create_notice.*
 import kotlinx.android.synthetic.main.main_toolbar.view.*
 import android.app.DatePickerDialog
 import android.app.Dialog
+import android.net.Uri
+import android.provider.Settings
 import java.util.*
 import java.text.SimpleDateFormat
 import android.widget.CompoundButton
+import androidx.lifecycle.LifecycleOwner
 import com.akshar.one.adapter.ClassDropDownAdapter
 import com.akshar.one.databinding.ActivityNoticeDetailBinding
 import com.akshar.one.databinding.ActivityNoticeboardBinding
@@ -38,6 +41,7 @@ class NoticeDetailActivity : AppCompatActivity(), View.OnClickListener {
     private var noticeBoardModel = NoticeBoardModel()
     private var binding : ActivityNoticeDetailBinding? = null
     private var noticeModel : NoticeBoardModel? = null
+    private var noticeBoardViewModel: NoticeBoardViewModel? = null
 
 
     companion object{
@@ -80,7 +84,8 @@ class NoticeDetailActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun setListner(){
         binding!!.toolbar.imgBack.setOnClickListener(this)
-
+        binding!!.rlEdit.setOnClickListener(this)
+        binding!!.rlDelete.setOnClickListener(this)
 
     }
 
@@ -89,8 +94,44 @@ class NoticeDetailActivity : AppCompatActivity(), View.OnClickListener {
             R.id.imgBack ->{
                 onBackPressed()
             }
+            R.id.rlEdit ->{
+                updateItem(noticeModel!!)
+            }
+            R.id.rlDelete ->{
+                removeItem()
+            }
 
         }
+    }
+
+    fun removeItem() {
+        deleteNotice(noticeBoardModel.id)
+
+    }
+
+    private fun updateItem(model : NoticeBoardModel){
+        CreateNoticeActivity.open(currActivity,model)
+    }
+
+    private fun deleteNotice(id : Int){
+        noticeBoardViewModel?.let {
+            if (currActivity.let { ctx -> AndroidUtil.isInternetAvailable(ctx) }) {
+                it.deleteNotice(id)
+            }
+        }
+
+        noticeBoardViewModel?.getErrorMutableLiveData()?.observe(currActivity as LifecycleOwner, androidx.lifecycle.Observer {
+            it?.let {
+                AndroidUtil.showToast(currActivity, it.message,true)
+            }
+        })
+
+        noticeBoardViewModel?.getSuccessLiveData()?.observe(currActivity as LifecycleOwner, androidx.lifecycle.Observer {
+
+            AndroidUtil.showToast(currActivity, "Notice deleted successfully",false)
+            onBackPressed()
+
+        })
     }
 
 }

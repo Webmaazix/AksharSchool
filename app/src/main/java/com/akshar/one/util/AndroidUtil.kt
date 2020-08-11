@@ -1,5 +1,6 @@
 package com.akshar.one.util
 
+import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
@@ -22,7 +23,14 @@ object AndroidUtil {
     fun isInternetAvailable(context: Context): Boolean {
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
-        return activeNetwork?.isConnectedOrConnecting == true
+        if(activeNetwork?.isConnectedOrConnecting == true){
+            return activeNetwork.isConnectedOrConnecting == true
+        }else{
+            AppUtils.showToast(context as Activity,"Internet is not available",true)
+            return  activeNetwork?.isConnectedOrConnecting == true
+
+        }
+
     }
 
     fun startActivity(context: Context, cls: Class<*>?, bundle: Bundle? = null) {

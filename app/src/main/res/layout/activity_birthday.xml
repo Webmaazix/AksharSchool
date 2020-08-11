@@ -89,6 +89,7 @@
                     android:id="@+id/rlBirthdayNotFound"
                     android:layout_width="match_parent"
                     android:layout_margin="@dimen/_10sdp"
+                    android:visibility="gone"
                     android:layout_centerInParent="true"
                     android:layout_height="wrap_content">
 

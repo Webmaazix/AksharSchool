@@ -145,6 +145,7 @@ class CreateNoticeActivity : AppCompatActivity(), View.OnClickListener {
                 visibility = "Parent"
             }
         })
+
         binding!!.cbEmployees.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
             if(isChecked){
                 visibility = "Employee"
@@ -278,6 +279,11 @@ class CreateNoticeActivity : AppCompatActivity(), View.OnClickListener {
        noticeBoardViewModel?.getErrorMutableLiveData()?.observe(this,androidx.lifecycle.Observer {
            it?.let {
                AndroidUtil.showToast(currActivity, it.message,true)
+           }
+       })
+       noticeBoardViewModel?.getUpdatedNoticeLiveData()?.observe(this,androidx.lifecycle.Observer {
+           it?.let {
+               AndroidUtil.showToast(currActivity,"Notice Updated successfully",false)
            }
        })
 

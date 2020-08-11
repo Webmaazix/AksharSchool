@@ -175,10 +175,10 @@ interface ApiInterface {
     suspend fun addOrUpdateStudentMarks(@HeaderMap headers: Map<String, String>,
                              @Body jsonObject: ArrayList<StundentsMarksList>) : ArrayList<StundentsMarksList>?
 
-    @PUT("noticeboard/{id}")
+    @PUT("noticeboard/{scheduleId}")
     suspend fun updateNotice(@HeaderMap headers: Map<String, String>,
                              @Path("scheduleId") scheduleId  : Int,
-                             @Body jsonObject: NoticeBoardModel)
+                             @Body jsonObject: NoticeBoardModel) : NoticeBoardModel
 
     @GET("subjects")
     suspend fun getSubjectListByClassId(@HeaderMap headers: Map<String, String>,

@@ -79,8 +79,8 @@ class EmployeeAttendanceEntryFragment : BaseFragment(), View.OnClickListener,
         fragmentEmployeeAttendanceEntryBinding?.employeeAttendanceEntryViewModel =
             employeeAttendanceEntryViewModel
 
-        mainActivity?.setToolbarBackground(false)
-        mainActivity?.setToolbarTitle(context?.getString(R.string.employee_attendance_entry))
+//        mainActivity?.setToolbarBackground(false)
+       mainActivity?.setToolbarTitle(getString(R.string.employee_attendance_entry))
 
         observers()
         fetchEmployeeShifts()

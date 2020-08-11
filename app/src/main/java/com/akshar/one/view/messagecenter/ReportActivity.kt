@@ -136,6 +136,8 @@ class ReportActivity : AppCompatActivity(),View.OnClickListener {
             binding!!.rlClassSection.visibility = View.VISIBLE
             binding!!.llAbsentDateShift.visibility = View.VISIBLE
             binding!!.tvSelectExaminationType.visibility = View.GONE
+            binding!!.rlProfileType.visibility = View.GONE
+            binding!!.tvSelectDate.visibility = View.GONE
             binding!!.etTypeMessage.visibility = View.GONE
             binding!!.tvSend.text = getString(R.string.send_fee_reminder)
 
@@ -144,7 +146,6 @@ class ReportActivity : AppCompatActivity(),View.OnClickListener {
             binding!!.tvSend.text = getString(R.string.send_general_notification)
 
         }else if(from.equals("EmployeeNotification")){
-
             binding!!.rlClassSection.visibility = View.GONE
             binding!!.llAbsentDateShift.visibility = View.GONE
             binding!!.tvSelectExaminationType.visibility = View.GONE
@@ -364,7 +365,7 @@ class ReportActivity : AppCompatActivity(),View.OnClickListener {
             R.id.rlClassSection -> {
                 openDialog()
             }
-            R.id.imgBack ->{
+            R.id.imgBack -> {
                 onBackPressed()
             }
             R.id.tvSelectDate ->{
@@ -374,8 +375,13 @@ class ReportActivity : AppCompatActivity(),View.OnClickListener {
                     myCalendar!!.get(Calendar.DAY_OF_MONTH)
                 ).show()
             }
-            R.id.tvSelectShift ->{
-                openShiftDialog()
+            R.id.tvSelectShift -> {
+                if(from.equals("feeReminder")){
+                    openFeeHeadDialog()
+                }else{
+                    openShiftDialog()
+                }
+
             }
             R.id.tvSend ->{
                 if(validation()){
@@ -418,6 +424,10 @@ class ReportActivity : AppCompatActivity(),View.OnClickListener {
             }
 
         }
+    }
+
+    private fun openFeeHeadDialog(){
+
     }
 
     private fun validation() : Boolean{

@@ -31,10 +31,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-
             android:layout_margin="@dimen/_10sp"
             android:layout_height="wrap_content">
-
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvTimeLine"
@@ -51,8 +49,6 @@
                 android:layout_width="match_parent"
                 android:layout_below="@+id/tvTimeLine"
                 android:layout_height="wrap_content">
-
-
 
             <RelativeLayout
                 android:id="@+id/rlTimeTableNotFound"
@@ -912,7 +908,7 @@
                                 android:id="@+id/tvCategoryExpence"
                                 android:layout_width="wrap_content"
                                 android:textSize="@dimen/_9sp"
-                                android:text="@string/by_feahead"
+                                android:text="@string/category"
                                 android:layout_centerVertical="true"
                                 android:textColor="@color/dark_blue"
                                 android:padding="@dimen/_3sdp"

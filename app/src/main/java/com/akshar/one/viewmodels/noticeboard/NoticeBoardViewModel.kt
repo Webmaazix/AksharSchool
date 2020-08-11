@@ -22,6 +22,7 @@ class NoticeBoardViewModel(application: Application) : BaseViewModel(application
     private val isLoading = MutableLiveData<Boolean>()
     private val isSuccess = MutableLiveData<Boolean>()
     private var mutuableLiveDataNoticeList = MutableLiveData<List<NoticeBoardModel>>()
+    private var mutuableLiveDataupdatedModelLiveData = MutableLiveData<NoticeBoardModel>()
     private var mutableLiveDataCreateStudentProfile = MutableLiveData<StudentListModel>()
     private var mutableLiveDataImage = MutableLiveData<ImageModel>()
 
@@ -30,6 +31,7 @@ class NoticeBoardViewModel(application: Application) : BaseViewModel(application
     }
 
     fun getNoticeListLiveData() : MutableLiveData<List<NoticeBoardModel>> = mutuableLiveDataNoticeList
+    fun getUpdatedNoticeLiveData() : MutableLiveData<NoticeBoardModel> = mutuableLiveDataupdatedModelLiveData
     fun getSuccessLiveData() : MutableLiveData<Boolean> = isSuccess
 
     fun getImageLiveData() : MutableLiveData<ImageModel> = mutableLiveDataImage
@@ -100,8 +102,11 @@ class NoticeBoardViewModel(application: Application) : BaseViewModel(application
             withContext(Dispatchers.IO){
                 try {
                     isLoading.postValue(false)
-                    studentRepository?.updateNotice(id,noticeBoardModel)
-                    isSuccess.postValue(true)
+                    val model = studentRepository?.updateNotice(id,noticeBoardModel)
+                    model.let {
+                        mutuableLiveDataupdatedModelLiveData.postValue(model)
+                    }
+                  //  isSuccess.postValue(true)
                 }catch (httpException : HttpException){
                     val errorResponse = AppUtil.getErrorResponse(httpException.response()?.errorBody()?.string())
                     errorResponse.let { getErrorMutableLiveData().postValue(it) }

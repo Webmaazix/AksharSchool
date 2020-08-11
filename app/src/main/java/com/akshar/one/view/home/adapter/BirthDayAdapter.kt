@@ -36,7 +36,7 @@ class BirthDayAdapter(private val mContext: Context, private val birthDayModel: 
             name = birthDayModel?.firstName!!
         }
         holder.binding.tvClassName.text = "N/A"
-        val bdyDate = AppUtil.formatDate(birthDayModel.birthday!!)
+        val bdyDate = AppUtil.formatBirthdayDate(birthDayModel.birthday!!)
         holder.binding.tvDate.text = bdyDate
 
         holder.binding.tvUserName.text  = name

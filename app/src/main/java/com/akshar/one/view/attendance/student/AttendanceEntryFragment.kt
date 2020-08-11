@@ -81,8 +81,8 @@ class AttendanceEntryFragment : BaseFragment(), View.OnClickListener,
         }
         fragmentAttendanceEntryBinding?.attendanceEntryViewModel = attendanceEntryViewModel
 
-        mainActivity?.setToolbarBackground(false)
-        mainActivity?.setToolbarTitle(context?.getString(R.string.student_attendance_entry))
+       // mainActivity?.setToolbarBackground(false)
+        mainActivity?.setToolbarTitle(getString(R.string.student_attendance_entry))
 
         observers()
     }
@@ -181,7 +181,7 @@ class AttendanceEntryFragment : BaseFragment(), View.OnClickListener,
                 if (classRoomEntity == null) {
                     Toast.makeText(
                         context,
-                        getString(R.string.please_select_class_and_section),
+                        getString(R.string.select_class_section),
                         Toast.LENGTH_LONG
                     )
                         .show()

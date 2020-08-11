@@ -76,9 +76,9 @@
     <string name="no">No</string>
     <string name="female">Female</string>
     <string name="postal_code">Postal Code :</string>
-    <string name="timeline">Timeline</string>
+    <string name="timeline">Today\'s Timeline</string>
     <string name="homework">Homework</string>
-    <string name="birthday">Birthday</string>
+    <string name="birthday">Birthday\'s</string>
     <string name="reviewed">Reviewed</string>
     <string name="finance">Finance</string>
     <string name="overall_fee_amount">Overall Fee Amount</string>
@@ -277,4 +277,13 @@
     <string name="check_number">Check Number</string>
     <string name="transaction_id">Transaction Id</string>
     <string name="transaction_status">Transaction Status</string>
+    <string name="s_no">S No.</string>
+    <string name="employee_name">Employee Name</string>
+    <string name="trouble_in_login_question_mark">Trouble in login?</string>
+    <string name="student_attendance_entry">Student Attendance Entry</string>
+    <string name="employee_attendance_entry">Employee Attendance Entry</string>
+    <string name="error_please_enter_new_password">Please enter new password</string>
+    <string name="error_please_enter_confirm_password">Please confirm password</string>
+    <string name="error_new_password_and_confirm_password_not_match">New password and confirm passeword  are not matching</string>
+    <string name="category">By Category</string>
 </resources>

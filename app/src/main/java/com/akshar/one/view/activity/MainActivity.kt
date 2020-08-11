@@ -25,7 +25,6 @@ import androidx.lifecycle.ViewModelStore
 import com.akshar.one.R
 import com.akshar.one.api.service.ApiInterface
 import com.akshar.one.app.AksharSchoolApplication
-import com.akshar.one.view.attendance.AttendanceFragment
 import com.akshar.one.view.examschedule.ScheduledExamList
 import com.akshar.one.view.feeandpayments.StudentListForFeesFragment
 import com.akshar.one.manager.SessionManager
@@ -34,11 +33,14 @@ import com.akshar.one.util.AppUtils
 import com.akshar.one.view.noticeboard.NoticeboardActivity
 import com.akshar.one.view.timetable.TimeTableActivity
 import com.akshar.one.util.CheckPermission
+import com.akshar.one.view.attendance.employee.EmployeeAttendanceEntryFragment
+import com.akshar.one.view.attendance.student.AttendanceEntryFragment
 import com.akshar.one.view.home.DashboardActivity
 import com.akshar.one.view.marksentry.inputselection.ClassSectionSelectActivity
 import com.akshar.one.view.messagecenter.MessageCenterFragment
 import com.akshar.one.view.studentprofile.StudentListFragment
 import com.akshar.one.viewmodels.ViewModelFactory
+import com.akshar.one.viewmodels.main.MainViewModel
 import com.akshar.one.viewmodels.student.StudentViewModel
 import com.bumptech.glide.Glide
 import com.google.android.material.navigation.NavigationView
@@ -69,6 +71,7 @@ class MainActivity : BaseActivity(),  NavigationView.OnNavigationItemSelectedLis
     private var profileFile: File? = null
     private var mSelectedImagePath: String = ""
     private var image = ""
+    private var mainViewModel: MainViewModel? = null
 
     companion object {
         fun open(currActivity: Activity) {
@@ -138,6 +141,12 @@ class MainActivity : BaseActivity(),  NavigationView.OnNavigationItemSelectedLis
 
         }
 
+        mainViewModel = ViewModelProvider(
+            ViewModelStore(),
+            ViewModelFactory(application)
+        ).get(MainViewModel::class.java)
+
+
 
         drawerLayout?.setDrawerListener(toggle)
         nav_view.itemIconTintList = null;
@@ -147,6 +156,22 @@ class MainActivity : BaseActivity(),  NavigationView.OnNavigationItemSelectedLis
         getWindow().statusBarColor = Color.WHITE;
         txtToolbarTitle.text = currActivity.resources.getString(R.string.home)
         replaceFragment(DashboardActivity.newInstance(), DashboardActivity::javaClass.name, false)
+    }
+
+    private fun fetchCourses() {
+        mainViewModel?.getClassRoomDropdownService()
+    }
+
+    private fun observers() {
+        mainViewModel?.getIsLoading()?.observe(this, Observer {
+            showProgressIndicator(it)
+        })
+
+        mainViewModel?.getErrorMutableLiveData()?.observe(this, Observer {
+            it?.let {
+                AndroidUtil.showMessageDialog(this, it.message)
+            }
+        })
     }
 
     private fun setListner() {
@@ -226,6 +251,7 @@ class MainActivity : BaseActivity(),  NavigationView.OnNavigationItemSelectedLis
              //   replaceFragment(DashboardActivity.newInstance(), DashboardActivity::javaClass.name, true)
 
             }
+
             R.id.nav_student_profile -> {
                 toolbar.background = currActivity.resources.getDrawable(R.drawable.yellow_top_square)
 
@@ -233,33 +259,56 @@ class MainActivity : BaseActivity(),  NavigationView.OnNavigationItemSelectedLis
 
             }
 
-            R.id.nav_attandance_entry -> {
-                toolbar.background = currActivity.resources.getDrawable(R.drawable.yellow_top_square)
+            R.id.nav_student_attendance_entry -> {
+                toolbar.background =
+                    currActivity.resources.getDrawable(R.drawable.yellow_top_square,null)
 
-                replaceFragment(AttendanceFragment.newInstance(), AttendanceFragment::javaClass.name, false)
-
+                replaceFragment(
+                    AttendanceEntryFragment.newInstance(),
+                    AttendanceEntryFragment::class.java.name,
+                    true
+                )
 
             }
+
+            R.id.nav_employee_attendance_entry -> {
+                toolbar.background =
+                    currActivity.resources.getDrawable(R.drawable.yellow_top_square, null)
+
+                replaceFragment(
+                    EmployeeAttendanceEntryFragment.newInstance(),
+                    EmployeeAttendanceEntryFragment::class.java.name,
+                    true
+                )
+
+            }
+
             R.id.nav_settings -> {
             }
+
             R.id.nav_assign_homework -> {
                 toolbar.background = currActivity.resources.getDrawable(R.drawable.yellow_top_square)
 
                // replaceFragment(AssignHomeworkFragment.newInstance(), AssignHomeworkFragment::javaClass.name, false)
             }
+
             R.id.nav_notice_board -> {
                 NoticeboardActivity.open(currActivity)
             }
+
             R.id.nav_marks_entry -> {
                ClassSectionSelectActivity.open(currActivity)
             }
+
             R.id.nav_exam_schedule -> {
                 ScheduledExamList.open(currActivity)
             }
+
             R.id.nav_fees_payment -> {
                 toolbar.background = currActivity.resources.getDrawable(R.drawable.yellow_top_square)
                 replaceFragment(StudentListForFeesFragment.newInstance(), StudentListForFeesFragment::javaClass.name, false)
             }
+
             R.id.nav_message_center -> {
                 toolbar.txtToolbarTitle.text = "Message Center"
                 replaceFragment(MessageCenterFragment.newInstance(), MessageCenterFragment::javaClass.name, false)
@@ -423,6 +472,10 @@ class MainActivity : BaseActivity(),  NavigationView.OnNavigationItemSelectedLis
 
 
         })
+    }
+
+    private fun showProgressIndicator(isLoading: Boolean?) {
+//        linProgressIndicator.visibility = if (isLoading == true) View.VISIBLE else View.GONE
     }
 
 }

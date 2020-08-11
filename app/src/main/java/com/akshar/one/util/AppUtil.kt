@@ -124,6 +124,14 @@ object AppUtil {
         val outputDateStr = outputFormat.format(date)
         return outputDateStr
     }
+    fun formatBirthdayDate(date : String) : String{
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd")
+        val outputFormat = SimpleDateFormat("dd MMM")
+        val inputDateStr = date
+        val date = inputFormat.parse(inputDateStr)
+        val outputDateStr = outputFormat.format(date)
+        return outputDateStr
+    }
 
     fun getServerDateFormat(date:Date): String = SimpleDateFormat(SERVER_DATE_FORMAT).format(date)
 

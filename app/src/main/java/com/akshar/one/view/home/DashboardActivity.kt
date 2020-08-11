@@ -145,15 +145,18 @@ class DashboardActivity : BaseFragment(),View.OnClickListener {
                 showProgressBar()
                 it.getTimeTableOfEmployee(employeeId,date!!) }
         }
+
         dashboardViewModel?.let {
             if (context?.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true) {
              //   showProgressBar()
                 it.getBirthdays(date!!,date!!) }
         }
+
         dashboardViewModel?.let {
             if (context?.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true) {
                 it.getAllFinanceSummery(currentYearJan!!,date!!) }
         }
+
         setCollectionAdapter()
         observers()
     }
@@ -178,7 +181,7 @@ class DashboardActivity : BaseFragment(),View.OnClickListener {
                    binding!!.tvErrorMessage.text = it.message
                    binding!!.tvTotalFinanceAmountCollection.text = "₹ 0"
                 }else{
-                      AndroidUtil.showToast(context!!, it.message,true)
+                    //  AndroidUtil.showToast(context!!, it.message,true)
                 }
 
             }
@@ -195,7 +198,7 @@ class DashboardActivity : BaseFragment(),View.OnClickListener {
                     binding!!.tvErrorMessageExpence.visibility = View.VISIBLE
                     binding!!.tvErrorMessageExpence.text = it.message
                 }else{
-                    AndroidUtil.showToast(context!!, it.message,true)
+                  //  AndroidUtil.showToast(context!!, it.message,true)
                 }
 
             }
@@ -403,7 +406,7 @@ class DashboardActivity : BaseFragment(),View.OnClickListener {
                     binding?.pieChartCollection!!.setCenterColor(R.color.white)
                     binding?.pieChartCollection!!.setSliceColor(collectionColorArray.toIntArray())
 
-            },3000)
+            },100)
 
         }
 
@@ -418,7 +421,7 @@ class DashboardActivity : BaseFragment(),View.OnClickListener {
         binding!!.rvExpence.setHasFixedSize(true)
         binding!!.rvExpence.layoutManager = LinearLayoutManager(currActivity,LinearLayoutManager.VERTICAL,false)
         expencesAdapter = ExpencesAdapter(currActivity,expenceList)
-        binding!!.rvExpence.adapter = collectionAdapter
+        binding!!.rvExpence.adapter = expencesAdapter
     }
 
     private fun setCollectionData(feePayment: ArrayList<FeePayment>?){
@@ -437,8 +440,8 @@ class DashboardActivity : BaseFragment(),View.OnClickListener {
 
         if(collectionList.size > 4){
             binding!!.tvSeeAllCollection.visibility = View.VISIBLE
-        }else{
-            binding!!.tvSeeAllCollection.visibility = View.VISIBLE
+        }else {
+            binding!!.tvSeeAllCollection.visibility = View.GONE
         }
 
         for(i in 0 until feePayment.size){
@@ -480,7 +483,9 @@ class DashboardActivity : BaseFragment(),View.OnClickListener {
         expenceList.addAll(expenseSummary)
         expencesAdapter.notifyDataSetChanged()
         if(expenceList.size > 4){
-
+            binding!!.tvSeeAllExpence.visibility = View.VISIBLE
+        }else {
+            binding!!.tvSeeAllExpence.visibility = View.GONE
         }
 
         for(i in 0 until expenseSummary.size){
@@ -505,7 +510,7 @@ class DashboardActivity : BaseFragment(),View.OnClickListener {
             binding?.pieChartExpence!!.setDataPoints(collectionAmountFloatArray.toFloatArray())
             binding?.pieChartExpence!!.setCenterColor(R.color.white)
             binding?.pieChartExpence!!.setSliceColor(collectionColorArray.toIntArray())
-        },3000)
+        },100)
     }
 
     private fun  openCategoryPopup(from : Int){
@@ -546,7 +551,7 @@ class DashboardActivity : BaseFragment(),View.OnClickListener {
         }else if(from == 1){
             val popup = PopupMenu(currActivity, rlCategoryExpence)
             //Inflating the Popup using xml file
-            popup.menuInflater.inflate(R.menu.category_popup, popup.menu)
+            popup.menuInflater.inflate(R.menu.expense_category_popup, popup.menu)
 
             //registering popup with OnMenuItemClickListener
             popup.setOnMenuItemClickListener {
@@ -554,7 +559,7 @@ class DashboardActivity : BaseFragment(),View.OnClickListener {
                     dashboardViewModel?.let {
                         if(context?.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true){
                             expenseGroupBy = "FEE_HEAD"
-                            binding?.tvCategoryExpence!!.text = currActivity.resources.getString(R.string.by_feahead)
+                            binding?.tvCategoryExpence!!.text = currActivity.resources.getString(R.string.category)
                             it.getExpences(expenseGroupBy,expenseFromDate,expenseToDate)
                         }
                     }
