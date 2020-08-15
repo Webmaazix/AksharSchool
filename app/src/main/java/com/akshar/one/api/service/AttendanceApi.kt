@@ -1,29 +1,21 @@
 package com.akshar.one.api.service
 
-import com.akshar.one.model.*
+import com.akshar.one.model.CourseModel
+import com.akshar.one.model.DegreeModel
+import com.akshar.one.model.ShiftModel
+import com.akshar.one.model.StudentAttendanceModel
 import retrofit2.http.*
 
 interface AttendanceApi {
 
-    @GET("AksharOne/courses")
-    suspend fun getCourses(
-        @HeaderMap headers: Map<String, String>
-    ): List<CourseModel>?
-
-    @GET("AksharOne/classrooms")
-    suspend fun getClassRooms(
-        @HeaderMap headers: Map<String, String>,
-        @Query("courseId") courseId: Int
-    ): List<ClassRoomModel>?
-
-    @GET("AksharOne/attendance/shifts")
+    @GET("attendance/shifts")
     suspend fun getShifts(
         @HeaderMap headers: Map<String, String>,
         @Query("profileType") profileType: String = "STUDENT",
-        @Query("classroomId") classroomId: Int
+        @Query("classroomIdList") classroomId: Int
     ): List<ShiftModel>?
 
-    @GET("AksharOne/attendance/students")
+    @GET("attendance/students")
     suspend fun getStudentsAttendanceByClassRoomId(
         @HeaderMap headers: Map<String, String>,
         @Query("classroomId") classroomId: Int,
@@ -31,20 +23,20 @@ interface AttendanceApi {
         @Query("date") date: String
     ): List<StudentAttendanceModel>?
 
-    @POST("AksharOne/attendance/record")
+    @POST("attendance/record")
     suspend fun saveStudentsAttendance(
         @HeaderMap headers: Map<String, String>,
         @Query("profileType") profileType: String,
-        @Body  studentList : List<StudentAttendanceModel>
+        @Body studentList: List<StudentAttendanceModel>
     )
 
-    @GET("AksharOne/classrooms/dropdown")
+    @GET("classrooms/dropdown")
     suspend fun getClassRoomsDropDown(@HeaderMap headers: Map<String, String>): List<CourseModel>?
 
-    @GET("AksharOne/classrooms/dropdown")
+    @GET("classrooms/dropdown")
     suspend fun getDegreeClassRoomsDropDown(@HeaderMap headers: Map<String, String>): List<DegreeModel>?
 
-    @GET("AksharOne/attendance/employees")
+    @GET("attendance/employees")
     suspend fun getEmployeeAttendance(
         @HeaderMap headers: Map<String, String>,
         @Query("shiftId") shiftId: Int,

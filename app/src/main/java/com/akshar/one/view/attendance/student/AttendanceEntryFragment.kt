@@ -81,7 +81,7 @@ class AttendanceEntryFragment : BaseFragment(), View.OnClickListener,
         }
         fragmentAttendanceEntryBinding?.attendanceEntryViewModel = attendanceEntryViewModel
 
-       // mainActivity?.setToolbarBackground(false)
+//        mainActivity?.setToolbarBackground(false)
         mainActivity?.setToolbarTitle(getString(R.string.student_attendance_entry))
 
         observers()
@@ -101,11 +101,7 @@ class AttendanceEntryFragment : BaseFragment(), View.OnClickListener,
                 }
             }
         } else {
-            Toast.makeText(
-                context,
-                getString(R.string.no_internet_available),
-                Toast.LENGTH_LONG
-            ).show()
+            AndroidUtil.showToast(context,getString(R.string.no_internet_available),true)
         }
     }
 
@@ -153,11 +149,7 @@ class AttendanceEntryFragment : BaseFragment(), View.OnClickListener,
                 if (context?.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true) {
                     attendanceEntryViewModel?.saveStudentAttendance()
                 } else {
-                    Toast.makeText(
-                        context,
-                        getString(R.string.no_internet_available),
-                        Toast.LENGTH_LONG
-                    ).show()
+                    AndroidUtil.showToast(context,getString(R.string.no_internet_available),true)
                 }
             }
             R.id.rlMarkAll -> {
@@ -179,12 +171,7 @@ class AttendanceEntryFragment : BaseFragment(), View.OnClickListener,
             R.id.rLCategory -> {
 
                 if (classRoomEntity == null) {
-                    Toast.makeText(
-                        context,
-                        getString(R.string.select_class_section),
-                        Toast.LENGTH_LONG
-                    )
-                        .show()
+                    AndroidUtil.showToast(context,getString(R.string.select_class_section),true)
                 } else {
                     attendanceEntryViewModel?.getAttendanceCategories(classRoomEntity, this)
                 }

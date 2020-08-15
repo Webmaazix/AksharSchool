@@ -97,11 +97,7 @@ class EmployeeAttendanceEntryFragment : BaseFragment(), View.OnClickListener,
                 }
             }
         } else {
-            Toast.makeText(
-                context,
-                getString(R.string.no_internet_available),
-                Toast.LENGTH_LONG
-            ).show()
+            AndroidUtil.showToast(context,getString(R.string.no_internet_available),true)
         }
     }
 
@@ -147,11 +143,7 @@ class EmployeeAttendanceEntryFragment : BaseFragment(), View.OnClickListener,
                 if (context?.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true) {
                     employeeAttendanceEntryViewModel?.saveEmployeeAttendance()
                 } else {
-                    Toast.makeText(
-                        context,
-                        getString(R.string.no_internet_available),
-                        Toast.LENGTH_LONG
-                    ).show()
+                    AndroidUtil.showToast(context,getString(R.string.no_internet_available),true)
                 }
             }
             R.id.rlMarkAll -> {

@@ -146,7 +146,8 @@ class MainActivity : BaseActivity(),  NavigationView.OnNavigationItemSelectedLis
             ViewModelFactory(application)
         ).get(MainViewModel::class.java)
 
-
+        fetchCourses()
+        observers()
 
         drawerLayout?.setDrawerListener(toggle)
         nav_view.itemIconTintList = null;

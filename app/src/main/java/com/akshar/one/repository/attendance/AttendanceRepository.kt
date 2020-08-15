@@ -34,11 +34,6 @@ class AttendanceRepository(application: Application) : BaseRepository() {
         departmentDao = aksharSchoolDataBase.departmentDao()
     }
 
-    suspend fun getCourses() = attendanceApi?.getCourses(service.headers())
-
-    suspend fun getClassRooms(courseId: Int) =
-        attendanceApi?.getClassRooms(service.headers(), courseId)
-
     suspend fun getCoursesFromDB(schoolCode: String) = courseDao?.getCourses(schoolCode)
 
     suspend fun insertCourse(courseEntity: CourseEntity) = courseDao?.insert(courseEntity)

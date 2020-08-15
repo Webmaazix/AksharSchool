@@ -1,5 +1,6 @@
 package com.akshar.one.util
 
+import android.util.Log
 import com.akshar.one.api.response.ErrorResponse
 import com.akshar.one.calender.data.Day
 import com.google.gson.Gson
@@ -136,6 +137,13 @@ object AppUtil {
     fun getServerDateFormat(date:Date): String = SimpleDateFormat(SERVER_DATE_FORMAT).format(date)
 
     fun getServerDateFormat(day: Day): String{
-        return day.year.toString()+"-"+day.month.toString()+"-"+day.day
+//        return day.year.toString()+"-"+day.month.toString()+"-"+day.day
+        Log.d("AksharOne","date : "+day.year.toString()+"-"+day.month.toString()+"-"+day.day)
+        val cal = Calendar.getInstance()
+        cal.set(Calendar.YEAR,day.year)
+        cal.set(Calendar.MONTH,day.month)
+        cal.set(Calendar.DAY_OF_MONTH,day.day)
+        Log.d("AksharOne","date : "+cal.time.toString())
+        return SimpleDateFormat(SERVER_DATE_FORMAT).format(cal.time)
     }
 }

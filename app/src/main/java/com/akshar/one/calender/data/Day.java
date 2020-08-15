@@ -42,7 +42,7 @@ public class Day implements Parcelable{
         in.readIntArray(data);
         this.mYear = data[0];
         this.mMonth = data[1];
-        this.mYear = data[2];
+        this.mDay = data[2];
     }
 
     @Override

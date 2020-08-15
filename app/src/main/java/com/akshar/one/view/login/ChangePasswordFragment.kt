@@ -90,11 +90,7 @@ class ChangePasswordFragment : BaseFragment(), View.OnClickListener {
 
                             }
                         } else
-                            Toast.makeText(
-                                context,
-                                getString(R.string.no_internet_available),
-                                Toast.LENGTH_LONG
-                            ).show()
+                            AndroidUtil.showToast(context,getString(R.string.no_internet_available),true)
                     }
                 }
             }
