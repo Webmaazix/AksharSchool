@@ -27,19 +27,43 @@
         android:layout_height="@dimen/_18sdp"/>
 
 
-    <TextView
-        android:id="@+id/tvUserName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="User Name"
-        android:layout_gravity="bottom"
-        android:textAlignment="center"
-        android:maxLength="25"
-        android:layout_marginBottom="@dimen/_10sdp"
-        android:fontFamily="@font/opensans_bold"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_12sp"
-        android:textStyle="bold" />
+    <RelativeLayout
+        android:id="@+id/rlSwitchSchool"
+        android:layout_width="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:background="@drawable/transparent_shape"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgSwitch"
+            android:layout_width="@dimen/_15sdp"
+            android:src="@drawable/switchj"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_height="@dimen/_15sdp"/>
+
+        <TextView
+            android:id="@+id/tvUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jigyasa@gmail.com"
+            android:layout_toEndOf="@+id/imgSwitch"
+            android:textAlignment="center"
+            android:maxLength="25"
+            android:paddingStart="@dimen/_7sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:fontFamily="@font/opensans_bold"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_11sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
 
 
 

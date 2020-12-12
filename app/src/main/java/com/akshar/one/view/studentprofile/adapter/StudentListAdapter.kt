@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.akshar.one.R
 import com.akshar.one.databinding.StudentCellBinding
 import com.akshar.one.model.StudentListModel
+import com.akshar.one.view.activity.MainActivity
 import com.akshar.one.view.feeandpayments.StudentFeesDetails
 import com.akshar.one.view.feeandpayments.StudentListForFeesFragment
 import com.akshar.one.view.studentprofile.ViewStudentProfileActivity
@@ -29,6 +30,7 @@ class StudentListAdapter(private val mContext: Activity, private val studentList
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val model = studentList?.get(position)
         var name = ""
+
         if(model?.lastName != null){
             name = model.firstName +" "+model.lastName
         }else if(model?.firstName!= null){
@@ -52,7 +54,7 @@ class StudentListAdapter(private val mContext: Activity, private val studentList
             if(fragment is StudentListForFeesFragment){
                 StudentFeesDetails.open(mContext,model!!)
             }else{
-                ViewStudentProfileActivity.open(mContext,studentList!!,position)
+                ViewStudentProfileActivity.open(mContext,studentList!!,position,(mContext as MainActivity).securityList)
             }
 
         }

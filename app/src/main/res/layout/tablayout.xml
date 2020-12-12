@@ -7,7 +7,7 @@
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:text="My TimeTable"
-        android:textSize="@dimen/_11sp"
+        android:textSize="@dimen/_10sp"
         android:fontFamily="@font/opensans_bold"
         android:padding="@dimen/_7sdp"
         android:textAlignment="center"

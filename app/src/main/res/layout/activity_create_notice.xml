@@ -294,7 +294,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvSend"
                     android:layout_width="match_parent"
-                    android:text="@string/send"
+                    android:text="@string/save"
                     android:textSize="@dimen/_12sp"
                     android:textColor="@color/white"
                     android:background="@drawable/dark_blue_button_bg"

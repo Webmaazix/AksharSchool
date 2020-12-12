@@ -20,6 +20,7 @@ import com.akshar.one.databinding.FragmentActiveNoticeBinding
 import com.akshar.one.databinding.FragmentFeesDetailsBinding
 import com.akshar.one.model.FeesDetailModel
 import com.akshar.one.model.NoticeBoardModel
+import com.akshar.one.model.StudentListModel
 import com.akshar.one.util.AndroidUtil
 import com.akshar.one.viewmodels.ViewModelFactory
 import com.akshar.one.viewmodels.noticeboard.NoticeBoardViewModel
@@ -40,6 +41,7 @@ class FeesDetailsFragment : Fragment() ,View.OnClickListener {
     private var feeAndPaymentViewModel : FeeAndPaymentViewModel? = null
     lateinit var adapter : FeesDetailAdapter
     private var dialog : Dialog? = null
+    private var studentModel = StudentListModel()
     private var mdialog : Dialog? = null
 
 
@@ -54,14 +56,23 @@ class FeesDetailsFragment : Fragment() ,View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_fees_details,container,false)
-        initViews()
-        return  binding?.root
 
+        return  binding?.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+
+
+        studentModel = (currActivity as StudentFeesDetails).student
+        initViews()
+        observers()
+    }
+
+
+    private fun initViews(){
+        setAdapter()
         activity?.application?.let {
             feeAndPaymentViewModel = ViewModelProvider(
                 ViewModelStore(),
@@ -74,13 +85,6 @@ class FeesDetailsFragment : Fragment() ,View.OnClickListener {
                 mdialog =  AppUtils.showProgress(currActivity!!)
                 it.getFeeDetail((currActivity as StudentFeesDetails).student.studentProfileId!!) }
         }
-
-        observers()
-    }
-
-
-    private fun initViews(){
-        setAdapter()
     }
 
     private fun setAdapter(){
@@ -89,7 +93,7 @@ class FeesDetailsFragment : Fragment() ,View.OnClickListener {
             LinearLayoutManager.VERTICAL,false)
         adapter = FeesDetailAdapter(
             currActivity!!,
-            feeDetailList,(currActivity as StudentFeesDetails).student.studentProfileId!!)
+            feeDetailList,(currActivity as StudentFeesDetails).student.studentProfileId!!,studentModel)
 
         binding!!.rlActiveNotice.adapter = adapter
     }

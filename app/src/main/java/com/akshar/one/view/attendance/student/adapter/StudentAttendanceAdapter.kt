@@ -27,7 +27,8 @@ class StudentAttendanceAdapter(private val attendanceEntryViewModel: AttendanceE
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val attendanceEntryCellLayoutBinding = DataBindingUtil.inflate<AttendanceEntryCellLayoutBinding>(LayoutInflater.from(parent.context), R.layout.attendance_entry_cell_layout, parent,  false)
+        val attendanceEntryCellLayoutBinding =
+            DataBindingUtil.inflate<AttendanceEntryCellLayoutBinding>(LayoutInflater.from(parent.context), R.layout.attendance_entry_cell_layout, parent,  false)
         return Holder(
             parent.context,
             attendanceEntryCellLayoutBinding,

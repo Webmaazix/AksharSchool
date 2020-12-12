@@ -9,7 +9,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.akshar.one.R
 import com.akshar.one.databinding.ActivityFeeDetailBinding
+import com.akshar.one.manager.SessionManager
 import com.akshar.one.model.FeesDetailModel
+import com.akshar.one.model.StudentListModel
 import com.akshar.one.view.feeandpayments.adapter.FeeHeadAdapter
 import kotlinx.android.synthetic.main.main_toolbar.view.*
 
@@ -21,12 +23,13 @@ class FeeDetailActivity : AppCompatActivity(),View.OnClickListener{
     private var currActivity : Activity = this
     lateinit var adapter : FeeHeadAdapter
     var studentId  = 0
-
+    private var studentListModel = StudentListModel()
     companion object {
-        fun open(currActivity: Activity, feeDetailModel : FeesDetailModel,studentId : Int) {
+        fun open(currActivity: Activity, feeDetailModel : FeesDetailModel,studentId : Int,studentModel : StudentListModel) {
             val intent = Intent(currActivity, FeeDetailActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
             intent.putExtra("feeDetailModel",feeDetailModel)
+            intent.putExtra("studentListModel",studentModel)
             intent.putExtra("studentId",studentId)
             currActivity.startActivity(intent)
             currActivity.overridePendingTransition(R.anim.slide_in, R.anim.slide_out)
@@ -37,11 +40,10 @@ class FeeDetailActivity : AppCompatActivity(),View.OnClickListener{
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(currActivity,R.layout.activity_fee_detail)
         feeDetailModel = intent.getSerializableExtra("feeDetailModel") as FeesDetailModel
+        studentListModel = intent.getSerializableExtra("studentListModel") as StudentListModel
         studentId = intent.getIntExtra("studentId",0)
         setData()
         setListner()
-
-
     }
 
     private fun setAdapter(){
@@ -55,13 +57,11 @@ class FeeDetailActivity : AppCompatActivity(),View.OnClickListener{
         binding!!.rvFeeHeads.adapter = adapter
     }
 
-
     private fun setData(){
         binding!!.toolbar.imgMenu.visibility = View.GONE
         binding!!.toolbar.imgBack.visibility = View.VISIBLE
         binding!!.toolbar.txtToolbarTitle.text =
-            currActivity.resources.getString(R.string.fee_amp_payment)
-
+            currActivity.resources.getString(R.string.fee_details)
         var finalAmount = 0.0
         var dueAmount = 0.0
         var overDueAmount = 0.0
@@ -93,7 +93,8 @@ class FeeDetailActivity : AppCompatActivity(),View.OnClickListener{
                 onBackPressed()
             }
             R.id.tvPay ->{
-                PayFeeActivity.open(currActivity,feeDetailModel,studentId)
+                    PayFeeActivity.open(currActivity, feeDetailModel, studentId, studentListModel)
+
             }
         }
     }

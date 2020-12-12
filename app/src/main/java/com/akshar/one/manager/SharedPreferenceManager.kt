@@ -9,6 +9,8 @@ class SharedPreferenceManager constructor(private val sharedPreferences: SharedP
     companion object {
         const val SHARED_PREF_FILE_NAME = "akshar_school_shared_pre_file"
         const val LOGIN_MODEL = "prefLoginModel"
+        const val ROLE = "prefLoginRole"
+        const val securityList = "prefSecurityList"
     }
 
     fun putObject( key: String, model: Any) {

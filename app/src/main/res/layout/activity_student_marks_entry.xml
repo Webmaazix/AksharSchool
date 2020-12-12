@@ -200,7 +200,7 @@
                     android:layout_height="wrap_content"/>
 
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/tvMaximumMarks"
                     android:layout_width="wrap_content"
                     android:text="100"

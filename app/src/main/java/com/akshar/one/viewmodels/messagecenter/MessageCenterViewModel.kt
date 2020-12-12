@@ -22,6 +22,8 @@ class MessageCenterViewModel(application: Application) : BaseViewModel(applicati
     private var mutuableLiveDataStudentList = MutableLiveData<List<AbsentStudentList>>()
     private var mutuableLiveDataMarksStudentList = MutableLiveData<List<StudentListModel>>()
     private var mutuableLiveDataShiftList = MutableLiveData<List<ShiftList>>()
+    private var mutuableLiveDataFeeHeadTermList = MutableLiveData<List<FeeHeadTermList>>()
+    private var mutuableLiveDataStudentListModel = MutableLiveData<List<FeeStudentList>>()
     private var mutuableLiveDataAbsentReport = MutableLiveData<Boolean>()
     private var mutuableLiveDataEmployeeDepartment = MutableLiveData<List<EmployeeDepartmentList>>()
     private var mutuableLiveDataEmployeeList = MutableLiveData<List<EmployeeList>>()
@@ -35,8 +37,10 @@ class MessageCenterViewModel(application: Application) : BaseViewModel(applicati
     fun getIsLoading(): MutableLiveData<Boolean> = isLoading
 
     fun getStudentListLiveData() : MutableLiveData<List<AbsentStudentList>> = mutuableLiveDataStudentList
+    fun getStudentListModelLiveData() : MutableLiveData<List<FeeStudentList>> = mutuableLiveDataStudentListModel
     fun getMarksStudentListLiveData() : MutableLiveData<List<StudentListModel>> = mutuableLiveDataMarksStudentList
     fun getShiftListLiveData() : MutableLiveData<List<ShiftList>> = mutuableLiveDataShiftList
+    fun getFeeHeadTermListLiveData() : MutableLiveData<List<FeeHeadTermList>> = mutuableLiveDataFeeHeadTermList
     fun getAbsentReportLiveData() : MutableLiveData<Boolean> = mutuableLiveDataAbsentReport
     fun getEmployeeDepartmentLiveData() : MutableLiveData<List<EmployeeDepartmentList>> = mutuableLiveDataEmployeeDepartment
     fun getEmployeeListLiveData() : MutableLiveData<List<EmployeeList>> = mutuableLiveDataEmployeeList
@@ -267,6 +271,58 @@ class MessageCenterViewModel(application: Application) : BaseViewModel(applicati
                     val shiftList = messageRepository?.getShiftList(profileType,classRoomId)
                     shiftList.let {
                         mutuableLiveDataShiftList.postValue(shiftList)
+                    }
+
+                }catch (httpException : HttpException){
+                    isLoading.postValue(false)
+                    val errorResponse  = AppUtil.getErrorResponse(httpException.response()?.errorBody()?.string())
+                    errorResponse.let { getErrorMutableLiveData().postValue(it) }
+
+                }catch (e : Exception){
+                    isLoading.postValue(false)
+                    e.printStackTrace()
+                }
+            }
+        }
+    }
+    fun getFeeHeadTermList(dueDate : String){
+        isLoading.postValue(true)
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                try {
+                    isLoading.postValue(false)
+                    if(dueDate.equals("")){
+                        val list = messageRepository?.getFeeHeadTermListOverDue()
+                        list.let {
+                            mutuableLiveDataFeeHeadTermList.postValue(list)
+                        }
+                    }else{
+                        val list = messageRepository?.getFeeHeadTermList(dueDate)
+                        list.let {
+                            mutuableLiveDataFeeHeadTermList.postValue(list)
+                        }
+                    }
+                }catch (httpException : HttpException){
+                    isLoading.postValue(false)
+                    val errorResponse  = AppUtil.getErrorResponse(httpException.response()?.errorBody()?.string())
+                    errorResponse.let { getErrorMutableLiveData().postValue(it) }
+
+                }catch (e : Exception){
+                    isLoading.postValue(false)
+                    e.printStackTrace()
+                }
+            }
+        }
+    }
+    fun getPendingFeeStudentList(model : PendingFeeStudentRequest){
+        isLoading.postValue(true)
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                try {
+                    isLoading.postValue(false)
+                    val list = messageRepository?.getPendingFeeStudentList(model)
+                    list.let {
+                        mutuableLiveDataStudentListModel.postValue(list!!.content)
                     }
 
                 }catch (httpException : HttpException){

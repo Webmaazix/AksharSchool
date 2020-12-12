@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">SchoolOne</string>
 
     <string name="no_internet_available">No internet available. Please try later!</string>
@@ -78,7 +78,7 @@
     <string name="postal_code">Postal Code :</string>
     <string name="timeline">Today\'s Timeline</string>
     <string name="homework">Homework</string>
-    <string name="birthday">Birthday\'s</string>
+    <string name="birthday">Birthdays</string>
     <string name="reviewed">Reviewed</string>
     <string name="finance">Finance</string>
     <string name="overall_fee_amount">Overall Fee Amount</string>
@@ -123,7 +123,7 @@
     <string name="concession">Concession</string>
     <string name="due_amount">Due Amount</string>
     <string name="pay_all">Pay all</string>
-    <string name="payment_date">Payment Date</string>
+    <string name="payment_date">Payment Date :</string>
     <string name="recieved_by">Received By :</string>
     <string name="remarks">Remarks</string>
     <string name="bank_account">Bank Account</string>
@@ -138,9 +138,9 @@
     <string name="attendance_entry">Attendance Entry</string>
     <string name="assign_homework">Assign Homework</string>
     <string name="notice_board">Notice board</string>
-    <string name="marks_entry">Marks Entry</string>
+    <string name="marks_entry">Student Marks</string>
     <string name="exam_schedule">Exam Schedule</string>
-    <string name="fee_amp_payment"><![CDATA[Fee & Payment]]></string>
+    <string name="fee_amp_payment"><![CDATA[Fees & Payments]]></string>
     <string name="message_center">Message Center</string>
     <string name="settings">Settings</string>
     <string name="logout">Logout</string>
@@ -167,7 +167,7 @@
     <string name="total_expences">Total Expenses</string>
     <string name="week">Week</string>
     <string name="by_feahead">By Fee Head</string>
-    <string name="today">Today\'s</string>
+    <string name="today">Today</string>
     <string name="yesterday">Yesterday</string>
     <string name="year">This year</string>
     <string name="month">This Month</string>
@@ -280,10 +280,55 @@
     <string name="s_no">S No.</string>
     <string name="employee_name">Employee Name</string>
     <string name="trouble_in_login_question_mark">Trouble in login?</string>
-    <string name="student_attendance_entry">Student Attendance Entry</string>
-    <string name="employee_attendance_entry">Employee Attendance Entry</string>
+    <string name="student_attendance_entry">Student Attendance</string>
+    <string name="employee_attendance_entry">Employee Attendance</string>
     <string name="error_please_enter_new_password">Please enter new password</string>
     <string name="error_please_enter_confirm_password">Please confirm password</string>
     <string name="error_new_password_and_confirm_password_not_match">New password and confirm passeword  are not matching</string>
     <string name="category">By Category</string>
+
+    <string name="crop__saving">Saving picture…</string>
+    <string name="crop__wait">Please wait…</string>
+    <string name="crop__pick_error">No image sources available</string>
+
+    <string name="crop__done">DONE</string>
+    <string name="crop__cancel" tools:ignore="ButtoASnCase">CANCEL</string>
+    <string name="done">Done</string>
+    <string name="select_role">Select Role</string>
+    <string name="save_attendance">Save Attendance</string>
+    <string name="select_child">Select Child</string>
+    <string name="select_school">Select School</string>
+    <string name="students">Students</string>
+    <string name="you_can_change_the_selection_any_time">You can change the selection any time</string>
+    <string name="select_fee_head">Select Fee Head</string>
+    <string name="edit_attendance">Edit Attendance</string>
+    <string name="select_school_or_student">Select School or Student</string>
+    <string name="no_notice_found">No notice found</string>
+    <string name="data_not_found">Data not found</string>
+    <string name="student_marks">Student Marks</string>
+    <string name="select_payment_method">Select payment method</string>
+    <string name="select_bank">Select bank</string>
+    <string name="select_examination">Select examination</string>
+    <string name="select_employee_department">Select employee department</string>
+    <string name="designation">Designation</string>
+    <string name="department">Department</string>
+    <string name="employee_details">Employee Details</string>
+    <string name="enter_department">Enter Department</string>
+    <string name="enter_designation">Enter Designation</string>
+    <string name="please_wait_untill_we_process_data">Please wait until we process data</string>
+    <string name="select_subject">Select Subject</string>
+    <string name="employee_profile">Employee Profile</string>
+    <string name="enter_email">Enter email</string>
+    <string name="enter_mobile_no">Enter Mobile No.</string>
+    <string name="enter_details">Enter details</string>
+    <string name="employee_list">Employee List</string>
+    <string name="employee_id">Employee Id :</string>
+    <string name="contact_details">Contact details</string>
+    <string name="payment_details">Payment Details</string>
+    <string name="payment_history_detail">Payment History Detail</string>
+    <string name="print_invoice">Print Invoice</string>
+    <string name="fee_details">Fee Details</string>
+    <string name="attendance_is_not_recorded_would_you_like_to_record_now">Attendance is not recorded.\n Would you like to record now?</string>
+    <string name="reoord_now">Reoord Now</string>
+
 </resources>

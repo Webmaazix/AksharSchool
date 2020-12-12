@@ -32,7 +32,7 @@ class AssignHomeworkViewModel(application: Application) : BaseViewModel(applicat
 
     fun getImageLiveData() : MutableLiveData<ImageModel> = mutableLiveDataImage
 
-    fun getAllHomeworkList(showDraft : Boolean){
+    fun getAllHomeworkList(showDraft : String){
         viewModelScope.launch {
             withContext(Dispatchers.IO){
                 try {

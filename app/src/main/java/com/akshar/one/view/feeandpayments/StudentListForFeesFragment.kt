@@ -113,7 +113,6 @@ class StudentListForFeesFragment : Fragment(),View.OnClickListener {
         }
 
         observer()
-
     }
 
     private fun observer() {
@@ -159,7 +158,6 @@ class StudentListForFeesFragment : Fragment(),View.OnClickListener {
 
     }
 
-
     private fun setAdapter() {
         fragmentStudentListBinding!!.rvStudents.setHasFixedSize(true)
         fragmentStudentListBinding!!.rvStudents.layoutManager =
@@ -179,7 +177,6 @@ class StudentListForFeesFragment : Fragment(),View.OnClickListener {
             R.id.rlClassSection -> {
                 openDialog()
             }
-
         }
     }
 
@@ -203,6 +200,13 @@ class StudentListForFeesFragment : Fragment(),View.OnClickListener {
         )
         ClassDropDownAdapter.selectedChild = -1
         ClassDropDownAdapter.clickParent =-1;
+        if(classDropdownList.size > 0){
+            dialogSelectClassSectionBinding!!.rlNotFound.visibility = View.GONE
+            dialogSelectClassSectionBinding!!.rlClassesDropdown.visibility = View.VISIBLE
+        }else{
+            dialogSelectClassSectionBinding!!.rlNotFound.visibility = View.VISIBLE
+            dialogSelectClassSectionBinding!!.rlClassesDropdown.visibility = View.GONE
+        }
         classDropDownAdapter = ClassDropDownAdapter(currActivity, classDropdownList, this, object :
             ClassDropDownAdapter.SectionSelection {
             override fun selectionCallback(parent: Int, child: Int) {
@@ -238,7 +242,6 @@ class StudentListForFeesFragment : Fragment(),View.OnClickListener {
             }
         }
     }
-
 
     private fun showProgressIndicator(isLoading: Boolean?) {
         linProgressIndicator.visibility = if (isLoading == true) View.VISIBLE else View.GONE

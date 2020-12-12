@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="position"
+            type="java.lang.Integer" />
+
+        <variable
+            name="attendanceClassRoomViewModel"
+            type="com.akshar.one.viewmodels.attendance.AttendanceClassRoomViewModel" />
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/rlBlue"
+                android:layout_width="match_parent"
+                android:backgroundTint="@color/blue"
+                android:padding="@dimen/_5sdp"
+                android:background="@drawable/blue_nopadding_bottomsquare"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:text="@string/enter_details"
+                    android:textSize="@dimen/_12sp"
+                    android:textColor="@color/white"
+                    android:padding="@dimen/_7sdp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/opensans_regular"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgCancel"
+                    android:layout_width="@dimen/_24sdp"
+                    android:src="@drawable/ic_baseline_close_24"
+                    android:layout_alignParentEnd="true"
+                    android:tint="@color/white"
+                    android:padding="@dimen/_3sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_centerVertical="true"
+                    android:layout_height="@dimen/_24sdp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_below="@+id/rlBlue"
+                android:background="@drawable/white_nopadding_topsquare"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/rlEmail"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="@dimen/_7sdp"
+                    android:layout_marginEnd="@dimen/_7sdp"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvemailLabel"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/dark_black"
+                        android:text="@string/enter_email"
+                        android:fontFamily="@font/opensans_bold"
+                        android:textSize="@dimen/_11sp"
+                        android:textAlignment="center"
+                        android:layout_height="wrap_content"/>
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/etEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/_10sp"
+                        android:fontFamily="@font/opensans_regular"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_below="@+id/tvemailLabel"
+                        android:background="@drawable/grey_stroke_shape"
+                        android:layout_marginTop="@dimen/_10sdp"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/rlPhone"
+                    android:layout_below="@+id/rlEmail"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="@dimen/_7sdp"
+                    android:layout_marginEnd="@dimen/_7sdp"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvMobileNumberLabel"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/dark_black"
+                        android:text="@string/enter_mobile_no"
+                        android:fontFamily="@font/opensans_bold"
+                        android:textSize="@dimen/_11sp"
+                        android:textAlignment="center"
+                        android:layout_height="wrap_content"/>
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/etMobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/_10sp"
+                        android:fontFamily="@font/opensans_regular"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_below="@+id/tvMobileNumberLabel"
+                        android:background="@drawable/grey_stroke_shape"
+                        android:layout_marginTop="@dimen/_10sdp"/>
+
+                </RelativeLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:weightSum="2"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_below="@+id/rlPhone"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvCancel"
+                        android:layout_width="match_parent"
+                        android:text="@string/cancel"
+                        android:textSize="@dimen/_12sp"
+                        android:elevation="@dimen/_2sdp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/lightish_grey"
+                        android:background="@drawable/white_nopadding_lesser_round_shape"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/opensans_regular"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:padding="@dimen/_7sdp"
+                        android:layout_height="wrap_content"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvSubmit"
+                        android:layout_width="match_parent"
+                        android:text="@string/submit"
+                        android:textSize="@dimen/_12sp"
+                        android:layout_weight="1"
+                        android:textAlignment="center"
+                        android:fontFamily="@font/opensans_regular"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:background="@drawable/white_nopadding_lesser_round_shape"
+                        android:backgroundTint="@color/blue"
+                        android:padding="@dimen/_7sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_height="wrap_content"/>
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</layout>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="position"
+            type="java.lang.Integer" />
+
+        <variable
+            name="attendanceClassRoomViewModel"
+            type="com.akshar.one.viewmodels.attendance.AttendanceClassRoomViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_type_square"/>
+        <RelativeLayout
+            android:id="@+id/rlYellow"
+            android:layout_below="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:background="@drawable/yellow_topsquare_with_nopadding"
+            android:layout_height="@dimen/_100sdp">
+
+            <RelativeLayout
+                android:id="@+id/rlStudentProfile"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:background="@drawable/white_nopadding_shape"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/rlImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <com.akshar.one.circlularimageview.CircularImageView
+                        android:id="@+id/imgUserProfile"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/circle_default_pic"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        app:civ_border_width="@dimen/_1sdp"
+                        app:civ_border_color="@color/ultra_light_grey"
+                        app:civ_circle_color="@color/lightish_grey"/>
+
+                    <FrameLayout
+                        android:id="@+id/flLayout"
+                        android:layout_width="wrap_content"
+                        android:visibility="gone"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:layout_height="@dimen/_45sdp">
+
+                        <ImageView
+                            android:layout_width="@dimen/_35sdp"
+                            android:layout_height="@dimen/_35sdp"
+                            android:layout_gravity="center|start"
+                            android:src="@drawable/bg_circle" />
+
+                        <TextView
+                            android:id="@+id/tvShortName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/opensans_regular"
+                            android:text="WO"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_12sp"
+                            />
+                    </FrameLayout>
+
+
+                </RelativeLayout>
+
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvStudentName"
+                    android:text="Student Name"
+                    android:layout_toEndOf="@+id/rlImageView"
+                    android:fontFamily="@font/opensans_regular"
+                    android:textStyle="bold"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textSize="@dimen/_11sp"
+                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvClassSectionName"
+                    android:text="Student Name"
+                    android:layout_below="@+id/tvStudentName"
+                    android:layout_toEndOf="@+id/rlImageView"
+                    android:fontFamily="@font/opensans_regular"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:textSize="@dimen/_11sp"
+                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgArrow"
+                    android:layout_width="@dimen/_24sdp"
+                    android:src="@drawable/dropdwn_arrow"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:layout_height="@dimen/_24sdp"/>
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlMain"
+            android:layout_below="@+id/rlYellow"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/rlMarks"
+                android:background="@drawable/white_rounded_radius_4_bg"
+                android:layout_margin="@dimen/_10sdp"
+                android:visibility="visible"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgPrev"
+                    android:layout_width="@dimen/_20sdp"
+                    android:src="@drawable/leftarrow"
+                    android:tint="@color/black"
+                    android:layout_height="@dimen/_20sdp"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvTestName"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_12sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/opensans_regular"
+                    android:layout_width="match_parent"
+                    android:text="testName"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgNext"
+                    android:layout_width="@dimen/_20sdp"
+                    android:src="@drawable/rightarrow"
+                    android:tint="@color/black"
+                    android:layout_alignParentEnd="true"
+                    android:layout_height="@dimen/_20sdp"/>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvSubjectMarks"
+                    android:layout_below="@+id/tvTestName"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_height="wrap_content"/>
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+
+</layout>

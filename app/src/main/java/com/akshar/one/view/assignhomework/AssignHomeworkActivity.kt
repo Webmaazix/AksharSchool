@@ -50,8 +50,6 @@ class AssignHomeworkActivity : AppCompatActivity(),View.OnClickListener {
             currActivity.overridePendingTransition(R.anim.slide_in, R.anim.slide_out)
         }
     }
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(currActivity,R.layout.activity_assign_homework)

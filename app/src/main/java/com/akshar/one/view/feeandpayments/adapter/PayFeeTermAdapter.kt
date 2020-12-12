@@ -78,14 +78,14 @@ class PayFeeTermAdapter(private val mContext: Activity, private val list: ArrayL
 //               if(amount != "" ){
 //                   (mContext as PayFeeActivity).addAmount(amount.toDouble())
 //               }else{
-                   (mContext as PayFeeActivity).addAmount(model?.dueAmount!!)
+                   (mContext as PayFeeActivity).addAmount(model?.dueAmount!!,model)
 //               }
 
            }else{
 //               if(amount!= ""){
 //                   (mContext as PayFeeActivity).removeAmount(amount.toDouble())
 //               }
-               (mContext as PayFeeActivity).removeAmount(model?.dueAmount!!)
+               (mContext as PayFeeActivity).removeAmount(model?.dueAmount!!,model)
            }
        }
 

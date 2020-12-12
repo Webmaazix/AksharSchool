@@ -9,6 +9,7 @@ import com.akshar.one.repository.noticeboard.NoticeBoardRepository
 import com.akshar.one.repository.student.StudentRepository
 import com.akshar.one.util.AppUtil
 import com.akshar.one.viewmodels.base.BaseViewModel
+import com.google.gson.JsonObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -21,16 +22,20 @@ class FeeAndPaymentViewModel(application: Application) : BaseViewModel(applicati
     private val isLoading = MutableLiveData<Boolean>()
     private val isSuccess = MutableLiveData<Boolean>()
     private var mutuableLiveDataFeeDetail = MutableLiveData<List<FeesDetailModel>>()
+    private var mutuableLiveDataPaymentGatewayResponse= MutableLiveData<PaymentGatewayResponse>()
     private var mutuableLiveDataPaymentHistory = MutableLiveData<List<PaymentHistoryModel>>()
     private var mutuableLiveDataPaymentMethod = MutableLiveData<List<String>>()
     private var mutuableLiveDataBankAccount = MutableLiveData<List<BankAccount>>()
     private var mutableLiveDataImage = MutableLiveData<ImageModel>()
+    private var mutableLiveDataForInvoice = MutableLiveData<InvoiceModel>()
 
     init {
         feeRepository = FeeAndPaymentRepository()
     }
 
     fun getFeeDetailLiveData() : MutableLiveData<List<FeesDetailModel>> = mutuableLiveDataFeeDetail
+    fun getInvoiceLiveData() : MutableLiveData<InvoiceModel> = mutableLiveDataForInvoice
+    fun getPaymentGatewayResponseLiveData() : MutableLiveData<PaymentGatewayResponse> = mutuableLiveDataPaymentGatewayResponse
     fun getPaymentHistoryLiveData() : MutableLiveData<List<PaymentHistoryModel>> = mutuableLiveDataPaymentHistory
     fun getPaymentMethodLiveData() : MutableLiveData<List<String>> = mutuableLiveDataPaymentMethod
     fun getBankAccountLiveData() : MutableLiveData<List<BankAccount>> = mutuableLiveDataBankAccount
@@ -60,6 +65,67 @@ class FeeAndPaymentViewModel(application: Application) : BaseViewModel(applicati
             }
         }
     }
+    fun getInVoice(invoiceNumber : Int){
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                try {
+                    isLoading.postValue(false)
+                    val data = feeRepository?.getInVoice(invoiceNumber)
+                    mutableLiveDataForInvoice.postValue(data)
+                }catch (httpException : HttpException){
+                    isLoading.postValue(false)
+                    val errorResponse  = AppUtil.getErrorResponse(httpException.response()?.errorBody()?.string())
+                    errorResponse.let { getErrorMutableLiveData().postValue(it) }
+
+                }catch (e : Exception){
+                    isLoading.postValue(false)
+                    e.printStackTrace()
+                }
+            }
+        }
+    }
+    fun sendPayUResponseToServer(model : JsonObject){
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                try {
+                    isLoading.postValue(false)
+                    val noticeList = feeRepository?.sendPayUResponseToServer(model)
+
+                }catch (httpException : HttpException){
+                    isLoading.postValue(false)
+                    val errorResponse  = AppUtil.getErrorResponse(httpException.response()?.errorBody()?.string())
+                    errorResponse.let { getErrorMutableLiveData().postValue(it) }
+
+                }catch (e : Exception){
+                    isLoading.postValue(false)
+                    e.printStackTrace()
+                }
+            }
+        }
+    }
+    fun paymentGatewayRedirect(model : PaymentGatewayRequest){
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                try {
+                    isLoading.postValue(false)
+                    val list = feeRepository?.paymentGatewayRedirect(model)
+                    list.let {
+                        mutuableLiveDataPaymentGatewayResponse.postValue(it)
+                    }
+
+                }catch (httpException : HttpException){
+                    isLoading.postValue(false)
+                    val errorResponse  = AppUtil.getErrorResponse(httpException.response()?.errorBody()?.string())
+                    errorResponse.let { getErrorMutableLiveData().postValue(it) }
+
+                }catch (e : Exception){
+                    isLoading.postValue(false)
+                    e.printStackTrace()
+                }
+            }
+        }
+    }
+
     fun getPaymentHistory(studentId : Int){
         viewModelScope.launch {
             withContext(Dispatchers.IO){
@@ -82,6 +148,7 @@ class FeeAndPaymentViewModel(application: Application) : BaseViewModel(applicati
             }
         }
     }
+
     fun getPaymentMethod(fieldName : String){
         viewModelScope.launch {
             withContext(Dispatchers.IO){
@@ -104,6 +171,7 @@ class FeeAndPaymentViewModel(application: Application) : BaseViewModel(applicati
             }
         }
     }
+
     fun getBankAccountList(){
         viewModelScope.launch {
             withContext(Dispatchers.IO){
@@ -126,6 +194,7 @@ class FeeAndPaymentViewModel(application: Application) : BaseViewModel(applicati
             }
         }
     }
+
     fun addFeePayment(paymentRequest : PaymentRequest){
         viewModelScope.launch {
             withContext(Dispatchers.IO){

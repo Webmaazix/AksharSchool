@@ -56,15 +56,15 @@
                     android:layout_width="wrap_content"
                     android:text="@string/final_amount"
                     android:textSize="@dimen/_11sp"
-                    android:fontFamily="@font/opensans_light"
+                    android:fontFamily="@font/opensans_regular"
+                    android:textColor="@color/black"
                     android:layout_height="wrap_content"/>
-
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvFinalAmount"
                     android:layout_alignParentEnd="true"
                     android:layout_width="wrap_content"
-                    android:text="Rs. 3734547"
+                    android:text="Rs. 0"
                     android:textSize="@dimen/_11sp"
                     android:fontFamily="@font/opensans_regular"
                     android:textColor="@color/black"
@@ -86,7 +86,8 @@
                     android:layout_below="@+id/vvFinalAmount"
                     android:textSize="@dimen/_11sp"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:fontFamily="@font/opensans_light"
+                    android:fontFamily="@font/opensans_regular"
+                    android:textColor="@color/black"
                     android:layout_height="wrap_content"/>
 
 
@@ -94,7 +95,7 @@
                     android:id="@+id/tvDueAmount"
                     android:layout_alignParentEnd="true"
                     android:layout_width="wrap_content"
-                    android:text="Rs. 3734547"
+                    android:text="Rs. 0"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_below="@+id/vvFinalAmount"
                     android:textSize="@dimen/_11sp"
@@ -119,7 +120,8 @@
                     android:textSize="@dimen/_11sp"
                     android:layout_below="@+id/vvDueAmount"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:fontFamily="@font/opensans_light"
+                    android:fontFamily="@font/opensans_regular"
+                    android:textColor="@color/black"
                     android:layout_height="wrap_content"/>
 
 
@@ -127,7 +129,7 @@
                     android:id="@+id/tvOverDueAmount"
                     android:layout_alignParentEnd="true"
                     android:layout_width="wrap_content"
-                    android:text="Rs. 3734547"
+                    android:text="Rs. 0"
                     android:layout_below="@+id/vvDueAmount"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:textSize="@dimen/_11sp"
@@ -136,11 +138,27 @@
                     android:textStyle="bold"
                     android:layout_height="wrap_content"/>
 
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvPay"
+                    android:layout_width="match_parent"
+                    android:text="@string/pay"
+                    android:layout_below="@+id/tvOverDueAmount"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:textSize="@dimen/_11sp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/white_nopadding_shape"
+                    android:padding="@dimen/_7sdp"
+                    android:backgroundTint="@color/light_blue"
+                    android:textAlignment="center"
+                    android:fontFamily="@font/opensans_regular"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content"/>
+
             </RelativeLayout>
 
-
-
         </RelativeLayout>
+
     </RelativeLayout>
 
 

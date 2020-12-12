@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/rlMain"
+        android:background="@drawable/grey_round_shape"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvMobileNumber"
+            android:layout_width="wrap_content"
+            android:text="934845475"
+            android:maxLines="1"
+            android:textSize="@dimen/_11sp"
+            android:layout_margin="@dimen/_5sdp"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:fontFamily="@font/opensans_bold"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgRemove"
+            android:visibility="visible"
+            android:layout_width="@dimen/_15sdp"
+            android:src="@drawable/ic_baseline_close_24"
+            android:layout_toEndOf="@+id/tvMobileNumber"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_height="@dimen/_15sdp"/>
+
+    </RelativeLayout>
+
+</layout>

@@ -48,6 +48,9 @@ class EmployeeList : Serializable {
     @SerializedName("fullName")
     @Expose
     var fullName = ""
+    @SerializedName("address")
+    @Expose
+    var address = AddressModel()
     @SerializedName("emailList")
     @Expose
     var emailList = ArrayList<String>()

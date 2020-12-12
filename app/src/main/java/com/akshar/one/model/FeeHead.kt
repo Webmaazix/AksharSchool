@@ -9,7 +9,7 @@ class FeeHead : Serializable {
     @SerializedName("feeHeadSetupId")
     @Expose
     var feeHeadSetupId = 0
-    @SerializedName("feeHead")
+    @SerializedName("headName")
     @Expose
     var feeHead = ""
     @SerializedName("transportFlag")

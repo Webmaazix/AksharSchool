@@ -22,13 +22,24 @@
             android:id="@+id/toolbar"
             layout="@layout/main_toolbar"/>
 
+        <androidx.core.widget.NestedScrollView
+            android:layout_below="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+
+
         <RelativeLayout
             android:id="@+id/rlInvoiceDetail"
             android:layout_width="match_parent"
             android:padding="@dimen/_10sdp"
             android:background="@color/white"
             android:layout_marginTop="@dimen/_10sdp"
-            android:layout_below="@+id/toolbar"
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -46,46 +57,20 @@
                 android:id="@+id/tvInvoiceNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" 843458457"
+                android:text=""
                 android:layout_alignParentEnd="true"
                 android:textSize="@dimen/_11sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:fontFamily="@font/opensans_regular" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvRecievedBy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/recieved_by"
-                android:textSize="@dimen/_11sp"
-                android:layout_below="@+id/tvInvoiceLabel"
-                android:textColor="@color/black"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:layout_alignParentStart="true"
-                android:fontFamily="@font/opensans_regular" />
-
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvStudentName"
-                android:text="Student Name"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_11sp"
-                android:fontFamily="@font/opensans_regular"
-                android:layout_below="@+id/tvInvoiceLabel"
-                android:layout_width="wrap_content"
-                android:textStyle="bold"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:layout_alignParentEnd="true"
-                android:layout_height="wrap_content"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvDateLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/date"
+                android:text="@string/payment_date"
                 android:textSize="@dimen/_11sp"
-                android:layout_below="@+id/tvRecievedBy"
+                android:layout_below="@+id/tvInvoiceLabel"
                 android:textColor="@color/black"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:layout_alignParentStart="true"
@@ -93,12 +78,12 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvDate"
-                android:text="05-06-2020"
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="@dimen/_11sp"
                 android:textStyle="bold"
                 android:fontFamily="@font/opensans_regular"
-                android:layout_below="@+id/tvStudentName"
+                android:layout_below="@+id/tvInvoiceNumber"
                 android:layout_width="wrap_content"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:layout_alignParentEnd="true"
@@ -120,7 +105,7 @@
                 android:id="@+id/tvPaymentMethod"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" Net Banking"
+                android:text=""
                 android:layout_marginTop="@dimen/_15sdp"
                 android:layout_below="@+id/tvDate"
                 android:layout_alignParentEnd="true"
@@ -145,7 +130,7 @@
                 android:id="@+id/tvRefrenceNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" Net Banking"
+                android:text=""
                 android:layout_marginTop="@dimen/_15sdp"
                 android:layout_below="@+id/tvPaymentMethod"
                 android:layout_alignParentEnd="true"
@@ -153,6 +138,33 @@
                 android:textStyle="bold"
                 android:textSize="@dimen/_11sp"
                 android:fontFamily="@font/opensans_regular" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvRecievedBy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/recieved_by"
+                android:textSize="@dimen/_11sp"
+                android:layout_below="@+id/tvRefrenceNumberLabel"
+                android:textColor="@color/black"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_alignParentStart="true"
+                android:fontFamily="@font/opensans_regular" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvStudentName"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11sp"
+                android:fontFamily="@font/opensans_regular"
+                android:layout_below="@+id/tvRefrenceNumber"
+                android:layout_width="wrap_content"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_height="wrap_content"/>
+
 
 
 
@@ -196,6 +208,7 @@
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvTotalAmount"
                     android:layout_width="wrap_content"
                     android:text="@string/total_amount"
                     android:textColor="@color/black"
@@ -208,7 +221,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
-                    android:text="Rs 109283"
+                    android:text=""
                     android:textColor="@color/black"
                     android:fontFamily="@font/opensans_regular"
                     android:textStyle="bold"
@@ -223,6 +236,29 @@
 
 
         </RelativeLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvDownloadInvoice"
+                    android:layout_below="@+id/rlFeeHeads"
+                    android:background="@drawable/white_nopadding_shape"
+                    android:padding="@dimen/_7sdp"
+                    android:backgroundTint="@color/light_blue"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12sp"
+                    android:fontFamily="@font/opensans_regular"
+                    android:textStyle="bold"
+                    android:layout_marginStart="@dimen/_30sdp"
+                    android:layout_marginEnd="@dimen/_30sdp"
+                    android:text="@string/print_invoice"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
 
 
     </RelativeLayout>

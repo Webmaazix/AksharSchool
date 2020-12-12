@@ -224,6 +224,7 @@ class CreateNoticeActivity : AppCompatActivity(), View.OnClickListener {
     private fun updateNotice(id : Int){
         val loginModel = SessionManager.getLoginModel()
         noticeBoardModel.title = etTitle.text.toString()
+        noticeBoardModel.id = id
         noticeBoardModel.description = etDesc.text.toString()
         noticeBoardModel.startDate = tvStartDate.text.toString()
         noticeBoardModel.endDate = tvEndDate.text.toString()
@@ -294,7 +295,7 @@ class CreateNoticeActivity : AppCompatActivity(), View.OnClickListener {
                 AndroidUtil.showToast(currActivity,"Notice created successfully",false)
             }
 
-            NoticeboardActivity.open(currActivity)
+            NoticeboardActivity.open(currActivity,null)
         })
 
     }

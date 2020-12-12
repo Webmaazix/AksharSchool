@@ -1,9 +1,11 @@
 package com.akshar.one.api.service
 
 import com.akshar.one.model.*
+import com.google.gson.JsonObject
 import retrofit2.http.*
 import retrofit2.http.POST
 import okhttp3.RequestBody
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.http.Url
 import retrofit2.http.PUT
@@ -62,12 +64,37 @@ interface ApiInterface {
         @Query("toDate") toDate: String
     ): List<BirthDayModel>?
 
+    @GET("attendance/stats")
+    suspend fun getAttendanceStatsOfStudent(
+        @HeaderMap headers: Map<String, String>,
+        @Query("fromDate") fromDate: String,
+        @Query("toDate") toDate: String,
+        @Query("studentProfileId") studentProfileId: String
+    ):  ArrayList<AttendanceDashboard>?
+    @GET("attendance/stats")
+    suspend fun getAttendanceStatsOfyear(
+        @HeaderMap headers: Map<String, String>,
+        @Query("studentProfileId") studentProfileId: String
+    ):  ArrayList<AttendanceDashboard>?
+
+    @GET("attendance/today")
+    suspend fun getPresentAttendance(
+        @HeaderMap headers: Map<String, String>,
+        @Query("studentProfileId") studentProfileId: String
+    ): StudentAttendanceModel?
+
     @GET("finance/summary")
     suspend fun getAllFinance(
         @HeaderMap headers: Map<String, String>,
         @Query("fromDate") fromDate: String,
         @Query("toDate") toDate: String
     ): FinanceModel?
+
+    @GET("security/groups")
+    suspend fun getSecurityGroupsList(
+        @HeaderMap headers: Map<String, String>,
+        @Query("module") module: String
+    ): ArrayList<String>?
 
     @GET("finance/fees/payments-summary")
     suspend fun getCollection(
@@ -95,6 +122,10 @@ interface ApiInterface {
         @HeaderMap headers: Map<String, String>,
         @Query("classroomId") classroomId: Int
     ) : List<ExaminationDropDownModel>?
+    @GET("academics/exams")
+    suspend fun getExaminationDropDownForParent(
+        @HeaderMap headers: Map<String, String>
+    ) : List<ExaminationDropDownModel>?
 
     @GET("academics/exams/schedule")
     suspend fun getExaminations(
@@ -108,16 +139,32 @@ interface ApiInterface {
         @Query("testId") testId: Int
     ) : ExaminationScheduleList?
 
-    @GET("students")
+    @GET("mobile/students")
     suspend fun getStudentListByClassId(
         @HeaderMap headers: Map<String, String>,
         @Query("classroomId") classroomId: Int
     ) : ArrayList<StudentListModel>?
 
+    @GET("employees/all")
+    suspend fun getEmployeeList(
+        @HeaderMap headers: Map<String, String>
+    ) : ArrayList<EmployeeList>?
+
+    @PUT("employees/mobile")
+    suspend fun updateEmployeeProfile(
+        @HeaderMap headers: Map<String, String>,
+        @Body jsonObject : EmployeeList
+    ) : EmployeeList?
+
+    @GET("mobile/students/profile")
+    suspend fun getStudentProfile(
+        @HeaderMap headers: Map<String, String>
+    ) : StudentListModel?
+
     @GET("noticeboard/")
     suspend fun getNotices(
         @HeaderMap headers: Map<String, String>,
-        @Query("showExpired") showExpired: Boolean
+        @Query("status") showExpired: String
     ) : NoticeModel?
 
     @PUT("mobile/students/{studentProfileId}")
@@ -130,6 +177,12 @@ interface ApiInterface {
     suspend fun uploadImage(
         @HeaderMap headers: Map<String, String>,
         @Path("studentProfileId") studentProfileId : Int
+    ) : ImageModel?
+
+    @PUT("employees/{employeeProfileId }/image")
+    suspend fun uploadEmployeeImage(
+        @HeaderMap headers: Map<String, String>,
+        @Path("employeeProfileId ") employeeProfileId  : Int
     ) : ImageModel?
 
     @PUT("academics/exams/schedule/{scheduleId}")
@@ -215,6 +268,16 @@ interface ApiInterface {
                              @Query("profileType") profileType : String,
                              @Query("classroomIdList") classroomIdList : ArrayList<Int>?) : ArrayList<ShiftList>?
 
+    @GET("finance/fees/outstandingFeeHeads")
+    suspend fun getFeeHeadTermList(@HeaderMap headers: Map<String, String>,
+                             @Query("dueDate") dueDate : String) : ArrayList<FeeHeadTermList>?
+    @GET("finance/fees/outstandingFeeHeads")
+    suspend fun getFeeHeadTermListOverDue(@HeaderMap headers: Map<String, String>): ArrayList<FeeHeadTermList>?
+
+    @POST("finance/fees/due-report")
+    suspend fun getPendingFeeStudentList(@HeaderMap headers: Map<String, String>,
+                             @Body model : PendingFeeStudentRequest) : FeeStudentObject?
+
     @PUT("attendance/students/absent-report")
     suspend fun getAbsentStudentList(@HeaderMap headers: Map<String, String>,
                                      @Body requestDTO  : GetAbsentRequest) : ArrayList<AbsentStudentList>?
@@ -251,6 +314,9 @@ interface ApiInterface {
     @GET("finance/fees")
     suspend fun getFeeDetail(@HeaderMap headers: Map<String, String>,
                                                     @Query("studentProfileId") studentProfileId : Int) : ArrayList<FeesDetailModel>?
+    @GET("finance/fees/receipt")
+    suspend fun getInVoice(@HeaderMap headers: Map<String, String>,
+                                                    @Query("invoiceNumber") invoiceNumber : Int) : InvoiceModel?
     @GET("finance/fees/payments")
     suspend fun getPaymentHistory(@HeaderMap headers: Map<String, String>,
                                                     @Query("studentProfileId") studentProfileId : Int) : ArrayList<PaymentHistoryModel>?
@@ -261,12 +327,28 @@ interface ApiInterface {
     @GET("finance/bankAccounts/school")
     suspend fun getBankAccountList(@HeaderMap headers: Map<String, String>) : ArrayList<BankAccount>?
 
+
+    @GET("academics/marks/byStudent")
+    suspend fun getStudentMarksByProfileId(@HeaderMap headers: Map<String, String>,
+                                           @Query("examId") examId : Int,
+                                           @Query("studentProfileId") studentProfileId : Int) : MarksCategoryList?
+    @GET("academics/marks/student/graph")
+    suspend fun getStudentMarksGraph(@HeaderMap headers: Map<String, String>,
+                                           @Query("studentProfileId") studentProfileId : Int) : ArrayList<MarksGraphModel>?
+
 //    @GET("")
 //    suspend fun getMarksStudentList(@HeaderMap headers: Map<String, String>) : ArrayList<StudentListModel>?
 
 
     @POST("finance/fees/payments")
     suspend fun addFeePayment(@HeaderMap headers: Map<String, String>,@Body paymentRequest: PaymentRequest)
+
+
+    @POST("pg/redirect-properties")
+    suspend fun paymentGatewayRedirect(@HeaderMap headers: Map<String, String>,@Body model: PaymentGatewayRequest) : PaymentGatewayResponse
+
+    @POST("pg/postPayment")
+    suspend fun sendPayUResponseToServer(@HeaderMap headers: Map<String, String>,@Body model: JsonObject)
 
 
 }

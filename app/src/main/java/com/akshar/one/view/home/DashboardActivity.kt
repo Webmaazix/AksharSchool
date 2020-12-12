@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
+import android.se.omapi.Session
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -162,7 +163,6 @@ class DashboardActivity : BaseFragment(),View.OnClickListener {
     }
 
     private fun observers() {
-
         dashboardViewModel?.getErrorMutableLiveData()?.observe(this, Observer {
             hideProgressBar()
             it?.let {
@@ -208,7 +208,7 @@ class DashboardActivity : BaseFragment(),View.OnClickListener {
             hideProgressBar()
             timeTableList.clear()
             timeTableList.addAll(it)
-            if(timeTableList.size > 0){
+            if(timeTableList.size > 0 || timeTableList == null){
                 binding!!.rlTimeTableNotFound.visibility = View.GONE
                 binding!!.rvClassRooms.visibility = View.VISIBLE
             }else{
@@ -329,9 +329,9 @@ class DashboardActivity : BaseFragment(),View.OnClickListener {
                 it.feeSummary.overdueAmount.toFloat()))
             binding?.pieChart!!.setCenterColor(R.color.white)
             binding?.pieChart!!.setSliceColor(intArrayOf(
-                R.color.maroon,
                 R.color.green_normal,
-                R.color.light_yellow))
+                R.color.light_yellow,
+                R.color.maroon))
         }
 
         if(it.expenseSummary!= null){
@@ -367,7 +367,7 @@ class DashboardActivity : BaseFragment(),View.OnClickListener {
                 binding?.pieChartExpence!!.setDataPoints(collectionAmountFloatArray.toFloatArray())
                 binding?.pieChartExpence!!.setCenterColor(R.color.white)
                 binding?.pieChartExpence!!.setSliceColor(collectionColorArray.toIntArray())
-            },3000)
+            },100)
         }
         if(it.feePayment != null){
 
@@ -465,7 +465,7 @@ class DashboardActivity : BaseFragment(),View.OnClickListener {
             binding?.pieChartCollection!!.setCenterColor(R.color.white)
             binding?.pieChartCollection!!.setSliceColor(collectionColorArray.toIntArray())
 
-        },3000)
+        },100)
 
     }
 
@@ -555,7 +555,7 @@ class DashboardActivity : BaseFragment(),View.OnClickListener {
 
             //registering popup with OnMenuItemClickListener
             popup.setOnMenuItemClickListener {
-                if(it.title.equals(currActivity.resources.getString(R.string.by_feahead))){
+                if(it.title.equals(currActivity.resources.getString(R.string.category))){
                     dashboardViewModel?.let {
                         if(context?.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true){
                             expenseGroupBy = "FEE_HEAD"
@@ -760,7 +760,7 @@ class DashboardActivity : BaseFragment(),View.OnClickListener {
             }
 
             popup.show()
-        }else if( from == 1){
+        }else if(from == 1){
             val popup = PopupMenu(currActivity, rlWeekExpence)
             //Inflating the Popup using xml file
             popup.menuInflater.inflate(com.akshar.one.R.menu.collection_month_popup, popup.menu)
@@ -802,7 +802,7 @@ class DashboardActivity : BaseFragment(),View.OnClickListener {
                         if(context?.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true){
                             binding?.tvWeekExpence!!.text = currActivity.resources.getString(R.string.week)
                             expenseFromDate = startDateOfWeek!!
-                            expenseToDate = date!!
+                            expenseToDate = date!!+6
                             it.getExpences(expenseGroupBy,expenseFromDate,expenseToDate)
                         }
                     }

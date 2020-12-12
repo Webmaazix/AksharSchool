@@ -10,6 +10,7 @@ import java.io.Serializable
     @Expose
     var isSelected = false
 
+
     @SerializedName("studentProfileId")
     @Expose
     var studentProfileId : Int? = null
@@ -17,6 +18,9 @@ import java.io.Serializable
     @SerializedName("classroomId")
     @Expose
     var classroomId : Int? = null
+    @SerializedName("classroom")
+    @Expose
+    var classroom = ClassRoomModel()
 
     @SerializedName("firstName")
     @Expose
@@ -26,9 +30,6 @@ import java.io.Serializable
     @Expose
     var courseName : String? = null
 
-    @SerializedName("classroomName")
-    @Expose
-    var classroomName : String? = null
 
     @SerializedName("lastName")
     @Expose

@@ -39,9 +39,13 @@ class BirthDayAdapter(private val mContext: Context, private val birthDayModel: 
         val bdyDate = AppUtil.formatBirthdayDate(birthDayModel.birthday!!)
         holder.binding.tvDate.text = bdyDate
 
+        holder.binding.tvClassName.text = birthDayModel?.courseName+" "+birthDayModel.classroomName
+
         holder.binding.tvUserName.text  = name
 
-        if(birthDayModel.imageUrl!= null || birthDayModel.imageUrl!=""){
+        if(birthDayModel.imageUrl!= null && birthDayModel.imageUrl!=""){
+            holder.binding.flLayout.visibility = View.GONE
+            holder.binding.imgUserProfile.visibility = View.VISIBLE
             AppUtils.loadImageCrop(
                 birthDayModel.imageUrl,
                 holder.binding.imgUserProfile,
@@ -49,6 +53,18 @@ class BirthDayAdapter(private val mContext: Context, private val birthDayModel: 
                 80,
                 80
             )
+        }else {
+            holder.binding.flLayout.visibility = View.VISIBLE
+            holder.binding.imgUserProfile.visibility = View.GONE
+            if(birthDayModel.lastName!= null){
+               holder.binding.tvShortName.setText(birthDayModel.firstName!!.substring(0,1).toUpperCase() + birthDayModel?.lastName.substring(0, 1).toUpperCase()
+                )
+            }else{
+                holder.binding.tvShortName.setText(
+                    birthDayModel.firstName!!.substring(0, 2).toUpperCase()
+                )
+            }
+
         }
     }
 

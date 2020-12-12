@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/white_rounded_radius_4_bg_without_padding">
+    android:layout_centerInParent="true"
+    android:layout_marginStart="@dimen/_30sdp"
+    android:layout_marginEnd="@dimen/_30sdp"
+    android:layout_gravity="center">
 
     <RelativeLayout
         android:id="@+id/relHeader"
@@ -13,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/light_purple_top_corners_rounded_bg"
+        android:background="@drawable/blue_nopadding_bottomsquare"
         android:paddingStart="@dimen/common_margin"
         android:paddingEnd="@dimen/common_margin"
         android:paddingTop="@dimen/_12sdp"
@@ -24,7 +27,8 @@
             android:layout_height="wrap_content"
             android:text="@string/mark_all_as"
             android:textColor="@color/white"
-            android:textSize="@dimen/_14ssp"
+            android:textSize="@dimen/_11sp"
+            android:fontFamily="@font/opensans_regular"
             android:textStyle="bold"
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true"/>
@@ -39,54 +43,100 @@
             android:layout_centerVertical="true"/>
     </RelativeLayout>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/txtPresent"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/present"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/relHeader"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:paddingStart="@dimen/common_margin"
-        android:paddingEnd="@dimen/common_margin"
-        android:paddingTop="@dimen/_8sdp"
-        android:paddingBottom="@dimen/_8sdp"
-        android:textSize="@dimen/_12ssp"
-        android:textColor="@color/black"
-        android:background="@drawable/textview_selector"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/relHeader"
+        android:background="@color/white"
+        android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/txtHoliday"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/holiday"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtPresent"
-        android:paddingStart="@dimen/common_margin"
-        android:paddingEnd="@dimen/common_margin"
-        android:paddingTop="@dimen/_8sdp"
-        android:paddingBottom="@dimen/_8sdp"
-        android:textSize="@dimen/_12ssp"
-        android:textColor="@color/black"
-        android:background="@drawable/textview_selector"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtPresent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/present"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:paddingStart="@dimen/common_margin"
+            android:paddingEnd="@dimen/common_margin"
+            android:paddingTop="@dimen/_8sdp"
+            android:paddingBottom="@dimen/_8sdp"
+            android:textSize="@dimen/_11sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/opensans_regular"
+            android:textColor="@color/black"
+            android:background="@drawable/textview_selector"/>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/txtWeekOff"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/textview_selector"
-        android:paddingStart="@dimen/common_margin"
-        android:paddingTop="@dimen/_8sdp"
-        android:paddingEnd="@dimen/common_margin"
-        android:paddingBottom="@dimen/_8sdp"
-        android:text="@string/week_off"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_12ssp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtHoliday"
-        android:layout_marginBottom="@dimen/_8sdp"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtOnLeave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/on_leave"
+           android:layout_below="@+id/txtPresent"
+            android:paddingStart="@dimen/common_margin"
+            android:paddingEnd="@dimen/common_margin"
+            android:paddingTop="@dimen/_8sdp"
+            android:paddingBottom="@dimen/_8sdp"
+            android:textSize="@dimen/_11sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/opensans_regular"
+            android:textColor="@color/black"
+            android:background="@drawable/textview_selector"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtAbsent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/absent"
+           android:layout_below="@+id/txtOnLeave"
+            android:paddingStart="@dimen/common_margin"
+            android:paddingEnd="@dimen/common_margin"
+            android:paddingTop="@dimen/_8sdp"
+            android:paddingBottom="@dimen/_8sdp"
+            android:textSize="@dimen/_11sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/opensans_regular"
+            android:textColor="@color/black"
+            android:background="@drawable/textview_selector"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtHoliday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/holiday"
+           android:layout_below="@+id/txtAbsent"
+            android:paddingStart="@dimen/common_margin"
+            android:paddingEnd="@dimen/common_margin"
+            android:paddingTop="@dimen/_8sdp"
+            android:paddingBottom="@dimen/_8sdp"
+            android:textSize="@dimen/_11sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:fontFamily="@font/opensans_regular"
+            android:background="@drawable/textview_selector"/>
+
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtWeekOff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/textview_selector"
+            android:paddingStart="@dimen/common_margin"
+            android:paddingTop="@dimen/_8sdp"
+            android:paddingEnd="@dimen/common_margin"
+            android:paddingBottom="@dimen/_8sdp"
+            android:text="@string/week_off"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_11sp"
+            android:fontFamily="@font/opensans_regular"
+            android:layout_below="@+id/txtHoliday"
+            android:layout_marginBottom="@dimen/_8sdp"/>
+
+
+    </RelativeLayout>
+
+
+
+
+
+</RelativeLayout>

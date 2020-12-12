@@ -2,10 +2,7 @@ package com.akshar.one.repository.messagecenter
 
 import com.akshar.one.api.service.AksharSchoolService
 import com.akshar.one.api.service.ApiInterface
-import com.akshar.one.model.GetAbsentRequest
-import com.akshar.one.model.NoticeBoardModel
-import com.akshar.one.model.SendGeneralNotification
-import com.akshar.one.model.StudentListModel
+import com.akshar.one.model.*
 import com.akshar.one.repository.base.BaseRepository
 import org.json.JSONObject
 
@@ -44,4 +41,9 @@ class MessageCenterRepository : BaseRepository() {
 
     suspend fun getShiftList(profileType : String , classRoomIdList : ArrayList<Int>?) = apiInterface?.getShiftList(service.headers(),
         profileType,classRoomIdList)
+    suspend fun getFeeHeadTermList(dueDate : String) = apiInterface?.getFeeHeadTermList(service.headers(),
+        dueDate)
+    suspend fun getFeeHeadTermListOverDue() = apiInterface?.getFeeHeadTermListOverDue(service.headers())
+    suspend fun getPendingFeeStudentList(model : PendingFeeStudentRequest) = apiInterface?.getPendingFeeStudentList(service.headers(),
+        model)
 }

@@ -17,6 +17,7 @@ class ExaminationRepository : BaseRepository() {
     }
 
     suspend fun getExaminationDropDown(classRoomId : Int) = apiInterface?.getExaminationDropDown(service.headers(),classRoomId)
+    suspend fun getExaminationDropDownForParent() = apiInterface?.getExaminationDropDownForParent(service.headers())
     suspend fun getExaminations(examId : Int) = apiInterface?.getExaminations(service.headers(),examId)
     suspend fun getExaminationsTest(testId : Int) = apiInterface?.getExaminationsTest(service.headers(),testId)
     suspend fun createExamSchedule(examModel : ExamPostModel) = apiInterface?.createExamSchedule(service.headers(),examModel)

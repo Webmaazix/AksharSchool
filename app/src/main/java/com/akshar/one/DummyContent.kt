@@ -42,14 +42,18 @@ object DummyContent {
         val noticeBoardList = ArrayList<TabsModel>()
 
         val noticeBoardOne = TabsModel()
-        noticeBoardOne.name = "Active Notice"
+        noticeBoardOne.name = "Active"
 
         val noticeBoardTwo = TabsModel()
-        noticeBoardTwo.name = "Expired Notice"
+        noticeBoardTwo.name = "Expired"
+
+        val noticeBoardThree = TabsModel()
+        noticeBoardThree.name = "Upcoming"
 
 
         noticeBoardList.add(noticeBoardOne)
         noticeBoardList.add(noticeBoardTwo)
+        noticeBoardList.add(noticeBoardThree)
 
         return noticeBoardList
     }

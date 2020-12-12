@@ -262,22 +262,32 @@ class ScheduleExamActivity : AppCompatActivity(),View.OnClickListener {
         dialog!!.setContentView(dialogSelectClassSectionBinding!!.getRoot())
         Objects.requireNonNull<Window>(dialog!!.getWindow())
             .setBackgroundDrawableResource(android.R.color.transparent)
-        dialogSelectClassSectionBinding!!.rlClassesDropdown.setHasFixedSize(true)
-        dialogSelectClassSectionBinding!!.rlClassesDropdown.layoutManager = LinearLayoutManager(
-            currActivity,
-            LinearLayoutManager.VERTICAL, false
-        )
-        ClassDropDownAdapter.selectedChild = -1
-        ClassDropDownAdapter.clickParent =-1;
-        classDropDownAdapter = ClassDropDownAdapter(currActivity, classDropdownList, null, object :
-            ClassDropDownAdapter.SectionSelection {
-            override fun selectionCallback(parent: Int, child: Int) {
-                classDropDownAdapter.notifyDataSetChanged()
-            }
 
-        })
-        dialogSelectClassSectionBinding!!.rlClassesDropdown.adapter = classDropDownAdapter
-        classDropDownAdapter.notifyDataSetChanged()
+        if(classDropdownList.size > 0){
+            dialogSelectClassSectionBinding!!.rlClassesDropdown.visibility = View.VISIBLE
+            dialogSelectClassSectionBinding!!.rlNotFound.visibility = View.GONE
+            dialogSelectClassSectionBinding!!.rlClassesDropdown.setHasFixedSize(true)
+            dialogSelectClassSectionBinding!!.rlClassesDropdown.layoutManager = LinearLayoutManager(
+                currActivity,
+                LinearLayoutManager.VERTICAL, false
+            )
+            ClassDropDownAdapter.selectedChild = -1
+            ClassDropDownAdapter.clickParent =-1;
+
+            classDropDownAdapter = ClassDropDownAdapter(currActivity, classDropdownList, null, object :
+                ClassDropDownAdapter.SectionSelection {
+                override fun selectionCallback(parent: Int, child: Int) {
+                    classDropDownAdapter.notifyDataSetChanged()
+                }
+
+            })
+            dialogSelectClassSectionBinding!!.rlClassesDropdown.adapter = classDropDownAdapter
+            classDropDownAdapter.notifyDataSetChanged()
+        }else{
+            dialogSelectClassSectionBinding!!.rlClassesDropdown.visibility = View.GONE
+            dialogSelectClassSectionBinding!!.rlNotFound.visibility = View.VISIBLE
+        }
+
 
         dialogSelectClassSectionBinding!!.imgCancel.setOnClickListener {
             dialog!!.dismiss()
@@ -296,20 +306,31 @@ class ScheduleExamActivity : AppCompatActivity(),View.OnClickListener {
         dialog!!.setContentView(dialogSelectClassSectionBinding!!.getRoot())
         Objects.requireNonNull<Window>(dialog!!.getWindow())
             .setBackgroundDrawableResource(android.R.color.transparent)
-        dialogSelectClassSectionBinding!!.rlClassesDropdown.setHasFixedSize(true)
-        dialogSelectClassSectionBinding!!.rlClassesDropdown.layoutManager = LinearLayoutManager(
-            currActivity,
-            LinearLayoutManager.VERTICAL, false
-        )
-        examDropDownAdapter = ExaminationDropDownAdapter(currActivity, examDropdownList,openTest, null, object :
-            ExaminationDropDownAdapter.SectionSelection {
-            override fun selectionCallback(parent: Int, child: Int) {
-                classDropDownAdapter.notifyDataSetChanged()
-            }
 
-        })
-        dialogSelectClassSectionBinding!!.rlClassesDropdown.adapter = examDropDownAdapter
-        examDropDownAdapter.notifyDataSetChanged()
+        if(examDropdownList.size > 0){
+            dialogSelectClassSectionBinding!!.rlClassesDropdown.visibility = View.VISIBLE
+            dialogSelectClassSectionBinding!!.rlNotFound.visibility = View.GONE
+
+            dialogSelectClassSectionBinding!!.rlClassesDropdown.setHasFixedSize(true)
+            dialogSelectClassSectionBinding!!.rlClassesDropdown.layoutManager = LinearLayoutManager(
+                currActivity,
+                LinearLayoutManager.VERTICAL, false
+            )
+            examDropDownAdapter = ExaminationDropDownAdapter(currActivity, examDropdownList,openTest, null, object :
+                ExaminationDropDownAdapter.SectionSelection {
+                override fun selectionCallback(parent: Int, child: Int) {
+                    classDropDownAdapter.notifyDataSetChanged()
+                }
+
+            })
+            dialogSelectClassSectionBinding!!.rlClassesDropdown.adapter = examDropDownAdapter
+            examDropDownAdapter.notifyDataSetChanged()
+
+        }else{
+            dialogSelectClassSectionBinding!!.rlClassesDropdown.visibility = View.GONE
+            dialogSelectClassSectionBinding!!.rlNotFound.visibility = View.VISIBLE
+        }
+
 
         dialogSelectClassSectionBinding!!.imgCancel.setOnClickListener {
             dialog!!.dismiss()

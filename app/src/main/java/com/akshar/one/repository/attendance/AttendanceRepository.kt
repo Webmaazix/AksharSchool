@@ -10,7 +10,7 @@ import com.akshar.one.model.CourseWithClassRoomModel
 import com.akshar.one.model.StudentAttendanceModel
 import com.akshar.one.repository.base.BaseRepository
 
-class AttendanceRepository(application: Application) : BaseRepository() {
+class AttendanceRepository : BaseRepository() {
 
     private var attendanceApi: AttendanceApi? = null
     private var service: AksharSchoolService = AksharSchoolService()
@@ -26,12 +26,7 @@ class AttendanceRepository(application: Application) : BaseRepository() {
     }
     init {
         attendanceApi = service.createService(AttendanceApi::class.java)
-        val aksharSchoolDataBase = AksharSchoolDataBase.getDatabase(application)
-        courseDao = aksharSchoolDataBase.courseDao()
-        classroomDao = aksharSchoolDataBase.classroomDao()
-        attendanceCategoryDao = aksharSchoolDataBase.attendanceCategory()
-        degreeDao = aksharSchoolDataBase.degreeDao()
-        departmentDao = aksharSchoolDataBase.departmentDao()
+
     }
 
     suspend fun getCoursesFromDB(schoolCode: String) = courseDao?.getCourses(schoolCode)
@@ -44,8 +39,8 @@ class AttendanceRepository(application: Application) : BaseRepository() {
     suspend fun insertClassroom(classRoomEntity: ClassRoomEntity) =
         classroomDao?.insert(classRoomEntity)
 
-    suspend fun getShifts(profileType: String, classRoomId: Int = 0) =
-        attendanceApi?.getShifts(service.headers(), classroomId = classRoomId, profileType = profileType)
+//    suspend fun getShifts(profileType: String, classRoomId: Int = 0) =
+//        attendanceApi?.getShifts(service.headers(), classroomId = classRoomId, profileType = profileType)
 
     suspend fun getStudentsShiftsByClassRoomIdFromDB(classRoomId: Int, schoolCode: String?) =
         attendanceCategoryDao?.getStudentShifts(classRoomId, schoolCode)

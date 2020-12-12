@@ -165,10 +165,21 @@ class SendMarksAndFeeReport : AppCompatActivity(),View.OnClickListener {
     override fun onClick(p0: View?) {
         when (p0!!.id) {
             R.id.rlClassSection -> {
-                openDialog()
+                if(classDropdownList.size > 0){
+                    openDialog()
+                }else{
+                    AndroidUtil.showToast(currActivity,"Please wait untill we process data",true)
+                }
+
             }
             R.id.rlExaminationSelection -> {
-                openExamDialog()
+                if(examDropDownList.size > 0){
+                    openExamDialog()
+                }else{
+                    AndroidUtil.showToast(currActivity,"Please wait untill we process data",true)
+
+                }
+
             }
             R.id.imgBack ->{
                 onBackPressed()
@@ -182,6 +193,7 @@ class SendMarksAndFeeReport : AppCompatActivity(),View.OnClickListener {
                             val selectedStudentProfileId = ArrayList<Int>()
                             classRoomList.add(sectionModel!!.classroomId)
                             model.classroomIdList = classRoomList
+                            model.category = "MARKS_REPORT"
 
                             for(data in studentList){
                                 if(data.isSelected){
@@ -227,11 +239,20 @@ class SendMarksAndFeeReport : AppCompatActivity(),View.OnClickListener {
         dialog!!.setContentView(dialogSelectClassSectionBinding!!.getRoot())
         Objects.requireNonNull<Window>(dialog!!.getWindow())
             .setBackgroundDrawableResource(android.R.color.transparent)
+        dialogSelectClassSectionBinding!!.tvTitle.text = resources.getString(R.string.select_exam_amp_test_name)
         dialogSelectClassSectionBinding!!.rlClassesDropdown.setHasFixedSize(true)
         dialogSelectClassSectionBinding!!.rlClassesDropdown.layoutManager = LinearLayoutManager(
             currActivity,
             LinearLayoutManager.VERTICAL, false
         )
+        if(examDropDownList.size > 0){
+            dialogSelectClassSectionBinding!!.rlNotFound.visibility = View.GONE
+            dialogSelectClassSectionBinding!!.rlClassesDropdown.visibility = View.VISIBLE
+        }else{
+            dialogSelectClassSectionBinding!!.rlNotFound.visibility = View.VISIBLE
+            dialogSelectClassSectionBinding!!.rlClassesDropdown.visibility = View.GONE
+        }
+
         examDropDownAdapter = ExaminationDropDownAdapter(currActivity, examDropDownList, true,null, object :
             ExaminationDropDownAdapter.SectionSelection {
             override fun selectionCallback(parent: Int, child: Int) {
@@ -265,6 +286,14 @@ class SendMarksAndFeeReport : AppCompatActivity(),View.OnClickListener {
             currActivity,
             LinearLayoutManager.VERTICAL, false
         )
+        if(classDropdownList.size > 0){
+            dialogSelectClassSectionBinding!!.rlNotFound.visibility = View.GONE
+            dialogSelectClassSectionBinding!!.rlClassesDropdown.visibility = View.VISIBLE
+        }else{
+            dialogSelectClassSectionBinding!!.rlNotFound.visibility = View.VISIBLE
+            dialogSelectClassSectionBinding!!.rlClassesDropdown.visibility = View.GONE
+        }
+
         ClassDropDownAdapter.selectedChild = -1
         ClassDropDownAdapter.clickParent =-1;
         classDropDownAdapter = ClassDropDownAdapter(currActivity, classDropdownList, null, object :
@@ -377,6 +406,7 @@ class SendMarksAndFeeReport : AppCompatActivity(),View.OnClickListener {
         examViewModel?.getExamDropDownLiveData()?.observe(this, androidx.lifecycle.Observer {
             examDropDownList.clear()
             examDropDownList.addAll(it)
+
         })
 
         studentViewModel?.getErrorMutableLiveData()?.observe(this, androidx.lifecycle.Observer {

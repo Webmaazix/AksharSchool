@@ -13,6 +13,9 @@ import com.akshar.one.databinding.ClassRowBinding
 import com.akshar.one.view.examschedule.ScheduleExamActivity
 import com.akshar.one.view.examschedule.ScheduledExamList
 import com.akshar.one.model.ExaminationDropDownModel
+import com.akshar.one.view.activity.MainActivity
+import com.akshar.one.view.marksentry.ParentCategoryFragment
+import com.akshar.one.view.marksentry.ParentMarksActivity
 import com.akshar.one.view.marksentry.inputselection.SelectOtherInputsActivity
 import com.akshar.one.view.messagecenter.SendMarksAndFeeReport
 
@@ -98,16 +101,26 @@ class ExaminationDropDownAdapter(private val mContext: Activity, private val lis
 
 
         holder.binding.tvClassName.setOnClickListener{
-            if(!openTest){
+            if(openTest){
                 if(mContext is ScheduleExamActivity){
                     (mContext).examSelectd(examModel)
                 }else if(mContext is SelectOtherInputsActivity){
+                    (mContext).examSelectd(examModel)
+                }else if(mContext is ScheduledExamList){
+                    (mContext).examSelectd(examModel)
+                }else if(mContext is SendMarksAndFeeReport){
                     (mContext).examSelectd(examModel)
                 }
 
             }else if(mContext is ScheduledExamList){
                 (mContext).examSelectd(examModel)
             }else if(mContext is SendMarksAndFeeReport){
+                (mContext).examSelectd(examModel)
+            }else if(mContext is MainActivity){
+                if(fragment!= null){
+                    (fragment as ParentCategoryFragment).examSelectd(examModel)
+                }
+            }else if(mContext is ParentMarksActivity){
                 (mContext).examSelectd(examModel)
             }
         }

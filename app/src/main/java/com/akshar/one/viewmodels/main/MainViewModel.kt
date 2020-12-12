@@ -29,7 +29,7 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
     private val isLoading = MutableLiveData<Boolean>()
 
     init {
-        attendanceRepository = AttendanceRepository(application)
+        attendanceRepository = AttendanceRepository()
     }
 
     fun getIsLoading(): MutableLiveData<Boolean> = isLoading

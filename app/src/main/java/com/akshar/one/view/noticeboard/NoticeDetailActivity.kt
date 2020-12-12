@@ -1,6 +1,7 @@
 package com.akshar.one.view.noticeboard
 
 import android.app.Activity
+import android.app.Application
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -42,12 +43,14 @@ class NoticeDetailActivity : AppCompatActivity(), View.OnClickListener {
     private var binding : ActivityNoticeDetailBinding? = null
     private var noticeModel : NoticeBoardModel? = null
     private var noticeBoardViewModel: NoticeBoardViewModel? = null
+    private var expired = ""
 
 
     companion object{
-        fun open(currActivity : Activity,model : NoticeBoardModel?){
+        fun open(currActivity : Activity,model : NoticeBoardModel?,expired : String){
             val intent = Intent(currActivity, NoticeDetailActivity::class.java)
             intent.putExtra("model",model)
+            intent.putExtra("expired",expired)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
             currActivity.startActivity(intent)
             currActivity.overridePendingTransition(R.anim.slide_in, R.anim.slide_out)
@@ -58,6 +61,7 @@ class NoticeDetailActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(currActivity,R.layout.activity_notice_detail)
         noticeModel = intent.getSerializableExtra("model") as NoticeBoardModel?
+        expired = intent.getStringExtra("expired")!!
         setData()
         initViews()
     }
@@ -78,7 +82,16 @@ class NoticeDetailActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun initViews(){
+        noticeBoardViewModel = ViewModelProvider(
+            ViewModelStore(),
+            ViewModelFactory(applicationContext as Application)
+        ).get(NoticeBoardViewModel::class.java)
         setListner()
+        if(expired =="EXPIRED"){
+            binding!!.rlEdit.visibility = View.GONE
+        }else{
+            binding!!.rlEdit.visibility = View.VISIBLE
+        }
 
     }
 

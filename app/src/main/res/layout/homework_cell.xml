@@ -91,6 +91,7 @@
                 android:paddingTop="@dimen/_5sdp"
                 android:paddingEnd="@dimen/_10sp"
                 android:paddingBottom="@dimen/_5sdp"
+                android:visibility="visible"
                 android:layout_marginStart="@dimen/_10sp"
                 android:fontFamily="@font/opensans_regular"
                 android:layout_height="wrap_content"/>
@@ -98,6 +99,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvAttendance"
+                android:visibility="visible"
                 android:layout_toEndOf="@+id/tvHomeWork"
                 android:layout_below="@+id/tvTime"
                 android:layout_width="wrap_content"

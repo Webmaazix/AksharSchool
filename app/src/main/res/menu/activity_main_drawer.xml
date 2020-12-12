@@ -16,16 +16,22 @@
             android:id="@+id/nav_student_profile"
             android:icon="@drawable/book"
             android:title="@string/student_profile" />
+        <item
+            android:id="@+id/nav_employee_profile"
+            android:icon="@drawable/book"
+            android:title="@string/employee_profile" />
 
         <item
             android:id="@+id/nav_student_attendance_entry"
             android:icon="@drawable/attendanceentry"
-            android:title="@string/student_attendance_entry" />
-
+            android:title="@string/student_attendance_entry" >
+        </item>
         <item
-            android:id="@+id/nav_employee_attendance_entry"
+            android:id="@+id/nav_subcategory_employees"
             android:icon="@drawable/attendanceentry"
-            android:title="@string/employee_attendance_entry" />
+            android:title="@string/employee_attendance_entry" >
+        </item>
+
 
         <item
             android:id="@+id/nav_assign_homework"
@@ -59,6 +65,7 @@
             android:title="@string/message_center" />
         <item
             android:id="@+id/nav_settings"
+            android:visible="false"
             android:icon="@drawable/settings"
             android:title="@string/setup_pin" />
         <item

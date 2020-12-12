@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="position"
+            type="java.lang.Integer" />
+
+        <variable
+            name="attendanceClassRoomViewModel"
+            type="com.akshar.one.viewmodels.attendance.AttendanceClassRoomViewModel" />
+    </data>
+
+
+    <RelativeLayout
+        android:id="@+id/rlMainBg"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_marginStart="@dimen/_7sdp"
+        android:layout_marginTop="@dimen/_7sdp"
+        android:layout_marginEnd="@dimen/_7sdp"
+        android:layout_marginBottom="@dimen/_4sdp"
+        android:gravity="center_horizontal"
+        android:backgroundTint="@color/light_pink"
+        android:background="@drawable/white_nopadding_shape"
+        android:layout_height="@dimen/_90sdp">
+
+        <RelativeLayout
+            android:id="@+id/RlimgUserProfile"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content">
+
+            <com.akshar.one.circlularimageview.CircularImageView
+                android:id="@+id/imgUserProfile"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginStart="@dimen/_7sdp"
+                android:src="@drawable/circle_default_pic"
+                app:civ_border_width="@dimen/_1sdp"
+                android:visibility="visible"
+                app:civ_border_color="@color/ultra_light_grey"
+                app:civ_circle_color="@color/lightish_grey"/>
+
+            <FrameLayout
+                android:id="@+id/flLayout"
+                android:layout_width="wrap_content"
+                android:visibility="visible"
+                android:layout_marginStart="@dimen/_7sdp"
+                android:layout_centerVertical="true"
+                android:layout_height="@dimen/_55sdp">
+
+                <ImageView
+                    android:id="@+id/imgNoImage"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_gravity="center|start"
+                    android:tint="@color/white"
+                    android:src="@drawable/bg_circle" />
+
+                <TextView
+                    android:id="@+id/tvShortName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/opensans_regular"
+                    android:text="WO"
+                    android:textColor="@color/pink"
+                    android:textSize="@dimen/_12sp"
+                    />
+            </FrameLayout>
+
+
+        </RelativeLayout>
+
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgDone"
+            android:layout_width="@dimen/_18sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:src="@drawable/circle_check_mark"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:visibility="gone"
+            android:layout_height="@dimen/_18sdp"/>
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvStudentName"
+            android:text="Student name"
+            android:layout_toEndOf="@+id/RlimgUserProfile"
+            android:textSize="@dimen/_11sp"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:paddingStart="@dimen/_5sdp"
+            android:paddingEnd="@dimen/_5sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:fontFamily="@font/opensans_regular"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvClassSection"
+            android:text="Class / Section"
+            android:layout_below="@+id/tvStudentName"
+            android:textSize="@dimen/_11sp"
+            android:paddingStart="@dimen/_5sdp"
+            android:paddingEnd="@dimen/_5sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_toEndOf="@+id/RlimgUserProfile"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/opensans_regular"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSchoolName"
+            android:text="Student name"
+            android:layout_below="@+id/tvClassSection"
+            android:layout_toEndOf="@+id/RlimgUserProfile"
+
+            android:textSize="@dimen/_10sp"
+            android:paddingStart="@dimen/_5sdp"
+            android:paddingEnd="@dimen/_5sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:fontFamily="@font/opensans_light"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+</layout>

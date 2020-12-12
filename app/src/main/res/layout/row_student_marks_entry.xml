@@ -51,7 +51,7 @@
             android:layout_height="@dimen/_30sdp"
             android:layout_marginTop="@dimen/_2sdp"
             android:visibility="gone"
-            android:inputType="number"
+            android:inputType="textPassword"
             android:background="@drawable/dark_grey_square_shape"
             android:layout_alignParentEnd="true" />
 

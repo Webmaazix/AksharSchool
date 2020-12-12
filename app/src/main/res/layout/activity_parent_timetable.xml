@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="position"
+            type="java.lang.Integer" />
+
+        <variable
+            name="attendanceClassRoomViewModel"
+            type="com.akshar.one.viewmodels.attendance.AttendanceClassRoomViewModel" />
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/light_yellow"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/main_toolbar"/>
+
+
+        <RelativeLayout
+            android:id="@+id/rlMain"
+            android:layout_below="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/rlFragments"
+                android:background="@color/dim_white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/rlCalenderView"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/yellow_topsquare_with_nopadding"
+                    android:layout_height="wrap_content">
+
+                    <com.akshar.one.calender.widget.CollapsibleCalendar
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:primaryColor="@color/light_yellow"
+                        app:texttColor="@android:color/black"
+                        android:visibility="visible"
+                        app:selectedItem_textColor="@color/black"
+                        android:id="@+id/collapsibleCalendarView"
+                        app:todayItem_textColor="@android:color/black"
+                        app:todayItem_background="@drawable/circle_white_stroke_background"
+                        app:selectedItem_background="@drawable/circle_white_solid_background"
+                        app:buttonLeft_drawableTintColor="@android:color/black"
+                        app:buttonRight_drawableTintColor="@android:color/black"
+                        app:expandIconColor="@android:color/black"
+                        app:eventColor="@android:color/black" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgExpand"
+                        android:layout_width="@dimen/_18sdp"
+                        android:src="@drawable/down_arrow_icon"
+                        android:layout_below="@+id/collapsibleCalendarView"
+                        android:layout_centerInParent="true"
+                        android:layout_height="@dimen/_18sdp"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_below="@+id/rlCalenderView"
+                    android:layout_height="match_parent">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rlActiveNotice"
+                        android:visibility="visible"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlNoDataFound"
+                    android:layout_width="match_parent"
+                    android:visibility="gone"
+                    android:layout_below="@+id/rlCalenderView"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgEmpty"
+                        android:layout_width="@dimen/_100sdp"
+                        android:src="@drawable/emptynotice"
+                        android:layout_centerInParent="true"
+                        android:layout_centerVertical="true"
+                        android:layout_height="@dimen/_100sdp"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvEmptyText"
+                        android:layout_below="@+id/imgEmpty"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/opensans_regular"
+                        android:text="@string/no_timetable_found"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/_12sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</layout>

@@ -49,21 +49,21 @@ class StudentMarksAdapter(private val mContext: Context, private val list: Array
         }
 
        // model.marksScored = holder.binding.etMarksEntry.text.toString()
-        holder.binding.etMarksEntry.setText("")
+        holder.binding.etMarksEntry.setText(model.marksScored)
         holder.binding.etMarksEntry.addTextChangedListener(object : TextWatcher{
             override fun afterTextChanged(p0: Editable?) {
                 model.marksScored = p0!!.toString()
-                if(position == list.size-1){
-                    for (data in list){
-                        if(!data.marksScored.isNullOrEmpty()){
-                                (mContext as StudentMarksEntry).saveOrUpdateList(list,isUpdate)
-                        }else{
-                            AppUtils.showToast(mContext as Activity,"Please assign marks to all students",true)
-                        }
-                    }
-
-
-                }
+//                if(position == list.size-1){
+//                    for (data in list){
+//                        if(!data.marksScored.isNullOrEmpty()){
+//                                (mContext as StudentMarksEntry).saveOrUpdateList(list,isUpdate)
+//                        }else{
+//                            AppUtils.showToast(mContext as Activity,"Please assign marks to all students",true)
+//                        }
+//                    }
+//
+//
+//                }
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {

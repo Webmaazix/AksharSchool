@@ -42,7 +42,7 @@
                     android:padding="@dimen/_7sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_centerHorizontal="true"
-                    android:layout_height="match_parent">
+                    android:layout_height="@dimen/_45sdp">
 
 
                     <androidx.appcompat.widget.AppCompatImageView
@@ -88,7 +88,7 @@
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginBottom="@dimen/_3sdp"
                     android:layout_marginStart="@dimen/_12sdp"
-                    android:layout_height="match_parent">
+                    android:layout_height="@dimen/_45sdp">
 
 
                     <androidx.appcompat.widget.AppCompatImageView
@@ -98,6 +98,7 @@
                         android:layout_toStartOf="@+id/tvDelete"
                         android:layout_marginEnd="@dimen/_7sdp"
                         android:padding="@dimen/_3sdp"
+                        android:layout_centerVertical="true"
                         android:background="@drawable/white_circle"
                         android:layout_height="@dimen/_15sdp"/>
 
@@ -118,7 +119,9 @@
 
             </RelativeLayout>
 
-        <RelativeLayout
+
+
+                    <RelativeLayout
             android:id="@+id/rlForground"
             android:layout_width="match_parent"
             android:elevation="@dimen/_2sdp"
@@ -145,7 +148,8 @@
                     android:id="@+id/tvDesc"
                     android:text="@string/images"
                     android:textSize="@dimen/_10sp"
-                    android:maxLines="1"
+                    android:maxLines="3"
+                    android:minLines="3"
                     android:layout_below="@+id/tvTopicName"
                     android:textColor="@color/black"
                     android:layout_marginStart="@dimen/_20sp"
@@ -160,7 +164,6 @@
                 android:id="@+id/rlBottom"
                 android:layout_below="@+id/rlTop"
                 android:layout_width="match_parent"
-                android:backgroundTint="@color/blue_notice"
                 android:background="@drawable/blue_nopadding_topsquare"
                 android:layout_height="wrap_content">
 

@@ -9,7 +9,10 @@ class FeeTerm : Serializable {
     @SerializedName("feeTermSetupId")
     @Expose
     var feeTermSetupId = 0
-    @SerializedName("feeTerm")
+    @SerializedName("termName")
     @Expose
     var feeTerm = ""
+    @SerializedName("dueDate")
+    @Expose
+    var dueDate = ""
 }

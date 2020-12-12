@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -11,43 +12,59 @@
         android:layout_height="wrap_content">
 
 
-        <LinearLayout
-            android:id="@+id/llNotification"
-            android:layout_width="wrap_content"
-            android:background="@drawable/green_round_shape"
-            android:layout_height="wrap_content">
+<!--        <LinearLayout-->
+<!--            android:id="@+id/llNotification"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:background="@drawable/green_round_shape"-->
+<!--            android:layout_height="wrap_content">-->
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgNotification"
-                android:layout_width="@dimen/_20sdp"
-                android:src="@drawable/notification"
-                android:layout_height="@dimen/_20sdp"/>
-        </LinearLayout>
+<!--            <androidx.appcompat.widget.AppCompatImageView-->
+<!--                android:id="@+id/imgNotification"-->
+<!--                android:layout_width="@dimen/_20sdp"-->
+<!--                android:src="@drawable/notification"-->
+<!--                android:layout_height="@dimen/_20sdp"/>-->
+<!--        </LinearLayout>-->
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_7sdp"
-            android:text="Amit has sent you a homework "
+            android:text="title "
             android:gravity="center_vertical"
-            android:layout_centerInParent="true"
             android:textSize="@dimen/_11sp"
+            android:fontFamily="@font/opensans_regular"
+            android:textStyle="bold"
             android:textColor="@color/black"
             android:layout_toStartOf="@+id/tvTime"
             android:layout_toEndOf="@+id/llNotification"/>
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvTime"
-            android:layout_width="wrap_content"
+            android:id="@+id/tvDesc"
+            android:layout_below="@+id/tvTitle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/opensans_regular"
             android:layout_marginStart="@dimen/_7sdp"
-            android:text="11:30 pm"
+            android:text="Amit has sent you a homework "
             android:gravity="center_vertical"
-            android:layout_alignParentEnd="true"
-            android:layout_centerInParent="true"
             android:textSize="@dimen/_11sp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:maxLines="2"
+            android:layout_toStartOf="@+id/tvTime"
+            android:layout_toEndOf="@+id/llNotification"/>
+
+<!--        <androidx.appcompat.widget.AppCompatTextView-->
+<!--            android:id="@+id/tvTime"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="@dimen/_7sdp"-->
+<!--            android:text="11:30 pm"-->
+<!--            android:gravity="bottom"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:textSize="@dimen/_11sp"-->
+<!--            android:textColor="@color/black" />-->
 
     </RelativeLayout>
 
-</RelativeLayout>
+</layout>

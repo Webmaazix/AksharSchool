@@ -29,7 +29,12 @@ import com.akshar.one.viewmodels.ViewModelFactory
 import com.akshar.one.viewmodels.student.StudentViewModel
 import com.bumptech.glide.Glide
 import com.theartofdev.edmodo.cropper.CropImage
+import kotlinx.android.synthetic.main.activity_create_student_profile.*
 import kotlinx.android.synthetic.main.activity_edit_student_profile.*
+import kotlinx.android.synthetic.main.activity_edit_student_profile.etEmailAddress
+import kotlinx.android.synthetic.main.activity_edit_student_profile.etFirstName
+import kotlinx.android.synthetic.main.activity_edit_student_profile.etLastName
+import kotlinx.android.synthetic.main.activity_edit_student_profile.etMobileNumber
 import kotlinx.android.synthetic.main.main_toolbar.view.*
 import java.io.File
 
@@ -316,12 +321,12 @@ class CreateStudentProfile : AppCompatActivity(),View.OnClickListener{
     private fun updateStudentData(){
 
         val model  = StudentListModel()
-        model.firstName = etFirstName.text.toString()
-        model.lastName = etLastName.text.toString()
-        model.admissionNumber = etAdmissionNumber.text.toString()
+        model.firstName = binding!!.etFirstName.text.toString()
+        model.lastName = binding!!.etLastName.text.toString()
+        model.admissionNumber = binding!!.etAdmissionNumber.text.toString()
         model.classroomId = sectionList.classroomId
-        model.courseName = classDropDownModel.courseName
-        model.classroomName = sectionList.classroomName
+        model.classroom.courseName = classDropDownModel.courseName
+        model.classroom.classroomName = sectionList.classroomName
         var gender = ""
         if(binding!!.rbFemale.isChecked){
             gender = "Female"
@@ -330,16 +335,16 @@ class CreateStudentProfile : AppCompatActivity(),View.OnClickListener{
         }
         model.gender = gender
         model.bloodGroup = bloodGroup
-        model.studentContact.email = etEmailAddress.text.toString()
-        model.studentContact.parentName = etParentName.text.toString()
-        model.studentContact.relationship = etRelationShip.text.toString()
-        model.studentContact.mobile = etMobileNumber.text.toString()
-        model.studentContact.address.addressLine1 = etHouseNumber.text.toString()
-        model.studentContact.address.addressLine2 = etStreet.text.toString()
-        model.studentContact.address.city = etCity.text.toString()
+        model.studentContact.email = binding!!.etEmailAddress.text.toString()
+        model.studentContact.parentName = binding!!.etParentName.text.toString()
+        model.studentContact.relationship = binding!!.etRelationShip.text.toString()
+        model.studentContact.mobile = binding!!.etMobileNumber.text.toString()
+        model.studentContact.address.addressLine1 = binding!!.etHouseNumber.text.toString()
+        model.studentContact.address.addressLine2 = binding!!.etStreet.text.toString()
+        model.studentContact.address.city = binding!!.etCity.text.toString()
         model.studentContact.address.state = state
-        model.studentContact.address.district = etDistrict.text.toString()
-        model.studentContact.address.postalcode = etPostal.text.toString()
+        model.studentContact.address.district = binding!!.etDistrict.text.toString()
+        model.studentContact.address.postalcode = binding!!.etPostal.text.toString()
         studentViewModel.let {
             if(AksharSchoolApplication.context?.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true){
                 showProgressBar()

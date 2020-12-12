@@ -9,7 +9,7 @@ class FeeHeadList : Serializable{
     @SerializedName("feeHead")
     @Expose
     var feeHead = ""
-    @SerializedName("feeTermList")
+    @SerializedName("feeItemList")
     @Expose
     var feeTermList = ArrayList<FeeTermList>()
 

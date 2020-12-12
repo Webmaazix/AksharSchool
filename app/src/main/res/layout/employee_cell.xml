@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="position"
+            type="java.lang.Integer" />
+
+        <variable
+            name="attendanceClassRoomViewModel"
+            type="com.akshar.one.viewmodels.attendance.AttendanceClassRoomViewModel" />
+    </data>
+
+
+    <RelativeLayout
+        android:id="@+id/rlMain"
+        android:layout_width="match_parent"
+        android:padding="@dimen/_5sdp"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/llMain"
+            android:weightSum="3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvEmployeeId"
+                android:layout_width="match_parent"
+                android:textColor="@color/black"
+                android:text="282fhbbdsv"
+                android:maxLength="6"
+                android:textAlignment="center"
+                android:layout_weight="1.2"
+                android:textSize="@dimen/_10sp"
+                android:padding="@dimen/_7sdp"
+                android:layout_height="wrap_content"/>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvStudentName"
+                android:layout_width="match_parent"
+                android:textColor="@color/black"
+                android:text="Sjkdfjsd"
+                android:textAlignment="center"
+                android:layout_weight="0.9"
+                android:textSize="@dimen/_10sp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:padding="@dimen/_7sdp"
+                android:layout_height="wrap_content"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvDepartment"
+                android:layout_width="match_parent"
+                android:textColor="@color/black"
+                android:text="Sjkdfjsd"
+                android:textAlignment="center"
+                android:layout_weight="0.9"
+                android:textSize="@dimen/_10sp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:padding="@dimen/_7sdp"
+                android:layout_height="wrap_content"/>
+
+
+        </LinearLayout>
+
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_below="@+id/llMain"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@color/grey"/>
+    </RelativeLayout>
+
+</layout>

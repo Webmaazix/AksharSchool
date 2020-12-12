@@ -1,9 +1,6 @@
 package com.akshar.one.api.service
 
-import com.akshar.one.model.CourseModel
-import com.akshar.one.model.DegreeModel
-import com.akshar.one.model.ShiftModel
-import com.akshar.one.model.StudentAttendanceModel
+import com.akshar.one.model.*
 import retrofit2.http.*
 
 interface AttendanceApi {
@@ -11,9 +8,15 @@ interface AttendanceApi {
     @GET("attendance/shifts")
     suspend fun getShifts(
         @HeaderMap headers: Map<String, String>,
-        @Query("profileType") profileType: String = "STUDENT",
-        @Query("classroomIdList") classroomId: Int
-    ): List<ShiftModel>?
+        @Query("profileType") profileType: String,
+        @Query("classroomIdList") classroomId: ArrayList<Int>
+    ): List<ShiftList>?
+
+    @GET("attendance/shifts")
+    suspend fun getShiftListEmployee(
+        @HeaderMap headers: Map<String, String>,
+        @Query("profileType") profileType: String
+    ): List<ShiftList>?
 
     @GET("attendance/students")
     suspend fun getStudentsAttendanceByClassRoomId(

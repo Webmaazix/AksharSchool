@@ -36,16 +36,24 @@ class ExamViewModel(application: Application) : BaseViewModel(application){
     fun getImageLiveData() : MutableLiveData<ImageModel> = mutableLiveDataImage
 
 
-    fun getExaminationDropDown(classRoomId : Int){
+    fun getExaminationDropDown(classRoomId : Int?){
         isLoading.postValue(true)
         viewModelScope.launch {
             withContext(Dispatchers.IO){
                 try {
                     isLoading.postValue(false)
-                    val studentList = examRepository?.getExaminationDropDown(classRoomId)
-                    studentList.let {
-                        mutuableLiveDataExamList.postValue(studentList)
+                    if(classRoomId == null){
+                        val studentList = examRepository?.getExaminationDropDownForParent()
+                        studentList.let {
+                            mutuableLiveDataExamList.postValue(studentList)
+                        }
+                    }else{
+                        val studentList = examRepository?.getExaminationDropDown(classRoomId)
+                        studentList.let {
+                            mutuableLiveDataExamList.postValue(studentList)
+                        }
                     }
+
 
                 }catch (httpException : HttpException){
                     isLoading.postValue(false)

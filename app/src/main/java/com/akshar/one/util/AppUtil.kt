@@ -49,6 +49,12 @@ object AppUtil {
         //System.out.println(" C DATE is  "+currentDate)
         return currentDate
     }
+    fun getCurrentDateInDDMMYYYYFormat() : String?{
+        val sdf = SimpleDateFormat("dd-MM-YYYY")
+        val currentDate = sdf.format(Date())
+        //System.out.println(" C DATE is  "+currentDate)
+        return currentDate
+    }
 
     fun getCurrentYear() : Int{
        return Calendar.getInstance().get(Calendar.YEAR);
@@ -145,5 +151,20 @@ object AppUtil {
         cal.set(Calendar.DAY_OF_MONTH,day.day)
         Log.d("AksharOne","date : "+cal.time.toString())
         return SimpleDateFormat(SERVER_DATE_FORMAT).format(cal.time)
+    }
+
+    fun parseTime(time : String) : String{
+        val parseFormat = SimpleDateFormat("HH:mm")
+        val displayFormat = SimpleDateFormat("hh:mm a")
+        val date = parseFormat.parse(time)
+        println(parseFormat.format(date!!) + " = " + displayFormat.format(date))
+        return displayFormat.format(date)
+    }
+    fun parseTimeExam(time : String) : String{
+        val parseFormat = SimpleDateFormat("HH:mm:ss")
+        val displayFormat = SimpleDateFormat("hh:mm a")
+        val date = parseFormat.parse(time)
+        println(parseFormat.format(date!!) + " = " + displayFormat.format(date))
+        return displayFormat.format(date)
     }
 }

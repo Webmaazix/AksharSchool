@@ -38,7 +38,7 @@ class EmployeeAttendanceEntryViewModel(application: Application) : BaseViewModel
     private val isLoading = MutableLiveData<Boolean>()
 
     init {
-        attendanceRepository = AttendanceRepository(application)
+        attendanceRepository = AttendanceRepository()
         employeeAttendanceAdapter =
             EmployeeAttendanceAdapter(
                 this
@@ -61,7 +61,7 @@ class EmployeeAttendanceEntryViewModel(application: Application) : BaseViewModel
 
     fun updateAttendance(position: Int, status: String) {
         val student = getEmployeeAt(position)
-        student?.lateEntryFlag = null
+        student?.lateEntryFlag = ""
         when (status) {
             PRESENT -> {
                 student?.attendanceInd = PRESENT
@@ -100,7 +100,7 @@ class EmployeeAttendanceEntryViewModel(application: Application) : BaseViewModel
                         errorResponse?.let { getErrorMutableLiveData().postValue(it) }
                     } catch (e: Exception) {
                         isLoading.postValue(false)
-                        Log.d(AppConstant.TAG, "Save Employee Attendance  Exception : $e")
+                        Log.d(AppConstant.TAG, "Save Employee Attendance Exception : $e")
                     }
                 }
 
@@ -112,7 +112,7 @@ class EmployeeAttendanceEntryViewModel(application: Application) : BaseViewModel
     fun markAll(status: String) {
         studentAttendanceListMutableLiveData.value?.let {
             for (student in it) {
-                student.lateEntryFlag = null
+                student.lateEntryFlag = ""
                 student.attendanceInd = status
             }
             employeeAttendanceAdapter?.notifyDataSetChanged()
@@ -130,13 +130,13 @@ class EmployeeAttendanceEntryViewModel(application: Application) : BaseViewModel
                     shiftEntityList =
                         attendanceRepository?.getEmployeeShiftsFromDB()
                     if (shiftEntityList.isNullOrEmpty()) {
-                        val shiftList =
-                            attendanceRepository?.getShifts(
-                                AttendanceRepository.EMPLOYEE_PROFILE_TYPE
-                            )
-                        shiftList?.let { list ->
-                            insertAttendanceShiftInDB(list)
-                        }
+//                        val shiftList =
+//                            attendanceRepository?.getShifts(
+//                                AttendanceRepository.EMPLOYEE_PROFILE_TYPE
+//                            )
+//                        shiftList?.let { list ->
+//                            insertAttendanceShiftInDB(list)
+//                        }
                         shiftEntityList =
                             attendanceRepository?.getEmployeeShiftsFromDB()
                     }

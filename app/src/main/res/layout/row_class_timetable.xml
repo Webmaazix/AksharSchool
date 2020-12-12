@@ -10,100 +10,128 @@
         android:layout_width="match_parent"
         android:layout_marginStart="@dimen/_12sp"
         android:layout_marginEnd="@dimen/_12sp"
-        android:layout_marginTop="@dimen/_7sdp"
-        android:layout_marginBottom="@dimen/_7sdp"
-        android:elevation="@dimen/_4sdp"
         android:layout_height="wrap_content">
 
-        <RelativeLayout
-            android:id="@+id/rlTime"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgLine"
+            android:layout_width="@dimen/_10sdp"
+            android:src="@drawable/line_timetable"
+            android:layout_height="@dimen/_100sdp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvStartTime"
             android:layout_width="wrap_content"
-            android:visibility="visible"
-            android:background="@drawable/blue_right_round_nopadding"
-            android:layout_height="wrap_content">
+            android:text="08:00 Am - 09:00 Am"
+            android:layout_toEndOf="@+id/imgLine"
+            android:paddingStart="@dimen/_7sdp"
+            android:paddingEnd="@dimen/_7sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:textSize="@dimen/_11sp"
+            android:fontFamily="@font/opensans_regular"
+            android:textStyle="bold"
+            android:layout_marginStart="@dimen/_7sdp"
+            android:layout_marginEnd="@dimen/_7sdp"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content"/>
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvStartTime"
-                android:layout_width="wrap_content"
-                android:text="08:00"
-                android:paddingStart="@dimen/_7sdp"
-                android:paddingEnd="@dimen/_7sdp"
-                android:paddingTop="@dimen/_15sdp"
-                android:textSize="@dimen/_11sp"
-                android:fontFamily="@font/opensans_regular"
-                android:layout_marginStart="@dimen/_7sdp"
-                android:layout_marginEnd="@dimen/_7sdp"
-                android:textColor="@color/white"
-                android:layout_height="wrap_content">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvTimeTable"
+            android:layout_width="match_parent"
+            android:layout_toEndOf="@+id/imgLine"
+            android:layout_below="@+id/tvStartTime"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_height="wrap_content"/>
 
-            </androidx.appcompat.widget.AppCompatTextView>
+<!--        <RelativeLayout-->
+<!--            android:id="@+id/rlTime"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:visibility="visible"-->
+<!--            android:background="@drawable/blue_right_round_nopadding"-->
+<!--            android:layout_height="wrap_content">-->
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvEndTime"
-                android:layout_below="@+id/tvStartTime"
-                android:layout_width="wrap_content"
-                android:text="08:00"
-                android:paddingStart="@dimen/_7sdp"
-                android:paddingEnd="@dimen/_7sdp"
-                android:paddingBottom="@dimen/_15sdp"
-                android:textSize="@dimen/_11sp"
-                android:fontFamily="@font/opensans_regular"
-                android:layout_marginStart="@dimen/_7sdp"
-                android:layout_marginEnd="@dimen/_7sdp"
-                android:textColor="@color/white"
-                android:layout_height="wrap_content">
+<!--            <androidx.appcompat.widget.AppCompatTextView-->
+<!--                android:id="@+id/tvStartTime"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:text="08:00"-->
+<!--                android:paddingStart="@dimen/_7sdp"-->
+<!--                android:paddingEnd="@dimen/_7sdp"-->
+<!--                android:paddingTop="@dimen/_15sdp"-->
+<!--                android:textSize="@dimen/_11sp"-->
+<!--                android:fontFamily="@font/opensans_regular"-->
+<!--                android:layout_marginStart="@dimen/_7sdp"-->
+<!--                android:layout_marginEnd="@dimen/_7sdp"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:layout_height="wrap_content">-->
 
-            </androidx.appcompat.widget.AppCompatTextView>
+<!--            </androidx.appcompat.widget.AppCompatTextView>-->
 
-        </RelativeLayout>
+<!--            <androidx.appcompat.widget.AppCompatTextView-->
+<!--                android:id="@+id/tvEndTime"-->
+<!--                android:layout_below="@+id/tvStartTime"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:text="08:00"-->
+<!--                android:paddingStart="@dimen/_7sdp"-->
+<!--                android:paddingEnd="@dimen/_7sdp"-->
+<!--                android:paddingBottom="@dimen/_15sdp"-->
+<!--                android:textSize="@dimen/_11sp"-->
+<!--                android:fontFamily="@font/opensans_regular"-->
+<!--                android:layout_marginStart="@dimen/_7sdp"-->
+<!--                android:layout_marginEnd="@dimen/_7sdp"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:layout_height="wrap_content">-->
 
-            <RelativeLayout
-                android:id="@+id/rlSubject"
-                android:layout_toEndOf="@+id/rlTime"
-                android:visibility="visible"
-                android:background="@drawable/white_left_round_nopadding"
-                android:layout_width="match_parent"
-                android:elevation="@dimen/_1sdp"
-                android:layout_height="wrap_content">
+<!--            </androidx.appcompat.widget.AppCompatTextView>-->
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvSubjectName"
-                    android:layout_width="match_parent"
-                    android:text="Subject Name"
-                    android:paddingTop="@dimen/_15sdp"
-                    android:maxLines="1"
-                    android:paddingStart="@dimen/_7sdp"
-                    android:paddingEnd="@dimen/_7sdp"
-                    android:textSize="@dimen/_11sp"
-                    android:fontFamily="@font/opensans_regular"
-                    android:layout_marginStart="@dimen/_7sdp"
-                    android:layout_marginEnd="@dimen/_7sdp"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:layout_height="wrap_content"/>
+<!--        </RelativeLayout>-->
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvClassName"
-                    android:layout_below="@+id/tvSubjectName"
-                    android:layout_width="match_parent"
-                    android:maxLines="1"
-                    android:text="Subject Name"
-                    android:paddingStart="@dimen/_7sdp"
-                    android:paddingEnd="@dimen/_7sdp"
-                    android:paddingBottom="@dimen/_10sdp"
-                    android:textSize="@dimen/_11sp"
-                    android:paddingTop="@dimen/_5sdp"
-                    android:fontFamily="@font/opensans_regular"
-                    android:layout_marginStart="@dimen/_7sdp"
-                    android:layout_marginEnd="@dimen/_7sdp"
-                    android:textColor="@color/black"
-                    android:layout_height="wrap_content">
+<!--            <RelativeLayout-->
+<!--                android:id="@+id/rlSubject"-->
+<!--                android:layout_toEndOf="@+id/rlTime"-->
+<!--                android:visibility="visible"-->
+<!--                android:background="@drawable/white_left_round_nopadding"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:elevation="@dimen/_1sdp"-->
+<!--                android:layout_height="wrap_content">-->
 
-                </androidx.appcompat.widget.AppCompatTextView>
+<!--                <androidx.appcompat.widget.AppCompatTextView-->
+<!--                    android:id="@+id/tvSubjectName"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:text="Subject Name"-->
+<!--                    android:paddingTop="@dimen/_15sdp"-->
+<!--                    android:maxLines="1"-->
+<!--                    android:paddingStart="@dimen/_7sdp"-->
+<!--                    android:paddingEnd="@dimen/_7sdp"-->
+<!--                    android:textSize="@dimen/_11sp"-->
+<!--                    android:fontFamily="@font/opensans_regular"-->
+<!--                    android:layout_marginStart="@dimen/_7sdp"-->
+<!--                    android:layout_marginEnd="@dimen/_7sdp"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:layout_height="wrap_content"/>-->
+
+<!--                <androidx.appcompat.widget.AppCompatTextView-->
+<!--                    android:id="@+id/tvClassName"-->
+<!--                    android:layout_below="@+id/tvSubjectName"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:maxLines="1"-->
+<!--                    android:text="Subject Name"-->
+<!--                    android:paddingStart="@dimen/_7sdp"-->
+<!--                    android:paddingEnd="@dimen/_7sdp"-->
+<!--                    android:paddingBottom="@dimen/_10sdp"-->
+<!--                    android:textSize="@dimen/_11sp"-->
+<!--                    android:paddingTop="@dimen/_5sdp"-->
+<!--                    android:fontFamily="@font/opensans_regular"-->
+<!--                    android:layout_marginStart="@dimen/_7sdp"-->
+<!--                    android:layout_marginEnd="@dimen/_7sdp"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:layout_height="wrap_content">-->
+
+<!--                </androidx.appcompat.widget.AppCompatTextView>-->
 
 
 
-            </RelativeLayout>
+<!--            </RelativeLayout>-->
 
         <RelativeLayout
             android:id="@+id/rlTime1"

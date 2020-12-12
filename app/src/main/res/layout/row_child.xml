@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="position"
+            type="java.lang.Integer" />
+
+        <variable
+            name="attendanceClassRoomViewModel"
+            type="com.akshar.one.viewmodels.attendance.AttendanceClassRoomViewModel" />
+    </data>
+
+
+    <RelativeLayout
+        android:id="@+id/rlMainBg"
+        android:layout_width="@dimen/_100sdp"
+        android:gravity="center_horizontal"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/RlimgUserProfile"
+            android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="@dimen/_7sdp"
+            android:layout_height="wrap_content">
+
+            <com.akshar.one.circlularimageview.CircularImageView
+                android:id="@+id/imgUserProfile"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_gravity="center"
+                android:src="@drawable/circle_default_pic"
+                app:civ_border_width="@dimen/_1sdp"
+                android:visibility="visible"
+                app:civ_border_color="@color/ultra_light_grey"
+                app:civ_circle_color="@color/lightish_grey"/>
+
+            <FrameLayout
+                android:id="@+id/flLayout"
+                android:layout_width="@dimen/_50sdp"
+                android:visibility="gone"
+                android:layout_centerVertical="true"
+                android:layout_height="@dimen/_50sdp">
+
+                <ImageView
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_gravity="center|start"
+                    android:src="@drawable/bg_circle" />
+
+                <TextView
+                    android:id="@+id/tvShortName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/opensans_regular"
+                    android:text="WO"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12sp"
+                    />
+            </FrameLayout>
+
+
+        </RelativeLayout>
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvStudentName"
+            android:text="Student name"
+            android:layout_below="@+id/RlimgUserProfile"
+            android:textSize="@dimen/_11sp"
+            android:textStyle="bold"
+            android:maxLength="12"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:fontFamily="@font/opensans_regular"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+</layout>

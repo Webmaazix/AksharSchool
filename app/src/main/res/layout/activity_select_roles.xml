@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+
+    </data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/lightish_grey"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/main_toolbar"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_below="@+id/toolbar"
+            android:layout_height="wrap_content">
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvSelectChild"
+                android:layout_width="match_parent"
+                android:text="@string/select_child"
+                android:fontFamily="@font/opensans_regular"
+                android:textStyle="bold"
+                android:textSize="@dimen/_12sp"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingStart="@dimen/_5sdp"
+                android:paddingEnd="@dimen/_5sdp"
+                android:textColor="@color/black"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:layout_height="wrap_content"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvChildList"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/tvSelectChild"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_height="wrap_content"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvSelectSchool"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/rvChildList"
+                android:text="@string/select_school"
+                android:fontFamily="@font/opensans_regular"
+                android:textStyle="bold"
+                android:textSize="@dimen/_12sp"
+                android:textColor="@color/black"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingStart="@dimen/_5sdp"
+                android:paddingEnd="@dimen/_5sdp"
+                android:layout_height="wrap_content"/>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvRoleList"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/tvSelectSchool"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
+<!--        <androidx.appcompat.widget.AppCompatTextView-->
+<!--            android:id="@+id/tvBottomText"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:text="@string/you_can_change_the_selection_any_time"-->
+<!--            android:textAlignment="center"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="@dimen/_11sp"-->
+<!--            android:fontFamily="@font/opensans_regular"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_marginBottom="@dimen/_10sdp"-->
+<!--            android:textStyle="bold"-->
+<!--            android:layout_height="wrap_content"/>-->
+
+
+    </RelativeLayout>
+
+</layout>

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.akshar.one.R
 import com.akshar.one.databinding.HomeworkCellBinding
+import com.akshar.one.manager.SessionManager
 import com.akshar.one.model.PeriodTimeTable
 import com.akshar.one.model.TimeTableModel
 import com.akshar.one.view.activity.MainActivity
@@ -37,6 +38,14 @@ class TimeTableAdapter(private val mContext: Context, private val timeTableList:
 
         val timeTableModel = timeTableList?.get(position)
 
+        if(SessionManager.getLoginRole()?.appName.equals("SmartParent",true)){
+            holder.binding.tvHomeWork.visibility = View.GONE
+            holder.binding.tvAttendance.visibility = View.GONE
+        }else{
+            holder.binding.tvHomeWork.visibility = View.VISIBLE
+            holder.binding.tvAttendance.visibility = View.VISIBLE
+        }
+
         val itemWidth = screenWidth / 1.20
 
         val lp = holder.binding.rlMain.layoutParams
@@ -47,8 +56,14 @@ class TimeTableAdapter(private val mContext: Context, private val timeTableList:
         if(timeTableModel?.timetable!= null){
             if(timeTableModel.timetable.size == 1){
                 val model = timeTableModel.timetable.get(0)
-                val className = model.classroom.courseName +" "+model.classroom.classroomName
-                holder.binding.tvTimeLine.text = className
+                if(SessionManager.getLoginRole()?.appName.equals("SmartParent")) {
+                    val teacherName = model.teacher.fullName
+                    holder.binding.tvTimeLine.text = teacherName
+                }else{
+                    val className = model.classroom.courseName +" "+model.classroom.classroomName
+                    holder.binding.tvTimeLine.text = className
+                }
+
                 holder.binding.tvSubjectName.text = model.subjectName
                 val time = model.startTime +" - "+model.endTime
 
@@ -101,8 +116,24 @@ class TimeTableAdapter(private val mContext: Context, private val timeTableList:
                 holder.binding.tvTime.text = time
             }else{
                 val model = timeTableModel.timetable.get(0)
-                val className = model.classroom.courseName +" "+model.classroom.classroomName
-                holder.binding.tvTimeLine.text = className
+                if(SessionManager.getLoginRole()?.appName.equals("SmartParent")) {
+                    val teacherName = model.teacher.fullName
+                    holder.binding.tvTimeLine.text = teacherName
+                }else{
+                    var className = ""
+                    for(model in timeTableModel.timetable){
+                        if(className.equals("")){
+                            className = model.classroom.courseName +" "+model.classroom.classroomName
+                        }else{
+                            className = className+" , "+ model.classroom.classroomName
+                        }
+                    }
+                    holder.binding.tvTimeLine.text = className
+
+                }
+
+//                val className = model.classroom.courseName +" "+model.classroom.classroomName
+
                 holder.binding.tvSubjectName.text = model.subjectName
                 val time = model.startTime +" - "+model.endTime
 

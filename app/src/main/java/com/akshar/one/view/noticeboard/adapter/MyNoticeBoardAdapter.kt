@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.akshar.one.R
 import com.akshar.one.databinding.RowExpirednoticeBinding
 import com.akshar.one.databinding.RowNoticeBinding
+import com.akshar.one.manager.SessionManager
 import com.akshar.one.model.NoticeBoardModel
 import com.akshar.one.view.noticeboard.CreateNoticeActivity
 import com.akshar.one.swipelayout.SimpleSwipeListener
@@ -33,7 +34,7 @@ import kotlinx.android.synthetic.main.row_notice.view.*
 import java.util.ArrayList
 
 class MyNoticeBoardAdapter(private val mContext: Activity, private val noticeList: ArrayList<NoticeBoardModel>?,
-                           private var expired : Boolean, private var fragment : Fragment) :
+                           private var expired : String, private var fragment : Fragment, var securityList : ArrayList<String>) :
     RecyclerView.Adapter<MyNoticeBoardAdapter.ViewHolder>() {
 
 
@@ -50,7 +51,7 @@ class MyNoticeBoardAdapter(private val mContext: Activity, private val noticeLis
             ViewModelFactory(mContext.applicationContext as Application)
         ).get(NoticeBoardViewModel::class.java)
 
-        if(expired){
+        if(expired == "EXPIRED"){
             return ViewHolder(
                 LayoutInflater.from(mContext).inflate(
                     R.layout.row_expirednotice,
@@ -77,14 +78,27 @@ class MyNoticeBoardAdapter(private val mContext: Activity, private val noticeLis
 
 
 
-        if(expired){
-//            viewHolder.expiredBinding?.swipe!!.setShowMode(SwipeLayout.ShowMode.LayDown)
-//            viewHolder.expiredBinding?.swipe!!.addSwipeListener(object : SimpleSwipeListener() {
-//                override fun onOpen(layout: SwipeLayout) {
-//                    YoYo.with(Techniques.Tada).duration(500).delay(100)
-//                        .playOn(layout.findViewById(R.id.imgDelete))
-//                }
-//            })
+        if(expired == "EXPIRED"){
+            if(SessionManager.getLoginRole()?.appName.equals("SmartParent")) {
+                viewHolder.expiredBinding!!.rlBackground.visibility = View.GONE
+
+            }else{
+                if(securityList.contains("M_NOTICE_BOARD_DELETE") && securityList.contains("M_NOTICE_BOARD_EDIT")){
+                    viewHolder.expiredBinding!!.rlBackground.visibility = View.VISIBLE
+                }else if(securityList.contains("M_NOTICE_BOARD_DELETE")){
+                    viewHolder.expiredBinding!!.rlEditNotice.visibility = View.GONE
+                    viewHolder.expiredBinding!!.vvbg.visibility = View.GONE
+                    viewHolder.expiredBinding!!.rlDelete.visibility = View.VISIBLE
+
+                }else if(securityList.contains("M_NOTICE_BOARD_EDIT")){
+                    viewHolder.expiredBinding!!.rlEditNotice.visibility = View.VISIBLE
+                    viewHolder.expiredBinding!!.vvbg.visibility = View.GONE
+                    viewHolder.expiredBinding!!.rlDelete.visibility = View.GONE
+                }else{
+                    viewHolder.expiredBinding!!.rlBackground.visibility = View.GONE
+                }
+
+            }
 
             viewHolder.expiredBinding!!.tvTopicName.text = noticeModel?.title
             viewHolder.expiredBinding!!.tvDesc.text = noticeModel?.description
@@ -100,17 +114,36 @@ class MyNoticeBoardAdapter(private val mContext: Activity, private val noticeLis
 //                updateItem(noticeModel)
 //            }
             viewHolder.expiredBinding!!.rlForground.setOnClickListener{
-                NoticeDetailActivity.open(mContext,noticeModel)
+                NoticeDetailActivity.open(mContext,noticeModel,expired)
             }
 
         }else{
+            if(SessionManager.getLoginRole()?.appName.equals("SmartParent")) {
+                viewHolder.binding!!.rlBackground.visibility = View.GONE
+            }else{
+                if(securityList.contains("M_NOTICE_BOARD_DELETE") && securityList.contains("M_NOTICE_BOARD_EDIT")){
+                    viewHolder.binding!!.rlBackground.visibility = View.VISIBLE
+                }else if(securityList.contains("M_NOTICE_BOARD_DELETE")){
+                    viewHolder.binding!!.rlEditNotice.visibility = View.GONE
+                    viewHolder.binding!!.vvbg.visibility = View.GONE
+                    viewHolder.binding!!.rlDelete.visibility = View.VISIBLE
+
+                }else if(securityList.contains("M_NOTICE_BOARD_EDIT")){
+                    viewHolder.binding!!.rlEditNotice.visibility = View.VISIBLE
+                    viewHolder.binding!!.vvbg.visibility = View.GONE
+                    viewHolder.binding!!.rlDelete.visibility = View.GONE
+                }else{
+                    viewHolder.binding!!.rlBackground.visibility = View.GONE
+                }
+
+            }
 
             var colorRes = 0
-            when (position % 4) {
+            when (position % 3) {
                 0 -> colorRes = R.color.blue_notice
                 1 -> colorRes = R.color.pink_notice
                 2 -> colorRes = R.color.purple_notice
-                3 -> colorRes = R.color.green_notice
+
             }
             viewHolder.binding?.rlBottom!!.backgroundTintList = mContext.resources.getColorStateList(colorRes)
 //            viewHolder.binding?.swipe!!.setShowMode(SwipeLayout.ShowMode.LayDown)
@@ -136,7 +169,9 @@ class MyNoticeBoardAdapter(private val mContext: Activity, private val noticeLis
             }
 
             viewHolder.binding!!.rlForground.setOnClickListener{
-                NoticeDetailActivity.open(mContext,noticeModel)
+                NoticeDetailActivity.open(mContext,noticeModel,expired)
+
+
             }
         }
 
@@ -151,7 +186,7 @@ class MyNoticeBoardAdapter(private val mContext: Activity, private val noticeLis
         var expiredBinding: RowExpirednoticeBinding? = null
 
         init {
-            if(expired){
+            if(expired == "EXPIRED"){
                 expiredBinding = RowExpirednoticeBinding.bind(itemView)
             }else{
                 binding = RowNoticeBinding.bind(itemView)

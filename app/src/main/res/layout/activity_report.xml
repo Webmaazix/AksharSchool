@@ -26,7 +26,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-
             <RelativeLayout
                 android:id="@+id/rlProfileType"
                 android:background="@color/white"
@@ -65,8 +64,6 @@
 
             </RelativeLayout>
 
-
-
             <RelativeLayout
                 android:id="@+id/rlClassSection"
                 android:background="@color/white"
@@ -81,6 +78,7 @@
                     android:background="@drawable/grey_round_shape"
                     android:layout_margin="@dimen/_10sdp"
                     android:paddingTop="@dimen/_7sdp"
+                    android:visibility="visible"
                     android:paddingBottom="@dimen/_5sdp"
                     android:paddingStart="@dimen/_15sdp"
                     android:paddingEnd="@dimen/_10sdp"
@@ -104,6 +102,7 @@
                     android:id="@+id/llAbsentDateShift"
                     android:layout_width="match_parent"
                     android:weightSum="2"
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:layout_height="wrap_content">
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -198,6 +197,19 @@
                     android:fontFamily="@font/opensans_bold"
                     android:padding="@dimen/_7sdp"
                     android:textColor="@color/dark_blue"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/cbSelectAllStudents"
+                    android:layout_width="wrap_content"
+                    android:text="@string/select_all"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:fontFamily="@font/opensans_regular"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    android:textColor="@color/dark_blue"
+                    android:padding="@dimen/_7sdp"
                     android:layout_height="wrap_content"/>
 
                 <androidx.recyclerview.widget.RecyclerView

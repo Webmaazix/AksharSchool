@@ -12,6 +12,9 @@ import java.util.concurrent.TimeUnit
 class AksharSchoolService {
 
     private val AUTHORIZATION = "Authorization"
+    private val APP_NAME = "APP_NAME"
+    private val STUDENT_PROFILE_ID = "STUDENT_PROFILE_ID"
+    private val SCHOOL_CD = "SCHOOL_CODE"
     private val interceptor: HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
         this.level = HttpLoggingInterceptor.Level.BODY
     }
@@ -34,6 +37,19 @@ class AksharSchoolService {
     }
 
     fun headers(): Map<String, String> {
-        return mapOf(Pair(AUTHORIZATION, SessionManager.getLoginModel()?.token ?: ""))
+        if(SessionManager.getLoginRole()?.appName.equals("SmartParent")){
+            return mapOf(Pair(AUTHORIZATION, SessionManager.getLoginModel()?.token ?: ""),
+                Pair(APP_NAME,SessionManager.getLoginRole()?.appName ?: ""),
+                Pair(STUDENT_PROFILE_ID,SessionManager.getLoginRole()?.userUniqueId.toString() ?: ""),
+                Pair(SCHOOL_CD , SessionManager.getLoginRole()?.schoolCode ?: "")
+            )
+
+        }else {
+            return mapOf(Pair(AUTHORIZATION, SessionManager.getLoginModel()?.token ?: ""),
+                Pair(APP_NAME,SessionManager.getLoginRole()?.appName ?: ""),
+                Pair(SCHOOL_CD , SessionManager.getLoginRole()?.schoolCode ?: "")
+            )
+
+        }
     }
 }

@@ -137,7 +137,7 @@ class OTPFragment : BaseFragment(), View.OnClickListener {
             if(isTroubleLogin == true){
                 loginActivity.goToChangePasswordScreen()
             }else {
-                loginActivity.goToMainActivity()
+                loginActivity.chooseSchoolRoles()
             }
         })
 

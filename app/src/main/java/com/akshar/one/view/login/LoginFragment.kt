@@ -125,7 +125,7 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
         })
 
         loginViewModel?.getMutableLiveDataLoginModel()?.observe(this, Observer {
-            loginActivity.goToMainActivity()
+            loginActivity.chooseSchoolRoles()
         })
 
         loginViewModel?.getMutableLiveDataOTPResponse()?.observe(this, Observer {

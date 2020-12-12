@@ -1,45 +1,63 @@
 package com.akshar.one.view.activity
 
 import android.app.Activity
+import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.provider.MediaStore
 import android.util.Log
-import android.view.Gravity
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.FileProvider
 import androidx.core.view.GravityCompat
+import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.akshar.one.R
+import com.akshar.one.adapter.ClassDropDownAdapter
 import com.akshar.one.api.service.ApiInterface
 import com.akshar.one.app.AksharSchoolApplication
+import com.akshar.one.app.AksharSchoolApplication.Companion.context
+import com.akshar.one.databinding.DialogSelectClassAndSectionBinding
+import com.akshar.one.databinding.LogoutPopupBinding
 import com.akshar.one.view.examschedule.ScheduledExamList
 import com.akshar.one.view.feeandpayments.StudentListForFeesFragment
 import com.akshar.one.manager.SessionManager
+import com.akshar.one.model.StudentListModel
 import com.akshar.one.util.AndroidUtil
 import com.akshar.one.util.AppUtils
 import com.akshar.one.view.noticeboard.NoticeboardActivity
 import com.akshar.one.view.timetable.TimeTableActivity
 import com.akshar.one.util.CheckPermission
 import com.akshar.one.view.attendance.employee.EmployeeAttendanceEntryFragment
-import com.akshar.one.view.attendance.student.AttendanceEntryFragment
+import com.akshar.one.view.attendance2.AttendanceEntryFragment
+import com.akshar.one.view.employeeprofile.EmployeeListFragment
+import com.akshar.one.view.feeandpayments.StudentFeesDetails
 import com.akshar.one.view.home.DashboardActivity
+import com.akshar.one.view.home.ParentDashBoardFragment
+import com.akshar.one.view.login.SelectRoles
+import com.akshar.one.view.marksentry.ParentCategoryFragment
+import com.akshar.one.view.marksentry.ParentMarksActivity
 import com.akshar.one.view.marksentry.inputselection.ClassSectionSelectActivity
 import com.akshar.one.view.messagecenter.MessageCenterFragment
 import com.akshar.one.view.studentprofile.StudentListFragment
+import com.akshar.one.view.studentprofile.ViewStudentProfileActivity
+import com.akshar.one.view.timetable.ParentTimetableActivity
+import com.akshar.one.view.welcome.WelcomeActivity
 import com.akshar.one.viewmodels.ViewModelFactory
+import com.akshar.one.viewmodels.dashboard.DashboardViewModel
 import com.akshar.one.viewmodels.main.MainViewModel
 import com.akshar.one.viewmodels.student.StudentViewModel
 import com.bumptech.glide.Glide
@@ -57,12 +75,15 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MainActivity : BaseActivity(),  NavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
 
 
     var drawerLayout: DrawerLayout? = null
     var mSlideState = false
+    private var dashboardViewModel: DashboardViewModel? = null
     private var currActivity : Activity = this
     private var studentViewModel : StudentViewModel? = null
     private val RESULT_LOAD = 423
@@ -72,6 +93,13 @@ class MainActivity : BaseActivity(),  NavigationView.OnNavigationItemSelectedLis
     private var mSelectedImagePath: String = ""
     private var image = ""
     private var mainViewModel: MainViewModel? = null
+    var from  = ""
+    var student = StudentListModel()
+    var securityList = ArrayList<String>()
+    private var logoutPopupBinding: LogoutPopupBinding? = null
+    private var dialog: Dialog? = null
+    private var studentList = ArrayList<StudentListModel>()
+
 
     companion object {
         fun open(currActivity: Activity) {
@@ -80,9 +108,7 @@ class MainActivity : BaseActivity(),  NavigationView.OnNavigationItemSelectedLis
             currActivity.startActivity(intent)
             currActivity.overridePendingTransition(R.anim.slide_in, R.anim.slide_out)
             currActivity.finish()
-
         }
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -131,7 +157,13 @@ class MainActivity : BaseActivity(),  NavigationView.OnNavigationItemSelectedLis
                             CheckPermission.REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS
                         )
                 }
+                nav_view.getHeaderView(0).rlSwitchSchool.setOnClickListener{
+                    drawerLayout?.closeDrawer(Gravity.LEFT);
+                    SelectRoles.open(currActivity)
+                }
             }
+
+
 
             override fun onDrawerClosed(drawerView: View) {
                 super.onDrawerClosed(drawerView)
@@ -156,14 +188,59 @@ class MainActivity : BaseActivity(),  NavigationView.OnNavigationItemSelectedLis
         toolbar.background = currActivity.resources.getDrawable(R.drawable.white_square_nopadding_shape)
         getWindow().statusBarColor = Color.WHITE;
         txtToolbarTitle.text = currActivity.resources.getString(R.string.home)
-        replaceFragment(DashboardActivity.newInstance(), DashboardActivity::javaClass.name, false)
+        if(SessionManager.getLoginRole()?.appName.equals("SmartParent")){
+            fetchStudentProfile()
+            nav_view.getMenu().findItem(R.id.nav_student_attendance_entry).setVisible(false);
+            nav_view.getMenu().findItem(R.id.nav_subcategory_employees).setVisible(false);
+            nav_view.getMenu().findItem(R.id.nav_assign_homework).setVisible(false);
+            nav_view.getMenu().findItem(R.id.nav_message_center).setVisible(false);
+            nav_view.getMenu().findItem(R.id.nav_employee_profile).setVisible(false);
+            toolbar.background =
+                currActivity.resources.getDrawable(R.drawable.yellow_radious_2_bg,null)
+            replaceFragment(ParentDashBoardFragment.newInstance(), ParentDashBoardFragment::javaClass.name, false)
+        }else{
+            nav_view.getMenu().findItem(R.id.nav_student_attendance_entry).setVisible(true);
+            nav_view.getMenu().findItem(R.id.nav_subcategory_employees).setVisible(true);
+            nav_view.getMenu().findItem(R.id.nav_assign_homework).setVisible(true);
+            nav_view.getMenu().findItem(R.id.nav_message_center).setVisible(true);
+            nav_view.getMenu().findItem(R.id.nav_employee_profile).setVisible(true);
+            toolbar.background = currActivity.resources.getDrawable(R.drawable.white_square_nopadding_shape)
+            replaceFragment(DashboardActivity.newInstance(), DashboardActivity::javaClass.name, false)
+        }
+
     }
 
     private fun fetchCourses() {
+
+        currActivity.application?.let {
+            dashboardViewModel = ViewModelProvider(
+                ViewModelStore(),
+                ViewModelFactory(it)
+            ).get(DashboardViewModel::class.java)
+        }
+
+
+        dashboardViewModel?.let {
+            if (currActivity.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true) {
+                it.getSecurityGroupsList(SessionManager.getLoginModel()!!.appsList!!.get(0).appName) }
+        }
+
+
         mainViewModel?.getClassRoomDropdownService()
+
+
     }
 
     private fun observers() {
+        dashboardViewModel?.getSecurityGroupsLiveData()?.observe(this, Observer {
+            it?.let {
+                securityList.clear()
+                securityList.addAll(it)
+                // SessionManager.setSecurityList(it)
+
+            }
+        })
+
         mainViewModel?.getIsLoading()?.observe(this, Observer {
             showProgressIndicator(it)
         })
@@ -173,6 +250,7 @@ class MainActivity : BaseActivity(),  NavigationView.OnNavigationItemSelectedLis
                 AndroidUtil.showMessageDialog(this, it.message)
             }
         })
+
     }
 
     private fun setListner() {
@@ -240,79 +318,148 @@ class MainActivity : BaseActivity(),  NavigationView.OnNavigationItemSelectedLis
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+
             R.id.nav_logout -> {
+                openLogoutDialog()
+
             }
+
             R.id.nav_dashboard -> {
                 txtToolbarTitle.text = currActivity.resources.getString(R.string.home)
-                toolbar.background = currActivity.resources.getDrawable(R.drawable.white_square_nopadding_shape)
-                replaceFragment(DashboardActivity.newInstance(), DashboardActivity::javaClass.name, false)
-            }
-            R.id.nav_time_table -> {
-                TimeTableActivity.open(currActivity)
-             //   replaceFragment(DashboardActivity.newInstance(), DashboardActivity::javaClass.name, true)
 
+                if(SessionManager.getLoginRole()?.appName.equals("SmartParent",true)){
+                    nav_view.getMenu().findItem(R.id.nav_student_attendance_entry).setVisible(false);
+                    nav_view.getMenu().findItem(R.id.nav_subcategory_employees).setVisible(false);
+                    nav_view.getMenu().findItem(R.id.nav_assign_homework).setVisible(false);
+                    nav_view.getMenu().findItem(R.id.nav_message_center).setVisible(false);
+                    nav_view.getMenu().findItem(R.id.nav_employee_profile).setVisible(false);
+
+                    toolbar.background =
+                        currActivity.resources.getDrawable(R.drawable.yellow_radious_2_bg,null)
+                    replaceFragment(ParentDashBoardFragment.newInstance(), ParentDashBoardFragment::javaClass.name, false)
+                }else{
+                    nav_view.getMenu().findItem(R.id.nav_student_attendance_entry).setVisible(true);
+                    nav_view.getMenu().findItem(R.id.nav_subcategory_employees).setVisible(true);
+                    nav_view.getMenu().findItem(R.id.nav_assign_homework).setVisible(true);
+                    nav_view.getMenu().findItem(R.id.nav_message_center).setVisible(true);
+                    nav_view.getMenu().findItem(R.id.nav_employee_profile).setVisible(true);
+                    toolbar.background = currActivity.resources.getDrawable(R.drawable.white_square_nopadding_shape)
+                    replaceFragment(DashboardActivity.newInstance(), DashboardActivity::javaClass.name, false)
+                }
+
+            }
+
+            R.id.nav_time_table -> {
+                if(SessionManager.getLoginRole()?.appName.equals("SmartParent",true)) {
+                    ParentTimetableActivity.open(currActivity)
+                }else
+                    TimeTableActivity.open(currActivity)
             }
 
             R.id.nav_student_profile -> {
-                toolbar.background = currActivity.resources.getDrawable(R.drawable.yellow_top_square)
+                if(SessionManager.getLoginRole()?.appName.equals("SmartParent",true)){
+                    ViewStudentProfileActivity.open(currActivity,null,null,securityList)
+                }else{
+                    toolbar.background = currActivity.resources.getDrawable(R.drawable.yellow_topsquare_with_nopadding)
+                    replaceFragment(StudentListFragment.newInstance(), StudentListFragment::javaClass.name, false)
+                }
 
-                replaceFragment(StudentListFragment.newInstance(), StudentListFragment::javaClass.name, false)
 
             }
 
+//            R.id.nav_student_attendance_entry -> {
+//                txtToolbarTitle.text =  currActivity.resources.getString(R.string.attendance)
+//                toolbar.background =
+//                    currActivity.resources.getDrawable(R.drawable.yellow_radious_2_bg,null)
+//                replaceFragment(
+//                    AttendanceEntryFragment.newInstance(),
+//                    AttendanceEntryFragment::class.java.name,
+//                    true
+//                )
+//
+//            }
             R.id.nav_student_attendance_entry -> {
+                txtToolbarTitle.text =  currActivity.resources.getString(R.string.attendance)
                 toolbar.background =
-                    currActivity.resources.getDrawable(R.drawable.yellow_top_square,null)
-
+                    currActivity.resources.getDrawable(R.drawable.yellow_radious_2_bg,null)
+                from = "Student"
                 replaceFragment(
                     AttendanceEntryFragment.newInstance(),
                     AttendanceEntryFragment::class.java.name,
-                    true
+                    false
                 )
 
             }
-
-            R.id.nav_employee_attendance_entry -> {
+            R.id.nav_subcategory_employees -> {
+                txtToolbarTitle.text =  currActivity.resources.getString(R.string.attendance)
+                from = "Employee"
                 toolbar.background =
-                    currActivity.resources.getDrawable(R.drawable.yellow_top_square, null)
-
+                    currActivity.resources.getDrawable(R.drawable.yellow_radious_2_bg,null)
                 replaceFragment(
-                    EmployeeAttendanceEntryFragment.newInstance(),
-                    EmployeeAttendanceEntryFragment::class.java.name,
-                    true
+                    AttendanceEntryFragment.newInstance(),
+                    AttendanceEntryFragment::class.java.name,
+                    false
                 )
 
             }
+
+//            R.id.nav_employee_attendance_entry -> {
+//                toolbar.background =
+//                    currActivity.resources.getDrawable(R.drawable.yellow_topsquare_with_nopadding, null)
+//
+//                replaceFragment(
+//                    EmployeeAttendanceEntryFragment.newInstance(),
+//                    EmployeeAttendanceEntryFragment::class.java.name,
+//                    true
+//                )
+//
+//            }
 
             R.id.nav_settings -> {
             }
 
             R.id.nav_assign_homework -> {
-                toolbar.background = currActivity.resources.getDrawable(R.drawable.yellow_top_square)
+                toolbar.background = currActivity.resources.getDrawable(R.drawable.yellow_topsquare_with_nopadding)
 
                // replaceFragment(AssignHomeworkFragment.newInstance(), AssignHomeworkFragment::javaClass.name, false)
             }
 
             R.id.nav_notice_board -> {
-                NoticeboardActivity.open(currActivity)
+                NoticeboardActivity.open(currActivity,securityList)
             }
 
             R.id.nav_marks_entry -> {
-               ClassSectionSelectActivity.open(currActivity)
+                if(SessionManager.getLoginRole()?.appName.equals("SmartParent",true)){
+                    txtToolbarTitle.text =  currActivity.resources.getString(R.string.marks_report)
+                    ParentMarksActivity.open(currActivity)
+                }else{
+                    ClassSectionSelectActivity.open(currActivity)
+
+                }
             }
 
             R.id.nav_exam_schedule -> {
-                ScheduledExamList.open(currActivity)
+                ScheduledExamList.open(currActivity,securityList)
             }
 
             R.id.nav_fees_payment -> {
-                toolbar.background = currActivity.resources.getDrawable(R.drawable.yellow_top_square)
-                replaceFragment(StudentListForFeesFragment.newInstance(), StudentListForFeesFragment::javaClass.name, false)
+                if(SessionManager.getLoginRole()?.appName.equals("SmartParent",true)) {
+                    StudentFeesDetails.open(currActivity,student)
+                }else{
+                    toolbar.background = currActivity.resources.getDrawable(R.drawable.yellow_topsquare_with_nopadding)
+                    replaceFragment(StudentListForFeesFragment.newInstance(), StudentListForFeesFragment::javaClass.name, false)
+                }
+
             }
 
             R.id.nav_message_center -> {
                 toolbar.txtToolbarTitle.text = "Message Center"
                 replaceFragment(MessageCenterFragment.newInstance(), MessageCenterFragment::javaClass.name, false)
+
+            }
+            R.id.nav_employee_profile -> {
+                toolbar.txtToolbarTitle.text = currActivity.getString(R.string.employee_profile)
+                replaceFragment(EmployeeListFragment.newInstance(), EmployeeListFragment::javaClass.name, false)
 
             }
 
@@ -321,6 +468,51 @@ class MainActivity : BaseActivity(),  NavigationView.OnNavigationItemSelectedLis
         return true
 
     }
+
+    private fun fetchStudentProfile(){
+        currActivity.application?.let {
+            studentViewModel = ViewModelProvider(
+                ViewModelStore(),
+                ViewModelFactory(it)
+            ).get(StudentViewModel::class.java)
+        }
+
+        studentViewModel.let {
+            if (context?.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true) {
+               // showProgressBar()
+                it!!.getStudentProfile()
+            }
+        }
+
+        observer()
+
+    }
+
+
+    private fun observer() {
+
+        studentViewModel?.getErrorMutableLiveData()?.observe(this, Observer {
+            it.let {
+                hideProgressBar()
+                AndroidUtil.showToast(currActivity, it.message, true)
+            }
+        })
+
+        studentViewModel?.getStudentProfileLiveData()?.observe(this, Observer {
+//            hideProgressBar()
+            student = it
+
+        })
+    }
+
+    fun showProgressBar(){
+        dialog =  AppUtils.showProgress(currActivity)
+    }
+
+    fun hideProgressBar(){
+        AppUtils.hideProgress(dialog!!)
+    }
+
 
     override fun onClick(p0: View?) {
         when (p0!!.id) {
@@ -333,6 +525,32 @@ class MainActivity : BaseActivity(),  NavigationView.OnNavigationItemSelectedLis
                 }
             }
         }
+    }
+
+    private fun openLogoutDialog() {
+        dialog = Dialog(currActivity as Context)
+        logoutPopupBinding = DataBindingUtil.inflate(
+            LayoutInflater.from(currActivity),
+            R.layout.logout_popup, null, false
+        )
+        dialog!!.setContentView(logoutPopupBinding!!.getRoot())
+        Objects.requireNonNull<Window>(dialog!!.getWindow())
+            .setBackgroundDrawableResource(android.R.color.transparent)
+
+        logoutPopupBinding!!.imgCancel.setOnClickListener {
+            dialog!!.dismiss()
+        }
+        logoutPopupBinding!!.tvCancel.setOnClickListener {
+            dialog!!.dismiss()
+        }
+        logoutPopupBinding!!.tvLogout.setOnClickListener {
+            WelcomeActivity.open(currActivity)
+            SessionManager.clear()
+            dialog!!.dismiss()
+        }
+
+        dialog!!.setCancelable(true)
+        dialog!!.show()
     }
 
     private fun openCameraDialog() {
@@ -448,8 +666,6 @@ class MainActivity : BaseActivity(),  NavigationView.OnNavigationItemSelectedLis
             }
         })
 
-
-
     }
 
 
@@ -473,6 +689,23 @@ class MainActivity : BaseActivity(),  NavigationView.OnNavigationItemSelectedLis
 
 
         })
+    }
+
+    var doubleBackToExitPressedOnce = false
+
+    override fun onBackPressed() {
+        if(doubleBackToExitPressedOnce){
+            super.onBackPressed()
+            return
+        }
+
+         this.doubleBackToExitPressedOnce = true;
+        AppUtils.showToast(currActivity,"Please click BACK again to exit",true)
+        Handler().postDelayed({
+            doubleBackToExitPressedOnce=false;
+
+        }, 2000);
+
     }
 
     private fun showProgressIndicator(isLoading: Boolean?) {

@@ -48,4 +48,7 @@ class StundentsMarksList : Serializable {
     @SerializedName("gradePoint")
     @Expose
     var gradePoint = ""
+    @SerializedName("showPresentAbsent")
+    @Expose
+    var showPresentAbsent = false
 }

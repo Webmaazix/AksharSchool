@@ -51,6 +51,7 @@ class StudentListFragment : Fragment(),View.OnClickListener {
     lateinit var studentadapter: StudentListAdapter
     private lateinit var classDropDownModel: ClassDropDownModel
     private lateinit var sectionModel: SectionList
+    var securityList = ArrayList<String>()
 
 
     companion object {
@@ -132,6 +133,7 @@ class StudentListFragment : Fragment(),View.OnClickListener {
         when (p0!!.id) {
             R.id.rlClassSection -> {
                 openDialog()
+
             }
             R.id.imgCreateStudent -> {
                 CreateStudentProfile.open(currActivity, classDropDownModel, sectionModel)
@@ -141,6 +143,7 @@ class StudentListFragment : Fragment(),View.OnClickListener {
     }
 
     private fun initViews() {
+        securityList = (currActivity as MainActivity).securityList
         mainActivity?.setToolbarTitle(getString(R.string.student_list))
     }
 
@@ -160,6 +163,13 @@ class StudentListFragment : Fragment(),View.OnClickListener {
         )
         ClassDropDownAdapter.selectedChild = -1
         ClassDropDownAdapter.clickParent =-1;
+        if(classDropdownList.size > 0){
+            dialogSelectClassSectionBinding!!.rlNotFound.visibility = View.GONE
+            dialogSelectClassSectionBinding!!.rlClassesDropdown.visibility = View.VISIBLE
+        }else{
+            dialogSelectClassSectionBinding!!.rlNotFound.visibility = View.VISIBLE
+            dialogSelectClassSectionBinding!!.rlClassesDropdown.visibility = View.GONE
+        }
         classDropDownAdapter = ClassDropDownAdapter(currActivity, classDropdownList, this, object :
             ClassDropDownAdapter.SectionSelection {
             override fun selectionCallback(parent: Int, child: Int) {
@@ -185,7 +195,12 @@ class StudentListFragment : Fragment(),View.OnClickListener {
 
         val className = data.courseName + " " + model.classroomName
         fragmentStudentListBinding!!.tvClassSectionName.text = className
-        fragmentStudentListBinding!!.imgCreateStudent.visibility = View.VISIBLE
+        if((currActivity as MainActivity).securityList.contains("M_STUDENT_PROFILE_ADD")){
+            fragmentStudentListBinding!!.imgCreateStudent.visibility = View.VISIBLE
+        }else{
+            fragmentStudentListBinding!!.imgCreateStudent.visibility = View.GONE
+        }
+
         dialog!!.dismiss()
 
         studentViewModel.let {

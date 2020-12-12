@@ -19,7 +19,7 @@
             android:id="@+id/relHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/light_purple_top_corners_rounded_bg"
+            android:background="@drawable/blue_nopadding_bottomsquare"
             android:paddingStart="@dimen/common_margin"
             android:paddingTop="@dimen/_12sdp"
             android:paddingEnd="@dimen/common_margin"
@@ -34,9 +34,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:text="@string/select_your_class_amp_section"
+                android:text="@string/choose_class_and_section"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_14ssp"
+                android:textSize="@dimen/_11sp"
+                android:fontFamily="@font/opensans_regular"
                 android:textStyle="bold" />
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -61,6 +62,8 @@
             tools:itemCount="3"
             tools:listitem="@layout/select_class_or_degree_cell"
             android:layout_below="@id/relHeader"/>
+
     </RelativeLayout>
+
 </layout>
 

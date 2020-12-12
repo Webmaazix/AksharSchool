@@ -70,6 +70,7 @@ class SendNotificationMessageActivity : AppCompatActivity(),View.OnClickListener
     private var examTime =""
     private var mobileNumber =""
     private var mobileList = ArrayList<String>()
+    private lateinit var mobileAdapter : MobileListAdapter
 
     var examTimeList = arrayOf("07:00 AM", "07:30 AM", "08:00 AM", "08:30 AM", "09:00 AM", "09:30 AM", "10:00 AM", "10:30 AM",
         "11:00 AM","11:30 AM","12:00 PM","12:30 PM","01:00 PM","01:30 PM","02:00 PM","02:30 PM","03:00 PM","03:30 PM","04:00 PM","04:30 PM",
@@ -162,12 +163,14 @@ class SendNotificationMessageActivity : AppCompatActivity(),View.OnClickListener
                 binding!!.rlAddRecipient.visibility = View.VISIBLE
                 binding!!.rlClassSection.visibility = View.GONE
                 binding!!.rlStudentList.visibility = View.GONE
+                binding!!.tvNote.visibility = View.VISIBLE
                 binding!!.cbScheduleMessage1.visibility = View.VISIBLE
                 binding!!.toolbar.txtToolbarTitle.text = getString(R.string.general_notification)
             }
             from == "EmployeeNotification" -> {
                 binding!!.rlAddRecipient.visibility = View.GONE
                 binding!!.cbScheduleMessage1.visibility = View.GONE
+                binding!!.tvNote.visibility = View.GONE
                 binding!!.rlClassSection.visibility = View.VISIBLE
                 binding!!.rlStudentList.visibility = View.VISIBLE
                 binding!!.toolbar.txtToolbarTitle.text = getString(R.string.employee_notification)
@@ -184,6 +187,7 @@ class SendNotificationMessageActivity : AppCompatActivity(),View.OnClickListener
                 binding!!.rlAddRecipient.visibility = View.GONE
                 binding!!.rlClassSection.visibility = View.VISIBLE
                 binding!!.cbScheduleMessage1.visibility = View.GONE
+                binding!!.tvNote.visibility = View.GONE
                 binding!!.rlStudentList.visibility = View.VISIBLE
                 binding!!.toolbar.txtToolbarTitle.text = getString(R.string.student_notification)
                 binding!!.tvSelectClassSection.text = currActivity.resources.getString(R.string.select_class_section)
@@ -200,6 +204,13 @@ class SendNotificationMessageActivity : AppCompatActivity(),View.OnClickListener
         studentadapter =
             StudentListAdapter(currActivity, studentList)
         binding!!.rvStudents.adapter = studentadapter
+
+        binding!!.rlMobileNumber.setHasFixedSize(true)
+        binding!!.rlMobileNumber.layoutManager =
+            LinearLayoutManager(currActivity, LinearLayoutManager.HORIZONTAL, false)
+        mobileAdapter =
+            MobileListAdapter(currActivity, mobileList)
+        binding!!.rlMobileNumber.adapter = mobileAdapter
     }
     private fun setEmployeeAdapter() {
         binding!!.rvStudents.setHasFixedSize(true)
@@ -230,6 +241,14 @@ class SendNotificationMessageActivity : AppCompatActivity(),View.OnClickListener
         )
         selectedChild = -1
         clickParent = -1
+        if(classDropdownList.size > 0){
+            dialogSelectClassSectionBinding!!.rlNotFound.visibility = View.GONE
+            dialogSelectClassSectionBinding!!.rlClassesDropdown.visibility = View.VISIBLE
+        }else{
+            dialogSelectClassSectionBinding!!.rlNotFound.visibility = View.VISIBLE
+            dialogSelectClassSectionBinding!!.rlClassesDropdown.visibility = View.GONE
+        }
+
         ClassSectionAdapterForMessage = ClassSectionAdapterForMessage(currActivity, classDropdownList, null, object :
             ClassSectionAdapterForMessage.SectionSelection {
             override fun selectionCallback(parent: Int, child: Int) {
@@ -284,6 +303,7 @@ class SendNotificationMessageActivity : AppCompatActivity(),View.OnClickListener
         dialog!!.setContentView(dialogSelectClassSectionBinding!!.getRoot())
         Objects.requireNonNull<Window>(dialog!!.getWindow())
             .setBackgroundDrawableResource(android.R.color.transparent)
+        dialogSelectClassSectionBinding!!.tvTitle.text = currActivity.getString(R.string.select_employee_department)
         dialogSelectClassSectionBinding!!.imgCancel.setImageResource(R.drawable.done)
         dialogSelectClassSectionBinding!!.rlClassesDropdown.setHasFixedSize(true)
         dialogSelectClassSectionBinding!!.rlClassesDropdown.layoutManager = LinearLayoutManager(
@@ -292,6 +312,13 @@ class SendNotificationMessageActivity : AppCompatActivity(),View.OnClickListener
         )
         selectedChild = -1
         clickParent = -1
+        if(employeeDepartmentList.size > 0){
+            dialogSelectClassSectionBinding!!.rlNotFound.visibility = View.GONE
+            dialogSelectClassSectionBinding!!.rlClassesDropdown.visibility = View.VISIBLE
+        }else{
+            dialogSelectClassSectionBinding!!.rlNotFound.visibility = View.VISIBLE
+            dialogSelectClassSectionBinding!!.rlClassesDropdown.visibility = View.GONE
+        }
 
         employeeDepartmentAdapter = EmployeeDepartmentAdapter(currActivity, employeeDepartmentList)
         dialogSelectClassSectionBinding!!.rlClassesDropdown.adapter = employeeDepartmentAdapter
@@ -344,6 +371,7 @@ class SendNotificationMessageActivity : AppCompatActivity(),View.OnClickListener
             }
 
         })
+
         binding?.rlClassSection!!.setOnClickListener(this)
         binding?.tvSelectDate!!.setOnClickListener(this)
 
@@ -376,6 +404,27 @@ class SendNotificationMessageActivity : AppCompatActivity(),View.OnClickListener
         binding!!.etMobileNumber.addTextChangedListener(object : TextWatcher{
             override fun afterTextChanged(p0: Editable?) {
                 mobileNumber = p0.toString()
+                if(mobileNumber.contains(",")){
+                    if(validateMobile()){
+
+                        mobileList.add(mobileNumber.replace(",",""))
+                        mobileAdapter.notifyDataSetChanged()
+                        var number = ""
+                        for(index in  0 until mobileList.size){
+                            if(number == ""){
+                                number = mobileList[index]
+                            }else{
+                                number = number+" , "+mobileList[index]
+                            }
+
+                        }
+                        binding!!.rlMobileNumber.visibility = View.VISIBLE
+                        binding!!.llMobile.visibility = View.VISIBLE
+//                        binding!!.tvMobileNumberList.text = number
+                        binding!!.etMobileNumber.setText("")
+                    }
+
+                }
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -441,8 +490,10 @@ class SendNotificationMessageActivity : AppCompatActivity(),View.OnClickListener
             R.id.rlClassSection -> {
                 if(from == "StudentNotification"){
                     openDialog()
+
                 }else if(from == "EmployeeNotification"){
                     openEmployeeDepartment()
+
                 }
 
             }
@@ -459,9 +510,9 @@ class SendNotificationMessageActivity : AppCompatActivity(),View.OnClickListener
 
                     }
                     binding!!.etMobileNumber.setText("")
-                    binding!!.tvMobileNumberList.visibility = View.VISIBLE
-                    binding!!.llMobile.visibility = View.GONE
-                    binding!!.tvMobileNumberList.text = number
+//                    binding!!.tvMobileNumberList.visibility = View.VISIBLE
+//                    binding!!.llMobile.visibility = View.GONE
+//                    binding!!.tvMobileNumberList.text = number
                 }
             }
             R.id.tvSelectDate ->{
@@ -549,7 +600,8 @@ class SendNotificationMessageActivity : AppCompatActivity(),View.OnClickListener
 
     private fun validateMobile() : Boolean{
         var isValid = true
-        if(mobileNumber.length < 10){
+        val number = mobileNumber.replace(",","")
+        if(number.length < 10 || number.length > 10){
             isValid = false
             AppUtils.showToast(currActivity,"Please enter a valid number",true)
         }

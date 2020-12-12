@@ -24,6 +24,8 @@ class MarksEntryViewModel(application: Application) : BaseViewModel(application)
     private var mutuableLiveDataSkillList = MutableLiveData<List<SkillListModel>>()
     private var mutuableLiveDataStudentList = MutableLiveData<List<StundentsMarksList>>()
     private var mutuableLiveDataStudentListpart2 = MutableLiveData<List<StundentsMarksList>>()
+    private var mutuableLiveDataMarksCategorylList = MutableLiveData<MarksCategoryList>()
+    private var mutuableLiveDataMarksGraphlList = MutableLiveData<ArrayList<MarksGraphModel>>()
 
     init {
         marksEnterRepository = MarksEntryRepository()
@@ -35,6 +37,8 @@ class MarksEntryViewModel(application: Application) : BaseViewModel(application)
     fun getStudentListLiveData() : MutableLiveData<List<StundentsMarksList>> = mutuableLiveDataStudentList
     fun getSkillListLiveData() : MutableLiveData<List<SkillListModel>> = mutuableLiveDataSkillList
     fun getStudentMarksEntryLiveData() : MutableLiveData<List<StundentsMarksList>> = mutuableLiveDataStudentListpart2
+    fun getStudentMarksCategoryLiveData() : MutableLiveData<MarksCategoryList> = mutuableLiveDataMarksCategorylList
+    fun getStudentMarksGraphLiveData() : MutableLiveData<ArrayList<MarksGraphModel>> = mutuableLiveDataMarksGraphlList
     fun getSuccessLiveData() : MutableLiveData<Boolean> = isSuccess
 
 
@@ -86,6 +90,52 @@ class MarksEntryViewModel(application: Application) : BaseViewModel(application)
             }
         }
     }
+    fun getStudentMarksByProfileId(examId : Int,subjectId: Int ){
+        isLoading.postValue(true)
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                try {
+                    isLoading.postValue(false)
+                    val list = marksEnterRepository?.getStudentMarksByProfileId(examId,subjectId)
+                    list.let {
+                        mutuableLiveDataMarksCategorylList.postValue(list)
+                    }
+
+                }catch (httpException : HttpException){
+                    isLoading.postValue(false)
+                    val errorResponse  = AppUtil.getErrorResponse(httpException.response()?.errorBody()?.string())
+                    errorResponse.let { getSkillErrorMutableLiveData().postValue(it) }
+
+                }catch (e : Exception){
+                    isLoading.postValue(false)
+                    e.printStackTrace()
+                }
+            }
+        }
+    }
+    fun getStudentMarksGraph(subjectId: Int ){
+        isLoading.postValue(true)
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                try {
+                    isLoading.postValue(false)
+                    val list = marksEnterRepository?.getStudentMarksGraph(subjectId)
+                    list.let {
+                        mutuableLiveDataMarksGraphlList.postValue(list)
+                    }
+
+                }catch (httpException : HttpException){
+                    isLoading.postValue(false)
+                    val errorResponse  = AppUtil.getErrorResponse(httpException.response()?.errorBody()?.string())
+                    errorResponse.let { getSkillErrorMutableLiveData().postValue(it) }
+
+                }catch (e : Exception){
+                    isLoading.postValue(false)
+                    e.printStackTrace()
+                }
+            }
+        }
+    }
     fun addOrUpdateStudentMarks(studentMarksList : ArrayList<StundentsMarksList>){
         isLoading.postValue(true)
         viewModelScope.launch {
@@ -115,46 +165,53 @@ class MarksEntryViewModel(application: Application) : BaseViewModel(application)
             withContext(Dispatchers.IO){
                 try {
                     isLoading.postValue(false)
-                    if(testId != 0){
-                        if(subjectId == null){
-                            var skill = 0
-                            if((skillId != null)){
-                                skill = skillId
-                            }
-                            val studentList = marksEnterRepository?.getStudentMarksListTest(classRoomId,
-                                examId,0,testId,skill)
-                            studentList.let {
-                                mutuableLiveDataStudentList.postValue(studentList)
-                            }
-                        }else{
-                            var skill = 0
-                            if((skillId != null)){
-                                skill = skillId
-                            }
-                            val studentList = marksEnterRepository?.getStudentMarksList(classRoomId,
-                                examId,subjectId,skill)
-                            studentList.let {
-                                mutuableLiveDataStudentList.postValue(studentList)
-                            }
-                        }
 
-
-                    }else{
-                        if(subjectId == null){
-                            val studentList = marksEnterRepository?.getStudentMarksListTest(classRoomId,
-                                examId,testId,0,testId)
-                            studentList.let {
-                                mutuableLiveDataStudentList.postValue(studentList)
-                            }
-                        }else{
-                            val studentList = marksEnterRepository?.getStudentMarksListTest(classRoomId,
-                                examId,testId,subjectId,testId)
-                            studentList.let {
-                                mutuableLiveDataStudentList.postValue(studentList)
-                            }
-                        }
-
+                    val studentList = marksEnterRepository?.getStudentMarksListTest(classRoomId,
+                        examId,testId,subjectId!!,skillId!!)
+                    studentList.let {
+                        mutuableLiveDataStudentList.postValue(studentList)
                     }
+
+//                    if(testId != 0){
+//                        if(subjectId != null){
+//                            var skill = 0
+//                            if((skillId != null)){
+//                                skill = skillId
+//                            }
+//                            val studentList = marksEnterRepository?.getStudentMarksListTest(classRoomId,
+//                                examId,testId,subjectId,skill)
+//                            studentList.let {
+//                                mutuableLiveDataStudentList.postValue(studentList)
+//                            }
+//                        }else{
+//                            var skill = 0
+//                            if((skillId != null)){
+//                                skill = skillId
+//                            }
+//                            val studentList = marksEnterRepository?.getStudentMarksList(classRoomId,
+//                                examId,subjectId,skill)
+//                            studentList.let {
+//                                mutuableLiveDataStudentList.postValue(studentList)
+//                            }
+//                        }
+//
+//
+//                    }else{
+//                        if(subjectId == null){
+//                            val studentList = marksEnterRepository?.getStudentMarksListTest(classRoomId,
+//                                examId,testId,0,testId)
+//                            studentList.let {
+//                                mutuableLiveDataStudentList.postValue(studentList)
+//                            }
+//                        }else{
+//                            val studentList = marksEnterRepository?.getStudentMarksListTest(classRoomId,
+//                                examId,testId,subjectId,testId)
+//                            studentList.let {
+//                                mutuableLiveDataStudentList.postValue(studentList)
+//                            }
+//                        }
+//
+//                    }
 
 
                 }catch (httpException : HttpException){

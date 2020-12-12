@@ -16,7 +16,7 @@ class NoticeBoardRepository : BaseRepository() {
         apiInterface = service.createService(ApiInterface::class.java)
     }
 
-    suspend fun getAllNotices(showExpired : Boolean) = apiInterface?.getNotices(service.headers(),showExpired)
+    suspend fun getAllNotices(status : String) = apiInterface?.getNotices(service.headers(),status)
 
     suspend fun deleteNotice(id : Int) = apiInterface?.deleteNotice(service.headers(),id)
 

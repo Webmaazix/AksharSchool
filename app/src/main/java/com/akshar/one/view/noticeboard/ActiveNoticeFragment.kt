@@ -37,6 +37,7 @@ class ActiveNoticeFragment : Fragment() ,View.OnClickListener {
     lateinit var adapter : MyNoticeBoardAdapter
     private var dialog : Dialog? = null
     private var mdialog : Dialog? = null
+    var securityList = ArrayList<String>()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -49,14 +50,14 @@ class ActiveNoticeFragment : Fragment() ,View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_active_notice,container,false)
-        initViews()
+
         return  binding?.root
 
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
+        securityList = (currActivity as NoticeboardActivity).securityList!!
         activity?.application?.let {
             noticeBoardViewModel = ViewModelProvider(
                 ViewModelStore(),
@@ -67,9 +68,9 @@ class ActiveNoticeFragment : Fragment() ,View.OnClickListener {
         noticeBoardViewModel?.let {
             if (context?.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true) {
                mdialog =  AppUtils.showProgress(currActivity!!)
-                it.getAllNotices(false) }
+                it.getAllNotices("ACTIVE") }
         }
-
+        initViews()
         observers()
     }
 
@@ -85,7 +86,7 @@ class ActiveNoticeFragment : Fragment() ,View.OnClickListener {
         adapter = MyNoticeBoardAdapter(
             currActivity!!,
             noticeBoardList,
-            false,this
+            "ACTIVE",this,securityList
         )
 //        (adapter).mode = Attributes.Mode.Single
         binding!!.rlActiveNotice.adapter = adapter

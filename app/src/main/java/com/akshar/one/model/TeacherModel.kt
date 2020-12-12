@@ -12,7 +12,7 @@ class TeacherModel : Serializable {
 
     @SerializedName("employeeId")
     @Expose
-    var employeeId = 0
+    var employeeId = ""
 
     @SerializedName("fullName")
     @Expose

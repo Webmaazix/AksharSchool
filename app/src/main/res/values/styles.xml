@@ -55,7 +55,7 @@
 
     <style name="SwitchCompatStyle" parent="Theme.AppCompat.Light">
         <item name="colorControlActivated">@color/blue</item>
-        <item name="colorSwitchThumbNormal">@color/switch_bg</item>
+        <item name="colorSwitchThumbNormal">@color/grey</item>
     </style>
 
     <style name="NavDrawerTextStyle" parent="Base.TextAppearance.AppCompat">
@@ -66,59 +66,200 @@
     </style>
 
     //image crop style
-
-    <style name="ucrop_ImageViewWidgetIcon">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:scaleType">fitCenter</item>
-        <item name="android:duplicateParentState">true</item>
+    <style name="DoneCancelBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/_56sdp</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:divider">@drawable/crop__divider</item>
+        <item name="android:showDividers" tools:ignore="NewApi">middle</item>
+        <item name="android:dividerPadding" tools:ignore="NewApi">12dp</item>
+        <item name="android:background">@color/crop__button_bar</item>
     </style>
 
-    <style name="ucrop_WrapperIconState">
+    <style name="ActionButton">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:background">?attr/selectableItemBackground</item>
-        <item name="android:clickable">true</item>
-        <item name="android:gravity">center</item>
-        <item name="android:orientation">vertical</item>
+        <item name="android:background">@drawable/crop__selectable_background</item>
     </style>
 
-    <style name="ucrop_WrapperRotateButton">
-        <item name="android:layout_width">@dimen/ucrop_size_wrapper_rotate_button</item>
-        <item name="android:layout_height">@dimen/ucrop_size_wrapper_rotate_button</item>
-        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
-        <item name="android:clickable">true</item>
-    </style>
-
-    <style name="ucrop_TextViewCropAspectRatio">
+    <style name="ActionButtonText">
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">@dimen/ucrop_height_crop_aspect_ratio_text</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center</item>
-        <item name="android:duplicateParentState">true</item>
-        <item name="android:textColor">@color/ucrop_scale_text_view_selector</item>
-    </style>
-
-    <style name="ucrop_TextViewWidgetText">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingRight">20dp</item> <!-- Offsets left drawable -->
+        <item name="android:drawablePadding">8dp</item>
+        <item name="android:textColor">@color/crop__button_text</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/ucrop_color_widget_text</item>
-        <item name="android:layout_marginTop">@dimen/ucrop_margin_top_widget_text</item>
-        <item name="android:textSize">@dimen/ucrop_text_size_widget_text</item>
+        <item name="android:textSize">13sp</item>
     </style>
 
-    <style name="ucrop_TextViewWidget">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_centerHorizontal">true</item>
-        <item name="android:layout_marginTop">@dimen/ucrop_margin_top_controls_text</item>
-        <item name="android:textColor">@color/ucrop_color_widget_active</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">@dimen/ucrop_text_size_controls_text</item>
+    <style name="Done">
+        <item name="android:drawableLeft">@drawable/crop__ic_done</item>
+        <item name="android:text">@string/crop__done</item>
     </style>
 
+    <style name="Cancel">
+        <item name="android:drawableLeft">@drawable/crop__ic_cancel</item>
+        <item name="android:text">@string/crop__cancel</item>
+    </style>
+
+
+
+
+
+<!--    <style name="AppTheme.Base" parent="PayumoneyAppTheme">-->
+<!--        <item name="colorPrimary">@color/primary</item>-->
+<!--        <item name="colorPrimaryDark">@color/primary_dark</item>-->
+<!--        <item name="colorAccent">@color/accent</item>-->
+<!--        <item name="colorButtonNormal">@color/primary</item>-->
+<!--    </style>-->
+
+
+<!--    <style name="AppTheme.Green" parent="PayumoneyAppTheme">-->
+<!--        <item name="colorPrimary">@color/persian_green_primary</item>-->
+<!--        <item name="colorPrimaryDark">@color/persian_green_dark</item>-->
+<!--        <item name="colorAccent">@color/persian_green_accent</item>-->
+<!--        <item name="colorButtonNormal">@color/persian_green_primary</item>-->
+<!--        <item name="alertDialogTheme">@style/AlertDialogStyle_green</item>-->
+<!--        <item name="actionMenuTextColor">@color/white</item>-->
+<!--    </style>-->
+
+<!--    <style name="ThemeRadioButton.Green">-->
+<!--        <item name="colorControlNormal">@color/persian_green_accent</item>-->
+<!--        <item name="colorControlActivated">@color/persian_green_accent</item>-->
+<!--    </style>-->
+
+<!--    <style name="AlertDialogStyle_green" parent="Theme.AppCompat.Light.Dialog.Alert">-->
+<!--        <item name="colorAccent">@color/persian_green_accent</item>-->
+<!--        <item name="android:textColorPrimary">@color/payumoney_text_color</item>-->
+<!--    </style>-->
+
+<!--    <style name="AppTheme.pink" parent="PayumoneyAppTheme">-->
+<!--        <item name="colorPrimary">@color/pink_primary</item>-->
+<!--        <item name="colorPrimaryDark">@color/pink_dark</item>-->
+<!--        <item name="colorAccent">@color/pink_accent</item>-->
+<!--        <item name="colorButtonNormal">@color/pink_primary</item>-->
+<!--        <item name="alertDialogTheme">@style/AlertDialogStyle_pink</item>-->
+<!--        <item name="actionMenuTextColor">@color/white</item>-->
+<!--    </style>-->
+
+<!--    <style name="ThemeRadioButton" parent="Theme.AppCompat.Light" />-->
+
+<!--    <style name="AppTheme.default" parent="PayumoneyAppTheme">-->
+<!--        <item name="colorPrimary">@color/orange_accent</item>-->
+<!--        <item name="colorPrimaryDark">@color/orange_accent</item>-->
+<!--        <item name="colorAccent">@color/orange_accent</item>-->
+<!--        <item name="colorButtonNormal">@color/orange_accent</item>-->
+<!--        <item name="alertDialogTheme">@style/AlertDialogStyle_Default</item>-->
+<!--        <item name="actionMenuTextColor">@color/white</item>-->
+<!--    </style>-->
+
+<!--    <style name="ThemeRadioButton.Default">-->
+<!--        <item name="colorControlNormal">@color/orange_accent</item>-->
+<!--        <item name="colorControlActivated">@color/orange_accent</item>-->
+<!--    </style>-->
+
+<!--    <style name="AlertDialogStyle_Default" parent="Theme.AppCompat.Light.Dialog.Alert">-->
+<!--        <item name="colorAccent">@color/orange_accent</item>-->
+<!--        <item name="android:textColorPrimary">@color/payumoney_text_color</item>-->
+<!--    </style>-->
+
+<!--    <style name="ThemeRadioButton.Pink">-->
+<!--        <item name="colorControlNormal">@color/pink_accent</item>-->
+<!--        <item name="colorControlActivated">@color/pink_accent</item>-->
+<!--    </style>-->
+
+
+<!--    <style name="AlertDialogStyle_pink" parent="Theme.AppCompat.Light.Dialog.Alert">-->
+<!--        <item name="colorAccent">@color/pink_accent</item>-->
+<!--        <item name="android:textColorPrimary">@color/payumoney_text_color</item>-->
+<!--    </style>-->
+
+<!--    <style name="AppTheme.blue" parent="PayumoneyAppTheme">-->
+<!--        <item name="colorPrimary">@color/royal_blue_primary</item>-->
+<!--        <item name="colorPrimaryDark">@color/royal_blue_dark</item>-->
+<!--        <item name="colorAccent">@color/royal_blue_accent</item>-->
+<!--        <item name="colorButtonNormal">@color/royal_blue_primary</item>-->
+<!--        <item name="alertDialogTheme">@style/AlertDialogStyle_blue</item>-->
+<!--        <item name="actionMenuTextColor">@color/white</item>-->
+<!--    </style>-->
+
+<!--    <style name="ThemeRadioButton.Blue">-->
+<!--        <item name="colorControlNormal">@color/royal_blue_accent</item>-->
+<!--        <item name="colorControlActivated">@color/royal_blue_accent</item>-->
+<!--    </style>-->
+
+<!--    <style name="AlertDialogStyle_blue" parent="Theme.AppCompat.Light.Dialog.Alert">-->
+<!--        <item name="colorAccent">@color/royal_blue_accent</item>-->
+<!--        <item name="android:textColorPrimary">@color/payumoney_text_color</item>-->
+<!--    </style>-->
+
+<!--    <style name="AppTheme.purple" parent="PayumoneyAppTheme">-->
+<!--        <item name="colorPrimary">@color/purple_primary</item>-->
+<!--        <item name="colorPrimaryDark">@color/purple_dark</item>-->
+<!--        <item name="colorAccent">@color/purple_accent</item>-->
+<!--        <item name="colorButtonNormal">@color/purple_primary</item>-->
+<!--        <item name="alertDialogTheme">@style/AlertDialogStyle_purple</item>-->
+<!--        <item name="actionMenuTextColor">@color/white</item>-->
+<!--    </style>-->
+
+<!--    <style name="ThemeRadioButton.Purple">-->
+<!--        <item name="colorControlNormal">@color/purple_accent</item>-->
+<!--        <item name="colorControlActivated">@color/purple_accent</item>-->
+<!--    </style>-->
+
+<!--    <style name="AlertDialogStyle_purple" parent="PayumoneyAppTheme">-->
+<!--        <item name="colorAccent">@color/purple_accent</item>-->
+<!--        <item name="android:textColorPrimary">@color/payumoney_text_color</item>-->
+<!--    </style>-->
+
+<!--    <style name="ButtonStyle">-->
+<!--        <item name="android:layout_width">match_parent</item>-->
+<!--        <item name="android:layout_height">wrap_content</item>-->
+<!--        <item name="android:paddingBottom">@dimen/dimen_10dp</item>-->
+<!--        <item name="android:paddingTop">@dimen/dimen_10dp</item>-->
+<!--        <item name="android:textColor">@color/white</item>-->
+<!--        <item name="android:textSize">@dimen/dimen_18sp</item>-->
+<!--        <item name="android:background">@drawable/bg_rounded_button</item>-->
+<!--        <item name="android:gravity">center</item>-->
+<!--    </style>-->
+
+<!--    <style name="MySwitch" parent="Theme.AppCompat.Light">-->
+<!--        &lt;!&ndash; active thumb & track color (30% transparency) &ndash;&gt;-->
+<!--        <item name="colorControlActivated">@color/indigo</item>-->
+
+<!--        &lt;!&ndash; inactive thumb color &ndash;&gt;-->
+<!--        <item name="colorSwitchThumbNormal">@color/pink</item>-->
+
+<!--        &lt;!&ndash; inactive track color (30% transparency) &ndash;&gt;-->
+<!--        <item name="android:colorForeground">@color/grey</item>-->
+<!--    </style>-->
+
+
+<!--    <style name="AppTheme.Grey" parent="PayumoneyAppTheme">-->
+<!--        <item name="colorPrimary">@color/persian_grey_primary</item>-->
+<!--        <item name="colorPrimaryDark">@color/persian_grey_dark</item>-->
+<!--        <item name="colorAccent">@color/persian_grey_accent</item>-->
+<!--        <item name="colorButtonNormal">@color/persian_grey_primary</item>-->
+<!--        <item name="alertDialogTheme">@style/AlertDialogStyle_grey</item>-->
+<!--        <item name="actionMenuTextColor">@color/white</item>-->
+<!--    </style>-->
+
+<!--    <style name="ThemeRadioButton.Grey">-->
+<!--        <item name="colorControlNormal">@color/persian_grey_accent</item>-->
+<!--        <item name="colorControlActivated">@color/persian_grey_accent</item>-->
+<!--    </style>-->
+
+<!--    <style name="AlertDialogStyle_grey" parent="Theme.AppCompat.Light.Dialog.Alert">-->
+<!--        <item name="colorAccent">@color/persian_grey_accent</item>-->
+<!--        <item name="android:textColorPrimary">@color/payumoney_text_color</item>-->
+<!--    </style>-->
+
+
+<!--    <color name="persian_grey_primary">#616161</color>-->
+<!--    <color name="persian_grey_dark">#424242</color>-->
+<!--    <color name="persian_grey_accent">#9e9e9e</color>-->
 
 </resources>

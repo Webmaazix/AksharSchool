@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="position"
+            type="java.lang.Integer" />
+
+        <variable
+            name="attendanceClassRoomViewModel"
+            type="com.akshar.one.viewmodels.attendance.AttendanceClassRoomViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/rlMainBg"
+        android:layout_width="match_parent"
+        android:background="@drawable/white_nopadding_shape"
+        android:padding="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_7sdp"
+        android:layout_marginStart="@dimen/_7sdp"
+        android:layout_marginEnd="@dimen/_7sdp"
+        android:layout_height="wrap_content">
+
+        <com.akshar.one.circlularimageview.CircularImageView
+            android:id="@+id/imgUserProfile"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_gravity="center"
+            android:layout_centerVertical="true"
+            android:src="@drawable/circle_default_pic"
+            app:civ_border_width="@dimen/_1sdp"
+            app:civ_border_color="@color/ultra_light_grey"
+            app:civ_circle_color="@color/lightish_grey"/>
+
+        <FrameLayout
+            android:id="@+id/flLayout"
+            android:layout_width="wrap_content"
+            android:visibility="gone"
+            android:layout_height="@dimen/_45sdp">
+
+            <ImageView
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_gravity="center|start"
+                android:src="@drawable/bg_circle" />
+
+            <TextView
+                android:id="@+id/tvShortName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/opensans_regular"
+                android:text="WO"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12sp"
+                />
+        </FrameLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgDone"
+            android:layout_width="@dimen/_18sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:src="@drawable/circle_check_mark"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:visibility="gone"
+            android:layout_height="@dimen/_18sdp"/>
+
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSchoolName"
+            android:layout_marginStart="@dimen/_61sdp"
+            android:layout_width="wrap_content"
+            android:text="School Name"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/opensans_bold"
+            android:layout_height="wrap_content"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_below="@+id/tvSchoolName"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_60sdp"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:weightSum="2"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_weight="1.1"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvEmployeeCount"
+                        android:layout_width="wrap_content"
+                        android:text="24"
+                        android:textColor="@color/blue"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/_12sp"
+                        android:fontFamily="@font/opensans_bold"
+                        android:layout_height="wrap_content"/>
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvLabelEmployees"
+                        android:layout_width="wrap_content"
+                        android:text="@string/employees"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_11sp"
+                        android:layout_below="@+id/tvEmployeeCount"
+                        android:fontFamily="@font/opensans_regular"
+                        android:layout_height="wrap_content"/>
+
+
+                </RelativeLayout>
+
+               <View
+                   android:layout_width="@dimen/_1sdp"
+                   android:background="@color/grey"
+                   android:layout_height="match_parent"/>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/_25sdp"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvStudentCount"
+                        android:layout_width="wrap_content"
+                        android:text="242"
+                        android:textColor="@color/maroon"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/_12sp"
+                        android:fontFamily="@font/opensans_bold"
+                        android:layout_height="wrap_content"/>
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvLabelStudent"
+                        android:layout_width="wrap_content"
+                        android:text="@string/students"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_11sp"
+                        android:layout_below="@+id/tvStudentCount"
+                        android:fontFamily="@font/opensans_regular"
+                        android:layout_height="wrap_content"/>
+
+
+                </RelativeLayout>
+
+
+
+            </LinearLayout>
+        </RelativeLayout>
+
+
+
+
+
+    </RelativeLayout>
+
+</layout>

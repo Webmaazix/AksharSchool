@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -21,16 +22,20 @@ import com.akshar.one.app.AksharSchoolApplication
 import com.akshar.one.app.AksharSchoolApplication.Companion.context
 import com.akshar.one.databinding.ActivityMakePaymentBinding
 import com.akshar.one.databinding.ActivityPayFeeBinding
+import com.akshar.one.databinding.DialogEmployeeListBinding
 import com.akshar.one.databinding.DialogSelectClassAndSectionBinding
 import com.akshar.one.model.*
 import com.akshar.one.util.AndroidUtil
+import com.akshar.one.util.AppUtil
 import com.akshar.one.util.AppUtils
 import com.akshar.one.view.feeandpayments.adapter.BankAccountListAdapter
+import com.akshar.one.view.feeandpayments.adapter.EmployeeListAdapterPayment
 import com.akshar.one.view.feeandpayments.adapter.FeeHeadAdapter
 import com.akshar.one.view.feeandpayments.adapter.PaymentMethodListAdapter
 import com.akshar.one.view.messagecenter.adapter.ClassSectionAdapterForMessage
 import com.akshar.one.view.messagecenter.adapter.EmployeeDepartmentAdapter
 import com.akshar.one.viewmodels.ViewModelFactory
+import com.akshar.one.viewmodels.employee.EmployeeViewModel
 import com.akshar.one.viewmodels.feeandpayment.FeeAndPaymentViewModel
 import kotlinx.android.synthetic.main.activity_create_notice.*
 import kotlinx.android.synthetic.main.activity_make_payment.*
@@ -51,9 +56,11 @@ class MakePaymentActivity : AppCompatActivity(), View.OnClickListener{
     private var  myCalendar : Calendar? = null
     private var startDate : DatePickerDialog.OnDateSetListener? =null
     private var dialogSelectClassSectionBinding: DialogSelectClassAndSectionBinding? = null
+    private var dialogEmployeeList: DialogEmployeeListBinding? = null
     private var dialog: Dialog? = null
     var recievedBy = ""
     var remarks = ""
+    private var date : String? = null
     lateinit var bankAccountAdapter : BankAccountListAdapter
     lateinit var paymentMethodAdapter : PaymentMethodListAdapter
     private var bankAccountList = ArrayList<BankAccount>()
@@ -62,6 +69,10 @@ class MakePaymentActivity : AppCompatActivity(), View.OnClickListener{
     private var SelectedbankModel = BankAccount()
     private var selectedPaymentMethod = ""
     var studentId  = 0
+    private var employeeViewModel: EmployeeViewModel? = null
+    private var employeeList = ArrayList<EmployeeList>()
+    private lateinit var employeeAdapter : EmployeeListAdapterPayment
+
 
     companion object {
         fun open(currActivity: Activity, feesDetailModel : FeesDetailModel,total : Double,studentId : Int) {
@@ -79,13 +90,14 @@ class MakePaymentActivity : AppCompatActivity(), View.OnClickListener{
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(currActivity,R.layout.activity_make_payment)
         feesDetailModel = intent.getSerializableExtra("feesDetailModel") as FeesDetailModel
+        date = AppUtil.getCurrentDateInDDMMYYYYFormat()
+        binding.etPaymentDate.setText(date)
         total = intent.getDoubleExtra("total",0.0)
         studentId = intent.getIntExtra("studentId",0)
         initViews()
     }
 
     private fun initViews(){
-
         binding.toolbar.imgMenu.visibility = View.GONE
         binding.toolbar.imgBack.visibility = View.VISIBLE
         binding.toolbar.txtToolbarTitle.text =
@@ -98,6 +110,21 @@ class MakePaymentActivity : AppCompatActivity(), View.OnClickListener{
             ).get(FeeAndPaymentViewModel::class.java)
         }
 
+
+        currActivity.application?.let {
+            employeeViewModel = ViewModelProvider(
+                ViewModelStore(),
+                ViewModelFactory(it)
+            ).get(EmployeeViewModel::class.java)
+        }
+
+        employeeViewModel?.let {
+            if (context?.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true) {
+                showProgressBar()
+                it.getEmployeeList()
+            }
+        }
+
         feeAndPaymentViewModel?.let {
             if (context?.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true) {
                // mdialog =  AppUtils.showProgress(currActivity)
@@ -106,7 +133,7 @@ class MakePaymentActivity : AppCompatActivity(), View.OnClickListener{
 
         feeAndPaymentViewModel?.let {
             if (context?.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true) {
-              //  mdialog =  AppUtils.showProgress(currActivity)
+              // mdialog =  AppUtils.showProgress(currActivity)
                 it.getPaymentMethod("PAYMENT_METHOD") }
         }
 
@@ -129,18 +156,18 @@ class MakePaymentActivity : AppCompatActivity(), View.OnClickListener{
             updateLabel()
         }
 
-        binding.etRecievedBy.addTextChangedListener(object : TextWatcher{
-            override fun afterTextChanged(p0: Editable?) {
-                recievedBy = p0!!.toString()
-            }
-
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-        })
+//        binding.etRecievedBy.addTextChangedListener(object : TextWatcher{
+//            override fun afterTextChanged(p0: Editable?) {
+//                recievedBy = p0!!.toString()
+//            }
+//
+//            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//            }
+//
+//            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//            }
+//
+//        })
 
         binding.etRemarksMethod.addTextChangedListener(object :TextWatcher{
             override fun afterTextChanged(p0: Editable?) {
@@ -160,14 +187,16 @@ class MakePaymentActivity : AppCompatActivity(), View.OnClickListener{
         binding.etPaymentMethod.setOnClickListener(this)
         binding.etBankAccountMethod.setOnClickListener(this)
         binding.tvSave.setOnClickListener(this)
+        binding.tvRecievedBy.setOnClickListener(this)
         binding.toolbar.imgBack.setOnClickListener(this)
+
     }
 
     private fun observers(){
 
         feeAndPaymentViewModel?.getErrorMutableLiveData()?.observe(this, androidx.lifecycle.Observer {
             it?.let {
-                AppUtils.hideProgress(mdialog!!)
+               // AppUtils.hideProgress(mdialog!!)
                 AndroidUtil.showToast(context!!, it.message,true)
             }
         })
@@ -186,6 +215,21 @@ class MakePaymentActivity : AppCompatActivity(), View.OnClickListener{
         feeAndPaymentViewModel?.getSuccessLiveData()?.observe(this, androidx.lifecycle.Observer {
             AppUtils.hideProgress(mdialog!!)
             AppUtils.showToast(currActivity,"Payment saved Successfully",false)
+        })
+
+        employeeViewModel?.getErrorMutableLiveData()?.observe(this, androidx.lifecycle.Observer {
+            it.let {
+                hideProgressBar()
+                AndroidUtil.showToast(currActivity, it.message, true)
+            }
+        })
+
+
+
+        employeeViewModel?.getEmployeeListLiveData()?.observe(this, androidx.lifecycle.Observer {
+            hideProgressBar()
+            employeeList.clear()
+            employeeList.addAll(it)
         })
     }
 
@@ -211,6 +255,9 @@ class MakePaymentActivity : AppCompatActivity(), View.OnClickListener{
             R.id.etPaymentMethod ->{
                 openPaymetMethodList()
             }
+            R.id.tvRecievedBy ->{
+                openEmployeeListPopup()
+            }
             R.id.etBankAccountMethod ->{
                 openBankAccountList()
             }
@@ -230,11 +277,20 @@ class MakePaymentActivity : AppCompatActivity(), View.OnClickListener{
         dialog!!.setContentView(dialogSelectClassSectionBinding!!.getRoot())
         Objects.requireNonNull<Window>(dialog!!.getWindow())
             .setBackgroundDrawableResource(android.R.color.transparent)
+        dialogSelectClassSectionBinding!!.tvTitle.text = currActivity.getString(R.string.select_bank)
         dialogSelectClassSectionBinding!!.rlClassesDropdown.setHasFixedSize(true)
         dialogSelectClassSectionBinding!!.rlClassesDropdown.layoutManager = LinearLayoutManager(
             currActivity,
             LinearLayoutManager.VERTICAL, false
         )
+        if(bankAccountList.size > 0){
+            dialogSelectClassSectionBinding!!.rlNotFound.visibility = View.GONE
+            dialogSelectClassSectionBinding!!.rlClassesDropdown.visibility = View.VISIBLE
+        }else{
+            dialogSelectClassSectionBinding!!.rlNotFound.visibility = View.VISIBLE
+            dialogSelectClassSectionBinding!!.rlClassesDropdown.visibility = View.GONE
+        }
+
         bankAccountAdapter = BankAccountListAdapter(currActivity, bankAccountList)
         dialogSelectClassSectionBinding!!.rlClassesDropdown.adapter = bankAccountAdapter
         bankAccountAdapter.notifyDataSetChanged()
@@ -248,6 +304,78 @@ class MakePaymentActivity : AppCompatActivity(), View.OnClickListener{
         dialog!!.setCancelable(true)
         dialog!!.show()
     }
+    private fun openEmployeeListPopup(){
+        dialog = Dialog(currActivity as Context)
+        dialogEmployeeList = DataBindingUtil.inflate(
+            LayoutInflater.from(currActivity),
+            R.layout.dialog_employee_list, null, false
+        )
+        dialog!!.setContentView(dialogEmployeeList!!.getRoot())
+        Objects.requireNonNull<Window>(dialog!!.getWindow())
+            .setBackgroundDrawableResource(android.R.color.transparent)
+        dialogEmployeeList!!.rlClassesDropdown.setHasFixedSize(true)
+        dialogEmployeeList!!.rlClassesDropdown.layoutManager = LinearLayoutManager(
+            currActivity,
+            LinearLayoutManager.VERTICAL, false
+        )
+        if(employeeList.size > 0){
+            dialogEmployeeList!!.rlNotFound.visibility = View.GONE
+            dialogEmployeeList!!.rlClassesDropdown.visibility = View.VISIBLE
+        }else{
+            dialogEmployeeList!!.rlNotFound.visibility = View.VISIBLE
+            dialogEmployeeList!!.rlClassesDropdown.visibility = View.GONE
+        }
+
+        employeeAdapter = EmployeeListAdapterPayment(currActivity, employeeList)
+        dialogEmployeeList!!.rlClassesDropdown.adapter = employeeAdapter
+        employeeAdapter.notifyDataSetChanged()
+
+        dialogEmployeeList!!.etSearch.addTextChangedListener(object : TextWatcher{
+            override fun afterTextChanged(p0: Editable?) {
+
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                val handler = Handler().postDelayed({ filterDialCode(p0.toString()) }, 100)
+
+            }
+
+
+        })
+
+        dialogEmployeeList!!.imgCancel.setOnClickListener {
+            dialog!!.dismiss()
+        }
+
+
+
+        dialog!!.setCancelable(true)
+        dialog!!.show()
+    }
+
+    private fun filterDialCode(name: String) {
+        val filteredNames = ArrayList<EmployeeList>()
+        for (i in employeeList.indices) {
+            val searchData = employeeList.get(i).fullName
+            val employeeId = employeeList.get(i).employeeId
+            val employeeDepartment = employeeList.get(i).department
+            if (searchData.toLowerCase().contains(name.toLowerCase()) || employeeId.toLowerCase().contains(name.toLowerCase())
+                        || employeeDepartment.toLowerCase().contains(name.toLowerCase())) {
+                filteredNames.add(employeeList.get(i))
+            }
+        }
+        //        view.rvDialList.adapter = adapterDialList
+        employeeAdapter.filterData(filteredNames)
+    }
+
+
+    fun selectedEmployee(model : EmployeeList){
+        binding.tvRecievedBy.text = model.fullName
+        dialog!!.dismiss()
+    }
     private fun openPaymetMethodList(){
         dialog = Dialog(currActivity as Context)
         dialogSelectClassSectionBinding = DataBindingUtil.inflate(
@@ -257,11 +385,21 @@ class MakePaymentActivity : AppCompatActivity(), View.OnClickListener{
         dialog!!.setContentView(dialogSelectClassSectionBinding!!.getRoot())
         Objects.requireNonNull<Window>(dialog!!.getWindow())
             .setBackgroundDrawableResource(android.R.color.transparent)
+
+        dialogSelectClassSectionBinding!!.tvTitle.text = currActivity.getString(R.string.select_payment_method)
         dialogSelectClassSectionBinding!!.rlClassesDropdown.setHasFixedSize(true)
         dialogSelectClassSectionBinding!!.rlClassesDropdown.layoutManager = LinearLayoutManager(
             currActivity,
             LinearLayoutManager.VERTICAL, false
         )
+        if(paymentMethodList.size > 0){
+            dialogSelectClassSectionBinding!!.rlNotFound.visibility = View.GONE
+            dialogSelectClassSectionBinding!!.rlClassesDropdown.visibility = View.VISIBLE
+        }else{
+            dialogSelectClassSectionBinding!!.rlNotFound.visibility = View.VISIBLE
+            dialogSelectClassSectionBinding!!.rlClassesDropdown.visibility = View.GONE
+        }
+
         paymentMethodAdapter = PaymentMethodListAdapter(currActivity, paymentMethodList)
         dialogSelectClassSectionBinding!!.rlClassesDropdown.adapter = paymentMethodAdapter
         paymentMethodAdapter.notifyDataSetChanged()
@@ -312,18 +450,17 @@ class MakePaymentActivity : AppCompatActivity(), View.OnClickListener{
     private fun validation() : Boolean{
         var isValid = true
 
-        if(binding.etPaymentDate.text.toString().equals("")){
+        if(binding.etPaymentDate.text.toString().equals("")) {
             isValid = false
-            AppUtils.showToast(currActivity,"Payment date is required",true)
-        }else if(binding.etRecievedBy.text.toString().equals("")){
-            isValid = false
-            AppUtils.showToast(currActivity,"Kindly add receiver details",true)
-        }else if(selectedPaymentMethod.equals("")){
+            AppUtils.showToast(currActivity, "Payment date is required", true)
+        }
+//        }else if(binding.etRecievedBy.text.toString().equals("")){
+//            isValid = false
+//            AppUtils.showToast(currActivity,"Kindly add receiver details",true)
+//        }
+       else if(selectedPaymentMethod.equals("")){
             isValid = false
             AppUtils.showToast(currActivity,"Payment Method is required",true)
-        }else if(binding.etRemarksMethod.text.toString().equals("")){
-            isValid = false
-            AppUtils.showToast(currActivity,"Kindly add remarks",true)
         }else if(binding.etBankAccountMethod.text.toString().equals("")){
             isValid = false
             AppUtils.showToast(currActivity,"please add bank account",true)
@@ -382,5 +519,13 @@ class MakePaymentActivity : AppCompatActivity(), View.OnClickListener{
                 mdialog =  AppUtils.showProgress(currActivity)
                 it.addFeePayment(model) }
         }
+    }
+
+    fun showProgressBar(){
+        dialog =  AppUtils.showProgress(currActivity)
+    }
+
+    fun hideProgressBar(){
+        AppUtils.hideProgress(dialog!!)
     }
 }

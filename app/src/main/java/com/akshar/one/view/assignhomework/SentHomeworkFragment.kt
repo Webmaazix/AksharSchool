@@ -58,7 +58,7 @@ class SentHomeworkFragment : Fragment() {
         }
         noticeBoardViewModel?.let {
             if (context?.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true) {
-                it.getAllNotices(true) }
+                it.getAllNotices("") }
         }
 
         observers()

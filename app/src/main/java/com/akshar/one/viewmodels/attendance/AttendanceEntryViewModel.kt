@@ -40,7 +40,7 @@ class AttendanceEntryViewModel(application: Application) : BaseViewModel(applica
     private val isLoading = MutableLiveData<Boolean>()
 
     init {
-        attendanceRepository = AttendanceRepository(application)
+        attendanceRepository = AttendanceRepository()
         studentAttendanceAdapter =
             StudentAttendanceAdapter(
                 this
@@ -102,7 +102,7 @@ class AttendanceEntryViewModel(application: Application) : BaseViewModel(applica
 
     fun updateAttendance(position: Int, status: String) {
         val student = getStudentAt(position)
-        student?.lateEntryFlag = null
+        student?.lateEntryFlag = ""
         when (status) {
             PRESENT -> {
                 student?.attendanceInd = PRESENT
@@ -153,7 +153,7 @@ class AttendanceEntryViewModel(application: Application) : BaseViewModel(applica
     fun markAll(status: String) {
         studentAttendanceListMutableLiveData.value?.let {
             for (student in it) {
-                student.lateEntryFlag = null
+                student.lateEntryFlag = ""
                 student.attendanceInd = status
             }
             studentAttendanceAdapter?.notifyDataSetChanged()
@@ -176,14 +176,14 @@ class AttendanceEntryViewModel(application: Application) : BaseViewModel(applica
                                 classroom.classroomId, classroom.schoolCode
                             )
                         if (shiftEntityList.isNullOrEmpty()) {
-                            val categoryList =
-                                attendanceRepository?.getShifts(
-                                    AttendanceRepository.STUDENT_PROFILE_TYPE,
-                                    classroom.classroomId
-                                )
-                            categoryList?.let { list ->
-                                insertAttendanceShiftInDB(classroom.classroomId, list)
-                            }
+                         //   val categoryList =
+//                                attendanceRepository?.getShifts(
+//                                    AttendanceRepository.STUDENT_PROFILE_TYPE,
+//                                    classroom.classroomId
+//                                )
+//                            categoryList?.let { list ->
+//                                insertAttendanceShiftInDB(classroom.classroomId, list)
+//                            }
                             shiftEntityList =
                                 attendanceRepository?.getStudentsShiftsByClassRoomIdFromDB(
                                     classroom.classroomId, classroom.schoolCode

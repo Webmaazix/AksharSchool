@@ -18,8 +18,13 @@ class DashboardRepository : BaseRepository() {
     suspend fun getTimeTableOfClass(classRoomId: Int, date: String) = apiInterface?.getClassTimeTable(service.headers(), classRoomId, date)
 
     suspend fun getBirthdays(fromDate : String , toDate : String) = apiInterface?.getBirthdays(service.headers(),fromDate,toDate)
+    suspend fun getAttendanceStatsOfStudent(fromDate : String , toDate : String,
+                                            studentProfileId : String) = apiInterface?.getAttendanceStatsOfStudent(service.headers(),fromDate,toDate,studentProfileId)
+    suspend fun getAttendanceStatsOfyear(studentProfileId : String) = apiInterface?.getAttendanceStatsOfyear(service.headers(),studentProfileId)
+    suspend fun getPresentAttendance(studentProfileId : String) = apiInterface?.getPresentAttendance(service.headers(),studentProfileId)
 
     suspend fun getAllFinance(fromDate: String,toDate: String) = apiInterface?.getAllFinance(service.headers(),fromDate,toDate)
+    suspend fun getSecurityGroupsList(appName: String) = apiInterface?.getSecurityGroupsList(service.headers(),appName)
 
     suspend fun getCollection(groupBy : String,fromDate: String,toDate: String) = apiInterface?.getCollection(service.headers(),groupBy,fromDate,toDate)
 

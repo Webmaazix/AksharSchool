@@ -20,6 +20,7 @@ class StudentViewModel(application: Application) : BaseViewModel(application){
     private val isLoading = MutableLiveData<Boolean>()
     private val isSuccess = MutableLiveData<Boolean>()
     private var mutuableLiveDataStudentList = MutableLiveData<List<StudentListModel>>()
+    private var mutuableLiveDataStudentProfile = MutableLiveData<StudentListModel>()
     private var mutableLiveDataCreateStudentProfile = MutableLiveData<StudentListModel>()
     private var mutableLiveDataImage = MutableLiveData<ImageModel>()
 
@@ -30,6 +31,7 @@ class StudentViewModel(application: Application) : BaseViewModel(application){
     fun getIsLoading(): MutableLiveData<Boolean> = isLoading
 
     fun getStudentListLiveData() : MutableLiveData<List<StudentListModel>> = mutuableLiveDataStudentList
+    fun getStudentProfileLiveData() : MutableLiveData<StudentListModel> = mutuableLiveDataStudentProfile
     fun getSuccessLiveData() : MutableLiveData<Boolean> = isSuccess
 
     fun getImageLiveData() : MutableLiveData<ImageModel> = mutableLiveDataImage
@@ -44,6 +46,29 @@ class StudentViewModel(application: Application) : BaseViewModel(application){
                     val studentList = studentRepository?.getStudentListByClassId(classRoomId)
                     studentList.let {
                         mutuableLiveDataStudentList.postValue(studentList)
+                    }
+
+                }catch (httpException : HttpException){
+                    isLoading.postValue(false)
+                    val errorResponse  = AppUtil.getErrorResponse(httpException.response()?.errorBody()?.string())
+                    errorResponse.let { getErrorMutableLiveData().postValue(it) }
+
+                }catch (e : Exception){
+                    isLoading.postValue(false)
+                    e.printStackTrace()
+                }
+            }
+        }
+    }
+    fun getStudentProfile(){
+        isLoading.postValue(true)
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                try {
+                    isLoading.postValue(false)
+                    val studentList = studentRepository?.getStudentProfile()
+                    studentList.let {
+                        mutuableLiveDataStudentProfile.postValue(studentList)
                     }
 
                 }catch (httpException : HttpException){

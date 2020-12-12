@@ -38,6 +38,20 @@
     <color name="light_green">#B2E8B9</color>
     <color name="ultra_light_green">#DCF3DF</color>
     <color name="light_white">#4DFFFFFF</color>
+    <color name="timetable_chemistry">#DBE4EB</color>
+    <color name="timetable_telugu">#F3FFFD</color>
+    <color name="timetable_other">#D2E3F1</color>
+    <color name="timetable_hindi">#FEF3EF</color>
+    <color name="timetable_english">#FFE7E8</color>
+    <color name="timetable_math">#FBE8F2</color>
+    <color name="timetable_science">#E1FCFE</color>
+    <color name="timetable_commerce">#FEF3EF</color>
+    <color name="timetable_economics">#F6E7FF</color>
+    <color name="timetable_civics">#D3F0EE</color>
+    <color name="timetable_socialstudy">#F6E7FF</color>
+    <color name="timetable_physics">#FEF3EF</color>
+    <color name="timetable_bio">#FBE8F2</color>
+    <color name="timetable_environmental">#EFFAEF</color>
 
     //subject colors
 
@@ -57,6 +71,9 @@
     <color name="undefined_black">#928DAB</color>
     <color name="undefined_green">#93F9B9</color>
     <color name="lightish_grey">#F0F0F0</color>
+    <color name="blue_notice">#AAD3FF</color>
+    <color name="pink_notice">#FCC5A7</color>
+    <color name="purple_notice">#E1D9FD</color>
 
     //image crop colors
 
@@ -85,15 +102,40 @@
     <color name="ucrop_color_crop_background">@color/ucrop_color_black</color>
 
     <!--Crop View-->
-    <color name="ucrop_color_default_crop_grid">#80ffffff</color>
-    <color name="ucrop_color_default_crop_frame">#ffffff</color>
-    <color name="ucrop_color_default_dimmed">#8c000000</color>
-    <color name="ucrop_color_default_logo">#4f212121</color>
-    <color name="blue_notice">#D4E9FF</color>
-    <color name="pink_notice">#FDE2D3</color>
-    <color name="purple_notice">#E1D9FD</color>
-    <color name="green_notice">#A6FFB9</color>
-    <color name="light_grey_special">#FBFAFA</color>
+    <color name="crop__button_bar">#f3f3f3</color>
+    <color name="crop__button_text">#666666</color>
+    <color name="crop__selector_pressed">#1a000000</color>
+    <color name="crop__selector_focused">#77000000</color>
+
+
+    <color name="primary">#7AA4D5</color>
+    <color name="primary_dark">#165E8B</color>
+    <color name="accent">#7AA4D5</color>
+    <color name="persian_green_primary">#0DAC8F</color>
+    <color name="persian_green_dark">#0A927A</color>
+    <color name="persian_green_accent">#0A927A</color>
+    <color name="pink_primary">#EB1E63</color>
+    <color name="pink_dark">#C0175C</color>
+    <color name="pink_accent">#C0175C</color>
+    <color name="royal_blue_primary">#4C63E2</color>
+    <color name="royal_blue_dark">#4055BF</color>
+    <color name="royal_blue_accent">#4055BF</color>
+    <color name="purple_primary">#9C28B1</color>
+    <color name="purple_dark">#7A1FA2</color>
+    <color name="purple_accent">#7A1FA2</color>
+    <color name="orange_accent">#F3A62E</color>
+    <color name="indigo">#3E50AE</color>
+    <color name="pink">#FF427C</color>
+    <color name="app_button_color">#2CA6CF</color>
+    <color name="light_pink">#FFE8F9</color>
+    <color name="light_blue1">#D8EFFF</color>
+    <color name="light_orange1">#FFF1D1</color>
+    <color name="light_green1">#C2FFBD</color>
+    <color name="light_nevi_blue">#E3E3FF</color>
+    <color name="blueTimetable">#5799D6</color>
+    <color name="pinkTimetable">#F56B96</color>
+    <color name="orangeTimetable">#F3BE78</color>
+
 
 
 </resources>

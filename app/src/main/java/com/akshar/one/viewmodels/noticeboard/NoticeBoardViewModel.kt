@@ -36,12 +36,12 @@ class NoticeBoardViewModel(application: Application) : BaseViewModel(application
 
     fun getImageLiveData() : MutableLiveData<ImageModel> = mutableLiveDataImage
 
-    fun getAllNotices(showExpired : Boolean){
+    fun getAllNotices(status : String){
         viewModelScope.launch {
             withContext(Dispatchers.IO){
                 try {
                     isLoading.postValue(false)
-                    val noticeList = studentRepository?.getAllNotices(showExpired)
+                    val noticeList = studentRepository?.getAllNotices(status)
                     noticeList.let {
                         mutuableLiveDataNoticeList.postValue(it?.list)
                     }
@@ -95,6 +95,7 @@ class NoticeBoardViewModel(application: Application) : BaseViewModel(application
             }
         }
     }
+
     fun updateNotice(id : Int,noticeBoardModel: NoticeBoardModel){
         isSuccess.postValue(false)
         isLoading.postValue(true)

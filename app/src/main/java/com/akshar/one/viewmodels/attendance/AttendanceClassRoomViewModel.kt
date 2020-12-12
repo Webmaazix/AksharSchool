@@ -29,7 +29,7 @@ class AttendanceClassRoomViewModel(application: Application) : BaseViewModel(app
     private val isLoading = MutableLiveData<Boolean>()
 
     init {
-        attendanceRepository = AttendanceRepository(application)
+        attendanceRepository = AttendanceRepository()
     }
 
     fun getIsLoading(): MutableLiveData<Boolean> = isLoading
@@ -60,17 +60,17 @@ class AttendanceClassRoomViewModel(application: Application) : BaseViewModel(app
                                 classroom.classroomId, classroom.schoolCode
                             )
                         if (shiftEntityList.isNullOrEmpty()) {
-                            val categoryList =
-                                attendanceRepository?.getShifts(AttendanceRepository.STUDENT_PROFILE_TYPE, classroom.classroomId)
-                            categoryList?.let { list ->
-                                insertAttendanceCategoryInDB(
-                                    classroom.classroomId,
-                                    classroom.schoolCode,
-                                    "STUDENT",
-                                    list
-                                )
-
-                            }
+//                            val categoryList =
+//                                attendanceRepository?.getShifts(AttendanceRepository.STUDENT_PROFILE_TYPE, classroom.classroomId)
+//                            categoryList?.let { list ->
+//                                insertAttendanceCategoryInDB(
+//                                    classroom.classroomId,
+//                                    classroom.schoolCode,
+//                                    "STUDENT",
+//                                    list
+//                                )
+//
+//                            }
                             shiftEntityList =
                                 attendanceRepository?.getStudentsShiftsByClassRoomIdFromDB(
                                     classroom.classroomId, classroom.schoolCode
@@ -98,6 +98,7 @@ class AttendanceClassRoomViewModel(application: Application) : BaseViewModel(app
                 }
             }
         }
+
         return shiftEntityList
     }
 

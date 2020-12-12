@@ -15,6 +15,9 @@ class SendGeneralNotification : Serializable {
     @SerializedName("type")
     @Expose
     var type = ""
+    @SerializedName("category")
+    @Expose
+    var category = ""
     @SerializedName("examinationId")
     @Expose
     var examinationId = 0
@@ -27,6 +30,9 @@ class SendGeneralNotification : Serializable {
     @SerializedName("classroomIdList")
     @Expose
     var classroomIdList = ArrayList<Int>()
+    @SerializedName("feeTermIdList")
+    @Expose
+    var feeTermIdList = ArrayList<Int>()
     @SerializedName("studentProfileIdList")
     @Expose
     var studentProfileIdList = ArrayList<Int>()

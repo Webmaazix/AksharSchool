@@ -6,6 +6,7 @@ import java.io.Serializable
 
 class FeeTermList : Serializable {
 
+
     @SerializedName("studentFeeId")
     @Expose
     var studentFeeId = 0

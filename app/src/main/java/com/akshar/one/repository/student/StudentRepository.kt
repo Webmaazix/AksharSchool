@@ -16,6 +16,7 @@ class StudentRepository : BaseRepository() {
     }
 
     suspend fun getStudentListByClassId(classRoomId : Int) = apiInterface?.getStudentListByClassId(service.headers(),classRoomId)
+    suspend fun getStudentProfile() = apiInterface?.getStudentProfile(service.headers())
 
     suspend fun CreateStudentProfile(jsonObject: StudentListModel) = apiInterface?.CreateStudentProfile(service.headers(),jsonObject)
 

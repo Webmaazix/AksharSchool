@@ -97,7 +97,7 @@ class SelectOtherInputsActivity : AppCompatActivity(),View.OnClickListener {
         binding!!.rlSkills.visibility = View.GONE
         binding!!.rlExamSelectionMain.visibility = View.VISIBLE
 
-        val className = sectionModel!!.courseName + " " + sectionModel!!.classroomName
+        val className = classDropDownModel!!.courseName + " " + sectionModel!!.classroomName
         binding!!.etClassName.text = className
 
         currActivity.application?.let {
@@ -173,6 +173,7 @@ class SelectOtherInputsActivity : AppCompatActivity(),View.OnClickListener {
                 binding!!.rlSelectCategory.visibility = View.GONE
                 binding!!.rlSkills.visibility = View.GONE
                 openExamDialog()
+
             }
             R.id.rlClassSectionMain ->{
                 openDialog()
@@ -226,7 +227,7 @@ class SelectOtherInputsActivity : AppCompatActivity(),View.OnClickListener {
             binding!!.rlAssessmentAreas.visibility = View.VISIBLE
             binding!!.rlCategory.visibility = View.GONE
             binding!!.rlSelectCategory.visibility = View.GONE
-            binding!!.rlSkills.visibility = View.GONE
+            binding!!.rlSkills.visibility = View.VISIBLE
 
             marksEntryViewModel?.let {
                 if (AksharSchoolApplication.context?.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true) {
@@ -265,6 +266,7 @@ class SelectOtherInputsActivity : AppCompatActivity(),View.OnClickListener {
             subjectList.addAll(it)
             subjectAdapter.notifyDataSetChanged()
         })
+
         marksEntryViewModel?.getSkillListLiveData()?.observe(this, Observer {
             skillList.clear()
             skillList.addAll(it)
@@ -274,8 +276,6 @@ class SelectOtherInputsActivity : AppCompatActivity(),View.OnClickListener {
                 binding!!.rlSkills.visibility = View.GONE
             }
         })
-
-
         examViewModel?.getExamDropDownErrorData()?.observe(this, Observer {
             it.let {
                 binding!!.tvExaminationErrorMessage.visibility = View.VISIBLE
@@ -339,11 +339,20 @@ class SelectOtherInputsActivity : AppCompatActivity(),View.OnClickListener {
         dialog!!.setContentView(dialogSelectClassSectionBinding!!.getRoot())
         Objects.requireNonNull<Window>(dialog!!.getWindow())
             .setBackgroundDrawableResource(android.R.color.transparent)
+        dialogSelectClassSectionBinding!!.tvTitle.text = currActivity.getString(R.string.select_examination_type)
         dialogSelectClassSectionBinding!!.rlClassesDropdown.setHasFixedSize(true)
         dialogSelectClassSectionBinding!!.rlClassesDropdown.layoutManager = LinearLayoutManager(
             currActivity,
             LinearLayoutManager.VERTICAL, false
         )
+        if(examDropDownList.size > 0){
+            dialogSelectClassSectionBinding!!.rlNotFound.visibility = View.GONE
+            dialogSelectClassSectionBinding!!.rlClassesDropdown.visibility = View.VISIBLE
+        }else{
+            dialogSelectClassSectionBinding!!.rlNotFound.visibility = View.VISIBLE
+            dialogSelectClassSectionBinding!!.rlClassesDropdown.visibility = View.GONE
+        }
+
         examDropDownAdapter = ExaminationDropDownAdapter(currActivity, examDropDownList, true,null, object :
             ExaminationDropDownAdapter.SectionSelection {
             override fun selectionCallback(parent: Int, child: Int) {
@@ -379,6 +388,15 @@ class SelectOtherInputsActivity : AppCompatActivity(),View.OnClickListener {
         )
         ClassDropDownAdapter.selectedChild = -1
         ClassDropDownAdapter.clickParent =-1;
+
+        if(classDropdownList.size > 0){
+            dialogSelectClassSectionBinding!!.rlNotFound.visibility = View.GONE
+            dialogSelectClassSectionBinding!!.rlClassesDropdown.visibility = View.VISIBLE
+        }else{
+            dialogSelectClassSectionBinding!!.rlNotFound.visibility = View.VISIBLE
+            dialogSelectClassSectionBinding!!.rlClassesDropdown.visibility = View.GONE
+        }
+
         classDropDownAdapter = ClassDropDownAdapter(currActivity, classDropdownList, null, object :
             ClassDropDownAdapter.SectionSelection {
             override fun selectionCallback(parent: Int, child: Int) {
@@ -428,11 +446,11 @@ class SelectOtherInputsActivity : AppCompatActivity(),View.OnClickListener {
         binding!!.etExamName.text = data.examName
         examDropDownModel  = data
         testModel = null
-        examViewModel.let {
-            if (currActivity.let { ctx -> AndroidUtil.isInternetAvailable(ctx) }) {
-                it!!.getExaminations(examId,0)
-            }
-        }
+//        examViewModel.let {
+//            if (currActivity.let { ctx -> AndroidUtil.isInternetAvailable(ctx) }) {
+//                it!!.getExaminations(examId,0)
+//            }
+//        }
         dialog!!.dismiss()
     }
     fun selectTest(model : TestListModel, data : ExaminationDropDownModel){
@@ -448,11 +466,11 @@ class SelectOtherInputsActivity : AppCompatActivity(),View.OnClickListener {
 //        binding!!.rlSkills.visibility = View.GONE
 
         dialog!!.dismiss()
-        examViewModel.let {
-            if (currActivity.let { ctx -> AndroidUtil.isInternetAvailable(ctx) }) {
-                it!!.getExaminations(0,testId)
-            }
-        }
+//        examViewModel.let {
+//            if (currActivity.let { ctx -> AndroidUtil.isInternetAvailable(ctx) }) {
+//                it!!.getExaminations(0,testId)
+//            }
+//        }
     }
 
     fun skillClicked(subCategory : SubCategoryList, category : SkillListModel,skill : SkillSetModel){
@@ -472,11 +490,20 @@ class SelectOtherInputsActivity : AppCompatActivity(),View.OnClickListener {
         dialog!!.setContentView(dialogSelectClassSectionBinding!!.getRoot())
         Objects.requireNonNull<Window>(dialog!!.getWindow())
             .setBackgroundDrawableResource(android.R.color.transparent)
+        dialogSelectClassSectionBinding!!.tvTitle.text = currActivity.getString(R.string.select_skills)
         dialogSelectClassSectionBinding!!.rlClassesDropdown.setHasFixedSize(true)
         dialogSelectClassSectionBinding!!.rlClassesDropdown.layoutManager = LinearLayoutManager(
             currActivity,
             LinearLayoutManager.VERTICAL, false
         )
+        if(skillList.size > 0){
+            dialogSelectClassSectionBinding!!.rlNotFound.visibility = View.GONE
+            dialogSelectClassSectionBinding!!.rlClassesDropdown.visibility = View.VISIBLE
+        }else{
+            dialogSelectClassSectionBinding!!.rlNotFound.visibility = View.VISIBLE
+            dialogSelectClassSectionBinding!!.rlClassesDropdown.visibility = View.GONE
+        }
+
         skillDropDownAdapter = SkillCategoryDropDownAdapter(currActivity,skillList)
         dialogSelectClassSectionBinding!!.rlClassesDropdown.adapter = skillDropDownAdapter
         skillDropDownAdapter.notifyDataSetChanged()

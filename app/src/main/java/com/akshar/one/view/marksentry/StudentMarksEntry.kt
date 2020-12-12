@@ -5,6 +5,8 @@ import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -136,10 +138,38 @@ class StudentMarksEntry : AppCompatActivity(),View.OnClickListener {
             if (AksharSchoolApplication.context?.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true) {
                 if(skillSetModel != null){
                     showProgressBar()
-                    it.getStudentMarks(sectionModel!!.classroomId,examId,testId,subjectModel?.subjectId,skillSetModel?.skillId)
+                    var subjectId = 0
+                    var skillId = 0
+                    if(subjectModel?.subjectId == null){
+                        subjectId = 0
+
+                    }else{
+                        subjectId = subjectModel?.subjectId!!
+                    }
+
+                    if(skillSetModel?.skillId == null){
+                        skillId = 0
+                    }else{
+                        skillId = skillSetModel?.skillId!!
+                    }
+                    it.getStudentMarks(sectionModel!!.classroomId,examId,testId,subjectId,skillId)
                 }else{
+                    var subjectId = 0
+                    var skillId = 0
+                    if(subjectModel?.subjectId == null){
+                        subjectId = 0
+
+                    }else{
+                        subjectId = subjectModel?.subjectId!!
+                    }
+
+                    if(skillSetModel?.skillId == null){
+                        skillId = 0
+                    }else{
+                        skillId = skillSetModel?.skillId!!
+                    }
                     showProgressBar()
-                    it.getStudentMarks(sectionModel!!.classroomId,examId,testId,subjectModel?.subjectId,skillSetModel?.skillId)
+                    it.getStudentMarks(sectionModel!!.classroomId,examId,testId,subjectId,skillId)
                 }
 
             }
@@ -152,21 +182,65 @@ class StudentMarksEntry : AppCompatActivity(),View.OnClickListener {
     private fun setListner(){
         binding!!.tvSaveOrUpdate.setOnClickListener(this)
         binding!!.toolbar.imgBack.setOnClickListener(this)
+
+        binding!!.tvMaximumMarks.addTextChangedListener(object : TextWatcher{
+            override fun afterTextChanged(p0: Editable?) {
+                if(p0!!.toString().isEmpty()){
+
+                }else{
+                    for(model in studentMarksList){
+                        model.maxMarks = p0.toString()
+                    }
+                }
+
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+        })
     }
 
     override fun onClick(p0: View?) {
         when(p0!!.id){
             R.id.tvSaveOrUpdate ->{
-                if(submitList == null){
-                    AppUtils.showToast(currActivity,"Please assign numbers to all students",true)
-                }else{
+                if(isUpdate){
+                  //  submitList = studentMarksList
+                    for(model in studentMarksList){
+                        model.maxMarks = binding!!.tvMaximumMarks.text.toString()
+                    }
                     marksEntryViewModel?.let {
                         if (AksharSchoolApplication.context?.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true) {
                             showProgressBar()
-                                it.addOrUpdateStudentMarks(submitList!!)
+                            it.addOrUpdateStudentMarks(studentMarksList)
 
 
                         }
+                    }
+
+                }else{
+                    var marksempty= false
+                    for(model in studentMarksList){
+                        if(model.marksScored.isNullOrEmpty()){
+                            marksempty = true
+                        }
+                    }
+
+                    if(marksempty){
+                        AppUtils.showToast(currActivity,"Please assign numbers to all students",true)
+                    }else if(studentMarksList[0].maxMarks.equals("") || studentMarksList[0].maxMarks.equals("0")){
+                        AppUtils.showToast(currActivity,"Please enter valid maximum marks",true)
+                    }else{
+                        marksEntryViewModel?.let {
+                            if (AksharSchoolApplication.context?.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true) {
+                                showProgressBar()
+                                it.addOrUpdateStudentMarks(studentMarksList)
+                            }
+                        }
+
                     }
 
                 }
@@ -197,12 +271,13 @@ class StudentMarksEntry : AppCompatActivity(),View.OnClickListener {
             studentMarksList.clear()
             studentMarksList.addAll(it)
             if(studentMarksList.size > 0){
-                binding!!.tvMaximumMarks.text = studentMarksList[0].maxMarks
+                binding!!.tvMaximumMarks.setText(studentMarksList[0].maxMarks)
                 if(studentMarksList[0].marksScored.isNullOrEmpty()){
                     isUpdate = false
                     binding!!.tvSaveOrUpdate.text = currActivity.resources.getString(R.string.save)
                 }else {
                     isUpdate = true
+                    binding!!.tvMaximumMarks.setText(studentMarksList[0].maxMarks)
                     binding!!.tvSaveOrUpdate.text = currActivity.resources.getString(R.string.edit)
                     binding!!.toolbar.txtToolbarTitle.text = getString(R.string.edit_marks)
                 }
@@ -220,10 +295,10 @@ class StudentMarksEntry : AppCompatActivity(),View.OnClickListener {
 
     }
 
-    fun saveOrUpdateList(list : ArrayList<StundentsMarksList>,isUpdate : Boolean){
-        submitList = list
-        this.isUpdate = isUpdate
-    }
+//    fun saveOrUpdateList(list : ArrayList<StundentsMarksList>,isUpdate : Boolean){
+//        submitList = list
+//        this.isUpdate = isUpdate
+//    }
 
     fun showProgressBar(){
         dialog =  AppUtils.showProgress(currActivity)

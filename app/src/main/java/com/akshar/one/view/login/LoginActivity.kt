@@ -101,10 +101,17 @@ class LoginActivity : BaseActivity() {
         )
     }
 
-    fun goToMainActivity() {
+    fun chooseSchoolRoles(){
+        AndroidUtil.startActivity(this, SelectRoles::class.java)
+        finish()
+
+    }
+    fun goToMainActivity(){
         AndroidUtil.startActivity(this, MainActivity::class.java)
         finish()
+
     }
+
 
     fun goToOTPScreen(mobileNumber: String, isTroubleLogin: Boolean = false) {
         val bundle = Bundle()

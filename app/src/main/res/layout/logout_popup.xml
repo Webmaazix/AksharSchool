@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="position"
+            type="java.lang.Integer" />
+
+        <variable
+            name="attendanceClassRoomViewModel"
+            type="com.akshar.one.viewmodels.attendance.AttendanceClassRoomViewModel" />
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/rlBlue"
+                android:layout_width="match_parent"
+                android:backgroundTint="@color/blue"
+                android:padding="@dimen/_5sdp"
+                android:background="@drawable/blue_nopadding_bottomsquare"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:text="@string/logout"
+                    android:textSize="@dimen/_12sp"
+                    android:textColor="@color/white"
+                    android:padding="@dimen/_7sdp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/opensans_regular"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgCancel"
+                    android:layout_width="@dimen/_24sdp"
+                    android:src="@drawable/ic_baseline_close_24"
+                    android:layout_alignParentEnd="true"
+                    android:tint="@color/white"
+                    android:padding="@dimen/_3sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_centerVertical="true"
+                    android:layout_height="@dimen/_24sdp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_below="@+id/rlBlue"
+                android:background="@drawable/white_nopadding_topsquare"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvPresent"
+                    android:layout_width="match_parent"
+                    android:text="Are you sure you want to logout?"
+                    android:textSize="@dimen/_12sp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    android:padding="@dimen/_7sdp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/opensans_regular"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_height="wrap_content"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:weightSum="2"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_below="@+id/tvPresent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvCancel"
+                        android:layout_width="match_parent"
+                        android:text="@string/cancel"
+                        android:textSize="@dimen/_12sp"
+                        android:layout_weight="1"
+                        android:background="@drawable/white_nopadding_lesser_round_shape"
+                        android:backgroundTint="@color/lightish_grey"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/opensans_regular"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:padding="@dimen/_7sdp"
+                        android:layout_height="wrap_content"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvLogout"
+                        android:layout_width="match_parent"
+                        android:text="@string/logout"
+                        android:textSize="@dimen/_12sp"
+                        android:layout_weight="1"
+                        android:textAlignment="center"
+                        android:fontFamily="@font/opensans_regular"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:background="@drawable/white_nopadding_lesser_round_shape"
+                        android:backgroundTint="@color/blue"
+                        android:padding="@dimen/_7sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_height="wrap_content"/>
+
+
+                </LinearLayout>
+
+
+
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</layout>

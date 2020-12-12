@@ -22,6 +22,7 @@ import com.akshar.one.databinding.FragmentPaymentHistoryBinding
 import com.akshar.one.model.FeesDetailModel
 import com.akshar.one.model.NoticeBoardModel
 import com.akshar.one.model.PaymentHistoryModel
+import com.akshar.one.model.StudentListModel
 import com.akshar.one.util.AndroidUtil
 import com.akshar.one.viewmodels.ViewModelFactory
 import com.akshar.one.viewmodels.noticeboard.NoticeBoardViewModel
@@ -44,6 +45,8 @@ class PaymentHistoryFragment : Fragment() ,View.OnClickListener {
     lateinit var adapter : PaymentHistoryAdapter
     private var dialog : Dialog? = null
     private var mdialog : Dialog? = null
+    private var studentModel = StudentListModel()
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -56,7 +59,7 @@ class PaymentHistoryFragment : Fragment() ,View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_payment_history,container,false)
-        initViews()
+
         return  binding?.root
 
     }
@@ -64,6 +67,16 @@ class PaymentHistoryFragment : Fragment() ,View.OnClickListener {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+
+
+        studentModel = (currActivity as StudentFeesDetails).student
+        initViews()
+        observers()
+    }
+
+
+    private fun initViews(){
+        setAdapter()
         activity?.application?.let {
             feeAndPaymentViewModel = ViewModelProvider(
                 ViewModelStore(),
@@ -76,13 +89,6 @@ class PaymentHistoryFragment : Fragment() ,View.OnClickListener {
                 mdialog =  AppUtils.showProgress(currActivity!!)
                 it.getPaymentHistory((currActivity as StudentFeesDetails).student.studentProfileId!!) }
         }
-
-        observers()
-    }
-
-
-    private fun initViews(){
-        setAdapter()
     }
 
     private fun setAdapter(){

@@ -8,13 +8,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.akshar.one.R
 import com.akshar.one.databinding.RowFeeDetailBinding
 import com.akshar.one.model.FeesDetailModel
+import com.akshar.one.model.StudentListModel
 import com.akshar.one.view.feeandpayments.FeeDetailActivity
+import com.akshar.one.view.feeandpayments.PayFeeActivity
+import com.akshar.one.view.feeandpayments.StudentFeesDetails
 
 
 import java.util.ArrayList
 
 class FeesDetailAdapter(private val mContext: Activity, private val list: ArrayList<FeesDetailModel>?,
-                        var studentId : Int) :
+                        var studentId : Int,var studentModel : StudentListModel) :
     RecyclerView.Adapter<FeesDetailAdapter.ViewHolder>() {
 
 
@@ -28,7 +31,6 @@ class FeesDetailAdapter(private val mContext: Activity, private val list: ArrayL
             )
         )
     }
-
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val model = list?.get(position)
@@ -57,7 +59,10 @@ class FeesDetailAdapter(private val mContext: Activity, private val list: ArrayL
         holder.binding.tvDueAmount.text = "₹ $dueAmount"
 
         holder.binding.rlMain.setOnClickListener{
-            FeeDetailActivity.open(mContext,model,studentId)
+            FeeDetailActivity.open(mContext,model,studentId,studentModel )
+        }
+        holder.binding.tvPay.setOnClickListener{
+            PayFeeActivity.open(mContext, model, studentId, studentModel)
         }
 
     }

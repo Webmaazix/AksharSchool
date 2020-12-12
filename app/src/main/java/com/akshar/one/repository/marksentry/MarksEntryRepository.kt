@@ -22,6 +22,10 @@ class MarksEntryRepository : BaseRepository() {
 
     suspend fun getSkillList(classRoomId : Int,subjectId: Int,area : String) = apiInterface?.getSkillList(service.headers(),
         classRoomId,subjectId,area)
+    suspend fun getStudentMarksByProfileId(examId : Int,subjectId: Int) = apiInterface?.getStudentMarksByProfileId(service.headers(),
+        examId,subjectId)
+    suspend fun getStudentMarksGraph(subjectId: Int) = apiInterface?.getStudentMarksGraph(service.headers(),
+        subjectId)
     suspend fun getStudentMarksList(classRoomId : Int,
                                     examId : Int,subjectId : Int,
                                     skillId : Int) = apiInterface?.getStudentMarksList(service.headers(),classRoomId,

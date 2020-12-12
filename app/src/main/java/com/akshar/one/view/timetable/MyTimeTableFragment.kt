@@ -107,13 +107,12 @@ class MyTimeTableFragment : Fragment(),View.OnClickListener {
         binding!!.rlActiveNotice.layoutManager = LinearLayoutManager(currActivity,
             LinearLayoutManager.VERTICAL,false)
         adapter =
-            MyTimeTableAdapter(currActivity!!, timeTableList)
+            MyTimeTableAdapter(currActivity!!, timeTableList,this)
         binding!!.rlActiveNotice.adapter = adapter
     }
 
     private fun observers(){
-
-            dashboardViewModel?.getErrorMutableLiveData()?.observe(this, Observer {
+        dashboardViewModel?.getErrorMutableLiveData()?.observe(this, Observer {
                 it?.let {
                     (currActivity as TimeTableActivity).hideProgressBar()
                     binding!!.rlNoDataFound.visibility = View.VISIBLE
@@ -124,7 +123,7 @@ class MyTimeTableFragment : Fragment(),View.OnClickListener {
                 }
             })
 
-            dashboardViewModel?.getTimeTableLiveData()?.observe(this, Observer {
+        dashboardViewModel?.getTimeTableLiveData()?.observe(this, Observer {
                 (currActivity as TimeTableActivity).hideProgressBar()
                 timeTableList.clear()
                 timeTableList.addAll(it)
@@ -139,8 +138,6 @@ class MyTimeTableFragment : Fragment(),View.OnClickListener {
                 adapter.notifyDataSetChanged()
                 // dashboardViewModel?.setTimeTableAdapter(it)
             })
-
-
     }
 
    fun sendDateToRefreshData(data : Day){

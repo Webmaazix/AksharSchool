@@ -12,6 +12,7 @@ import com.akshar.one.view.examschedule.ScheduleExamActivity
 import com.akshar.one.view.examschedule.ScheduledExamList
 import com.akshar.one.model.ClassDropDownModel
 import com.akshar.one.model.SectionList
+import com.akshar.one.view.attendance2.AttendanceEntryFragment
 import com.akshar.one.view.feeandpayments.StudentListForFeesFragment
 import com.akshar.one.view.marksentry.inputselection.ClassSectionSelectActivity
 import com.akshar.one.view.marksentry.inputselection.SelectOtherInputsActivity
@@ -75,6 +76,8 @@ class SectionAdapter(private val mContext: Activity, var parent: Int,
                         (fragment as StudentListFragment).sectionClicked(model ,model.classroomsList[adapterPosition])
                     }else if(fragment is StudentListForFeesFragment){
                         (fragment as StudentListForFeesFragment).sectionClicked(model ,model.classroomsList[adapterPosition])
+                    }else if(fragment is AttendanceEntryFragment){
+                        (fragment as AttendanceEntryFragment).sectionClicked(model ,model.classroomsList[adapterPosition])
                     }
                 }else{
                     if(mContext is EditStudentProfileActivity){

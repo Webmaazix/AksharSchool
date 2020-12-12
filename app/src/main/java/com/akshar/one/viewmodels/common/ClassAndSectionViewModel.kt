@@ -32,7 +32,7 @@ class ClassAndSectionViewModel(application: Application) : BaseViewModel(applica
     private var degreeListMutableLiveData = MutableLiveData<List<DegreeWithDeptModel>>()
 
     init {
-        attendanceRepository = AttendanceRepository(application)
+        attendanceRepository = AttendanceRepository()
         classAndSectionAdapter =
             ClassAndSectionAdapter(this)
     }

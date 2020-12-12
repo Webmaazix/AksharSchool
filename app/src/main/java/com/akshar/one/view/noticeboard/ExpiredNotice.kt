@@ -37,7 +37,7 @@ class ExpiredNotice : Fragment() ,View.OnClickListener{
     lateinit var adapter : MyNoticeBoardAdapter
     private var dialog : Dialog? = null
     private var mdialog : Dialog? = null
-
+    var securityList = ArrayList<String>()
     override fun onAttach(context: Context) {
         super.onAttach(context)
         currActivity = activity
@@ -49,13 +49,14 @@ class ExpiredNotice : Fragment() ,View.OnClickListener{
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_expired_notice,container,false)
-        initViews()
+
         return  binding?.root
     }
 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        securityList = (currActivity as NoticeboardActivity).securityList!!
         activity?.application?.let {
             noticeBoardViewModel = ViewModelProvider(
                 ViewModelStore(),
@@ -65,9 +66,9 @@ class ExpiredNotice : Fragment() ,View.OnClickListener{
         noticeBoardViewModel?.let {
             if (context?.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true) {
                 mdialog =  AppUtils.showProgress(currActivity!!)
-                it.getAllNotices(true) }
+                it.getAllNotices("EXPIRED") }
         }
-
+        initViews()
         observers()
     }
 
@@ -83,7 +84,7 @@ class ExpiredNotice : Fragment() ,View.OnClickListener{
         adapter = MyNoticeBoardAdapter(
             currActivity!!,
             noticeBoardList,
-            true,this
+            "EXPIRED",this,securityList
         )
 //        (adapter as MyNoticeBoardAdapter).mode = Attributes.Mode.Single
         binding!!.rlActiveNotice.adapter = adapter

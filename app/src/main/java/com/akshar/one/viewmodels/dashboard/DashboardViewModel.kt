@@ -22,8 +22,11 @@ class DashboardViewModel(application: Application) : BaseViewModel(application) 
     private var mutableLiveDataClassTimeTableModel = MutableLiveData<List<PeriodTimeTable>>()
     private var mutableLiveDataBirthDayModel  = MutableLiveData<List<BirthDayModel>>()
     private var mutableLiveDataAllFinanceModel  = MutableLiveData<FinanceModel>()
+    private var mutableLiveDataSecurityGroups  = MutableLiveData<ArrayList<String>>()
     private var mutableLiveDataCollection = MutableLiveData<ArrayList<FeePayment>>()
     private var mutableLiveDataExpense = MutableLiveData<ArrayList<FeePayment>>()
+    private var mutableLiveDataAttendanceStats = MutableLiveData<ArrayList<AttendanceDashboard>>()
+    private var mutableLiveDataPresentAttendance = MutableLiveData<StudentAttendanceModel>()
     private val isLoading = MutableLiveData<Boolean>()
     private var timeTableAdapter : TimeTableAdapter? =null
 
@@ -41,6 +44,12 @@ class DashboardViewModel(application: Application) : BaseViewModel(application) 
 
     fun getTimeTableLiveData(): MutableLiveData<List<PeriodTimeTable>> =
         mutableLiveDataTimeTableModel
+    fun getAttendanceStatsLiveData(): MutableLiveData<ArrayList<AttendanceDashboard>> =
+        mutableLiveDataAttendanceStats
+    fun getPresentAttendanceStatsLiveData(): MutableLiveData<StudentAttendanceModel> =
+        mutableLiveDataPresentAttendance
+    fun getSecurityGroupsLiveData(): MutableLiveData<ArrayList<String>> =
+        mutableLiveDataSecurityGroups
 
     fun getClassTimeTableLiveData(): MutableLiveData<List<PeriodTimeTable>> =
         mutableLiveDataClassTimeTableModel
@@ -129,6 +138,28 @@ class DashboardViewModel(application: Application) : BaseViewModel(application) 
             }
         }
     }
+    fun getSecurityGroupsList(appName : String){
+        isLoading.value = true
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                try {
+                    isLoading.postValue(false)
+                    val financeModel = loginRepository?.getSecurityGroupsList(appName)
+                    financeModel?.let {
+                        mutableLiveDataSecurityGroups.postValue(it)
+                    }
+
+                }catch (httpException : HttpException){
+                    isLoading.postValue(false)
+                    val errorResponse = AppUtil.getErrorResponse(httpException.response()?.errorBody()?.string())
+                    errorResponse?.let { getErrorMutableLiveData().postValue(it)}
+                }catch (e: Exception){
+                    isLoading.postValue(false)
+                    Log.d(AppConstant.TAG,"FinanceEntity Exception : &e")
+                }
+            }
+        }
+    }
 
     fun getCollectionLiveData() : MutableLiveData<ArrayList<FeePayment>> =
         mutableLiveDataCollection
@@ -184,6 +215,55 @@ class DashboardViewModel(application: Application) : BaseViewModel(application) 
                 try {
                     val birthdayModel = loginRepository?.getBirthdays(fromDate, toDate)
                    mutableLiveDataBirthDayModel.postValue(birthdayModel)
+                    isLoading.postValue(false)
+//                    birthdayModel?.let {data ->
+//                        mutableLiveDataBirthDayModel.postValue(data)
+//                    }
+                } catch (httpException: HttpException) {
+                    isLoading.postValue(false)
+                    val errorResponse =
+                        AppUtil.getErrorResponse(httpException.response()?.errorBody()?.string())
+                    errorResponse?.let { getErrorMutableLiveData().postValue(it) }
+                } catch (e: Exception) {
+                    isLoading.postValue(false)
+                    Log.d(AppConstant.TAG, "Login Exception : $e")
+                }
+            }
+        }
+    }
+    fun getAttendanceStatsOfStudent(fromDate: String?, toDate: String?,studentProfileId : String) {
+        isLoading.value = true
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                try {
+                    if(fromDate == null){
+                        val attendanceStats = loginRepository?.getAttendanceStatsOfyear(studentProfileId)
+                        mutableLiveDataAttendanceStats.postValue(attendanceStats)
+                        isLoading.postValue(false)
+                    }else{
+                        val attendanceStats = loginRepository?.getAttendanceStatsOfStudent(fromDate, toDate!!,studentProfileId)
+                        mutableLiveDataAttendanceStats.postValue(attendanceStats)
+                        isLoading.postValue(false)
+                    }
+                } catch (httpException: HttpException) {
+                    isLoading.postValue(false)
+                    val errorResponse =
+                        AppUtil.getErrorResponse(httpException.response()?.errorBody()?.string())
+                    errorResponse?.let { getErrorMutableLiveData().postValue(it) }
+                } catch (e: Exception) {
+                    isLoading.postValue(false)
+                    Log.d(AppConstant.TAG, "Login Exception : $e")
+                }
+            }
+        }
+    }
+    fun getPresentAttendance(studentProfileId : String) {
+        isLoading.value = true
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                try {
+                    val attendanceStats = loginRepository?.getPresentAttendance(studentProfileId)
+                   mutableLiveDataPresentAttendance.postValue(attendanceStats)
                     isLoading.postValue(false)
 //                    birthdayModel?.let {data ->
 //                        mutableLiveDataBirthDayModel.postValue(data)

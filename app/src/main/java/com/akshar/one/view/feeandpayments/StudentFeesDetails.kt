@@ -13,6 +13,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager.widget.ViewPager
 import com.akshar.one.DummyContent
 import com.akshar.one.R
 import com.akshar.one.adapter.AdapterCommonViewPager
@@ -23,6 +24,7 @@ import com.akshar.one.calender.widget.CollapsibleCalendar
 import com.akshar.one.databinding.ActivityStudentFeesDetailsBinding
 import com.akshar.one.databinding.ActivityTimeTableBinding
 import com.akshar.one.databinding.DialogSelectClassAndSectionBinding
+import com.akshar.one.manager.SessionManager
 import com.akshar.one.model.ClassDropDownModel
 import com.akshar.one.model.SectionList
 import com.akshar.one.model.StudentListModel
@@ -66,7 +68,7 @@ class StudentFeesDetails :AppCompatActivity(), View.OnClickListener {
         fun open(currActivity: Activity,studentListModel : StudentListModel) {
             val intent = Intent(currActivity, StudentFeesDetails::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-            intent.putExtra("studentListModel",studentListModel)
+            intent.putExtra("studentListetClassNameModel",studentListModel)
             currActivity.startActivity(intent)
             currActivity.overridePendingTransition(R.anim.slide_in, R.anim.slide_out)
         }
@@ -76,11 +78,42 @@ class StudentFeesDetails :AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         binding =
             DataBindingUtil.setContentView(currActivity, R.layout.activity_student_fees_details)
-        student = intent.getSerializableExtra("studentListModel") as StudentListModel
-        customTabs = DummyContent.feeModule()
-        setUpViewPager()
-        initViews()
+        if(intent.getSerializableExtra("studentListetClassNameModel") != null){
+            student = intent.getSerializableExtra("studentListetClassNameModel") as StudentListModel
+            customTabs = DummyContent.feeModule()
+            setUpViewPager()
+            initViews()
+        }else{
+            if(SessionManager.getLoginRole()?.appName.equals("SmartParent",true)) {
+                fetchStudentProfile()
+            }
+
+        }
+
+
+
     }
+
+    private fun fetchStudentProfile(){
+        currActivity.application?.let {
+            studentViewModel = ViewModelProvider(
+                ViewModelStore(),
+                ViewModelFactory(it)
+            ).get(StudentViewModel::class.java)
+        }
+
+        studentViewModel.let {
+            if (context?.let { ctx -> AndroidUtil.isInternetAvailable(ctx) } == true) {
+                showProgressBar()
+                it!!.getStudentProfile()
+            }
+        }
+
+        observer()
+
+    }
+
+
 
     private fun initViews() {
 
@@ -104,15 +137,24 @@ class StudentFeesDetails :AppCompatActivity(), View.OnClickListener {
             }
         }
 
-        binding!!.tvAllStudents.text =  student.firstName
-        val className = student.courseName + " " + student.classroomName
-        binding!!.etClassName.text =  className
+
+            binding!!.tvAllStudents.text =  student.firstName
+            if(SessionManager.getLoginRole()?.appName.equals("SmartParent",true)) {
+                val className = student.classroom.courseName+" "+student.classroom.classroomName
+                binding!!.etClassName.text =  className
+            }else{
+                val className =student.classroom.courseName+" "+student.classroom.classroomName
+                binding!!.etClassName.text =  className
+            }
+
+
+
+
         binding!!.toolbar.imgMenu.visibility = View.GONE
         binding!!.toolbar.imgBack.visibility = View.VISIBLE
         binding!!.toolbar.txtToolbarTitle.text =
             currActivity.resources.getString(R.string.fee_amp_payment)
         setListner()
-        observer()
     }
 
     private fun setListner() {
@@ -149,7 +191,7 @@ class StudentFeesDetails :AppCompatActivity(), View.OnClickListener {
             binding!!.tbLayout.getTabAt(i)!!.customView = getCustomView(i)
         }
 
-        binding!!.vpPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(binding!!.tbLayout))
+        binding!!.vpPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(binding!!.tbLayout) as ViewPager.OnPageChangeListener)
 
         binding!!.tbLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
@@ -214,6 +256,8 @@ class StudentFeesDetails :AppCompatActivity(), View.OnClickListener {
                 it!!.getStudentList(classRoomId)
             }
         }
+
+        observer()
     }
 
 
@@ -241,8 +285,38 @@ class StudentFeesDetails :AppCompatActivity(), View.OnClickListener {
             hideProgressBar()
             studentList.clear()
             studentList.addAll(it)
+            if(studentList.size > 0){
+                student = studentList.get(0)
+                setData()
+            }
+
           //  studentadapter.notifyDataSetChanged()
         })
+
+        studentViewModel?.getErrorMutableLiveData()?.observe(this,  androidx.lifecycle.Observer {
+            it.let {
+                hideProgressBar()
+                AndroidUtil.showToast(currActivity, it.message, true)
+            }
+        })
+
+        studentViewModel?.getStudentProfileLiveData()?.observe(this,  androidx.lifecycle.Observer {
+            hideProgressBar()
+            student = it
+
+            customTabs = DummyContent.feeModule()
+            setUpViewPager()
+            initViews()
+
+        })
+
+    }
+
+    private fun setData(){
+        binding!!.tvAllStudents.text =  student.firstName
+        val className = student.classroom.courseName + " " + student.classroom.classroomName
+        binding!!.etClassName.text =  className
+
     }
 
     private fun getCustomView(position: Int): View {
@@ -258,7 +332,5 @@ class StudentFeesDetails :AppCompatActivity(), View.OnClickListener {
     fun hideProgressBar(){
         AppUtils.hideProgress(dialog!!)
     }
-
-
 
 }

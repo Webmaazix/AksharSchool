@@ -19,6 +19,8 @@ import com.akshar.one.databinding.FragmentStudentListBinding
 import com.akshar.one.model.ClassDropDownModel
 import com.akshar.one.model.SectionList
 import com.akshar.one.model.StudentListModel
+import com.akshar.one.util.AppUtil
+import com.akshar.one.util.AppUtils
 import com.akshar.one.view.activity.MainActivity
 import com.akshar.one.view.studentprofile.StudentListFragment
 import com.akshar.one.view.studentprofile.adapter.StudentListAdapter
@@ -42,7 +44,6 @@ class MessageCenterFragment : Fragment(),View.OnClickListener{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onAttach(context: Context) {
@@ -71,31 +72,71 @@ class MessageCenterFragment : Fragment(),View.OnClickListener{
     }
 
     override fun onClick(p0: View?) {
-
         when(p0!!.id){
             R.id.rlAbsentReport->{
-                ReportActivity.open(currActivity,"Absent")
+                if((currActivity as MainActivity).securityList.contains("M_MC_ABSENT_REPORT")){
+                    ReportActivity.open(currActivity,"Absent")
+                }else{
+                    AppUtils.showToast(currActivity,"You don't have access to this report",true)
+                }
             }
+
             R.id.rlMarksReport ->{
-                SendMarksAndFeeReport.open(currActivity)
+                if((currActivity as MainActivity).securityList.equals("M_MC_MARKS_REPORT")){
+                    SendMarksAndFeeReport.open(currActivity)
+                }else{
+                    AppUtils.showToast(currActivity,"You don't have access to this report",true)
+                }
+
             }
+
             R.id.rlHomeWork ->{
                 ReportActivity.open(currActivity,"homework")
             }
+
             R.id.rlFeeReminder ->{
-                ReportActivity.open(currActivity,"feeReminder")
+                if((currActivity as MainActivity).securityList.contains("M_MC_FEE_REMINDER")){
+                    ReportActivity.open(currActivity,"feeReminder")
+                }else{
+                    AppUtils.showToast(currActivity,"You don't have access to this report",true)
+                }
+
             }
+
             R.id.rlGeneralNotification ->{
-                SendNotificationMessageActivity.open(currActivity,"genralNotification")
+                if((currActivity as MainActivity).securityList.contains("M_MC_GENERAL_NOTIFICATION")){
+                    SendNotificationMessageActivity.open(currActivity,"genralNotification")
+                }else{
+                    AppUtils.showToast(currActivity,"You don't have access to this report",true)
+                }
+
             }
+
             R.id.rlEmployeeNotification ->{
-                SendNotificationMessageActivity.open(currActivity,"EmployeeNotification")
+                if((currActivity as MainActivity).securityList.equals("M_MC_EMPLOYEE_NOTIFICATION")){
+                    SendNotificationMessageActivity.open(currActivity,"EmployeeNotification")
+                }else{
+                    AppUtils.showToast(currActivity,"You don't have access to this report",true)
+                }
+
             }
+
             R.id.rlLateEntry ->{
-                ReportActivity.open(currActivity,"LateEntry")
+                if((currActivity as MainActivity).securityList.equals("M_MC_LATE_ENTRY")){
+                    ReportActivity.open(currActivity,"LateEntry")
+                }else{
+                    AppUtils.showToast(currActivity,"You don't have access to this report",true)
+                }
+
             }
+
             R.id.rlStudent ->{
-                SendNotificationMessageActivity.open(currActivity,"StudentNotification")
+                if((currActivity as MainActivity).securityList.equals("M_MC_STUDENT_NOTIFICATION")){
+                    SendNotificationMessageActivity.open(currActivity,"StudentNotification")
+                }else{
+                    AppUtils.showToast(currActivity,"You don't have access to this report",true)
+                }
+
             }
         }
     }

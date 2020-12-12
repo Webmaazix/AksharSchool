@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="position"
+            type="java.lang.Integer" />
+
+        <variable
+            name="attendanceClassRoomViewModel"
+            type="com.akshar.one.viewmodels.attendance.AttendanceClassRoomViewModel" />
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/lightish_grey"
+        android:layout_height="match_parent">
+
+<!--        <include-->
+<!--            android:id="@+id/toolbar"-->
+<!--            layout="@layout/main_toolbar"/>-->
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView"
+            android:layout_above="@+id/tvSaveAttendance"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+
+        <RelativeLayout
+            android:id="@+id/rlCalenderView"
+            android:layout_width="match_parent"
+            android:background="@drawable/yellow_topsquare_with_nopadding"
+            android:layout_height="wrap_content">
+
+            <com.akshar.one.calender.widget.CollapsibleCalendar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:primaryColor="@color/light_yellow"
+                app:texttColor="@android:color/black"
+                android:visibility="visible"
+                app:selectedItem_textColor="@color/black"
+                android:id="@+id/collapsibleCalendarView"
+                app:todayItem_textColor="@android:color/black"
+                app:todayItem_background="@drawable/circle_white_stroke_background"
+                app:selectedItem_background="@drawable/circle_white_solid_background"
+                app:buttonLeft_drawableTintColor="@android:color/black"
+                app:buttonRight_drawableTintColor="@android:color/black"
+                app:expandIconColor="@android:color/black"
+                app:eventColor="@android:color/black" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgExpand"
+                android:layout_width="@dimen/_18sdp"
+                android:src="@drawable/down_arrow_icon"
+                android:layout_below="@+id/collapsibleCalendarView"
+                android:layout_centerInParent="true"
+                android:layout_height="@dimen/_18sdp"/>
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_below="@+id/rlCalenderView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <RelativeLayout
+                android:id="@+id/rlClassSection"
+                android:layout_width="match_parent"
+                android:layout_margin="@dimen/_10sdp"
+                android:background="@drawable/rounded_light_grey_bg"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:visibility="visible"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvClassSectionName"
+                    android:layout_width="match_parent"
+                    android:text="@string/select_class_section"
+                    android:padding="@dimen/_7sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11sp"
+                    android:fontFamily="@font/opensans_bold"
+                    android:layout_height="wrap_content"/>
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/_24sdp"
+                    android:layout_height="@dimen/_24sdp"
+                    android:src="@drawable/dropdown"
+                    android:layout_centerInParent="true"
+                    android:layout_alignParentEnd="true"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlDate"
+                android:layout_below="@+id/rlClassSection"
+                android:layout_width="match_parent"
+                android:visibility="visible"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/llAbsentDateShift"
+                    android:layout_width="match_parent"
+                    android:weightSum="2"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvSelectShift"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/rounded_light_grey_bg"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:paddingTop="@dimen/_7sdp"
+                        android:paddingBottom="@dimen/_4sdp"
+                        android:paddingStart="@dimen/_15sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:text="@string/select_shift"
+                        android:textSize="@dimen/_11sp"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:fontFamily="@font/opensans_bold"
+                        android:drawableEnd="@drawable/dropdown"
+                        android:layout_height="wrap_content"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvMarkAllAs"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/rounded_light_grey_bg"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:paddingTop="@dimen/_7sdp"
+                        android:paddingBottom="@dimen/_4sdp"
+                        android:paddingStart="@dimen/_15sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:text="@string/mark_all_as"
+                        android:textSize="@dimen/_11sp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:fontFamily="@font/opensans_bold"
+                        android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_24"
+                        android:layout_height="wrap_content"/>
+
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+
+            <RelativeLayout
+                android:id="@+id/rlNoDataFound"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_below="@+id/rlDate"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgEmpty"
+                    android:layout_width="@dimen/_100sdp"
+                    android:src="@drawable/emptynotice"
+                    android:layout_centerInParent="true"
+                    android:layout_centerVertical="true"
+                    android:layout_height="@dimen/_100sdp"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvEmptyText"
+                    android:layout_below="@+id/imgEmpty"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/opensans_regular"
+                    android:text="@string/no_timetable_found"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/_12sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rlNotRecorded"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_below="@+id/rlDate"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvNotRecorded"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/opensans_regular"
+                    android:text="@string/attendance_is_not_recorded_would_you_like_to_record_now"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/_12sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvRecordNow"
+                    android:layout_width="wrap_content"
+                    android:text="@string/reoord_now"
+                    android:fontFamily="@font/opensans_regular"
+                    android:layout_below="@+id/tvNotRecorded"
+                    android:background="@drawable/white_nopadding_square_shape"
+                    android:backgroundTint="@color/light_yellow"
+                    android:layout_centerVertical="true"
+                    android:textSize="@dimen/_11sp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:textColor="@color/black"
+                    android:padding="@dimen/_5sdp"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rlClassTimeTable"
+                android:visibility="visible"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_below="@+id/rlDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
+            </RelativeLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSaveAttendance"
+            android:layout_alignParentBottom="true"
+            android:padding="@dimen/_10sdp"
+            android:text="@string/save_attendance"
+            android:textColor="@color/white"
+            android:background="@color/dark_blue"
+            android:textAlignment="center"
+            android:fontFamily="@font/opensans_regular"
+            android:textStyle="bold"
+            android:textSize="@dimen/_11sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+</layout>
