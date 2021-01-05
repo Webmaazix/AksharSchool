@@ -119,9 +119,12 @@ class StudentAdapter(private val mContext: Context, private val list: ArrayList<
 //            holder.binding.imgNoImage.imageTintList =  mContext.resources.getColorStateList(colorRes)
                 holder.binding!!.tvShortName.setTextColor(colorResText)
 
-                holder.binding!!.tvShortName.setText(
-                    model.schoolName.substring(0, 2).toUpperCase()
-                )
+                if(model.schoolName!= null && model.schoolName != ""){
+                    holder.binding!!.tvShortName.setText(
+                        model.schoolName.substring(0, 2).toUpperCase()
+                    )
+
+                }
             }
 
             holder.itemView.setOnClickListener{

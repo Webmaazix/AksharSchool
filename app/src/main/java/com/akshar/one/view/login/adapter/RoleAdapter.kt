@@ -52,9 +52,12 @@ class RoleAdapter(private val mContext: Context, private val list: ArrayList<App
             holder.binding.flLayout.visibility = View.VISIBLE
             holder.binding.imgUserProfile.visibility = View.GONE
 
+            if(model.schoolName!= null && model.schoolName!= ""){
                 holder.binding.tvShortName.setText(
                     model.schoolName.substring(0, 2).toUpperCase()
                 )
+
+            }
 
 
         }
